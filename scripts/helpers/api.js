@@ -10,11 +10,11 @@ export const Schemas = {
     SONG: songSchema,
 };
 
-export callApi function callApi(url, schema) {
+export function callApi(url, schema) {
     return fetch(url)
-    .then(response =>
+    .then(response => {
         response.json().then(json => ({ json, response }))
-    ).then(({ json, response }) => {
+    }).then(({ json, response }) => {
         if (!response.ok) {
             return Promise.reject(json);
         }
@@ -22,7 +22,7 @@ export callApi function callApi(url, schema) {
         const camelizedJson = camelizeKeys(json);
 
         return Object.assign({},
-            normalize(camelizedJson, schema);
+            normalize(camelizedJson, schema)
         );
     });
 }

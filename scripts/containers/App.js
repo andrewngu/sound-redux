@@ -1,10 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import Songs from '../containers/Songs';
 
 class App extends Component {
     render() {
         return (
-            <div>Hello</div>
+            <Songs />
         );
     }
 }
