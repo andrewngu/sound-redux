@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import songs from  './songs';
+import SongReducers from  './SongReducers';
 
-const appReducer = combineReducers({
-    songs
+const AppReducer = combineReducers({
+    SongReducers
 });
 
-export default appReducer;
+export default AppReducer;

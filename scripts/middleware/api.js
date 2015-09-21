@@ -6,7 +6,11 @@ const songSchema = new Schema('songs', {
     idAttribute: 'id'
 });
 
-function callApi(url, schema) {
+export const Schemas = {
+    SONG: songSchema,
+};
+
+export callApi function callApi(url, schema) {
     return fetch(url)
     .then(response =>
         response.json().then(json => ({ json, response }))
