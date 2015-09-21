@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "http-server -p 3000 dist",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --progress --colors --hot"
+    "start": "webpack-dev-server --progress --colors --hot",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -22,7 +21,6 @@
     "babel-core": "^5.8.25",
     "babel-loader": "^5.3.2",
     "css-loader": "^0.18.0",
-    "http-server": "^0.8.0",
     "jsx-loader": "^0.13.2",
     "node-sass": "^3.3.3",
     "react": "^0.13.3",
