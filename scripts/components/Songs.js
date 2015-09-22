@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 
 class Songs extends Component {
     render() {
-        let items = this.props.songs.items.map((song)=> <div>{song.title}</div>);
+        const items = this.props.songs.items.map((song)=> <div>{song.title}</div>);
         return (
             <div>
-                <h2>Hello</h2>
                 {items}
             </div>
         );
