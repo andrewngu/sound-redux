@@ -14,11 +14,11 @@ class Songs extends Component {
         const {items} = this.props.songs;
 
         let result = [];
-        for (var i = 0; i < items.length; i += chunk) {
+        for (let i = 0; i < items.length; i += chunk) {
             let songCards = items.slice(i, i + chunk).map((song) => <SongCard song={song} />);
 
             if (songCards.length < chunk) {
-                for (var j = 0; j < chunk - songCards.length + 1; j++) {
+                for (let j = 0; j < chunk - songCards.length + 1; j++) {
                     songCards.push(<div className='song-card-placeholder'></div>);
                 }
             }
