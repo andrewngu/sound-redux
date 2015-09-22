@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import SongsCard from '../components/SongsCard';
+import SongCard from '../components/SongCard';
 
 
 class Songs extends Component {
@@ -15,7 +15,7 @@ class Songs extends Component {
 
         let result = [];
         for (var i = 0; i < items.length; i += chunk) {
-            let songCards = items.slice(i, i + chunk).map((song) => <SongsCard song={song} />);
+            let songCards = items.slice(i, i + chunk).map((song) => <SongCard song={song} />);
 
             if (songCards.length < chunk) {
                 for (var j = 0; j < chunk - songCards.length + 1; j++) {

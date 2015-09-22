@@ -1,3 +1,14 @@
 .song-card {
     padding: 20px;
 }
+
+.song-card-image {
+    width: 100%;
+    height: 70px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
