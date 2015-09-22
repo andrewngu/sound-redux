@@ -1,3 +1,5 @@
+var webpack = require('webpack');
+
 function getEntrySources(sources) {
     if (process.env.NODE_ENV !== 'production') {
         sources.push('webpack-dev-server/client?http://localhost:8080');
@@ -6,6 +8,8 @@ function getEntrySources(sources) {
 
     return sources;
 }
+
+var ignore = new webpack.IgnorePlugin(/\.svg$/)
 
 module.exports = {
     entry: {
@@ -22,5 +26,6 @@ module.exports = {
             { test: /\.js$/, loaders: ['react-hot', 'jsx', 'babel'], exclude: /node_modules/ },
             { test: /\.scss$/, loaders: ['style', 'css', 'sass'] }
         ]
-    }
+    },
+    plugins: [ignore]
 };

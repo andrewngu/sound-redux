@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --colors --hot",
+    "start": "webpack-dev-server --progress --colors --hot --content-base ./public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
