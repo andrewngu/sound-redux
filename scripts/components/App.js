@@ -1,13 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {fetchSongs} from '../actions/songs';
+
+import Header from '../components/Header';
 import Songs from '../components/Songs';
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount () {
         const {dispatch} = this.props;
         dispatch(fetchSongs());
@@ -15,7 +13,16 @@ class App extends Component {
 
     render() {
         const {songs} = this.props;
-        return <Songs songs={songs}  />;
+        return (
+            <div>
+                <Header />
+                <div className='container'>
+                    <div className='content'>
+                        <Songs songs={songs} />
+                    </div>
+                </div>
+            </div>
+        );
     }
 }
 

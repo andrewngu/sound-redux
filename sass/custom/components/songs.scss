@@ -1,0 +1,19 @@
+.songs-row {
+    display: flex;
+    flex-direction: row;
+
+    .song-card, .song-card-placeholder {
+        display: flex;
+        flex: 1 1 auto;
+        padding: 20px;
+        margin-right: 20px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    & + .songs-row {
+        margin-top: 20px;
+    }
+}

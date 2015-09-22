@@ -1,0 +1,38 @@
+.header {
+    height: 50px;
+    background-color: #3a3f41;
+
+    .container {
+        height: 100%;
+    }
+};
+
+.header-nav {
+    display: table;
+    height: 100%;
+    list-style: none;
+}
+
+.header-nav-item {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.header-nav-item-link {
+    margin: 10px 30px;
+    padding: 2px 0;
+    color: rgba(255,255,255, 0.5);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    &:hover {
+        border-bottom: 1px dotted #fff;
+        text-decoration: none;
+    }
+
+    &.active {
+        color: #fff;
+        text-decoration: none;
+        pointer-events: none;
+    }
+}
