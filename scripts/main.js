@@ -1,7 +1,8 @@
+import 'babel-core/polyfill';
 import React from 'react';
 import {Provider} from 'react-redux';
 import App from './components/App';
-import configureStore from './store/ConfigureStore';
+import configureStore from './store/configureStore';
 
 require('../sass/main.scss');
 

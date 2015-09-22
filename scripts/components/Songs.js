@@ -1,13 +1,15 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 
-function loadData(props) {
-    loadSongs();
-}
-
 class Songs extends Component {
     render() {
-        return <div></div>;
+        let items = this.props.songs.items.map((song)=> <div>{song.title}</div>);
+        return (
+            <div>
+                <h2>Hello</h2>
+                {items}
+            </div>
+        );
     }
 }
 

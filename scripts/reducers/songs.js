@@ -1,11 +1,16 @@
-import {FETCH_SONGS} from '../constants/ActionTypes';
+import * as types from '../constants/ActionTypes';
 
-function songs(state = {}, action) {
+function songs(state = {
+    items: [],
+}, action) {
     switch (action.type) {
-    case FETCH_SONGS:
+    case types.RECEIVE_SONGS:
+        return Object.assign({}, state, {
+            items: action.songs,
+        });
+    default:
         return state;
     }
-    return state;
 }
 
 export default songs;
