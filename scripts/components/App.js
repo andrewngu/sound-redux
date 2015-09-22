@@ -1,19 +1,26 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import Songs from '../containers/Songs';
+import Songs from '../components/Songs';
 
 class App extends Component {
     render() {
+        const { songs } = this.props;
         return (
-            <Songs />
+            <Songs songs={songs}  />
         );
     }
 }
 
-App.PropTypes = {};
+App.propTypes = {
+    songs: PropTypes.object.isRequired,
+};
 
 function mapStateToProps(state) {
-    return {};
+    const { songs } = state;
+    return {
+        songs,
+    };
 }
+
 
 export default connect(mapStateToProps)(App);
