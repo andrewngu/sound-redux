@@ -15,16 +15,18 @@ class Songs extends Component {
 
         let result = [];
         for (let i = 0; i < items.length; i += chunk) {
-            let songCards = items.slice(i, i + chunk).map((song) => <SongCard song={song} />);
+            let songCards = items.slice(i, i + chunk).map((song) => {
+                return <div className='col-1-5'><SongCard song={song} /></div>
+            });
 
             if (songCards.length < chunk) {
                 for (let j = 0; j < chunk - songCards.length + 1; j++) {
-                    songCards.push(<div className='song-card-placeholder'></div>);
+                    songCards.push(<div className='col-1-5'></div>);
                 }
             }
 
             result.push(
-                <div className='songs-row'>{songCards}</div>
+                <div className='songs-row grid'>{songCards}</div>
             );
         }
 

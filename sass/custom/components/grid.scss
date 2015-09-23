@@ -1,0 +1,25 @@
+.grid {
+    width: 100%;
+}
+
+.grid:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.col-1-5 {
+    width: 20%;
+}
+
+[class*='col-'] {
+    float: left;
+    min-height: 1px;
+}
+
+[class*='col-'] {
+    padding-right: 20px;
+}
+[class*='col-']:last-of-type {
+    padding-right: 0;
+}
