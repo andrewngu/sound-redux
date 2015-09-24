@@ -1,6 +1,13 @@
 import * as types from '../constants/ActionTypes';
 import {CLIENT_ID} from '../constants/Config';
 
+export function changeActiveSong(song) {
+    return {
+        type: types.CHANGE_ACTIVE_SONG,
+        song: song,
+    };
+}
+
 export function fetchSongs() {
     return dispatch => {
         return fetch(`http://api.soundcloud.com/tracks?linked_partitioning=1&client_id=${CLIENT_ID}&tags=house&limit=50&offset=0`)
@@ -12,6 +19,6 @@ export function fetchSongs() {
 export function receiveSongs(json) {
     return {
       type: types.RECEIVE_SONGS,
-      songs: json.collection,
+      songs: json.collection.filter((song) => song.streamable ),
     };
 }

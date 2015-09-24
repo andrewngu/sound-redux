@@ -18,7 +18,7 @@ class App extends Component {
                 <Header />
                 <div className='container'>
                     <div className='content'>
-                        <Songs songs={songs} />
+                        <Songs {...this.props} />
                     </div>
                 </div>
             </div>
