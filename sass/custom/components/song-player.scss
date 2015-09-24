@@ -1,0 +1,25 @@
+.song-player {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #e3e3e3;
+}
+
+.song-player-main {
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+}
+
+.song-player-main-info {
+    width: 100px;
+}
+
+.song-player-image {
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin-right: 8px;
+}

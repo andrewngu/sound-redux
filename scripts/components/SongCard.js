@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {formatSongTitle} from '../helpers/Format';
+import SongDetails from '../components/SongDetails';
 
 class SongCard extends Component {
     render() {
@@ -16,10 +16,7 @@ class SongCard extends Component {
                         className='song-card-user-image'
                         onClick={this.handleClick}
                         src={song.user.avatar_url} />
-                    <div className='song-card-details'>
-                        <div className='song-card-title'>{formatSongTitle(song.title)}</div>
-                        <div className='song-card-user-username'>{song.user.username}</div>
-                    </div>
+                    <SongDetails title={song.title} username={song.user.username} />
                 </div>
             </div>
         );
