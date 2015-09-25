@@ -14,7 +14,8 @@
 }
 
 .song-player-main-info {
-    width: 100px;
+    width: 200px;
+    margin-right: 40px;
 }
 
 .song-player-image {
@@ -22,4 +23,11 @@
     height: 30px;
     float: left;
     margin-right: 8px;
+}
+
+.song-player-controls {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
 }
