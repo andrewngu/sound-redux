@@ -3,7 +3,18 @@ import SongDetails from '../components/SongDetails';
 import {formatStreamUrl} from '../helpers/Format';
 
 class SongPlayer extends Component {
+    constructor(props) {
+        super(props);
+        this.handlePlay = this.handlePlay.bind(this);
+        this.handlePause = this.handlePause.bind(this);
+        this.togglePlay = this.togglePlay.bind(this);
+        this.state = {
+            isPlaying: false
+        };
+    }
+
     componentDidMount() {
+        this.bindEvents();
         React.findDOMNode(this.refs.audio).play();
     }
 
@@ -15,8 +26,38 @@ class SongPlayer extends Component {
         React.findDOMNode(this.refs.audio).play();
     }
 
+    componentWillUnmount() {
+        const audioElement = React.findDOMNode(this.refs.audio);
+        audioElement.removeEventListener('play', this.handlePlay, false);
+        audioElement.removeEventListener('pause', this.handlePause, false);
+    }
+
+    bindEvents() {
+        const audioElement = React.findDOMNode(this.refs.audio);
+        audioElement.addEventListener('play', this.handlePlay, false);
+        audioElement.addEventListener('pause', this.handlePause, false);
+    }
+
+    handlePause() {
+        this.setState({isPlaying: false});
+    }
+
+    handlePlay() {
+        this.setState({isPlaying: true});
+    }
+
+    togglePlay() {
+        const audioElement = React.findDOMNode(this.refs.audio);
+        if (this.state.isPlaying) {
+            audioElement.pause();
+        } else {
+            audioElement.play();
+        }
+    }
+
     render() {
         const {song} = this.props;
+        const {isPlaying} = this.state;
         const image = song.artwork_url.replace('large', 't300x300');
 
         return (
@@ -32,8 +73,10 @@ class SongPlayer extends Component {
                             <div className='song-player-button'>
                                 <i className='icon ion-ios-rewind'></i>
                             </div>
-                            <div className='song-player-button'>
-                                <i className='icon ion-ios-play'></i>
+                            <div
+                                className='song-player-button'
+                                onClick={this.togglePlay}>
+                                <i className={'icon ' + (isPlaying ? 'ion-ios-pause' : 'ion-ios-play')}></i>
                             </div>
                             <div className='song-player-button'>
                                 <i className='icon ion-ios-fastforward'></i>

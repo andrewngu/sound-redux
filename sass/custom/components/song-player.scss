@@ -31,3 +31,25 @@
     flex-direction: row;
     align-items: center;
 }
+
+.song-player-button {
+    padding: 4px;
+    color: #ccc;
+
+    &:hover {
+        color: #222;
+        cursor: pointer;
+
+        .ion-ios-pause {
+            color: #86AB85;
+        }
+    }
+
+    & + .song-player-button {
+        margin-left: 30px;
+    }
+
+    .ion-ios-pause {
+        color: #A6D2A5;
+    }
+}
