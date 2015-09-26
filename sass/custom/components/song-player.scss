@@ -83,6 +83,17 @@
     background-color: #A6D2A5;
 }
 
+.song-player-seek-handle {
+    position: absolute;
+    top: -5px;
+    right: -6px;
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 1px solid #e3e3e3;
+}
+
 .song-player-time {
     margin-left: 30px;
     color: #ccc;

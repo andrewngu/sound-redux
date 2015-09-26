@@ -91,6 +91,7 @@ class SongPlayer extends Component {
                 <div
                     className='song-player-seek-duration-bar'
                     style={{width: `${width}%`}} >
+                    <div className='song-player-seek-handle'></div>
                 </div>
             );
         }
