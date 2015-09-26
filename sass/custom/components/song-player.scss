@@ -27,7 +27,6 @@
 
 .song-player-controls {
     display: flex;
-    flex: 1;
     flex-direction: row;
     align-items: center;
 }
@@ -52,4 +51,36 @@
     .ion-ios-pause {
         color: #A6D2A5;
     }
+}
+
+.song-player-seek {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    margin-left: 30px;
+}
+
+.song-player-seek-bar {
+    position: relative;
+    flex: 1;
+    height: 2px;
+    background-color: #ddd;
+}
+
+.song-player-seek-duration-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #A6D2A5;
+}
+
+.song-player-time {
+    margin-left: 30px;
+    color: #ccc;
+    font-size: 11px;
+}
+
+.song-player-time-divider {
+    margin: 0 10px;
 }

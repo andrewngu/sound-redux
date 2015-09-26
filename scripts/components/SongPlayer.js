@@ -1,15 +1,18 @@
 import React, {Component, PropTypes} from 'react';
 import SongDetails from '../components/SongDetails';
-import {formatStreamUrl} from '../helpers/Format';
+import {formatSeconds, formatStreamUrl} from '../helpers/Format';
 
 class SongPlayer extends Component {
     constructor(props) {
         super(props);
         this.handlePlay = this.handlePlay.bind(this);
         this.handlePause = this.handlePause.bind(this);
+        this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
         this.togglePlay = this.togglePlay.bind(this);
         this.state = {
-            isPlaying: false
+            currentTime: 0,
+            duration: 0,
+            isPlaying: false,
         };
     }
 
@@ -30,12 +33,14 @@ class SongPlayer extends Component {
         const audioElement = React.findDOMNode(this.refs.audio);
         audioElement.removeEventListener('play', this.handlePlay, false);
         audioElement.removeEventListener('pause', this.handlePause, false);
+        audioElement.removeEventListener('timeupdate', this.handleTimeUpdate, false);
     }
 
     bindEvents() {
         const audioElement = React.findDOMNode(this.refs.audio);
         audioElement.addEventListener('play', this.handlePlay, false);
         audioElement.addEventListener('pause', this.handlePause, false);
+        audioElement.addEventListener('timeupdate', this.handleTimeUpdate, false);
     }
 
     handlePause() {
@@ -44,6 +49,20 @@ class SongPlayer extends Component {
 
     handlePlay() {
         this.setState({isPlaying: true});
+    }
+
+    handleTimeUpdate(e) {
+        const audioElement = e.currentTarget;
+        const currentTime = Math.floor(audioElement.currentTime);
+
+        if (currentTime === this.state.currentTime) {
+            return;
+        }
+
+        this.setState({
+            currentTime: currentTime,
+            duration: Math.floor(audioElement.duration)
+        });
     }
 
     togglePlay() {
@@ -55,9 +74,23 @@ class SongPlayer extends Component {
         }
     }
 
+    renderDurationBar() {
+        const {currentTime, duration} = this.state;
+
+        if (duration !== 0) {
+            const width = currentTime/duration * 100;
+            return (
+                <div
+                    className='song-player-seek-duration-bar'
+                    style={{width: `${width}%`}} >
+                </div>
+            );
+        }
+    }
+
     render() {
         const {song} = this.props;
-        const {isPlaying} = this.state;
+        const {currentTime, duration, isPlaying} = this.state;
         const image = song.artwork_url.replace('large', 't300x300');
 
         return (
@@ -80,6 +113,16 @@ class SongPlayer extends Component {
                             </div>
                             <div className='song-player-button'>
                                 <i className='icon ion-ios-fastforward'></i>
+                            </div>
+                        </div>
+                        <div className='song-player-seek'>
+                            <div className='song-player-seek-bar'>
+                                {this.renderDurationBar()}
+                            </div>
+                            <div className='song-player-time'>
+                                <span>{formatSeconds(currentTime)}</span>
+                                <span className='song-player-time-divider'>/</span>
+                                <span>{formatSeconds(duration)}</span>
                             </div>
                         </div>
                     </div>
