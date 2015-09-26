@@ -60,9 +60,17 @@
     margin-left: 30px;
 }
 
+.song-player-seek-bar-wrap {
+    padding: 6px 0;
+    flex: 1;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 .song-player-seek-bar {
     position: relative;
-    flex: 1;
     height: 2px;
     background-color: #ddd;
 }

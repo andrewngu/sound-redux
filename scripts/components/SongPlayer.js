@@ -8,7 +8,9 @@ class SongPlayer extends Component {
         this.handlePlay = this.handlePlay.bind(this);
         this.handlePause = this.handlePause.bind(this);
         this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
+        this.seek = this.seek.bind(this);
         this.togglePlay = this.togglePlay.bind(this);
+
         this.state = {
             currentTime: 0,
             duration: 0,
@@ -65,6 +67,12 @@ class SongPlayer extends Component {
         });
     }
 
+    seek(e) {
+        const audioElement = React.findDOMNode(this.refs.audio);
+        const currentTime = Math.floor(((e.clientX - e.currentTarget.offsetLeft) / e.currentTarget.offsetWidth) * this.state.duration);
+        audioElement.currentTime = currentTime;
+    }
+
     togglePlay() {
         const audioElement = React.findDOMNode(this.refs.audio);
         if (this.state.isPlaying) {
@@ -116,8 +124,10 @@ class SongPlayer extends Component {
                             </div>
                         </div>
                         <div className='song-player-seek'>
-                            <div className='song-player-seek-bar'>
-                                {this.renderDurationBar()}
+                            <div className='song-player-seek-bar-wrap' onClick={this.seek}>
+                                <div className='song-player-seek-bar'>
+                                    {this.renderDurationBar()}
+                                </div>
                             </div>
                             <div className='song-player-time'>
                                 <span>{formatSeconds(currentTime)}</span>
