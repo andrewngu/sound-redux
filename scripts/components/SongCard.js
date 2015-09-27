@@ -4,11 +4,11 @@ import {getImageUrl} from '../helpers/Format';
 
 class SongCard extends Component {
     render() {
-        const {changeActiveSong, song} = this.props;
+        const {changeActiveSong, isActive, song} = this.props;
         const image = getImageUrl(song.artwork_url);
 
         return (
-            <div className='card song-card'>
+            <div className={'card song-card' + (isActive ? ' active' : '')}>
                 <div
                     className='song-card-image'
                     onClick={changeActiveSong}

@@ -18,7 +18,7 @@ class Songs extends Component {
 
     renderSongs() {
         const chunk = 5;
-        const {items} = this.props.songs;
+        const {activeSong, items} = this.props.songs;
 
         let result = [];
         for (let i = 0; i < items.length; i += chunk) {
@@ -27,6 +27,7 @@ class Songs extends Component {
                     <div className='col-1-5' key={song.id}>
                         <SongCard
                             changeActiveSong={this.changeActiveSong.bind(this, i + j)}
+                            isActive={activeSong && activeSong.id === song.id}
                             song={song} />
                     </div>
                 );

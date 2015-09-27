@@ -1,5 +1,13 @@
 .song-card {
     padding: 10px;
+
+    &.active {
+        border-color: #A6D2A5;
+
+        .song-card-image {
+            pointer-events: none;
+        }
+    }
 }
 
 .song-card-image {
@@ -12,6 +20,10 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .song-card-user {
