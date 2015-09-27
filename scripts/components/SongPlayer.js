@@ -200,11 +200,11 @@ class SongPlayer extends Component {
                 <audio ref='audio' src={formatStreamUrl(song.stream_url)}></audio>
                 <div className='container'>
                     <div className='song-player-main'>
-                        <div className='song-player-main-info'>
+                        <div className='song-player-info song-player-section'>
                             <img className='song-player-image' src={song.artwork_url} />
                             <SongDetails title={song.title} username={song.user.username} />
                         </div>
-                        <div className='song-player-controls'>
+                        <div className='song-player-controls song-player-section'>
                             <div
                                 className='song-player-button'
                                 onClick={this.changePreviousSong}>
@@ -221,7 +221,7 @@ class SongPlayer extends Component {
                                 <i className='icon ion-ios-fastforward'></i>
                             </div>
                         </div>
-                        <div className='song-player-seek'>
+                        <div className='song-player-seek song-player-section'>
                             <div className='song-player-seek-bar-wrap' onClick={this.seek}>
                                 <div ref='seekBar' className='song-player-seek-bar'>
                                     {this.renderDurationBar()}

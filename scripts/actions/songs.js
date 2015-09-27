@@ -49,7 +49,7 @@ function receiveSongs(json) {
     return {
       type: types.RECEIVE_SONGS,
       nextUrl: json.next_href,
-      songs: json.collection.filter((song) => song.streamable ),
+      songs: json.collection.filter((song) => song.streamable && song.duration < 600000 ),
     };
 }
 

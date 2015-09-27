@@ -10,13 +10,17 @@
     -ms-user-select: none;
 }
 
+.song-player-section + .song-player-section {
+    margin-left: 40px;
+}
+
 .song-player-main {
     display: flex;
     flex-direction: row;
     padding: 8px;
 }
 
-.song-player-main-info {
+.song-player-info {
     width: 140px;
 }
 
@@ -31,7 +35,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: 30px;
 }
 
 .song-player-button {
@@ -60,7 +63,6 @@
     display: flex;
     flex: 1;
     align-items: center;
-    margin-left: 30px;
 }
 
 .song-player-seek-bar-wrap {
