@@ -8,6 +8,7 @@ class SongPlayer extends Component {
         super(props);
         this.changeNextSong = this.changeNextSong.bind(this);
         this.changePreviousSong = this.changePreviousSong.bind(this);
+        this.changeVolume = this.changeVolume.bind(this);
         this.handleEnded = this.handleEnded.bind(this);
         this.handleLoadedMetadata = this.handleLoadedMetadata.bind(this);
         this.handleLoadStart = this.handleLoadStart.bind(this);
@@ -17,6 +18,7 @@ class SongPlayer extends Component {
         this.handlePlay = this.handlePlay.bind(this);
         this.handlePause = this.handlePause.bind(this);
         this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
+        this.handleVolumeChange = this.handleVolumeChange.bind(this);
         this.seek = this.seek.bind(this);
         this.togglePlay = this.togglePlay.bind(this);
         this.toggleRepeat = this.toggleRepeat.bind(this);
@@ -40,6 +42,7 @@ class SongPlayer extends Component {
         audioElement.addEventListener('pause', this.handlePause, false);
         audioElement.addEventListener('play', this.handlePlay, false);
         audioElement.addEventListener('timeupdate', this.handleTimeUpdate, false);
+        audioElement.addEventListener('volumechange', this.handleVolumeChange, false);
         audioElement.play();
     }
 
@@ -59,6 +62,7 @@ class SongPlayer extends Component {
         audioElement.removeEventListener('pause', this.handlePause, false);
         audioElement.removeEventListener('play', this.handlePlay, false);
         audioElement.removeEventListener('timeupdate', this.handleTimeUpdate, false);
+        audioElement.removeEventListener('volumechange', this.handleVolumeChange, false);
     }
 
     bindMouseEvents() {
@@ -74,6 +78,12 @@ class SongPlayer extends Component {
     changePreviousSong() {
         const {dispatch} = this.props;
         dispatch(changePreviousSong())
+    }
+
+    changeVolume(e) {
+        const audioElement = React.findDOMNode(this.refs.audio);
+        const volume = (e.clientX - e.currentTarget.offsetLeft) / e.currentTarget.offsetWidth;
+        audioElement.volume = volume;
     }
 
     handleEnded() {
@@ -157,6 +167,12 @@ class SongPlayer extends Component {
 
         this.setState({
             currentTime: currentTime,
+        });
+    }
+
+    handleVolumeChange(e) {
+        this.setState({
+            volume: e.currentTarget.volume
         });
     }
 
@@ -275,7 +291,7 @@ class SongPlayer extends Component {
                                 <i className='icon ion-android-volume-mute'></i>
                             </div>
                             <div className='song-player-volume'>
-                                <div className='song-player-seek-bar-wrap'>
+                                <div className='song-player-seek-bar-wrap' onClick={this.changeVolume}>
                                     <div className='song-player-seek-bar'>
                                         {this.renderVolumeBar()}
                                     </div>
