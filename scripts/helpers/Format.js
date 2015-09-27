@@ -1,13 +1,5 @@
 import {CLIENT_ID} from '../constants/Config';
 
-function padZero(num, size) {
-    let s = num + '';
-    while (s.length < size) {
-        s = '0' + s;
-    }
-    return s;
-}
-
 export function formatSongTitle(str) {
     if (!str) {
         return '';
@@ -26,4 +18,20 @@ export function formatSeconds(num) {
 
 export function formatStreamUrl(str) {
     return `${str}?client_id=${CLIENT_ID}`;
+}
+
+export function getImageUrl(str) {
+    if (!str) {
+        return '';
+    }
+
+    return str.replace('large', 't300x300');
+}
+
+function padZero(num, size) {
+    let s = num + '';
+    while (s.length < size) {
+        s = '0' + s;
+    }
+    return s;
 }

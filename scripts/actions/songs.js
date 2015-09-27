@@ -1,5 +1,4 @@
 import * as types from '../constants/ActionTypes';
-import {CLIENT_ID} from '../constants/Config';
 
 export function changeActiveSong(song) {
     return {
@@ -8,10 +7,10 @@ export function changeActiveSong(song) {
     };
 }
 
-function fetchSongs() {
+function fetchSongs(url) {
     return dispatch => {
-        dispatch(requestSongs);
-        return fetch(`http://api.soundcloud.com/tracks?linked_partitioning=1&client_id=${CLIENT_ID}&tags=house&limit=50&offset=0`)
+        dispatch(requestSongs());
+        return fetch(url)
             .then(response => response.json())
             .then(json => dispatch(receiveSongs(json)));
     };
@@ -21,7 +20,7 @@ export function fetchSongsIfNeeded() {
     return (dispatch, getState) => {
         const {songs} = getState();
         if (shouldFetchSongs(songs)) {
-            return dispatch(fetchSongs())
+            return dispatch(fetchSongs(songs.nextUrl))
         }
     }
 }

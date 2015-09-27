@@ -1,10 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import SongDetails from '../components/SongDetails';
+import {getImageUrl} from '../helpers/Format';
 
 class SongCard extends Component {
     render() {
         const {changeActiveSong, song} = this.props;
-        const image = song.artwork_url.replace('large', 't300x300');
+        const image = getImageUrl(song.artwork_url);
+
         return (
             <div className='card song-card'>
                 <div

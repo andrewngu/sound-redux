@@ -1,9 +1,10 @@
 import * as types from '../constants/ActionTypes';
+import {CLIENT_ID} from '../constants/Config';
 
 const initialState = {
     activeSong: null,
     isFetching: false,
-    nextUrl: true,
+    nextUrl: `http://api.soundcloud.com/tracks?linked_partitioning=1&client_id=${CLIENT_ID}&tags=house&limit=50&offset=0`,
     items: []
 };
 
@@ -20,7 +21,7 @@ function songs(state = initialState, action) {
     case types.RECEIVE_SONGS:
         return Object.assign({}, state, {
             isFetching: false,
-            items: action.songs,
+            items: state.items.concat(action.songs),
             nextUrl: action.nextUrl
         });
 
