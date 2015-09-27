@@ -23,6 +23,7 @@ class SongPlayer extends Component {
         this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
         this.handleVolumeChange = this.handleVolumeChange.bind(this);
         this.seek = this.seek.bind(this);
+        this.toggleMute = this.toggleMute.bind(this);
         this.togglePlay = this.togglePlay.bind(this);
         this.toggleRepeat = this.toggleRepeat.bind(this);
         this.toggleShuffle = this.toggleShuffle.bind(this);
@@ -32,6 +33,7 @@ class SongPlayer extends Component {
             duration: 0,
             isPlaying: false,
             isSeeking: false,
+            muted: false,
             repeat: false,
             volume: 1,
         };
@@ -231,6 +233,17 @@ class SongPlayer extends Component {
         audioElement.currentTime = currentTime;
     }
 
+    toggleMute() {
+        const audioElement = React.findDOMNode(this.refs.audio);
+        if (this.state.muted) {
+            audioElement.muted = false;
+        } else {
+            audioElement.muted = true;
+        }
+
+        this.setState({muted: !this.state.muted});
+    }
+
     togglePlay() {
         const audioElement = React.findDOMNode(this.refs.audio);
         if (this.state.isPlaying) {
@@ -268,8 +281,8 @@ class SongPlayer extends Component {
     }
 
     renderVolumeBar() {
-        const {volume} = this.state;
-        const width = volume * 100;
+        const {muted, volume} = this.state;
+        const width = muted ? 0 : volume * 100;
         return (
             <div
                 className='song-player-seek-duration-bar'
@@ -335,7 +348,9 @@ class SongPlayer extends Component {
                                 className={'song-player-button' + (this.state.shuffle ? ' active' : '')}>
                                 <i className='icon ion-shuffle'></i>
                             </div>
-                            <div className={'song-player-button'}>
+                            <div
+                                className={'song-player-button'}
+                                onClick={this.toggleMute}>
                                 <i className='icon ion-android-volume-mute'></i>
                             </div>
                             <div className='song-player-volume'>
