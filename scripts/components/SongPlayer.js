@@ -15,6 +15,9 @@ class SongPlayer extends Component {
         this.handleSeekMouseDown = this.handleSeekMouseDown.bind(this);
         this.handleSeekMouseMove = this.handleSeekMouseMove.bind(this);
         this.handleSeekMouseUp = this.handleSeekMouseUp.bind(this);
+        this.handleVolumeMouseDown = this.handleVolumeMouseDown.bind(this);
+        this.handleVolumeMouseMove = this.handleVolumeMouseMove.bind(this);
+        this.handleVolumeMouseUp = this.handleVolumeMouseUp.bind(this);
         this.handlePlay = this.handlePlay.bind(this);
         this.handlePause = this.handlePause.bind(this);
         this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
@@ -70,6 +73,11 @@ class SongPlayer extends Component {
         document.addEventListener('mouseup', this.handleSeekMouseUp);
     }
 
+    bindVolumeMouseEvents() {
+        document.addEventListener('mousemove', this.handleVolumeMouseMove);
+        document.addEventListener('mouseup', this.handleVolumeMouseUp);
+    }
+
     changeNextSong() {
         const {dispatch} = this.props;
         dispatch(changeNextSong())
@@ -113,19 +121,19 @@ class SongPlayer extends Component {
         e.stopPropagation();
     }
 
-    handleSeekMouseDown(e) {
-        this.bindSeekMouseEvents();
-        this.setState({
-            isSeeking: true,
-        });
-    }
-
     handlePause() {
         this.setState({isPlaying: false});
     }
 
     handlePlay() {
         this.setState({isPlaying: true});
+    }
+
+    handleSeekMouseDown(e) {
+        this.bindSeekMouseEvents();
+        this.setState({
+            isSeeking: true,
+        });
     }
 
     handleSeekMouseMove(e) {
@@ -173,8 +181,47 @@ class SongPlayer extends Component {
     }
 
     handleVolumeChange(e) {
+        if (this.state.isSeeking) {
+            return;
+        }
+
         this.setState({
             volume: e.currentTarget.volume
+        });
+    }
+
+    handleVolumeMouseDown(e) {
+        this.bindVolumeMouseEvents();
+        this.setState({
+            isSeeking: true,
+        });
+    }
+
+    handleVolumeMouseMove(e) {
+        const volumeBar = React.findDOMNode(this.refs.volumeBar);
+        const diff = e.clientX - volumeBar.offsetLeft;
+        const pos = diff < 0 ? 0 : diff;
+        let percent = pos / volumeBar.offsetWidth;
+        percent = percent > 1 ? 1 : percent;
+
+        this.setState({
+            volume: percent
+        });
+        React.findDOMNode(this.refs.audio).volume = percent;
+    }
+
+    handleVolumeMouseUp(e) {
+        if (!this.state.isSeeking) {
+            return;
+        }
+
+        document.removeEventListener('mousemove', this.handleVolumeMouseMove);
+        document.removeEventListener('mouseup', this.handleVolumeMouseUp);
+
+        this.setState({
+            isSeeking: false,
+        }, function() {
+            React.findDOMNode(this.refs.audio).volume = this.state.volume;
         });
     }
 
@@ -227,7 +274,11 @@ class SongPlayer extends Component {
             <div
                 className='song-player-seek-duration-bar'
                 style={{width: `${width}%`}}>
-                <div className='song-player-seek-handle'></div>
+                <div
+                    className='song-player-seek-handle'
+                    onClick={this.handleMouseClick}
+                    onMouseDown={this.handleVolumeMouseDown}>
+                </div>
             </div>
         );
     }
@@ -264,7 +315,7 @@ class SongPlayer extends Component {
                         </div>
                         <div className='song-player-section song-player-seek'>
                             <div className='song-player-seek-bar-wrap' onClick={this.seek}>
-                                <div ref='seekBar' className='song-player-seek-bar'>
+                                <div className='song-player-seek-bar' ref='seekBar'>
                                     {this.renderDurationBar()}
                                 </div>
                             </div>
@@ -289,7 +340,7 @@ class SongPlayer extends Component {
                             </div>
                             <div className='song-player-volume'>
                                 <div className='song-player-seek-bar-wrap' onClick={this.changeVolume}>
-                                    <div className='song-player-seek-bar'>
+                                    <div className='song-player-seek-bar' ref='volumeBar'>
                                         {this.renderVolumeBar()}
                                     </div>
                                 </div>
