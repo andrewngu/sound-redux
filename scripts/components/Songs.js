@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {changeActiveSong} from '../actions/songs';
 import InfiniteScrollify from '../components/InfiniteScrollify';
 import SongCard from '../components/SongCard';
+import Spinner from '../components/Spinner';
 
 
 class Songs extends Component {
@@ -48,9 +49,12 @@ class Songs extends Component {
     }
 
     render() {
+        const {isFetching} = this.props.songs;
+
         return (
             <div>
                 {this.renderSongs()}
+                {isFetching ? <Spinner /> : null}
             </div>
         );
     }
