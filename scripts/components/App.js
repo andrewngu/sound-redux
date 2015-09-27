@@ -14,11 +14,11 @@ class App extends Component {
 
     renderSongPlayer() {
         const {songs} = this.props;
-        if (!songs.activeSong) {
+        if (songs.activeSongIndex === null) {
             return;
         }
 
-        return <SongPlayer song={songs.activeSong} />
+        return <SongPlayer song={songs.items[songs.activeSongIndex]} />
     }
 
     render() {

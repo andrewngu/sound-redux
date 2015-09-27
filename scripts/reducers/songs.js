@@ -2,7 +2,7 @@ import * as types from '../constants/ActionTypes';
 import {CLIENT_ID} from '../constants/Config';
 
 const initialState = {
-    activeSong: null,
+    activeSongIndex: null,
     isFetching: false,
     nextUrl: `http://api.soundcloud.com/tracks?linked_partitioning=1&client_id=${CLIENT_ID}&tags=house&limit=50&offset=0`,
     items: []
@@ -10,12 +10,9 @@ const initialState = {
 
 function songs(state = initialState, action) {
     switch (action.type) {
-    case types.CHANGE_ACTIVE_SONG:
-        if (action.song === null) {
-            return Object.assign({}, state, {activeSong: null});
-        }
+    case types.CHANGE_ACTIVE_SONG_INDEX:
         return Object.assign({}, state, {
-            activeSong: action.song
+            activeSongIndex: action.activeSongIndex
         });
 
     case types.RECEIVE_SONGS:

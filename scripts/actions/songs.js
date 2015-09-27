@@ -1,9 +1,9 @@
 import * as types from '../constants/ActionTypes';
 
-export function changeActiveSong(song) {
+export function changeActiveSongIndex(activeSongIndex) {
     return {
-        type: types.CHANGE_ACTIVE_SONG,
-        song: song,
+        type: types.CHANGE_ACTIVE_SONG_INDEX,
+        activeSongIndex: activeSongIndex,
     };
 }
 
