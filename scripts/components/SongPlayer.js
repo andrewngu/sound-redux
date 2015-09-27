@@ -1,10 +1,14 @@
 import React, {Component, PropTypes} from 'react';
+import {changePreviousSong, changeNextSong} from '../actions/songs';
 import SongDetails from '../components/SongDetails';
 import {formatSeconds, formatStreamUrl} from '../helpers/Format';
 
 class SongPlayer extends Component {
     constructor(props) {
         super(props);
+        this.changeNextSong = this.changeNextSong.bind(this);
+        this.changePreviousSong = this.changePreviousSong.bind(this);
+        this.handleEnded = this.handleEnded.bind(this);
         this.handleLoadedMetadata = this.handleLoadedMetadata.bind(this);
         this.handleLoadStart = this.handleLoadStart.bind(this);
         this.handleMouseDown = this.handleMouseDown.bind(this);
@@ -26,6 +30,7 @@ class SongPlayer extends Component {
 
     componentDidMount() {
         const audioElement = React.findDOMNode(this.refs.audio);
+        audioElement.addEventListener('ended', this.handleEnded, false);
         audioElement.addEventListener('loadedmetadata', this.handleLoadedMetadata, false);
         audioElement.addEventListener('loadstart', this.handleLoadStart, false);
         audioElement.addEventListener('play', this.handlePlay, false);
@@ -44,6 +49,7 @@ class SongPlayer extends Component {
 
     componentWillUnmount() {
         const audioElement = React.findDOMNode(this.refs.audio);
+        audioElement.removeEventListener('ended', this.handleEnded, false);
         audioElement.removeEventListener('loadedmetadata', this.handleLoadedMetadata, false);
         audioElement.removeEventListener('loadstart', this.handleLoadStart, false);
         audioElement.removeEventListener('play', this.handlePlay, false);
@@ -54,6 +60,20 @@ class SongPlayer extends Component {
     bindMouseEvents() {
         document.addEventListener('mousemove', this.handleMouseMove);
         document.addEventListener('mouseup', this.handleMouseUp);
+    }
+
+    changeNextSong() {
+        const {dispatch} = this.props;
+        dispatch(changeNextSong())
+    }
+
+    changePreviousSong() {
+        const {dispatch} = this.props;
+        dispatch(changePreviousSong())
+    }
+
+    handleEnded() {
+        this.changeNextSong();
     }
 
     handleLoadedMetadata() {
@@ -185,7 +205,9 @@ class SongPlayer extends Component {
                             <SongDetails title={song.title} username={song.user.username} />
                         </div>
                         <div className='song-player-controls'>
-                            <div className='song-player-button'>
+                            <div
+                                className='song-player-button'
+                                onClick={this.changePreviousSong}>
                                 <i className='icon ion-ios-rewind'></i>
                             </div>
                             <div
@@ -193,7 +215,9 @@ class SongPlayer extends Component {
                                 onClick={this.togglePlay}>
                                 <i className={'icon ' + (isPlaying ? 'ion-ios-pause' : 'ion-ios-play')}></i>
                             </div>
-                            <div className='song-player-button'>
+                            <div
+                                className='song-player-button'
+                                onClick={this.changeNextSong}>
                                 <i className='icon ion-ios-fastforward'></i>
                             </div>
                         </div>

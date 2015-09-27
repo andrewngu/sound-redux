@@ -13,16 +13,15 @@ class App extends Component {
     }
 
     renderSongPlayer() {
-        const {songs} = this.props;
+        const {dispatch, songs} = this.props;
         if (songs.activeSongIndex === null) {
             return;
         }
 
-        return <SongPlayer song={songs.items[songs.activeSongIndex]} />
+        return <SongPlayer dispatch={dispatch} song={songs.items[songs.activeSongIndex]} />
     }
 
     render() {
-        const {songs} = this.props;
         return (
             <div>
                 <Header />

@@ -7,6 +7,26 @@ export function changeActiveSongIndex(activeSongIndex) {
     };
 }
 
+export function changeNextSong() {
+    return (dispatch, getState) => {
+        const {songs} = getState();
+        const nextIndex = songs.activeSongIndex + 1;
+        if (nextIndex < songs.items.length) {
+            dispatch(changeActiveSongIndex(nextIndex));
+        }
+    }
+}
+
+export function changePreviousSong() {
+    return (dispatch, getState) => {
+        const {songs} = getState();
+        const prevIndex = songs.activeSongIndex - 1;
+        if (prevIndex >= 0) {
+            dispatch(changeActiveSongIndex(prevIndex));
+        }
+    }
+}
+
 function fetchSongs(url) {
     return dispatch => {
         dispatch(requestSongs());
