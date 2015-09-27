@@ -12,9 +12,9 @@ class SongPlayer extends Component {
         this.handleEnded = this.handleEnded.bind(this);
         this.handleLoadedMetadata = this.handleLoadedMetadata.bind(this);
         this.handleLoadStart = this.handleLoadStart.bind(this);
-        this.handleMouseDown = this.handleMouseDown.bind(this);
-        this.handleMouseMove = this.handleMouseMove.bind(this);
-        this.handleMouseUp = this.handleMouseUp.bind(this);
+        this.handleSeekMouseDown = this.handleSeekMouseDown.bind(this);
+        this.handleSeekMouseMove = this.handleSeekMouseMove.bind(this);
+        this.handleSeekMouseUp = this.handleSeekMouseUp.bind(this);
         this.handlePlay = this.handlePlay.bind(this);
         this.handlePause = this.handlePause.bind(this);
         this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
@@ -65,9 +65,9 @@ class SongPlayer extends Component {
         audioElement.removeEventListener('volumechange', this.handleVolumeChange, false);
     }
 
-    bindMouseEvents() {
-        document.addEventListener('mousemove', this.handleMouseMove);
-        document.addEventListener('mouseup', this.handleMouseUp);
+    bindSeekMouseEvents() {
+        document.addEventListener('mousemove', this.handleSeekMouseMove);
+        document.addEventListener('mouseup', this.handleSeekMouseUp);
     }
 
     changeNextSong() {
@@ -113,14 +113,22 @@ class SongPlayer extends Component {
         e.stopPropagation();
     }
 
-    handleMouseDown(e) {
-        this.bindMouseEvents();
+    handleSeekMouseDown(e) {
+        this.bindSeekMouseEvents();
         this.setState({
             isSeeking: true,
         });
     }
 
-    handleMouseMove(e) {
+    handlePause() {
+        this.setState({isPlaying: false});
+    }
+
+    handlePlay() {
+        this.setState({isPlaying: true});
+    }
+
+    handleSeekMouseMove(e) {
         const seekBar = React.findDOMNode(this.refs.seekBar);
         const diff = e.clientX - seekBar.offsetLeft;
         const pos = diff < 0 ? 0 : diff;
@@ -132,25 +140,19 @@ class SongPlayer extends Component {
         });
     }
 
-    handleMouseUp(e) {
+    handleSeekMouseUp(e) {
         if (!this.state.isSeeking) {
             return;
         }
 
-        this.unbindMouseEvents();
+        document.removeEventListener('mousemove', this.handleSeekMouseMove);
+        document.removeEventListener('mouseup', this.handleSeekMouseUp);
+
         this.setState({
             isSeeking: false,
         }, function() {
             React.findDOMNode(this.refs.audio).currentTime = this.state.currentTime;
         });
-    }
-
-    handlePause() {
-        this.setState({isPlaying: false});
-    }
-
-    handlePlay() {
-        this.setState({isPlaying: true});
     }
 
     handleTimeUpdate(e) {
@@ -199,11 +201,6 @@ class SongPlayer extends Component {
         this.setState({shuffle: !this.state.shuffle});
     }
 
-    unbindMouseEvents() {
-        document.removeEventListener('mousemove', this.handleMouseMove);
-        document.removeEventListener('mouseup', this.handleMouseUp);
-    }
-
     renderDurationBar() {
         const {currentTime, duration} = this.state;
 
@@ -216,7 +213,7 @@ class SongPlayer extends Component {
                     <div
                         className='song-player-seek-handle'
                         onClick={this.handleMouseClick}
-                        onMouseDown={this.handleMouseDown}>
+                        onMouseDown={this.handleSeekMouseDown}>
                     </div>
                 </div>
             );
