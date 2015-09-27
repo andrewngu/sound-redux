@@ -119,3 +119,23 @@
     margin-left: 30px;
     width: 100px;
 }
+
+.song-player-volume-button {
+    width: 12px;
+}
+
+.song-player-volume-button-wrap {
+    position: relative;
+
+    .ion-android-volume-up, .ion-android-volume-down {
+        z-index: 0;
+        color: #A6D2A5;
+    }
+
+    .ion-android-volume-mute {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+}
