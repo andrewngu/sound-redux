@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {fetchSongs} from '../actions/songs';
+import {fetchSongsIfNeeded} from '../actions/songs';
 
 import Header from '../components/Header';
 import SongPlayer from '../components/SongPlayer';
@@ -9,7 +9,7 @@ import Songs from '../components/Songs';
 class App extends Component {
     componentDidMount () {
         const {dispatch} = this.props;
-        dispatch(fetchSongs());
+        dispatch(fetchSongsIfNeeded());
     }
 
     renderSongPlayer() {
