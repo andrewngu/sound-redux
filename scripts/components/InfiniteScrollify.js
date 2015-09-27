@@ -26,5 +26,9 @@ export default function(InnerComponent) {
         }
     };
 
+    InfiniteScrollComponent.propTypes = {
+        scrollFunc: PropTypes.func.isRequired
+    };
+
     return InfiniteScrollComponent;
 }

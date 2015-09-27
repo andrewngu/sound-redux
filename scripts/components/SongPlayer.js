@@ -19,12 +19,15 @@ class SongPlayer extends Component {
         this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
         this.seek = this.seek.bind(this);
         this.togglePlay = this.togglePlay.bind(this);
+        this.toggleRepeat = this.toggleRepeat.bind(this);
+        this.toggleShuffle = this.toggleShuffle.bind(this);
 
         this.state = {
             currentTime: 0,
             duration: 0,
             isPlaying: false,
             isSeeking: false,
+            repeat: false,
         };
     }
 
@@ -33,8 +36,8 @@ class SongPlayer extends Component {
         audioElement.addEventListener('ended', this.handleEnded, false);
         audioElement.addEventListener('loadedmetadata', this.handleLoadedMetadata, false);
         audioElement.addEventListener('loadstart', this.handleLoadStart, false);
-        audioElement.addEventListener('play', this.handlePlay, false);
         audioElement.addEventListener('pause', this.handlePause, false);
+        audioElement.addEventListener('play', this.handlePlay, false);
         audioElement.addEventListener('timeupdate', this.handleTimeUpdate, false);
         audioElement.play();
     }
@@ -52,8 +55,8 @@ class SongPlayer extends Component {
         audioElement.removeEventListener('ended', this.handleEnded, false);
         audioElement.removeEventListener('loadedmetadata', this.handleLoadedMetadata, false);
         audioElement.removeEventListener('loadstart', this.handleLoadStart, false);
-        audioElement.removeEventListener('play', this.handlePlay, false);
         audioElement.removeEventListener('pause', this.handlePause, false);
+        audioElement.removeEventListener('play', this.handlePlay, false);
         audioElement.removeEventListener('timeupdate', this.handleTimeUpdate, false);
     }
 
@@ -73,7 +76,11 @@ class SongPlayer extends Component {
     }
 
     handleEnded() {
-        this.changeNextSong();
+        if (this.state.repeat) {
+            React.findDOMNode(this.refs.audio).play();
+        } else {
+            this.changeNextSong();
+        }
     }
 
     handleLoadedMetadata() {
@@ -167,6 +174,14 @@ class SongPlayer extends Component {
         }
     }
 
+    toggleRepeat() {
+        this.setState({repeat: !this.state.repeat});
+    }
+
+    toggleShuffle() {
+        this.setState({shuffle: !this.state.shuffle});
+    }
+
     unbindMouseEvents() {
         document.removeEventListener('mousemove', this.handleMouseMove);
         document.removeEventListener('mouseup', this.handleMouseUp);
@@ -200,11 +215,11 @@ class SongPlayer extends Component {
                 <audio ref='audio' src={formatStreamUrl(song.stream_url)}></audio>
                 <div className='container'>
                     <div className='song-player-main'>
-                        <div className='song-player-info song-player-section'>
+                        <div className='song-player-section song-player-info'>
                             <img className='song-player-image' src={song.artwork_url} />
                             <SongDetails title={song.title} username={song.user.username} />
                         </div>
-                        <div className='song-player-controls song-player-section'>
+                        <div className='song-player-section'>
                             <div
                                 className='song-player-button'
                                 onClick={this.changePreviousSong}>
@@ -221,7 +236,7 @@ class SongPlayer extends Component {
                                 <i className='icon ion-ios-fastforward'></i>
                             </div>
                         </div>
-                        <div className='song-player-seek song-player-section'>
+                        <div className='song-player-section song-player-seek'>
                             <div className='song-player-seek-bar-wrap' onClick={this.seek}>
                                 <div ref='seekBar' className='song-player-seek-bar'>
                                     {this.renderDurationBar()}
@@ -231,6 +246,17 @@ class SongPlayer extends Component {
                                 <span>{formatSeconds(currentTime)}</span>
                                 <span className='song-player-time-divider'>/</span>
                                 <span>{formatSeconds(duration)}</span>
+                            </div>
+                        </div>
+                        <div className='song-player-section'>
+                            <div
+                                className={'song-player-button' + (this.state.repeat ? ' active' : '')}
+                                onClick={this.toggleRepeat}>
+                                <i className='icon ion-loop'></i>
+                            </div>
+                            <div
+                                className={'song-player-button' + (this.state.shuffle ? ' active' : '')}>
+                                <i className='icon ion-shuffle'></i>
                             </div>
                         </div>
                     </div>

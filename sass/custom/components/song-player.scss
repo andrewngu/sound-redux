@@ -10,8 +10,14 @@
     -ms-user-select: none;
 }
 
-.song-player-section + .song-player-section {
-    margin-left: 40px;
+.song-player-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    & + .song-player-section {
+        margin-left: 40px;
+    }
 }
 
 .song-player-main {
@@ -31,15 +37,17 @@
     margin-right: 8px;
 }
 
-.song-player-controls {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
 .song-player-button {
     padding: 4px;
     color: #ccc;
+
+    &.active {
+        color: #A6D2A5;
+
+        &:hover {
+            color: #86AB85;
+        }
+    }
 
     &:hover {
         color: #222;
@@ -60,9 +68,7 @@
 }
 
 .song-player-seek {
-    display: flex;
     flex: 1;
-    align-items: center;
 }
 
 .song-player-seek-bar-wrap {
