@@ -174,7 +174,6 @@ class SongPlayer extends Component {
     render() {
         const {song} = this.props;
         const {currentTime, duration, isPlaying} = this.state;
-        const image = song.artwork_url.replace('large', 't300x300');
 
         return (
             <div className='song-player'>
@@ -182,7 +181,7 @@ class SongPlayer extends Component {
                 <div className='container'>
                     <div className='song-player-main'>
                         <div className='song-player-main-info'>
-                            <img className='song-player-image' src={image} />
+                            <img className='song-player-image' src={song.artwork_url} />
                             <SongDetails title={song.title} username={song.user.username} />
                         </div>
                         <div className='song-player-controls'>
