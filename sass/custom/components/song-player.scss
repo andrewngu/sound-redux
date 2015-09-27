@@ -5,6 +5,9 @@
     width: 100%;
     background-color: #fff;
     border-top: 1px solid #e3e3e3;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .song-player-main {
