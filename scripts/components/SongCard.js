@@ -12,7 +12,11 @@ class SongCard extends Component {
                 <div
                     className='song-card-image'
                     onClick={changeActiveSongIndex}
-                    style={{backgroundImage: `url(${image})`}} />
+                    style={{backgroundImage: `url(${image})`}}>
+                    <div className='song-card-playing'>
+                        <i className={'song-card-playing-icon icon ' + (isActive ? 'ion-stop' : 'ion-ios-play')}></i>
+                    </div>
+                </div>
                 <div className='song-card-user'>
                     <img
                         className='song-card-user-image'
