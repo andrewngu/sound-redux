@@ -35,6 +35,7 @@ class SongPlayer extends Component {
             isSeeking: false,
             muted: false,
             repeat: false,
+            shuffle: false,
             volume: 1,
         };
     }
@@ -375,7 +376,8 @@ class SongPlayer extends Component {
                                 <i className='icon ion-loop'></i>
                             </div>
                             <div
-                                className={'song-player-button' + (this.state.shuffle ? ' active' : '')}>
+                                className={'song-player-button' + (this.state.shuffle ? ' active' : '')}
+                                onClick={this.toggleShuffle}>
                                 <i className='icon ion-shuffle'></i>
                             </div>
                             <div
