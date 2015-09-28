@@ -14,7 +14,7 @@ class SongCard extends Component {
                     onClick={changeActiveSongIndex}
                     style={{backgroundImage: `url(${image})`}}>
                     <div className='song-card-playing'>
-                        <i className={'song-card-playing-icon icon ' + (isActive ? 'ion-stop' : 'ion-ios-play')}></i>
+                        <i className={'song-card-playing-icon icon ' + (isActive ? 'ion-radio-waves' : 'ion-ios-play')}></i>
                     </div>
                 </div>
                 <div className='song-card-user'>

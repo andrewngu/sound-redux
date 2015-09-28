@@ -4,8 +4,12 @@
     &.active {
         border-color: #A6D2A5;
 
+        .song-card-image {
+            pointer-events: none;
+        }
+
         .song-card-playing {
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.8);
         }
 
         .song-card-playing-icon {
@@ -59,7 +63,7 @@
     transition: background-color 0.2s ease-in-out;
 
     &:hover {
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color: rgba(0, 0, 0, 0.8);
 
         .song-card-playing-icon {
             opacity: 1;

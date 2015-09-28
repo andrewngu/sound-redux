@@ -12,7 +12,7 @@ function songs(state = initialState, action) {
     switch (action.type) {
     case types.CHANGE_ACTIVE_SONG_INDEX:
         return Object.assign({}, state, {
-            activeSongIndex: action.activeSongIndex === state.activeSongIndex ? null : action.activeSongIndex
+            activeSongIndex: action.activeSongIndex
         });
 
     case types.RECEIVE_SONGS:
