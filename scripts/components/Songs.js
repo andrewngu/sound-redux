@@ -1,9 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+
 import {changeActiveSongIndex} from '../actions/songs';
+
 import InfiniteScrollify from '../components/InfiniteScrollify';
 import SongCard from '../components/SongCard';
 import Spinner from '../components/Spinner';
+import Stickify from '../components/Stickify';
 import Toolbar from '../components/Toolbar';
 
 
@@ -51,11 +54,12 @@ class Songs extends Component {
     }
 
     render() {
-        const {isFetching} = this.props.songs;
+        const {songs, sticky} = this.props;
+        const {isFetching} = songs;
 
         return (
-            <div>
-                <Toolbar />
+            <div className={'songs' + (sticky ? ' sticky' : '')}>
+                <Toolbar sticky={sticky} />
                 <div className='container'>
                     <div className='content'>
                         {this.renderSongs()}
@@ -71,4 +75,4 @@ Songs.propTypes = {
     songs: PropTypes.object.isRequired,
 };
 
-export default InfiniteScrollify(Songs);
+export default InfiniteScrollify(Stickify(Songs, 50));

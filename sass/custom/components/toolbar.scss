@@ -1,6 +1,14 @@
+
 .toolbar {
-    margin-bottom: 40px;
     background-color: #fff;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.sticky .toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 .toolbar-items {
