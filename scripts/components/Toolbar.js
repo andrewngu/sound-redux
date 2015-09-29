@@ -9,7 +9,7 @@ class Toolbar extends Component {
     renderGenres() {
         return genres.map((genre) => {
             return (
-                <div className='toolbar-item toolbar-genre'>
+                <div className='toolbar-item toolbar-genre' key={genre}>
                     {genre}
                 </div>
             );
