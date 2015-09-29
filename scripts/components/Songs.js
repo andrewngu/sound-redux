@@ -4,6 +4,7 @@ import {changeActiveSongIndex} from '../actions/songs';
 import InfiniteScrollify from '../components/InfiniteScrollify';
 import SongCard from '../components/SongCard';
 import Spinner from '../components/Spinner';
+import Toolbar from '../components/Toolbar';
 
 
 class Songs extends Component {
@@ -54,8 +55,13 @@ class Songs extends Component {
 
         return (
             <div>
-                {this.renderSongs()}
-                {isFetching ? <Spinner /> : null}
+                <Toolbar />
+                <div className='container'>
+                    <div className='content'>
+                        {this.renderSongs()}
+                        {isFetching ? <Spinner /> : null}
+                    </div>
+                </div>
             </div>
         );
     }

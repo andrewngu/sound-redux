@@ -4,7 +4,7 @@ import {CLIENT_ID} from '../constants/Config';
 const initialState = {
     activeSongIndex: null,
     isFetching: false,
-    nextUrl: `http://api.soundcloud.com/tracks?linked_partitioning=1&client_id=${CLIENT_ID}&tags=house&limit=50&offset=0`,
+    nextUrl: `http://api.soundcloud.com/tracks?linked_partitioning=1&client_id=${CLIENT_ID}&genre=trance&limit=50&offset=0`,
     items: []
 };
 

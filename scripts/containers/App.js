@@ -25,11 +25,7 @@ class App extends Component {
         return (
             <div>
                 <Header />
-                <div className='container'>
-                    <div className='content'>
-                        <Songs {...this.props} scrollFunc={fetchSongsIfNeeded} />
-                    </div>
-                </div>
+                <Songs {...this.props} scrollFunc={fetchSongsIfNeeded} />
                 {this.renderSongPlayer()}
             </div>
         );
