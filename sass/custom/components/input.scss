@@ -1,19 +1,39 @@
 input[type="text"] {
     display: inline-block;
     padding: 0 0.875rem;
-    height: 2.6rem;
-    border: 1px solid #dfdfdf;
+    border: none;
     color: #222;
     text-align: left;
     font-family: 'Open Sans';
-
-    line-height: 2.6rem;
     font-size: 12px;
-
+    outline: 0;
     border-radius: 3px;
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
     -ms-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
-    outline: 0;
+}
+
+::-webkit-input-placeholder {
+    color: #bbb;
+    font-weight: 300;
+    font-family: 'Open Sans';
+}
+
+:-moz-placeholder {
+    color: #bbb;
+    font-weight: 300;
+    font-family: 'Open Sans';
+}
+
+::-moz-placeholder {
+    color: #bbb;
+    font-weight: 300;
+    font-family: 'Open Sans';
+}
+
+:-ms-input-placeholder {
+    color: #bbb;
+    font-weight: 300;
+    font-family: 'Open Sans';
 }
