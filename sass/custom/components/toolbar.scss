@@ -1,5 +1,46 @@
 .toolbar {
-    height: 50px;
     margin-bottom: 40px;
     background-color: #fff;
+}
+
+.toolbar-items {
+    display: flex;
+    height: 40px;
+}
+
+.toolbar-item {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 50px;
+    box-shadow: inset 0 -2px 0 #fff;
+    border-left: 1px solid #e3e3e3;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        color: #2D2D11;
+        text-decoration: none;
+        box-shadow: inset 0 -2px 0 #3381b7;
+    }
+
+    &.active {
+        color: #2D2D11;
+        box-shadow: inset 0 -2px 0 #3381b7;
+        pointer-events: none;
+    }
+
+    &:last-child {
+        border-right: 1px solid #e3e3e3;
+    }
+}
+
+.toolbar-item-content {
+    color: #adadad;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }

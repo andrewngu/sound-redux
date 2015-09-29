@@ -1,0 +1,17 @@
+input[type="text"] {
+    font-family: 'Open Sans';
+    border: 1px solid #dfdfdf;
+    padding: 0 0.875rem;
+    height: 2.6rem;
+    line-height: 2.6rem;
+    font-size: 12px;
+    color: #222;
+    border-radius: 3px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    outline: 0;
+    display: inline-block;
+    text-align: left;
+}

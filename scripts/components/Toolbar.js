@@ -9,11 +9,11 @@ class Toolbar extends Component {
         return (
             <div className='toolbar'>
                 <div className='container'>
-                    <ul className='toolbar-links'>
-                        <li>
+                    <div className='toolbar-items'>
+                        <div className='toolbar-item'>
                             <input placeholder='SEARCH' type='text' />
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
