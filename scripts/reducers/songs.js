@@ -3,7 +3,7 @@ import {constructUrl} from '../helpers/Songs';
 
 const initialState = {
     activeSongIndex: null,
-    category: 'House',
+    category: 'house',
     isFetching: false,
     nextUrl: constructUrl('house'),
     items: []

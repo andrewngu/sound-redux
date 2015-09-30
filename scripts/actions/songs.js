@@ -1,9 +1,25 @@
 import * as types from '../constants/ActionTypes';
+import {constructUrl} from '../helpers/Songs';
 
 export function changeActiveSongIndex(activeSongIndex) {
     return {
         type: types.CHANGE_ACTIVE_SONG_INDEX,
         activeSongIndex: activeSongIndex,
+    };
+}
+
+export function changeCategory(category) {
+    return (dispatch) => {
+        dispatch(changeCategorySet(category));
+        dispatch(fetchSongsIfNeeded());
+    };
+}
+
+export function changeCategorySet(category) {
+    return {
+        type: types.CHANGE_CATEGORY,
+        category: category,
+        url: constructUrl(category)
     };
 }
 

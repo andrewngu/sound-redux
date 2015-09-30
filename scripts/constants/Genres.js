@@ -1,10 +1,10 @@
 export default [
-    'Chill',
-    'Deep',
-    'Dubstep',
-    'House',
-    'Progressive',
-    'Tech',
-    'Trance',
-    'Tropical'
+    'chill',
+    'deep',
+    'dubstep',
+    'house',
+    'progressive',
+    'tech',
+    'trance',
+    'tropical'
 ];

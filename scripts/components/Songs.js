@@ -54,12 +54,12 @@ class Songs extends Component {
     }
 
     render() {
-        const {songs, sticky} = this.props;
-        const {isFetching} = songs;
+        const {dispatch, songs, sticky} = this.props;
+        const {category, isFetching} = songs;
 
         return (
             <div className={'songs' + (sticky ? ' sticky' : '')}>
-                <Toolbar sticky={sticky} />
+                <Toolbar category={category} dispatch={dispatch} sticky={sticky} />
                 <div className='container'>
                     <div className='content'>
                         {this.renderSongs()}
