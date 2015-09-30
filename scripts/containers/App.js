@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {fetchSongsIfNeeded} from '../actions/songs';
+import {changeActivePlaylist, fetchSongsIfNeeded} from '../actions/songs';
 
 import Header from '../components/Header';
 import SongPlayer from '../components/SongPlayer';
@@ -9,7 +9,8 @@ import Songs from '../components/Songs';
 class App extends Component {
     componentDidMount () {
         const {dispatch} = this.props;
-        dispatch(fetchSongsIfNeeded());
+        dispatch(changeActivePlaylist('house'));
+        dispatch(fetchSongsIfNeeded('house'));
     }
 
     renderSongPlayer() {
@@ -27,7 +28,7 @@ class App extends Component {
         return (
             <div>
                 <Header />
-                <Songs {...this.props} scrollFunc={fetchSongsIfNeeded} />
+                <Songs {...this.props} scrollFunc={function(){return;}} />
                 {this.renderSongPlayer()}
             </div>
         );
@@ -36,14 +37,16 @@ class App extends Component {
 
 App.propTypes = {
     dispatch: PropTypes.func.isRequired,
+    playlists: PropTypes.object.isRequired,
     songs: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
-    const { player, songs } = state;
+    const { player, playlists, songs } = state;
 
     return {
         player,
+        playlists,
         songs
     };
 }

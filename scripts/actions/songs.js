@@ -2,87 +2,51 @@ import {addSongsToPlaylist} from '../actions/player';
 import * as types from '../constants/ActionTypes';
 import {constructUrl} from '../helpers/Songs';
 
-export function changeActivePlaylist(activePlaylist) {
+export function changeActivePlaylist(playlist) {
     return {
-        type: types.CHANGE_ACTIVE_PLAYLIST
+        type: types.CHANGE_ACTIVE_PLAYLIST,
+        playlist: playlist
     };
 }
 
-export function changeCategory(category) {
-    return (dispatch) => {
-        dispatch(changeCategorySet(category));
-        dispatch(fetchSongsIfNeeded());
-    };
-}
-
-export function changeCategorySet(category) {
-    return {
-        type: types.CHANGE_CATEGORY,
-        category: category,
-        url: constructUrl(category)
-    };
-}
-
-export function changeNextSong() {
+function fetchSongs(url, playlist) {
     return (dispatch, getState) => {
-        const {songs} = getState();
-        const nextIndex = songs.activeSongIndex + 1;
-        if (nextIndex < songs.items.length) {
-            dispatch(changeActiveSongIndex(nextIndex));
-        }
-    }
-}
-
-export function changePreviousSong() {
-    return (dispatch, getState) => {
-        const {songs} = getState();
-        const prevIndex = songs.activeSongIndex - 1;
-        if (prevIndex >= 0) {
-            dispatch(changeActiveSongIndex(prevIndex));
-        }
-    }
-}
-
-function fetchSongs(url) {
-    return (dispatch, getState) => {
-        dispatch(requestSongs());
+        dispatch(requestSongs(playlist));
         return fetch(url)
             .then(response => response.json())
             .then(json => {
-                const {player, songs} = getState();
-                dispatch(receiveSongs(json));
-                if (songs.category in player.playlists) {
-                    dispatch(addSongsToPlaylist(songs.category, json.collection));
-                }
+                dispatch(receiveSongs(json, playlist));
             });
     };
 }
 
-export function fetchSongsIfNeeded() {
+export function fetchSongsIfNeeded(playlist) {
     return (dispatch, getState) => {
-        const {songs} = getState();
-        if (shouldFetchSongs(songs)) {
-            return dispatch(fetchSongs(songs.nextUrl))
+        const {playlists, songs} = getState();
+        if (shouldFetchSongs(playlists, playlist)) {
+            return dispatch(fetchSongs(playlists[playlist].nextUrl, playlist));
         }
     }
 }
 
-function receiveSongs(json) {
+function receiveSongs(json, playlist) {
     return {
       type: types.RECEIVE_SONGS,
       nextUrl: json.next_href,
-      songs: json.collection.filter((song) => song.streamable && song.duration < 600000 ),
+      playlist: playlist,
+      songs: json.collection.filter((song) => song.streamable && song.duration < 600000 )
     };
 }
 
-function requestSongs() {
+function requestSongs(playlist) {
     return {
         type: types.REQUEST_SONGS,
+        playlist: playlist
     };
 }
 
-function shouldFetchSongs(songs) {
-    if (songs.isFetching || !songs.nextUrl) {
+function shouldFetchSongs(playlists, playlist) {
+    if (playlists[playlist].isFetching || !playlists[playlist].nextUrl) {
         return false;
     }
 

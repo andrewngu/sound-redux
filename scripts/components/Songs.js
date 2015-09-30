@@ -35,7 +35,9 @@ class Songs extends Component {
 
     renderSongs() {
         const chunk = 5;
-        const {activeSongIndex, items} = this.props.songs;
+        const {playlists, songs} = this.props;
+        const {activePlaylist} = songs;
+        const items = activePlaylist in playlists ? playlists[activePlaylist].items : [];
         const activeSong = this.getActiveSong();
 
         let result = [];
@@ -85,6 +87,7 @@ class Songs extends Component {
 }
 
 Songs.propTypes = {
+    playlists: PropTypes.object.isRequired,
     songs: PropTypes.object.isRequired,
 };
 
