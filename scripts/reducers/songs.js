@@ -2,7 +2,7 @@ import * as types from '../constants/ActionTypes';
 import {constructUrl} from '../helpers/Songs';
 
 const initialState = {
-    activePlaylist: null,
+    activePlaylist: 'house',
     activeSongIndex: null,
     category: 'house',
     isFetching: false,
@@ -11,8 +11,42 @@ const initialState = {
     playlists: {}
 };
 
+function playlist(state = {
+    isFetching: false,
+    items: [],
+    nextUrl: null
+}, action) {
+    switch(action.type) {
+    case type.CHANGE_ACTIVE_PLAYLIST:
+        return Object.assign({}, state, {
+            nextUrl: state.nextUrl ? state.nextUrl : constructUrl(action.activePlaylist)
+        });
+
+    default:
+        return state;
+    }
+}
+
+function playlists(state, action) {
+    switch(action.type) {
+    case types.CHANGE_ACTIVE_PLAYLIST:
+        return Object.assign({}, state, {
+            [action.activePlaylist]: playlist(state[action.activePlaylist], action)
+        });
+
+    default:
+        return state;
+    }
+}
+
 export default function songs(state = initialState, action) {
     switch (action.type) {
+    case types.CHANGE_ACTIVE_PLAYLIST:
+        return Object.assign({}, state, {
+            activePlaylist: action.activePlaylist,
+            playlists: playlists(state.playlists, action)
+        });
+
     case types.CHANGE_CATEGORY:
         return Object.assign({}, state, {
             category: action.category,
@@ -31,11 +65,6 @@ export default function songs(state = initialState, action) {
         return Object.assign({}, state, {
             isFetching: true,
             nextUrl: null
-        });
-
-    case types.CHANGE_ACTIVE_PLAYLIST:
-        return Object.assign({}, state, {
-            activePlaylist: action.activePlaylist
         });
 
     default:
