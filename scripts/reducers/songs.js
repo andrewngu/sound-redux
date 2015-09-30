@@ -1,18 +1,26 @@
 import * as types from '../constants/ActionTypes';
-import {CLIENT_ID} from '../constants/Config';
+import {constructUrl} from '../helpers/Songs';
 
 const initialState = {
     activeSongIndex: null,
+    category: 'House',
     isFetching: false,
-    nextUrl: `http://api.soundcloud.com/tracks?linked_partitioning=1&client_id=${CLIENT_ID}&tags=house&limit=50&offset=0`,
+    nextUrl: constructUrl('house'),
     items: []
 };
 
-function songs(state = initialState, action) {
+export default function songs(state = initialState, action) {
     switch (action.type) {
     case types.CHANGE_ACTIVE_SONG_INDEX:
         return Object.assign({}, state, {
             activeSongIndex: action.activeSongIndex
+        });
+
+    case types.CHANGE_CATEGORY:
+        return Object.assign({}, state, {
+            category: action.category,
+            nextUrl: action.url,
+            items: []
         });
 
     case types.RECEIVE_SONGS:
@@ -32,5 +40,3 @@ function songs(state = initialState, action) {
         return state;
     }
 }
-
-export default songs;

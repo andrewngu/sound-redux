@@ -4,7 +4,6 @@ export default function(InnerComponent, scrollHeight) {
     class StickyComponent extends Component {
         constructor(props) {
             super(props);
-
             this.onScroll = this.onScroll.bind(this);
             this.state = {sticky: false};
         }
