@@ -8,11 +8,27 @@ export function addSongsToPlaylist(activePlaylist, songs) {
     };
 }
 
-export function playSong(activePlaylist, activeSongIndex, songs) {
+export function changeActiveSongIndex(activeSongIndex) {
     return {
-        type: types.PLAY_SONG,
+        type: types.CHANGE_ACTIVE_SONG_INDEX,
+        activeSongIndex: activeSongIndex
+    };
+}
+
+export function playSong(activePlaylist, activeSongIndex, songs) {
+    return (dispatch, getState) => {
+        const {player} = getState();
+        if (player.activePlaylist !== activePlaylist) {
+            dispatch(setPlaylistSongs(activePlaylist, songs));
+        }
+        dispatch(changeActiveSongIndex(activeSongIndex));
+    };
+}
+
+export function setPlaylistSongs(activePlaylist, songs) {
+    return {
+        type: types.SET_PLAYLIST_SONGS,
         activePlaylist: activePlaylist,
-        activeSongIndex: activeSongIndex,
         lastUpdated: new Date().getTime(),
         songs: songs
     };

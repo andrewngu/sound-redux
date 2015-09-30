@@ -10,7 +10,7 @@ function playlist(state = {
             songs: state.songs.concat(action.songs),
         });
 
-    case types.PLAY_SONG:
+    case types.SET_PLAYLIST_SONGS:
         return Object.assign({}, state, {
             lastUpdated: action.lastUpdated,
             songs: action.songs
@@ -28,7 +28,7 @@ function playlists(state = {}, action) {
             [action.activePlaylist]: playlist(state[action.activePlaylist], action)
         });
 
-    case types.PLAY_SONG:
+    case types.SET_PLAYLIST_SONGS:
         return Object.assign({}, state, {
             [action.activePlaylist]: playlist(state[action.activePlaylist], action)
         });
@@ -49,9 +49,13 @@ export default function player(state = {
             playlists: playlists(state.playlists, action)
         });
 
-    case types.PLAY_SONG:
+    case types.CHANGE_ACTIVE_SONG_INDEX:
         return Object.assign({}, state, {
-            activeSongIndex: action.activeSongIndex,
+            activeSongIndex: action.activeSongIndex
+        });    
+
+    case types.SET_PLAYLIST_SONGS:
+        return Object.assign({}, state, {
             activePlaylist: action.activePlaylist,
             playlists: playlists(state.playlists, action)
         });

@@ -11,11 +11,6 @@ const initialState = {
 
 export default function songs(state = initialState, action) {
     switch (action.type) {
-    case types.CHANGE_ACTIVE_SONG_INDEX:
-        return Object.assign({}, state, {
-            activeSongIndex: action.activeSongIndex
-        });
-
     case types.CHANGE_CATEGORY:
         return Object.assign({}, state, {
             category: action.category,

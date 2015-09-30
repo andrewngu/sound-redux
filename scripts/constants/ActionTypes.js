@@ -5,3 +5,4 @@ export const FETCH_SONGS = 'FETCH_SONGS';
 export const PLAY_SONG = 'PLAY_SONG';
 export const RECEIVE_SONGS = 'RECEIVE_SONGS';
 export const REQUEST_SONGS = 'REQUEST_SONGS';
+export const SET_PLAYLIST_SONGS = 'SET_PLAYLIST_SONGS';
