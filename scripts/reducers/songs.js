@@ -2,11 +2,13 @@ import * as types from '../constants/ActionTypes';
 import {constructUrl} from '../helpers/Songs';
 
 const initialState = {
+    activePlaylist: null,
     activeSongIndex: null,
     category: 'house',
     isFetching: false,
     nextUrl: constructUrl('house'),
-    items: []
+    items: [],
+    playlists: {}
 };
 
 export default function songs(state = initialState, action) {
@@ -29,6 +31,11 @@ export default function songs(state = initialState, action) {
         return Object.assign({}, state, {
             isFetching: true,
             nextUrl: null
+        });
+
+    case types.CHANGE_ACTIVE_PLAYLIST:
+        return Object.assign({}, state, {
+            activePlaylist: action.activePlaylist
         });
 
     default:
