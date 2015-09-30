@@ -13,12 +13,14 @@ class App extends Component {
     }
 
     renderSongPlayer() {
-        const {dispatch, songs} = this.props;
-        if (songs.activeSongIndex === null) {
+        const {dispatch, player} = this.props;
+        const {activePlaylist, activeSongIndex, playlists} = player;
+        if (activeSongIndex === null
+        || activePlaylist == null) {
             return;
         }
 
-        return <SongPlayer dispatch={dispatch} song={songs.items[songs.activeSongIndex]} />
+        return <SongPlayer dispatch={dispatch} song={playlists[activePlaylist].songs[activeSongIndex]} />
     }
 
     render() {
@@ -38,9 +40,11 @@ App.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const { songs } = state;
+    const { player, songs } = state;
+
     return {
-        songs,
+        player,
+        songs
     };
 }
 

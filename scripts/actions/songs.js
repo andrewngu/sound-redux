@@ -1,3 +1,4 @@
+import {addSongsToPlaylist} from '../actions/player';
 import * as types from '../constants/ActionTypes';
 import {constructUrl} from '../helpers/Songs';
 
@@ -44,11 +45,17 @@ export function changePreviousSong() {
 }
 
 function fetchSongs(url) {
-    return dispatch => {
+    return (dispatch, getState) => {
         dispatch(requestSongs());
         return fetch(url)
             .then(response => response.json())
-            .then(json => dispatch(receiveSongs(json)));
+            .then(json => {
+                const {player, songs} = getState();
+                dispatch(receiveSongs(json));
+                if (songs.category in player.playlists) {
+                    dispatch(addSongsToPlaylist(songs.category, json.collection));
+                }
+            });
     };
 }
 
