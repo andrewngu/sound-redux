@@ -14,14 +14,14 @@ class App extends Component {
     }
 
     renderSongPlayer() {
-        const {dispatch, player} = this.props;
-        const {activePlaylist, activeSongIndex, playlists} = player;
-        if (activeSongIndex === null
-        || activePlaylist == null) {
+        const {dispatch, player, playlists} = this.props;
+        const {activeSongIndex, selectedPlaylists} = player;
+        const activePlaylist = selectedPlaylists[selectedPlaylists.length - 1];
+        if (!activePlaylist || activeSongIndex === null) {
             return;
         }
 
-        return <SongPlayer dispatch={dispatch} song={playlists[activePlaylist].songs[activeSongIndex]} />
+        return <SongPlayer dispatch={dispatch} song={playlists[activePlaylist].items[activeSongIndex]} />
     }
 
     render() {

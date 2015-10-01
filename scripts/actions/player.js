@@ -1,35 +1,33 @@
 import * as types from '../constants/ActionTypes';
 
-export function addSongsToPlaylist(activePlaylist, songs) {
-    return {
-        type: types.ADD_SONGS_TO_PLAYLIST,
-        activePlaylist: activePlaylist,
-        songs: songs
-    };
-}
-
-export function changeActiveSongIndex(activeSongIndex) {
+export function changeActiveSongIndex(songIndex) {
     return {
         type: types.CHANGE_ACTIVE_SONG_INDEX,
-        activeSongIndex: activeSongIndex
+        activeSongIndex: songIndex
     };
 }
 
-export function playSong(activePlaylist, activeSongIndex, songs) {
+export function playSong(playlist, songIndex, songs) {
     return (dispatch, getState) => {
         const {player} = getState();
-        if (player.activePlaylist !== activePlaylist) {
-            dispatch(setPlaylistSongs(activePlaylist, songs));
+        const {selectedPlaylists} = player;
+        const len = selectedPlaylists.length;
+        if (len === 0 || selectedPlaylists[len - 1] !== playlist) {
+            dispatch(changeSelectedPlaylist(selectedPlaylists, playlist));
         }
-        dispatch(changeActiveSongIndex(activeSongIndex));
+        dispatch(changeActiveSongIndex(songIndex));
     };
 }
 
-export function setPlaylistSongs(activePlaylist, songs) {
+export function changeSelectedPlaylist(playlists, playlist) {
+    const index = playlists.indexOf(playlist);
+    if (index > -1) {
+        playlists.slice(index, 1);
+    }
+    playlists.push(playlist);
+
     return {
-        type: types.SET_PLAYLIST_SONGS,
-        activePlaylist: activePlaylist,
-        lastUpdated: new Date().getTime(),
-        songs: songs
-    };
+        type: types.CHANGE_SELECTED_PLAYLIST,
+        playlists: playlists
+    }
 }

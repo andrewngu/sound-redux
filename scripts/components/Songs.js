@@ -18,19 +18,19 @@ class Songs extends Component {
     }
 
     getActiveSong() {
-        const {player} = this.props;
-        const {activePlaylist, activeSongIndex, playlists} = player;
-
-        if (activePlaylist === null || activeSongIndex === null) {
+        const {playlists, player} = this.props;
+        const {activeSongIndex, selectedPlaylists} = player;
+        const activePlaylist = selectedPlaylists[selectedPlaylists.length - 1];
+        if (!activePlaylist || activeSongIndex === null) {
             return {};
         }
 
-        return playlists[activePlaylist].songs[activeSongIndex];
+        return playlists[activePlaylist].items[activeSongIndex];
     }
 
     changeActiveSongIndex(i) {
         const {dispatch, songs} = this.props;
-        dispatch(playSong(songs.category, i, songs.items));
+        dispatch(playSong(songs.activePlaylist, i, songs.items));
     }
 
     renderSongs() {
