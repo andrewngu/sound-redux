@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {changeCategory} from '../actions/songs.js';
+import {changeActivePlaylist} from '../actions/songs';
 import genres from '../constants/Genres';
 
 class Toolbar extends Component {
@@ -7,21 +7,23 @@ class Toolbar extends Component {
         super(props);
     }
 
-    changeCategory(category) {
-        if (this.props.category === category) {
+    changeActivePlaylist(playlist) {
+        if (this.props.activePlaylist === playlist) {
             return;
         }
 
-        this.props.dispatch(changeCategory(category));
+        this.props.dispatch(changeActivePlaylist(playlist));
     }
 
     renderGenres() {
+        const {activePlaylist} = this.props;
+
         return genres.map((genre) => {
             return (
                 <div
-                    className={'toolbar-item toolbar-genre' + (this.props.category === genre ? ' active' : '')}
+                    className={'toolbar-item toolbar-genre' + (activePlaylist === genre ? ' active' : '')}
                     key={genre}
-                    onClick={this.changeCategory.bind(this, genre)}>
+                    onClick={this.changeActivePlaylist.bind(this, genre)}>
                     {genre}
                 </div>
             );

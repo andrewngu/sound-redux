@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {changeActivePlaylist, fetchSongsIfNeeded} from '../actions/songs';
+import {fetchSongsIfNeeded} from '../actions/playlists';
+import {changeActivePlaylist} from '../actions/songs';
 
 import Header from '../components/Header';
 import SongPlayer from '../components/SongPlayer';
@@ -25,10 +26,12 @@ class App extends Component {
     }
 
     render() {
+        const {activePlaylist} = this.props.songs;
+
         return (
             <div>
                 <Header />
-                <Songs {...this.props} scrollFunc={function(){return;}} />
+                <Songs {...this.props} scrollFunc={fetchSongsIfNeeded.bind(null, activePlaylist)} />
                 {this.renderSongPlayer()}
             </div>
         );
