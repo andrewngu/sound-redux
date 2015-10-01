@@ -28,7 +28,7 @@ class Songs extends Component {
         return playlists[activePlaylist].items[activeSongIndex];
     }
 
-    changeActiveSongIndex(i) {
+    playSong(i) {
         const {dispatch, songs} = this.props;
         dispatch(playSong(songs.activePlaylist, i, songs.items));
     }
@@ -47,8 +47,8 @@ class Songs extends Component {
                 return (
                     <div className='col-1-5' key={song.id}>
                         <SongCard
-                            changeActiveSongIndex={this.changeActiveSongIndex.bind(this, index)}
                             isActive={song.id === activeSong.id}
+                            playSong={this.playSong.bind(this, index)}
                             song={song} />
                     </div>
                 );

@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {changeActiveSongIndex} from '../actions/player';
+import {changeSong} from '../actions/player';
 import SongDetails from '../components/SongDetails';
 import {formatSeconds, formatStreamUrl} from '../helpers/Format';
 
@@ -80,14 +80,9 @@ class SongPlayer extends Component {
         document.addEventListener('mouseup', this.handleVolumeMouseUp);
     }
 
-    changeSong(isNext = true) {
-        const {dispatch, player, playlists} = this.props;
-        const {activeSongIndex, selectedPlaylists} = player;
-        const activePlaylist = selectedPlaylists[selectedPlaylists.length - 1];
-        const newActiveIndex = isNext ? activeSongIndex + 1 : activeSongIndex - 1;
-        if (newActiveIndex < playlists[activePlaylist].items.length && newActiveIndex >= 0) {
-            dispatch(changeActiveSongIndex(newActiveIndex));
-        }
+    changeSong(playNext = true) {
+        const {dispatch} = this.props;
+        dispatch(changeSong(playNext));
     }
 
     changeVolume(e) {
