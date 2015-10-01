@@ -1,4 +1,5 @@
 import * as types from '../constants/ActionTypes';
+import {constructUrl} from '../helpers/Songs';
 
 function fetchSongs(url, playlist) {
     return (dispatch, getState) => {
@@ -15,9 +16,18 @@ export function fetchSongsIfNeeded(playlist) {
     return (dispatch, getState) => {
         const {playlists, songs} = getState();
         if (shouldFetchSongs(playlists, playlist)) {
-            return dispatch(fetchSongs(playlists[playlist].nextUrl, playlist));
+            const nextUrl = getNextUrl(playlists, playlist);
+            return dispatch(fetchSongs(nextUrl, playlist));
         }
     }
+}
+
+function getNextUrl(playlists, playlist) {
+    const activePlaylist = playlists[playlist];
+    if (!activePlaylist || !activePlaylist.nextUrl) {
+        return constructUrl(playlist);
+    }
+    return activePlaylist.nextUrl;
 }
 
 function receiveSongs(json, playlist) {
@@ -37,9 +47,10 @@ function requestSongs(playlist) {
 }
 
 function shouldFetchSongs(playlists, playlist) {
-    if (playlists[playlist].isFetching || !playlists[playlist].nextUrl) {
-        return false;
+    const activePlaylist = playlists[playlist];
+    if (!activePlaylist || !activePlaylist.isFetching) {
+        return true;
     }
 
-    return true;
+    return false;
 }

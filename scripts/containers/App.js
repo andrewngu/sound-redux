@@ -11,7 +11,6 @@ class App extends Component {
     componentDidMount () {
         const {dispatch} = this.props;
         dispatch(changeActivePlaylist('house'));
-        dispatch(fetchSongsIfNeeded('house'));
     }
 
     renderSongPlayer() {

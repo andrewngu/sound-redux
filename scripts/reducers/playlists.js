@@ -7,11 +7,6 @@ function playlist(state = {
     nextUrl: null
 }, action) {
     switch(action.type) {
-    case types.CHANGE_ACTIVE_PLAYLIST:
-        return Object.assign({}, state, {
-            nextUrl: state.nextUrl ? state.nextUrl : constructUrl(action.playlist)
-        });
-
     case types.RECEIVE_SONGS:
         return Object.assign({}, state, {
             isFetching: false,
@@ -32,11 +27,6 @@ function playlist(state = {
 
 export default function playlists(state = {}, action) {
     switch(action.type) {
-    case types.CHANGE_ACTIVE_PLAYLIST:
-        return Object.assign({}, state, {
-            [action.playlist]: playlist(state[action.playlist], action)
-        });
-
     case types.RECEIVE_SONGS:
         return Object.assign({}, state, {
             [action.playlist]: playlist(state[action.playlist], action)
