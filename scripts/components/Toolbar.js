@@ -1,10 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {changeActivePlaylist} from '../actions/songs';
-import {GENRES} from '../constants/Genres';
+import {GENRES, GENRES_MAP} from '../constants/Genres';
 
 class Toolbar extends Component {
     constructor(props) {
         super(props);
+        this.handleOnKeyPress = this.handleOnKeyPress.bind(this);
     }
 
     changeActivePlaylist(playlist) {
@@ -14,6 +15,15 @@ class Toolbar extends Component {
         }
 
         dispatch(changeActivePlaylist(playlist));
+    }
+
+    handleOnKeyPress(e) {
+        if (e.charCode === 13) {
+            const value = e.currentTarget.value.trim();
+            if (value !== '') {
+                this.props.dispatch(changeActivePlaylist(value));
+            }
+        }
     }
 
     renderGenres() {
@@ -32,13 +42,15 @@ class Toolbar extends Component {
     }
 
     render() {
+        const {activePlaylist} = this.props;
+
         return (
             <div className='toolbar'>
                 <div className='container'>
                     <div className='toolbar-items'>
                         {this.renderGenres()}
-                        <div className='toolbar-item toolbar-search'>
-                            <input placeholder='SEARCH' type='text' />
+                        <div className={'toolbar-item toolbar-search' + (activePlaylist in GENRES_MAP ? '' : ' active')}>
+                            <input placeholder='SEARCH' onKeyPress={this.handleOnKeyPress} type='text' />
                         </div>
                     </div>
                 </div>

@@ -56,7 +56,7 @@ class Songs extends Component {
 
             if (songCards.length < chunk) {
                 for (let j = 0; j < chunk - songCards.length + 1; j++) {
-                    songCards.push(<div className='col-1-5' key={'song-placeholder-' + j}></div>);
+                    songCards.push(<div className='col-1-5' key={'song-placeholder-' + (i + j)}></div>);
                 }
             }
 
