@@ -80,9 +80,9 @@ class SongPlayer extends Component {
         document.addEventListener('mouseup', this.handleVolumeMouseUp);
     }
 
-    changeSong(playNext = true) {
+    changeSong(changeType) {
         const {dispatch} = this.props;
-        dispatch(changeSong(playNext));
+        dispatch(changeSong(changeType));
     }
 
     changeVolume(e) {
@@ -94,8 +94,10 @@ class SongPlayer extends Component {
     handleEnded() {
         if (this.state.repeat) {
             React.findDOMNode(this.refs.audio).play();
+        } else if (this.state.shuffle) {
+            this.changeSong('shuffle');
         } else {
-            this.changeSong(true);
+            this.changeSong('next');
         }
     }
 
@@ -337,7 +339,7 @@ class SongPlayer extends Component {
                         <div className='song-player-section'>
                             <div
                                 className='song-player-button'
-                                onClick={this.changeSong.bind(this, false)}>
+                                onClick={this.changeSong.bind(this, 'prev')}>
                                 <i className='icon ion-ios-rewind'></i>
                             </div>
                             <div
@@ -347,7 +349,7 @@ class SongPlayer extends Component {
                             </div>
                             <div
                                 className='song-player-button'
-                                onClick={this.changeSong.bind(this, true)}>
+                                onClick={this.changeSong.bind(this, this.state.shuffle ? 'shuffle': 'next')}>
                                 <i className='icon ion-ios-fastforward'></i>
                             </div>
                         </div>

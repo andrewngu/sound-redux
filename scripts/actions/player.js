@@ -20,15 +20,26 @@ function changeSelectedPlaylist(playlists, playlist) {
     }
 }
 
-export function changeSong(playNext) {
+export function changeSong(changeType) {
     return (dispatch, getState) => {
         const {player, playlists} = getState();
         const {activeSongIndex, selectedPlaylists} = player;
         const activePlaylist = selectedPlaylists[selectedPlaylists.length - 1];
-        const newActiveIndex = playNext ? activeSongIndex + 1 : activeSongIndex - 1;
-        if (newActiveIndex < playlists[activePlaylist].items.length && newActiveIndex >= 0) {
-            dispatch(changeActiveSongIndex(newActiveIndex));
+        let newActiveIndex;
+
+        if (changeType === 'next') {
+            newActiveIndex = activeSongIndex + 1;
+        } else if (changeType === 'prev') {
+            newActiveIndex = activeSongIndex - 1;
+        } else if (changeType === 'shuffle') {
+            newActiveIndex = Math.floor((Math.random() * playlists[activePlaylist].items.length - 1) + 0);
         }
+
+        if (newActiveIndex >= playlists[activePlaylist].items.length || newActiveIndex < 0) {
+            return null;
+        }
+
+        return dispatch(changeActiveSongIndex(newActiveIndex));
     }
 }
 
