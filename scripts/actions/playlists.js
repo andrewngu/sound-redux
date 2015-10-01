@@ -8,6 +8,8 @@ function fetchSongs(url, playlist) {
             .then(response => response.json())
             .then(json => {
                 dispatch(receiveSongs(json, playlist));
+            }).catch(error => {
+                
             });
     };
 }
@@ -35,7 +37,7 @@ function receiveSongs(json, playlist) {
       type: types.RECEIVE_SONGS,
       nextUrl: json.next_href,
       playlist: playlist,
-      songs: json.collection.filter((song) => song.streamable && song.duration < 600000 )
+      songs: json.collection.filter(song => song.streamable && song.duration < 600000 )
     };
 }
 

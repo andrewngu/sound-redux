@@ -18,7 +18,7 @@ class Toolbar extends Component {
     renderGenres() {
         const {activePlaylist} = this.props;
 
-        return GENRES.map((genre) => {
+        return GENRES.map(genre => {
             return (
                 <div
                     className={'toolbar-item toolbar-genre' + (activePlaylist === genre ? ' active' : '')}
