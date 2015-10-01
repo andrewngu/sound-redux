@@ -10,7 +10,7 @@ function playlist(state = {
     case types.RECEIVE_SONGS:
         return Object.assign({}, state, {
             isFetching: false,
-            items: state.items.concat(action.songs),
+            items: [...state.items, ...action.songs],
             nextUrl: action.nextUrl
         });
 
