@@ -1,13 +1,12 @@
 import React, {Component, PropTypes} from 'react';
-import {changePreviousSong, changeNextSong} from '../actions/songs';
+import {changeActiveSongIndex} from '../actions/player';
 import SongDetails from '../components/SongDetails';
 import {formatSeconds, formatStreamUrl} from '../helpers/Format';
 
 class SongPlayer extends Component {
     constructor(props) {
         super(props);
-        this.changeNextSong = this.changeNextSong.bind(this);
-        this.changePreviousSong = this.changePreviousSong.bind(this);
+        this.changeSong = this.changeSong.bind(this);
         this.changeVolume = this.changeVolume.bind(this);
         this.handleEnded = this.handleEnded.bind(this);
         this.handleLoadedMetadata = this.handleLoadedMetadata.bind(this);
@@ -81,14 +80,14 @@ class SongPlayer extends Component {
         document.addEventListener('mouseup', this.handleVolumeMouseUp);
     }
 
-    changeNextSong() {
-        const {dispatch} = this.props;
-        dispatch(changeNextSong())
-    }
-
-    changePreviousSong() {
-        const {dispatch} = this.props;
-        dispatch(changePreviousSong())
+    changeSong(isNext = true) {
+        const {dispatch, player, playlists} = this.props;
+        const {activeSongIndex, selectedPlaylists} = player;
+        const activePlaylist = selectedPlaylists[selectedPlaylists.length - 1];
+        const newActiveIndex = isNext ? activeSongIndex + 1 : activeSongIndex - 1;
+        if (newActiveIndex < playlists[activePlaylist].items.length && newActiveIndex >= 0) {
+            dispatch(changeActiveSongIndex(newActiveIndex));
+        }
     }
 
     changeVolume(e) {
@@ -101,7 +100,7 @@ class SongPlayer extends Component {
         if (this.state.repeat) {
             React.findDOMNode(this.refs.audio).play();
         } else {
-            this.changeNextSong();
+            this.changeSong(true);
         }
     }
 
@@ -343,7 +342,7 @@ class SongPlayer extends Component {
                         <div className='song-player-section'>
                             <div
                                 className='song-player-button'
-                                onClick={this.changePreviousSong}>
+                                onClick={this.changeSong.bind(this, false)}>
                                 <i className='icon ion-ios-rewind'></i>
                             </div>
                             <div
@@ -353,7 +352,7 @@ class SongPlayer extends Component {
                             </div>
                             <div
                                 className='song-player-button'
-                                onClick={this.changeNextSong}>
+                                onClick={this.changeSong.bind(this, true)}>
                                 <i className='icon ion-ios-fastforward'></i>
                             </div>
                         </div>

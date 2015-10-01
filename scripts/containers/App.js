@@ -21,7 +21,13 @@ class App extends Component {
             return;
         }
 
-        return <SongPlayer dispatch={dispatch} song={playlists[activePlaylist].items[activeSongIndex]} />
+        return (
+            <SongPlayer
+                dispatch={dispatch}
+                song={playlists[activePlaylist].items[activeSongIndex]}
+                playlists={playlists}
+                player={player} />
+        );
     }
 
     render() {
