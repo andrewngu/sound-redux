@@ -30,7 +30,9 @@ class SongCard extends Component {
 }
 
 SongCard.propTypes = {
-    song: PropTypes.object.isRequired,
+    isActive: PropTypes.bool.isRequired,
+    playSong: PropTypes.func.isRequired,
+    song: PropTypes.object.isRequired
 };
 
 export default SongCard;
