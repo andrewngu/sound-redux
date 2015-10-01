@@ -6,11 +6,8 @@ function fetchSongs(url, playlist) {
         dispatch(requestSongs(playlist));
         return fetch(url)
             .then(response => response.json())
-            .then(json => {
-                dispatch(receiveSongs(json, playlist));
-            }).catch(error => {
-                
-            });
+            .then(json => dispatch(receiveSongs(json, playlist)))
+            .catch(error => {});
     };
 }
 

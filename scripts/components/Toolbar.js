@@ -8,11 +8,12 @@ class Toolbar extends Component {
     }
 
     changeActivePlaylist(playlist) {
-        if (this.props.activePlaylist === playlist) {
+        const {activePlaylist, dispatch} = this.props;
+        if (activePlaylist === playlist) {
             return;
         }
 
-        this.props.dispatch(changeActivePlaylist(playlist));
+        dispatch(changeActivePlaylist(playlist));
     }
 
     renderGenres() {
