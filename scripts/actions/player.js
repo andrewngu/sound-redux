@@ -7,6 +7,19 @@ export function changeActiveSongIndex(songIndex) {
     };
 }
 
+function changeSelectedPlaylist(playlists, playlist) {
+    const index = playlists.indexOf(playlist);
+    if (index > -1) {
+        playlists.splice(index, 1);
+    }
+    playlists.push(playlist);
+
+    return {
+        type: types.CHANGE_SELECTED_PLAYLIST,
+        playlists: playlists
+    }
+}
+
 export function playSong(playlist, songIndex, songs) {
     return (dispatch, getState) => {
         const {player} = getState();
@@ -17,17 +30,4 @@ export function playSong(playlist, songIndex, songs) {
         }
         dispatch(changeActiveSongIndex(songIndex));
     };
-}
-
-export function changeSelectedPlaylist(playlists, playlist) {
-    const index = playlists.indexOf(playlist);
-    if (index > -1) {
-        playlists.slice(index, 1);
-    }
-    playlists.push(playlist);
-
-    return {
-        type: types.CHANGE_SELECTED_PLAYLIST,
-        playlists: playlists
-    }
 }
