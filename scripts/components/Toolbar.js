@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {changeActivePlaylist} from '../actions/songs';
-import genres from '../constants/Genres';
+import {GENRES} from '../constants/Genres';
 
 class Toolbar extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class Toolbar extends Component {
     renderGenres() {
         const {activePlaylist} = this.props;
 
-        return genres.map((genre) => {
+        return GENRES.map((genre) => {
             return (
                 <div
                     className={'toolbar-item toolbar-genre' + (activePlaylist === genre ? ' active' : '')}

@@ -1,4 +1,4 @@
-export default [
+export const GENRES = [
     'chill',
     'deep',
     'dubstep',
@@ -8,3 +8,12 @@ export default [
     'trance',
     'tropical'
 ];
+
+export const GENRES_MAP = (function(){
+    let result = {};
+    GENRES.forEach(function(genre){
+        result[genre] = 1;
+    });
+
+    return result;
+})();
