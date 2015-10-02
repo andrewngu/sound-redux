@@ -1,3 +1,4 @@
+import fetch from 'isomorphic-fetch';
 import * as types from '../constants/ActionTypes';
 import {constructUrl} from '../helpers/Songs';
 
