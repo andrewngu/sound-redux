@@ -7,14 +7,6 @@ class Playlist extends Component {
         this.state = {activePlaylistIndex: null};
     }
 
-    componentWillReceiveProps(nextProps) {
-        const nextSelectedPlaylists = nextProps.player.selectedPlaylists;
-        const {selectedPlaylists} = this.props.player;
-        if (selectedPlaylists[selectedPlaylists.length - 1] !== nextSelectedPlaylists[nextSelectedPlaylists.length - 1]) {
-            this.setState({activePlaylistIndex: nextSelectedPlaylists.length - 1});
-        }
-    }
-
     componentWillUnmount() {
         this.setState({activePlaylistIndex : null});
     }
@@ -42,6 +34,7 @@ class Playlist extends Component {
         const activePlaylistIndex = this.state.activePlaylistIndex !== null ? this.state.activePlaylistIndex : selectedPlaylists.length - 1;
         const activePlaylist = selectedPlaylists[activePlaylistIndex];
         dispatch(playSong(activePlaylist, i));
+        this.setState({activePlaylistIndex: null});
     }
 
     render() {
