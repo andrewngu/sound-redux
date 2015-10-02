@@ -24,7 +24,7 @@ export function fetchSongsIfNeeded(playlist) {
 
 function getNextUrl(playlists, playlist) {
     const activePlaylist = playlists[playlist];
-    if (!activePlaylist || !activePlaylist.nextUrl) {
+    if (!activePlaylist || activePlaylist.nextUrl === false) {
         return constructUrl(playlist);
     }
     return activePlaylist.nextUrl;
@@ -48,7 +48,7 @@ function requestSongs(playlist) {
 
 function shouldFetchSongs(playlists, playlist) {
     const activePlaylist = playlists[playlist];
-    if (!activePlaylist || !activePlaylist.isFetching) {
+    if (!activePlaylist || !activePlaylist.isFetching && (activePlaylist.nextUrl !== null)) {
         return true;
     }
 

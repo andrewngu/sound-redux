@@ -4,7 +4,7 @@ import {constructUrl} from '../helpers/Songs';
 function playlist(state = {
     isFetching: false,
     items: [],
-    nextUrl: null
+    nextUrl: false
 }, action) {
     switch(action.type) {
     case types.RECEIVE_SONGS:
