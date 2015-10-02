@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {changeSong} from '../actions/player';
+import Playlist from '../components/Playlist';
 import Popover from '../components/Popover';
 import SongDetails from '../components/SongDetails';
 import {formatSeconds, formatStreamUrl} from '../helpers/Format';
@@ -29,6 +30,7 @@ class SongPlayer extends Component {
         this.toggleShuffle = this.toggleShuffle.bind(this);
 
         this.state = {
+            activePlaylistIndex: null,
             currentTime: 0,
             duration: 0,
             isPlaying: false,
@@ -58,6 +60,12 @@ class SongPlayer extends Component {
         }
 
         React.findDOMNode(this.refs.audio).play();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const {player} = nextProps;
+        const {selectedPlaylists} = player;
+        this.setState({activePlaylistIndex: selectedPlaylists.length - 1});
     }
 
     componentWillUnmount() {
@@ -282,19 +290,15 @@ class SongPlayer extends Component {
         }
     }
 
-    renderPlaylistSongs() {
-        const {playlists, player} = this.props;
-        const {selectedPlaylists} = player;
-        const activePlaylist = selectedPlaylists[selectedPlaylists.length - 1];
-        const songs = playlists[activePlaylist].items.map(song => {
-            return (
-                <li className='playlist-song' key={song.id}>
-                    <img className='playlist-song-image' src={song.artwork_url} />
-                </li>
-            );
-        });
+    renderPlaylist() {
+        const {dispatch, player, playlists} = this.props;
 
-        return <ul className='playlist-songs'>{songs}</ul>;
+        return (
+            <Playlist
+                dispatch={dispatch}
+                player={player}
+                playlists={playlists} />
+        );
     }
 
     renderVolumeBar() {
@@ -394,21 +398,7 @@ class SongPlayer extends Component {
                             </div>
                             <Popover className={'song-player-button'}>
                                 <i className='icon ion-android-list'></i>
-                                <div className='popover-content playlist' onClick={e => e.stopPropagation() }>
-                                    <div className='playlist-header'>
-                                        <a className='playlist-header-button'>
-                                            <i className='icon ion-ios-arrow-left'></i>
-                                        </a>
-                                        <div className='playlist-header-title'>Playlist</div>
-                                        <a className='playlist-header-button'>
-                                            <i className='icon ion-ios-arrow-right'></i>
-                                        </a>
-                                    </div>
-                                    <div className='playlist-body'>
-                                        {this.renderPlaylistSongs()}
-                                    </div>
-                                    <div className='playlist-footer'>32 Songs</div>
-                                </div>
+                                {this.renderPlaylist()}
                             </Popover>
                             <div
                                 className={'song-player-button song-player-volume-button'}

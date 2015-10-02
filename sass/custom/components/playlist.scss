@@ -9,16 +9,30 @@
     flex-direction: row;
     padding: 12px 0;
     border-bottom: 1px solid #e3e3e3;
+    background-color: #3a3f41;
+    color: #fff;
     font-size: 11px;
 }
 
 .playlist-header-button {
     padding: 0 10px;
+    color: #ccc;
+
+    &:hover {
+        color: #fff;
+        cursor: pointer;
+    }
+
+    &.disabled {
+        opacity: 0;
+        pointer-events: none;
+    }
 }
 
 .playlist-header-title {
     flex: 1;
     text-align: center;
+    text-transform: uppercase;
 }
 
 .playlist-body {
@@ -36,6 +50,11 @@
     align-items: center;
     padding: 4px;
     border-bottom: 1px solid #e3e3e3;
+
+    &:hover {
+        background-color: #fafafa;
+        cursor: pointer;
+    }
 
     &:last-child {
         border-bottom: none;
