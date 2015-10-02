@@ -32,6 +32,7 @@ class Playlist extends Component {
             return (
                 <li className='playlist-song' key={song.id}>
                     <img className='playlist-song-image' src={song.artwork_url} />
+                    <div className='playlist-song-title'>{song.title}</div>
                 </li>
             );
         });
