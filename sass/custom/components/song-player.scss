@@ -39,19 +39,29 @@
 
 .song-player-button {
     padding: 4px;
-    color: #ccc;
+
+    & > i {
+        color: #ccc;
+    }
 
     &.active {
-        color: #A6D2A5;
-
         &:hover {
-            color: #86AB85;
+            & i {
+                color: #86AB85;
+            }
+        }
+
+        & > i {
+            color: #A6D2A5;
         }
     }
 
     &:hover {
-        color: #222;
         cursor: pointer;
+
+        & > i {
+            color: #222;
+        }
 
         .ion-ios-pause {
             color: #86AB85;
@@ -137,5 +147,6 @@
         top: 0;
         left: 0;
         z-index: 1;
+        color: #ccc;
     }
 }

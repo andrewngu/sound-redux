@@ -282,6 +282,21 @@ class SongPlayer extends Component {
         }
     }
 
+    renderPlaylistSongs() {
+        const {playlists, player} = this.props;
+        const {selectedPlaylists} = player;
+        const activePlaylist = selectedPlaylists[selectedPlaylists.length - 1];
+        const songs = playlists[activePlaylist].items.map(song => {
+            return (
+                <li className='playlist-song' key={song.id}>
+                    <img className='playlist-song-image' src={song.artwork_url} />
+                </li>
+            );
+        });
+
+        return <ul className='playlist-songs'>{songs}</ul>;
+    }
+
     renderVolumeBar() {
         const {muted, volume} = this.state;
         const width = muted ? 0 : volume * 100;
@@ -378,8 +393,22 @@ class SongPlayer extends Component {
                                 <i className='icon ion-shuffle'></i>
                             </div>
                             <Popover className={'song-player-button'}>
-                                <i className='icon ion-ios-list-outline'></i>
-                                <div className='popover-content'>Hello</div>
+                                <i className='icon ion-android-list'></i>
+                                <div className='popover-content playlist' onClick={e => e.stopPropagation() }>
+                                    <div className='playlist-header'>
+                                        <a className='playlist-header-button'>
+                                            <i className='icon ion-ios-arrow-left'></i>
+                                        </a>
+                                        <div className='playlist-header-title'>Playlist</div>
+                                        <a className='playlist-header-button'>
+                                            <i className='icon ion-ios-arrow-right'></i>
+                                        </a>
+                                    </div>
+                                    <div className='playlist-body'>
+                                        {this.renderPlaylistSongs()}
+                                    </div>
+                                    <div className='playlist-footer'>32 Songs</div>
+                                </div>
                             </Popover>
                             <div
                                 className={'song-player-button song-player-volume-button'}

@@ -24,6 +24,8 @@ class App extends Component {
         return (
             <SongPlayer
                 dispatch={dispatch}
+                player={player}
+                playlists={playlists}
                 song={playlists[activePlaylist].items[activeSongIndex]} />
         );
     }
