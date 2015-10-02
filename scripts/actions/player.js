@@ -43,7 +43,7 @@ export function changeSong(changeType) {
     }
 }
 
-export function playSong(playlist, songIndex, songs) {
+export function playSong(playlist, songIndex) {
     return (dispatch, getState) => {
         const {player} = getState();
         const {selectedPlaylists} = player;

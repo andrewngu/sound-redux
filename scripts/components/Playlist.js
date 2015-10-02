@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import {playSong} from '../actions/player';
 
 class Playlist extends Component {
     constructor(props) {
@@ -12,6 +13,10 @@ class Playlist extends Component {
         if (selectedPlaylists[selectedPlaylists.length - 1] !== nextSelectedPlaylists[nextSelectedPlaylists.length - 1]) {
             this.setState({activePlaylistIndex: nextSelectedPlaylists.length - 1});
         }
+    }
+
+    componentWillUnmount() {
+        this.setState({activePlaylistIndex : null});
     }
 
     changeActivePlaylistIndex(i) {
@@ -31,6 +36,14 @@ class Playlist extends Component {
         document.body.style.overflow = 'auto';
     }
 
+    playSong(i) {
+        const {dispatch, player} = this.props;
+        const {selectedPlaylists} = player;
+        const activePlaylistIndex = this.state.activePlaylistIndex !== null ? this.state.activePlaylistIndex : selectedPlaylists.length - 1;
+        const activePlaylist = selectedPlaylists[activePlaylistIndex];
+        dispatch(playSong(activePlaylist, i));
+    }
+
     render() {
         const {playlists, player} = this.props;
         const {activeSongIndex, selectedPlaylists} = player;
@@ -40,7 +53,10 @@ class Playlist extends Component {
 
         const songs = playlists[activePlaylist].items.map((song, i) => {
             return (
-                <li className={'playlist-song' + (playingPlaylist === activePlaylist && i === activeSongIndex ? ' active' : '' )} key={song.id}>
+                <li
+                    className={'playlist-song' + (playingPlaylist === activePlaylist && i === activeSongIndex ? ' active' : '' )}
+                    key={song.id}
+                    onClick={this.playSong.bind(this, i)}>
                     <img className='playlist-song-image' src={song.artwork_url} />
                     <div className='playlist-song-title'>{song.title}</div>
                 </li>

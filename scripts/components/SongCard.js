@@ -20,7 +20,6 @@ class SongCard extends Component {
                 <div className='song-card-user'>
                     <img
                         className='song-card-user-image'
-                        onClick={this.handleClick}
                         src={song.user.avatar_url} />
                     <SongDetails title={song.title} username={song.user.username} />
                 </div>
