@@ -6,6 +6,14 @@ class Playlist extends Component {
         this.state = {activePlaylistIndex: null};
     }
 
+    componentWillReceiveProps(nextProps) {
+        const nextSelectedPlaylists = nextProps.player.selectedPlaylists;
+        const {selectedPlaylists} = this.props.player;
+        if (selectedPlaylists[selectedPlaylists.length - 1] !== nextSelectedPlaylists[nextSelectedPlaylists.length - 1]) {
+            this.setState({activePlaylistIndex: nextSelectedPlaylists.length - 1});
+        }
+    }
+
     changeActivePlaylistIndex(i) {
         const {player} = this.props;
         const {selectedPlaylists} = player;
@@ -25,12 +33,14 @@ class Playlist extends Component {
 
     render() {
         const {playlists, player} = this.props;
-        const {selectedPlaylists} = player;
+        const {activeSongIndex, selectedPlaylists} = player;
         const activePlaylistIndex = this.state.activePlaylistIndex !== null ? this.state.activePlaylistIndex : selectedPlaylists.length - 1;
         const activePlaylist = selectedPlaylists[activePlaylistIndex];
-        const songs = playlists[activePlaylist].items.map(song => {
+        const playingPlaylist = selectedPlaylists[selectedPlaylists.length - 1];
+
+        const songs = playlists[activePlaylist].items.map((song, i) => {
             return (
-                <li className='playlist-song' key={song.id}>
+                <li className={'playlist-song' + (playingPlaylist === activePlaylist && i === activeSongIndex ? ' active' : '' )} key={song.id}>
                     <img className='playlist-song-image' src={song.artwork_url} />
                     <div className='playlist-song-title'>{song.title}</div>
                 </li>

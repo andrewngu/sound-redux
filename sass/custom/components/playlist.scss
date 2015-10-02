@@ -53,9 +53,31 @@
     overflow: hidden;
     text-overflow: ellipsis;
 
+    &.active {
+        &:hover {
+            cursor: default;
+        }
+
+        .playlist-song-image {
+            opacity: 1;
+        };
+
+        .playlist-song-title {
+            color: #222;
+        }
+    }
+
     &:hover {
         background-color: #fafafa;
         cursor: pointer;
+
+        .playlist-song-image {
+            opacity: 1;
+        }
+
+        .playlist-song-title {
+            color: #222;
+        }
     }
 
     &:last-child {
@@ -66,6 +88,7 @@
 .playlist-song-title {
     flex: 1;
     margin-left: 10px;
+    color: #ccc;
     font-size: 11px;
     white-space: nowrap;
     overflow: hidden;
@@ -75,6 +98,7 @@
 .playlist-song-image {
     width: 30px;
     height: 30px;
+    opacity: 0.2;
 }
 
 .playlist-footer {

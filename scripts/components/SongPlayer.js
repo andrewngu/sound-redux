@@ -62,12 +62,6 @@ class SongPlayer extends Component {
         React.findDOMNode(this.refs.audio).play();
     }
 
-    componentWillReceiveProps(nextProps) {
-        const {player} = nextProps;
-        const {selectedPlaylists} = player;
-        this.setState({activePlaylistIndex: selectedPlaylists.length - 1});
-    }
-
     componentWillUnmount() {
         const audioElement = React.findDOMNode(this.refs.audio);
         audioElement.removeEventListener('ended', this.handleEnded, false);
