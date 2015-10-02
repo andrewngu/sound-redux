@@ -1,0 +1,12 @@
+.popover {
+
+}
+
+.popover.open .popover-content {
+    display: block;
+}
+
+.popover-content {
+    display: none;
+    position: absolute;
+}

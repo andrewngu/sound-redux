@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {changeSong} from '../actions/player';
+import Popover from '../components/Popover';
 import SongDetails from '../components/SongDetails';
 import {formatSeconds, formatStreamUrl} from '../helpers/Format';
 
@@ -376,6 +377,10 @@ class SongPlayer extends Component {
                                 onClick={this.toggleShuffle}>
                                 <i className='icon ion-shuffle'></i>
                             </div>
+                            <Popover className={'song-player-button'}>
+                                <i className='icon ion-ios-list-outline'></i>
+                                <div className='popover-content'>Hello</div>
+                            </Popover>
                             <div
                                 className={'song-player-button song-player-volume-button'}
                                 onClick={this.toggleMute}>
