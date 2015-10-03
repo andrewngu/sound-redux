@@ -1,12 +1,12 @@
 import {combineReducers} from 'redux';
+import activePlaylist from '../reducers/activePlaylist';
 import player from '../reducers/player';
 import playlists from '../reducers/playlists';
-import songs from '../reducers/songs';
 
 const rootReducer = combineReducers({
+    activePlaylist,
     player,
-    playlists,
-    songs
+    playlists
 });
 
 export default rootReducer;

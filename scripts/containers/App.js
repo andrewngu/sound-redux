@@ -31,7 +31,7 @@ class App extends Component {
     }
 
     render() {
-        const {activePlaylist} = this.props.songs;
+        const {activePlaylist} = this.props;
 
         return (
             <div>
@@ -50,12 +50,12 @@ App.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const { player, playlists, songs } = state;
+    const {activePlaylist, player, playlists} = state;
 
     return {
+        activePlaylist,
         player,
-        playlists,
-        songs
+        playlists
     };
 }
 

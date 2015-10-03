@@ -29,14 +29,13 @@ class Songs extends Component {
     }
 
     playSong(i) {
-        const {dispatch, songs} = this.props;
-        dispatch(playSong(songs.activePlaylist, i, songs.items));
+        const {activePlaylist, dispatch} = this.props;
+        dispatch(playSong(activePlaylist, i, songs.items));
     }
 
     renderSongs() {
         const chunk = 5;
-        const {playlists, songs} = this.props;
-        const {activePlaylist} = songs;
+        const {activePlaylist, playlists, songs} = this.props;
         const items = activePlaylist in playlists ? playlists[activePlaylist].items : [];
         const activeSong = this.getActiveSong();
 
@@ -69,8 +68,7 @@ class Songs extends Component {
     }
 
     render() {
-        const {dispatch, songs, playlists, sticky} = this.props;
-        const {activePlaylist} = songs;
+        const {dispatch, activePlaylist, playlists, sticky} = this.props;
         const isFetching = activePlaylist in playlists ? playlists[activePlaylist].isFetching : false;
 
         return (
