@@ -3,6 +3,10 @@ import React, {Component, PropTypes} from 'react';
 class Popover extends Component {
     constructor(props) {
         super(props);
+        if (props.children.length !== 2) {
+            throw new Error('Popover component requires exactly 2 children');
+        }
+
         this.handleOutsideClick = this.handleOutsideClick.bind(this);
         this.onOutsideClick = this.onOutsideClick.bind(this);
         this.toggleIsOpen = this.toggleIsOpen.bind(this);
@@ -51,7 +55,8 @@ class Popover extends Component {
             <div
                 className={this.props.className + ' popover' + (this.state.isOpen ? ' open' : '')}
                 onClick={this.toggleIsOpen}>
-                {this.props.children}
+                {this.props.children[0]}
+                {this.state.isOpen ? this.props.children[1] : null}
             </div>
         )
     }

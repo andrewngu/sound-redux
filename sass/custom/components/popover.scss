@@ -6,12 +6,8 @@
     color: #A6D2A5;
 }
 
-.popover.open .popover-content {
-    display: block;
-}
-
 .popover-content {
-    display: none;
+    display: block;
     position: absolute;
     margin-top: 10px;
     border-radius: 1px;
