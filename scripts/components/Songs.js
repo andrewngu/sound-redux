@@ -13,11 +13,11 @@ import Toolbar from '../components/Toolbar';
 class Songs extends Component {
     constructor(props) {
         super(props);
-        this.getActiveSong = this.getActiveSong.bind(this);
+        this.getCurrentSong = this.getCurrentSong.bind(this);
         this.renderSongs = this.renderSongs.bind(this);
     }
 
-    getActiveSong() {
+    getCurrentSong() {
         const {playlists, player} = this.props;
         const {currentSongIndex, selectedPlaylists} = player;
         const currentPlaylist = selectedPlaylists[selectedPlaylists.length - 1];
@@ -37,7 +37,7 @@ class Songs extends Component {
         const chunk = 5;
         const {activePlaylist, playlists, songs} = this.props;
         const items = activePlaylist in playlists ? playlists[activePlaylist].items : [];
-        const activeSong = this.getActiveSong();
+        const currentSong = this.getCurrentSong();
 
         let result = [];
         for (let i = 0; i < items.length; i += chunk) {
