@@ -46,7 +46,7 @@ class Songs extends Component {
                 return (
                     <div className='col-1-5' key={song.id}>
                         <SongCard
-                            isActive={song.id === activeSong.id}
+                            isActive={song.id === currentSong.id}
                             playSong={this.playSong.bind(this, index)}
                             song={song} />
                     </div>
