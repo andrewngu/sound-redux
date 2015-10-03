@@ -1,13 +1,13 @@
 import * as types from '../constants/ActionTypes';
 
-function changeActiveSongIndex(songIndex) {
+function changeCurrentSong(songIndex) {
     return {
-        type: types.CHANGE_ACTIVE_SONG_INDEX,
-        activeSongIndex: songIndex
+        type: types.CHANGE_CURRENT_SONG,
+        songIndex: songIndex
     };
 }
 
-function changeSelectedPlaylist(playlists, playlist) {
+function changeSelectedPlaylists(playlists, playlist) {
     const index = playlists.indexOf(playlist);
     if (index > -1) {
         playlists.splice(index, 1);
@@ -23,23 +23,23 @@ function changeSelectedPlaylist(playlists, playlist) {
 export function changeSong(changeType) {
     return (dispatch, getState) => {
         const {player, playlists} = getState();
-        const {activeSongIndex, selectedPlaylists} = player;
-        const activePlaylist = selectedPlaylists[selectedPlaylists.length - 1];
-        let newActiveIndex;
+        const {currentSongIndex, selectedPlaylists} = player;
+        const currentPlaylist = selectedPlaylists[selectedPlaylists.length - 1];
+        let newSongIndex;
 
         if (changeType === 'next') {
-            newActiveIndex = activeSongIndex + 1;
+            newSongIndex = currentSongIndex + 1;
         } else if (changeType === 'prev') {
-            newActiveIndex = activeSongIndex - 1;
+            newSongIndex = currentSongIndex - 1;
         } else if (changeType === 'shuffle') {
-            newActiveIndex = Math.floor((Math.random() * playlists[activePlaylist].items.length - 1) + 0);
+            newSongIndex = Math.floor((Math.random() * playlists[currentPlaylist].items.length - 1) + 0);
         }
 
-        if (newActiveIndex >= playlists[activePlaylist].items.length || newActiveIndex < 0) {
+        if (newSongIndex >= playlists[currentPlaylist].items.length ||  newSongIndex < 0) {
             return null;
         }
 
-        return dispatch(changeActiveSongIndex(newActiveIndex));
+        return dispatch(changeCurrentSong(newSongIndex));
     }
 }
 
@@ -49,8 +49,8 @@ export function playSong(playlist, songIndex) {
         const {selectedPlaylists} = player;
         const len = selectedPlaylists.length;
         if (len === 0 || selectedPlaylists[len - 1] !== playlist) {
-            dispatch(changeSelectedPlaylist(selectedPlaylists, playlist));
+            dispatch(changeSelectedPlaylists(selectedPlaylists, playlist));
         }
-        dispatch(changeActiveSongIndex(songIndex));
+        dispatch(changeCurrentSong(songIndex));
     };
 }

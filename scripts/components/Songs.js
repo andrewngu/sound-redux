@@ -19,13 +19,13 @@ class Songs extends Component {
 
     getActiveSong() {
         const {playlists, player} = this.props;
-        const {activeSongIndex, selectedPlaylists} = player;
-        const activePlaylist = selectedPlaylists[selectedPlaylists.length - 1];
-        if (!activePlaylist || activeSongIndex === null) {
+        const {currentSongIndex, selectedPlaylists} = player;
+        const currentPlaylist = selectedPlaylists[selectedPlaylists.length - 1];
+        if (currentSongIndex === null) {
             return {};
         }
 
-        return playlists[activePlaylist].items[activeSongIndex];
+        return playlists[currentPlaylist].items[currentSongIndex];
     }
 
     playSong(i) {

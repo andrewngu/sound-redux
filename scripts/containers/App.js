@@ -15,9 +15,9 @@ class App extends Component {
 
     renderSongPlayer() {
         const {dispatch, player, playlists} = this.props;
-        const {activeSongIndex, selectedPlaylists} = player;
-        const activePlaylist = selectedPlaylists[selectedPlaylists.length - 1];
-        if (!activePlaylist || activeSongIndex === null) {
+        const {currentSongIndex, selectedPlaylists} = player;
+        const currentPlaylist = selectedPlaylists[selectedPlaylists.length - 1];
+        if (currentSongIndex === null) {
             return;
         }
 
@@ -26,7 +26,7 @@ class App extends Component {
                 dispatch={dispatch}
                 player={player}
                 playlists={playlists}
-                song={playlists[activePlaylist].items[activeSongIndex]} />
+                song={playlists[currentPlaylist].items[currentSongIndex]} />
         );
     }
 

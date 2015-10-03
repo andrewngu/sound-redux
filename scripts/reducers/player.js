@@ -1,13 +1,13 @@
 import * as types from '../constants/ActionTypes';
 
 export default function player(state = {
-    activeSongIndex: null,
+    currentSongIndex: null,
     selectedPlaylists: [],
 }, action) {
     switch(action.type) {
-    case types.CHANGE_ACTIVE_SONG_INDEX:
+    case types.CHANGE_CURRENT_SONG:
         return Object.assign({}, state, {
-            activeSongIndex: action.activeSongIndex
+            currentSongIndex: action.songIndex
         });
 
     case types.CHANGE_SELECTED_PLAYLIST:

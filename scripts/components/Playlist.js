@@ -4,20 +4,20 @@ import {playSong} from '../actions/player';
 class Playlist extends Component {
     constructor(props) {
         super(props);
-        this.state = {activePlaylistIndex: null};
+        this.state = {shownPlaylistIndex: null};
     }
 
     componentWillUnmount() {
-        this.setState({activePlaylistIndex : null});
+        this.setState({shownPlaylistIndex : null});
     }
 
-    changeActivePlaylistIndex(i) {
+    changeShownPlaylistIndex(i) {
         const {player} = this.props;
         const {selectedPlaylists} = player;
         if (i < 0 || i >= selectedPlaylists.length) {
             return;
         }
-        this.setState({activePlaylistIndex: i});
+        this.setState({shownPlaylistIndex: i});
     }
 
     handleMouseEnter() {
@@ -28,28 +28,25 @@ class Playlist extends Component {
         document.body.style.overflow = 'auto';
     }
 
-    playSong(i) {
+    playSong(shownPlaylist, i) {
         const {dispatch, player} = this.props;
-        const {selectedPlaylists} = player;
-        const activePlaylistIndex = this.state.activePlaylistIndex !== null ? this.state.activePlaylistIndex : selectedPlaylists.length - 1;
-        const activePlaylist = selectedPlaylists[activePlaylistIndex];
-        dispatch(playSong(activePlaylist, i));
-        this.setState({activePlaylistIndex: null});
+        dispatch(playSong(shownPlaylist, i));
+        this.setState({shownPlaylistIndex: null});
     }
 
     render() {
         const {playlists, player} = this.props;
-        const {activeSongIndex, selectedPlaylists} = player;
-        const activePlaylistIndex = this.state.activePlaylistIndex !== null ? this.state.activePlaylistIndex : selectedPlaylists.length - 1;
-        const activePlaylist = selectedPlaylists[activePlaylistIndex];
-        const playingPlaylist = selectedPlaylists[selectedPlaylists.length - 1];
+        const {currentSongIndex, selectedPlaylists} = player;
+        const currentPlaylist = selectedPlaylists[selectedPlaylists.length - 1];
+        const shownPlaylistIndex = this.state.shownPlaylistIndex !== null ? this.state.shownPlaylistIndex : selectedPlaylists.length - 1;
+        const shownPlaylist = selectedPlaylists[shownPlaylistIndex];
 
-        const songs = playlists[activePlaylist].items.map((song, i) => {
+        const songs = playlists[shownPlaylist].items.map((song, i) => {
             return (
                 <li
-                    className={'playlist-song' + (playingPlaylist === activePlaylist && i === activeSongIndex ? ' active' : '' )}
+                    className={'playlist-song' + (currentPlaylist === shownPlaylist && i === currentSongIndex ? ' active' : '' )}
                     key={song.id}
-                    onClick={this.playSong.bind(this, i)}>
+                    onClick={this.playSong.bind(this, shownPlaylist, i)}>
                     <img className='playlist-song-image' src={song.artwork_url} />
                     <div className='playlist-song-title'>{song.title}</div>
                 </li>
@@ -64,14 +61,14 @@ class Playlist extends Component {
                 onMouseLeave={this.handleMouseLeave}>
                 <div className='playlist-header'>
                     <a
-                        className={'playlist-header-button' + (activePlaylistIndex === 0 ? ' disabled' : '')}
-                        onClick={this.changeActivePlaylistIndex.bind(this, activePlaylistIndex - 1)}>
+                        className={'playlist-header-button' + (shownPlaylistIndex === 0 ? ' disabled' : '')}
+                        onClick={this.changeShownPlaylistIndex.bind(this, shownPlaylistIndex - 1)}>
                         <i className='icon ion-ios-arrow-back'></i>
                     </a>
-                    <div className='playlist-header-title'>{activePlaylist}</div>
+                    <div className='playlist-header-title'>{shownPlaylist}</div>
                     <a
-                        className={'playlist-header-button' + (activePlaylistIndex === selectedPlaylists.length - 1 ? ' disabled' : '')}
-                        onClick={this.changeActivePlaylistIndex.bind(this, activePlaylistIndex + 1)}>
+                        className={'playlist-header-button' + (shownPlaylistIndex === selectedPlaylists.length - 1 ? ' disabled' : '')}
+                        onClick={this.changeShownPlaylistIndex.bind(this, shownPlaylistIndex + 1)}>
                         <i className='icon ion-ios-arrow-forward'></i>
                     </a>
                 </div>
