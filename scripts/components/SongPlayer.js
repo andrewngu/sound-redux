@@ -3,6 +3,7 @@ import {changeSong} from '../actions/player';
 import Playlist from '../components/Playlist';
 import Popover from '../components/Popover';
 import SongDetails from '../components/SongDetails';
+import {CHANGE_TYPES} from '../constants/SongConstants';
 import {formatSeconds, formatStreamUrl} from '../helpers/Format';
 
 class SongPlayer extends Component {
@@ -353,7 +354,7 @@ class SongPlayer extends Component {
                         <div className='song-player-section'>
                             <div
                                 className='song-player-button'
-                                onClick={this.changeSong.bind(this, 'prev')}>
+                                onClick={this.changeSong.bind(this, CHANGE_TYPES.PREV)}>
                                 <i className='icon ion-ios-rewind'></i>
                             </div>
                             <div
@@ -363,7 +364,7 @@ class SongPlayer extends Component {
                             </div>
                             <div
                                 className='song-player-button'
-                                onClick={this.changeSong.bind(this, this.state.shuffle ? 'shuffle': 'next')}>
+                                onClick={this.changeSong.bind(this, this.state.shuffle ? CHANGE_TYPES.SHUFFLE: CHANGE_TYPES.NEXT)}>
                                 <i className='icon ion-ios-fastforward'></i>
                             </div>
                         </div>

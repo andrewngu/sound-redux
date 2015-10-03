@@ -1,4 +1,5 @@
 import * as types from '../constants/ActionTypes';
+import {CHANGE_TYPES} from '../constants/SongConstants';
 
 function changeCurrentSong(songIndex) {
     return {
@@ -27,11 +28,11 @@ export function changeSong(changeType) {
         const currentPlaylist = selectedPlaylists[selectedPlaylists.length - 1];
         let newSongIndex;
 
-        if (changeType === 'next') {
+        if (changeType === CHANGE_TYPES.NEXT) {
             newSongIndex = currentSongIndex + 1;
-        } else if (changeType === 'prev') {
+        } else if (changeType === CHANGE_TYPES.PREV) {
             newSongIndex = currentSongIndex - 1;
-        } else if (changeType === 'shuffle') {
+        } else if (changeType === CHANGE_TYPES.shuffle) {
             newSongIndex = Math.floor((Math.random() * playlists[currentPlaylist].items.length - 1) + 0);
         }
 

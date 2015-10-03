@@ -1,5 +1,5 @@
 import {CLIENT_ID} from '../constants/Config';
-import {GENRES_MAP} from '../constants/Genres';
+import {GENRES_MAP} from '../constants/SongConstants';
 
 export function constructUrl(category) {
     let result = `http://api.soundcloud.com/tracks?linked_partitioning=1&client_id=${CLIENT_ID}&limit=50&offset=0`;
@@ -9,7 +9,7 @@ export function constructUrl(category) {
         && category !== 'dubstep') {
             category = `${category} house`;
         }
-        
+
         result += `&tags=${category}`;
     } else {
         result += `&q=${category}`;
