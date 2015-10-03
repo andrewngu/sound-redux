@@ -30,7 +30,7 @@ class Songs extends Component {
 
     playSong(i) {
         const {activePlaylist, dispatch} = this.props;
-        dispatch(playSong(activePlaylist, i, songs.items));
+        dispatch(playSong(activePlaylist, i));
     }
 
     renderSongs() {
@@ -86,8 +86,8 @@ class Songs extends Component {
 }
 
 Songs.propTypes = {
+    activePlaylist: PropTypes.string,
     playlists: PropTypes.object.isRequired,
-    songs: PropTypes.object.isRequired,
 };
 
 export default InfiniteScrollify(Stickify(Songs, 50));

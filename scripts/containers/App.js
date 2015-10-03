@@ -44,9 +44,9 @@ class App extends Component {
 }
 
 App.propTypes = {
+    activePlaylist: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
     playlists: PropTypes.object.isRequired,
-    songs: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
