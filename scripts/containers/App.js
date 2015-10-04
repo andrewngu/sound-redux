@@ -50,12 +50,15 @@ App.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const {activePlaylist, player, playlists} = state;
+    const {activePlaylist, activeSongId, navigator, player, playlists, songs} = state;
+    const song = activeSongId ? songs[activeSongId] : {};
 
     return {
         activePlaylist,
+        navigator,
         player,
-        playlists
+        playlists,
+        song
     };
 }
 
