@@ -1,6 +1,6 @@
 import {fetchSongsIfNeeded} from '../actions/playlists';
 import * as types from '../constants/ActionTypes';
-import {constructUrl} from '../helpers/Songs';
+import {constructUrl} from '../helpers/SongsHelper';
 
 export function changeActivePlaylist(playlist) {
     return (dispatch, getState) => {

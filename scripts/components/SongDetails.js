@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {navigateTo} from '../actions/navigator';
-import {formatSongTitle} from '../helpers/Format';
+import {formatSongTitle} from '../helpers/Formatter';
 
 class SongDetails extends Component {
     constructor(props) {

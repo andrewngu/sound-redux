@@ -17,3 +17,11 @@ export function constructUrl(category) {
 
     return result;
 }
+
+export function getImageUrl(str) {
+    if (!str) {
+        return '';
+    }
+
+    return str.replace('large', 't300x300');
+}

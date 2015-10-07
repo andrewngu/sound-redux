@@ -20,14 +20,6 @@ export function formatStreamUrl(str) {
     return `${str}?client_id=${CLIENT_ID}`;
 }
 
-export function getImageUrl(str) {
-    if (!str) {
-        return '';
-    }
-
-    return str.replace('large', 't300x300');
-}
-
 function padZero(num, size) {
     let s = num + '';
     while (s.length < size) {
