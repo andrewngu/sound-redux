@@ -17,13 +17,13 @@ class SongDetails extends Component {
         const {title, username} = this.props;
 
         return (
-            <div className='song-card-details'>
+            <div className='songs-card-details'>
                 <a
-                    className='song-card-title'
+                    className='songs-card-title'
                     onClick={this.navigateToSong}>
                     {formatSongTitle(title)}
                 </a>
-                <div className='song-card-user-username'>{username}</div>
+                <div className='songs-card-user-username'>{username}</div>
             </div>
         )
     }

@@ -8,18 +8,18 @@ class SongCard extends Component {
         const image = getImageUrl(song.artwork_url);
 
         return (
-            <div className={'card song-card' + (isActive ? ' active' : '')}>
+            <div className={'card songs-card' + (isActive ? ' active' : '')}>
                 <div
-                    className='song-card-image'
+                    className='songs-card-image'
                     onClick={playSong}
                     style={{backgroundImage: `url(${image})`}}>
-                    <div className='song-card-playing'>
-                        <i className={'song-card-playing-icon icon ' + (isActive ? 'ion-radio-waves' : 'ion-ios-play')}></i>
+                    <div className='songs-card-playing'>
+                        <i className={'songs-card-playing-icon icon ' + (isActive ? 'ion-radio-waves' : 'ion-ios-play')}></i>
                     </div>
                 </div>
-                <div className='song-card-user'>
+                <div className='songs-card-user'>
                     <img
-                        className='song-card-user-image'
+                        className='songs-card-user-image'
                         src={song.user.avatar_url} />
                     <SongDetails
                         dispatch={dispatch}
