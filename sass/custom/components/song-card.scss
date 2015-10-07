@@ -9,4 +9,10 @@
 .song-card-image {
     width: 100px;
     height: 100px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }

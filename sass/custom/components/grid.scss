@@ -12,6 +12,14 @@
     width: 20%;
 }
 
+.col-3-10 {
+    width: 30%;
+}
+
+.col-7-10 {
+    width: 70%;
+}
+
 [class*='col-'] {
     float: left;
     min-height: 1px;

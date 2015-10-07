@@ -1,9 +1,9 @@
 import * as types from '../constants/ActionTypes';
 import {CHANGE_TYPES} from '../constants/SongConstants';
 
-function changeCurrentSong(songIndex) {
+function changePlayingSong(songIndex) {
     return {
-        type: types.CHANGE_CURRENT_SONG,
+        type: types.CHANGE_PLAYING_SONG,
         songIndex: songIndex
     };
 }
@@ -40,7 +40,7 @@ export function changeSong(changeType) {
             return null;
         }
 
-        return dispatch(changeCurrentSong(newSongIndex));
+        return dispatch(changePlayingSong(newSongIndex));
     }
 }
 
@@ -52,6 +52,6 @@ export function playSong(playlist, songIndex) {
         if (len === 0 || selectedPlaylists[len - 1] !== playlist) {
             dispatch(changeSelectedPlaylists(selectedPlaylists, playlist));
         }
-        dispatch(changeCurrentSong(songIndex));
+        dispatch(changePlayingSong(songIndex));
     };
 }
