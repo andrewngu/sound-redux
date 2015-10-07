@@ -1,16 +1,43 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+
+import {navigateBack, navigateTo} from '../actions/navigator';
 import {fetchSongsIfNeeded} from '../actions/playlists';
 import {changeActivePlaylist} from '../actions/songs';
 
 import Header from '../components/Header';
 import SongPlayer from '../components/SongPlayer';
+import Song from '../components/Song';
 import Songs from '../components/Songs';
+
+function initNavigator(dispatch) {
+    window.onpopstate = e => {
+        dispatch(navigateBack(e));
+    };
+    dispatch(navigateTo(['songs']));
+}
 
 class App extends Component {
     componentDidMount () {
         const {dispatch} = this.props;
+        initNavigator(dispatch);
         dispatch(changeActivePlaylist('house'));
+    }
+
+    renderContent() {
+        const {activePlaylist, navigator, song} = this.props;
+        const {path} = navigator;
+        if (path[0] === 'songs' && path.length === 1) {
+            return (
+                <Songs
+                    {...this.props}
+                    scrollFunc={fetchSongsIfNeeded.bind(null, activePlaylist)} />
+            );
+        } else if (path[0] === 'songs' && path.length === 2) {
+            return (
+                <Song song={song} />
+            );
+        }
     }
 
     renderSongPlayer() {
@@ -31,12 +58,10 @@ class App extends Component {
     }
 
     render() {
-        const {activePlaylist} = this.props;
-
         return (
             <div>
                 <Header />
-                <Songs {...this.props} scrollFunc={fetchSongsIfNeeded.bind(null, activePlaylist)} />
+                {this.renderContent()}
                 {this.renderSongPlayer()}
             </div>
         );
@@ -46,7 +71,10 @@ class App extends Component {
 App.propTypes = {
     activePlaylist: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
+    navigator: PropTypes.object.isRequired,
+    player: PropTypes.object.isRequired,
     playlists: PropTypes.object.isRequired,
+    song: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

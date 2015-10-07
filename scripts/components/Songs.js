@@ -35,7 +35,7 @@ class Songs extends Component {
 
     renderSongs() {
         const chunk = 5;
-        const {activePlaylist, playlists, songs} = this.props;
+        const {activePlaylist, dispatch, playlists, songs} = this.props;
         const items = activePlaylist in playlists ? playlists[activePlaylist].items : [];
         const currentSong = this.getCurrentSong();
 
@@ -46,6 +46,7 @@ class Songs extends Component {
                 return (
                     <div className='col-1-5' key={song.id}>
                         <SongCard
+                            dispatch={dispatch}
                             isActive={song.id === currentSong.id}
                             playSong={this.playSong.bind(this, index)}
                             song={song} />

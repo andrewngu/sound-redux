@@ -1,8 +1,10 @@
 import * as types from '../constants/ActionTypes';
 
-export default function navigator(state={path: ['songs']}, action) {
+const initialState = {path: [null]};
+
+export default function navigator(state = initialState, action) {
     switch (action.type) {
-    case types.NAVIGATE_TO:
+    case types.CHANGE_PATH:
         return Object.assign({}, state, {
             path: action.path
         });
