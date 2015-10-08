@@ -40,7 +40,7 @@ function getNextUrl(playlists, playlist) {
     return activePlaylist.nextUrl;
 }
 
-export function receiveSongs(json, playlist) {
+function receiveSongs(json, playlist) {
     return {
       type: types.RECEIVE_SONGS,
       nextUrl: json.next_href,
@@ -62,7 +62,6 @@ function setActivePlaylist(playlist) {
         playlist: playlist
     };
 }
-
 
 function shouldFetchSongs(playlists, playlist) {
     const activePlaylist = playlists[playlist];
