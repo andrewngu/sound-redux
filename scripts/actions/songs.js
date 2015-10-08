@@ -1,5 +1,6 @@
 import * as types from '../constants/ActionTypes';
 import {navigateTo} from '../actions/navigator';
+import {receiveSongs} from '../actions/playlists';
 import {constructSongUrl, constructSongCommentsUrl} from '../helpers/SongsHelper';
 
 export function changeActiveSong(songId) {
@@ -64,6 +65,7 @@ function receiveSongComments(songId, comments) {
 function receiveSongPre(songId, song) {
     return dispatch => {
         dispatch(receiveSong(songId, song));
+        dispatch(receiveSongs({collection: [song], nextUrl: null}, song.title));
         dispatch(fetchSongComments(songId));
     };
 }

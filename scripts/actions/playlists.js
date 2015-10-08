@@ -40,7 +40,7 @@ function getNextUrl(playlists, playlist) {
     return activePlaylist.nextUrl;
 }
 
-function receiveSongs(json, playlist) {
+export function receiveSongs(json, playlist) {
     return {
       type: types.RECEIVE_SONGS,
       nextUrl: json.next_href,
