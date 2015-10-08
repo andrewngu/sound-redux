@@ -339,7 +339,7 @@ class SongPlayer extends Component {
     }
 
     render() {
-        const {song} = this.props;
+        const {dispatch, song} = this.props;
         const {currentTime, duration, isPlaying} = this.state;
 
         return (
@@ -349,7 +349,10 @@ class SongPlayer extends Component {
                     <div className='song-player-main'>
                         <div className='song-player-section song-player-info'>
                             <img className='song-player-image' src={song.artwork_url} />
-                            <SongDetails title={song.title} username={song.user.username} />
+                            <SongDetails
+                                dispatch={dispatch}
+                                title={song.title}
+                                username={song.user.username} />
                         </div>
                         <div className='song-player-section'>
                             <div

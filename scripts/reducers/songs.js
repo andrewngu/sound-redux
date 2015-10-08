@@ -9,11 +9,28 @@ export function activeSongId(state = null, action) {
     }
 }
 
+function song(state = {}, action) {
+    switch(action.type) {
+    case types.RECEIVE_SONG:
+        return action.song;
+    case types.RECEIVE_SONG_COMMENTS:
+        return Object.assign({}, state, {
+            comments: action.comments
+        });
+    default:
+        return state;
+    }
+}
+
 export function songs(state={}, action) {
     switch(action.type) {
     case types.RECEIVE_SONG:
         return Object.assign({}, state, {
-            [action.songId]: action.song
+            [action.songId]: song(state[action.songId], action)
+        });
+    case types.RECEIVE_SONG_COMMENTS:
+        return Object.assign({}, state, {
+            [action.songId]: song(state[action.songId], action)
         });
     default:
         return state;
