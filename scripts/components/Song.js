@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import CommentCard from '../components/CommentCard';
+import Spinner from '../components/Spinner';
 import {getImageUrl} from '../helpers/SongsHelper';
 
 class Song extends Component {
@@ -14,6 +15,10 @@ class Song extends Component {
 
     render() {
         const {song} = this.props;
+        if (song.isFetching) {
+            return <Spinner />;
+        }
+
         const image = getImageUrl(song.artwork_url);
 
         return (

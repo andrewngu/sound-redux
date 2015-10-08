@@ -23,6 +23,7 @@ function changeActiveSongId(songId) {
 
 function fetchSong(songId) {
     return dispatch => {
+        dispatch(requestSong(songId));
         return fetch(constructSongUrl(songId))
             .then(response => response.json())
             .then(json => dispatch(receiveSongPre(songId, json)))
@@ -59,5 +60,12 @@ function receiveSongPre(songId, song) {
     return dispatch => {
         dispatch(receiveSong(songId, song));
         dispatch(fetchSongComments(songId));
+    };
+}
+
+function requestSong(songId) {
+    return {
+        type: types.REQUEST_SONG,
+        songId: songId
     };
 }
