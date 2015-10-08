@@ -32,7 +32,7 @@ export function changeSong(changeType) {
             newSongIndex = currentSongIndex + 1;
         } else if (changeType === CHANGE_TYPES.PREV) {
             newSongIndex = currentSongIndex - 1;
-        } else if (changeType === CHANGE_TYPES.shuffle) {
+        } else if (changeType === CHANGE_TYPES.SHUFFLE) {
             newSongIndex = Math.floor((Math.random() * playlists[currentPlaylist].items.length - 1) + 0);
         }
 
