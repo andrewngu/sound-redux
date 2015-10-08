@@ -20,6 +20,7 @@ class Song extends Component {
         }
 
         const image = getImageUrl(song.artwork_url);
+        const {user} = song;
 
         return (
             <div className='container song'>
@@ -34,6 +35,13 @@ class Song extends Component {
                                     </div>
                                     <div className='song-card-info'>
                                         <div className='song-card-title'>{song.title}</div>
+                                        <div className='song-card-user'>
+                                            <div
+                                                className='song-card-user-image'
+                                                style={{backgroundImage: `url(${user.avatar_url})`}}>
+                                            </div>
+                                            <div className='song-card-username'>{user.username}</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
