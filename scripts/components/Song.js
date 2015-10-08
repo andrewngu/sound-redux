@@ -1,7 +1,17 @@
 import React, {Component, PropTypes} from 'react';
+import CommentCard from '../components/CommentCard';
 import {getImageUrl} from '../helpers/SongsHelper';
 
 class Song extends Component {
+    renderComments() {
+        const {comments} = this.props.song;
+        if (!comments) {
+            return;
+        }
+
+        return comments.slice(0, 10).map(comment => <CommentCard key={comment.id} comment={comment} />);
+    }
+
     render() {
         const {song} = this.props;
         const image = getImageUrl(song.artwork_url);
@@ -24,6 +34,10 @@ class Song extends Component {
                             </div>
                         </div>
                         <div className='col-3-10'>
+                            <div className='card sidebar'>
+                                <div className='sidebar-header'>Comments</div>
+                                {this.renderComments()}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,32 @@
+.comment-card {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #e3e3e3;
+    font-size: 11px;
+}
+
+.comment-card-image {
+    width: 24px;
+    height: 24px;
+    margin-right: 20px;
+    border-radius: 50%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+};
+
+.comment-card-info {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.comment-card-username {
+    color: #ccc;
+}
+
+.comment-card-time {
+    align-items: center;
+}

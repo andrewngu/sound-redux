@@ -47,10 +47,11 @@ function receiveSong(songId, song) {
     };
 }
 
-function receiveSongComments(comments) {
+function receiveSongComments(songId, comments) {
     return {
         type: types.RECEIVE_SONG_COMMENTS,
-        comments: comments
+        comments: comments,
+        songId: songId
     };
 }
 

@@ -351,6 +351,7 @@ class SongPlayer extends Component {
                             <img className='song-player-image' src={song.artwork_url} />
                             <SongDetails
                                 dispatch={dispatch}
+                                songId={song.id}
                                 title={song.title}
                                 username={song.user.username} />
                         </div>

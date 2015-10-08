@@ -15,7 +15,7 @@ function song(state = {}, action) {
         return action.song;
     case types.RECEIVE_SONG_COMMENTS:
         return Object.assign({}, state, {
-            comments: action.comments
+            comments: [...action.comments]
         });
     default:
         return state;
