@@ -3,12 +3,8 @@ import {navigateTo} from '../actions/navigator';
 import {constructSongUrl, constructSongCommentsUrl} from '../helpers/SongsHelper';
 
 export function changeActiveSong(songId) {
-    return (dispatch, getState) => {
-        const {songs} = getState();
-        if (!(songId in songs)) {
-            dispatch(fetchSong(songId));
-        }
-
+    return dispatch => {
+        dispatch(fetchSongIfNeeded(songId));
         dispatch(navigateTo(['songs', songId]));
         dispatch(changeActiveSongId(songId));
      }
@@ -19,6 +15,15 @@ function changeActiveSongId(songId) {
         type: types.CHANGE_ACTIVE_SONG_ID,
         songId: songId
     };
+}
+
+function fetchSongIfNeeded(songId) {
+    return (dispatch, getState) => {
+        const {songs} = getState();
+        if (!(songId in songs)) {
+            return dispatch(fetchSong(songId));
+        }
+    }
 }
 
 function fetchSong(songId) {
