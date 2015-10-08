@@ -1,16 +1,16 @@
 import React, {Component, PropTypes} from 'react';
-import {navigateTo} from '../actions/navigator';
+import {changeActiveSong} from '../actions/songs';
 import {formatSongTitle} from '../helpers/Formatter';
 
 class SongDetails extends Component {
     constructor(props) {
         super(props);
-        this.navigateToSong = this.navigateToSong.bind(this);
+        this.changeActiveSong = this.changeActiveSong.bind(this);
     }
 
-    navigateToSong() {
+    changeActiveSong() {
         const {dispatch, songId} = this.props;
-        dispatch(navigateTo(['songs', songId]));
+        dispatch(changeActiveSong(songId));
     }
 
     render() {
@@ -20,7 +20,7 @@ class SongDetails extends Component {
             <div className='songs-card-details'>
                 <a
                     className='songs-card-title'
-                    onClick={this.navigateToSong}>
+                    onClick={this.changeActiveSong}>
                     {formatSongTitle(title)}
                 </a>
                 <div className='songs-card-user-username'>{username}</div>

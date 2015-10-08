@@ -4,7 +4,7 @@ import {getImageUrl} from '../helpers/SongsHelper';
 class Song extends Component {
     render() {
         const {song} = this.props;
-        const image = getImageUrl(song.image);
+        const image = getImageUrl(song.artwork_url);
 
         return (
             <div className='container song'>
@@ -16,6 +16,9 @@ class Song extends Component {
                                     <div
                                         className='song-card-image'
                                         style={{backgroundImage: `url(${image})`}}>
+                                    </div>
+                                    <div className='song-card-info'>
+                                        <div className='song-card-title'>{song.title}</div>
                                     </div>
                                 </div>
                             </div>

@@ -2,6 +2,16 @@ import fetch from 'isomorphic-fetch';
 import * as types from '../constants/ActionTypes';
 import {constructUrl} from '../helpers/SongsHelper';
 
+export function changeActivePlaylist(playlist) {
+    return (dispatch, getState) => {
+        const {playlists} = getState();
+        dispatch(setActivePlaylist(playlist));
+        if (!(playlist in playlists) || playlists[playlist].items.length === 0) {
+            dispatch(fetchSongsIfNeeded(playlist));
+        }
+    }
+}
+
 function fetchSongs(url, playlist) {
     return (dispatch, getState) => {
         dispatch(requestSongs(playlist));
@@ -45,6 +55,14 @@ function requestSongs(playlist) {
         playlist: playlist
     };
 }
+
+function setActivePlaylist(playlist) {
+    return {
+        type: types.CHANGE_ACTIVE_PLAYLIST,
+        playlist: playlist
+    };
+}
+
 
 function shouldFetchSongs(playlists, playlist) {
     const activePlaylist = playlists[playlist];

@@ -1,20 +1,39 @@
-import {fetchSongsIfNeeded} from '../actions/playlists';
 import * as types from '../constants/ActionTypes';
-import {constructUrl} from '../helpers/SongsHelper';
+import {navigateTo} from '../actions/navigator';
+import {constructSongUrl} from '../helpers/SongsHelper';
 
-export function changeActivePlaylist(playlist) {
+export function changeActiveSong(songId) {
     return (dispatch, getState) => {
-        const {playlists} = getState();
-        dispatch(setActivePlaylist(playlist));
-        if (!(playlist in playlists) || playlists[playlist].items.length === 0) {
-            dispatch(fetchSongsIfNeeded(playlist));
+        const {songs} = getState();
+        if (!(songId in songs)) {
+            dispatch(fetchSong(songId));
         }
+
+        dispatch(navigateTo(['songs', songId]));
+        dispatch(changeActiveSongId(songId));
+     }
+}
+
+function changeActiveSongId(songId) {
+    return {
+        type: types.CHANGE_ACTIVE_SONG_ID,
+        songId: songId
+    };
+}
+
+function fetchSong(songId) {
+    return dispatch => {
+        return fetch(constructSongUrl(songId))
+            .then(response => response.json())
+            .then(json => dispatch(receiveSong(songId, json)))
+            .catch(error => console.log(error));
     }
 }
 
-function setActivePlaylist(playlist) {
+function receiveSong(songId, song) {
     return {
-        type: types.CHANGE_ACTIVE_PLAYLIST,
-        playlist: playlist
+        type: types.RECEIVE_SONG,
+        song: song,
+        songId: songId
     };
 }

@@ -18,6 +18,10 @@ export function constructUrl(category) {
     return result;
 }
 
+export function constructSongUrl(songId) {
+    return `http://api.soundcloud.com/tracks/${songId}?client_id=${CLIENT_ID}`;
+}
+
 export function getImageUrl(str) {
     if (!str) {
         return '';

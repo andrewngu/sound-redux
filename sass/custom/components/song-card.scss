@@ -7,12 +7,25 @@
 }
 
 .song-card-image {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
+    margin-right: 20px;
     background-position: center center;
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+.song-card-info {
+    flex: 1;
+}
+
+.song-card-title {
+    font-size: 26px;
+    font-weight: 300;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

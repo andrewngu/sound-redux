@@ -2,8 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
 import {navigateBack, navigateTo} from '../actions/navigator';
-import {fetchSongsIfNeeded} from '../actions/playlists';
-import {changeActivePlaylist} from '../actions/songs';
+import {changeActivePlaylist, fetchSongsIfNeeded} from '../actions/playlists';
 
 import Header from '../components/Header';
 import SongPlayer from '../components/SongPlayer';
@@ -79,7 +78,7 @@ App.propTypes = {
 
 function mapStateToProps(state) {
     const {activePlaylist, activeSongId, navigator, player, playlists, songs} = state;
-    const song = activeSongId ? songs[activeSongId] : {};
+    const song = activeSongId && activeSongId in songs ? songs[activeSongId] : {};
 
     return {
         activePlaylist,

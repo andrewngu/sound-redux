@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {changeActivePlaylist} from '../actions/songs';
+import {changeActivePlaylist} from '../actions/playlists';
 import {GENRES, GENRES_MAP} from '../constants/SongConstants';
 
 class Toolbar extends Component {
