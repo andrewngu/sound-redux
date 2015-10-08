@@ -28,19 +28,19 @@ class Song extends Component {
                     <div className='song grid'>
                         <div className='col-7-10'>
                             <div className='song-card card'>
-                                <div className='song-card-main'>
+                                <div className='song-main'>
                                     <div
-                                        className='song-card-image'
+                                        className='song-image'
                                         style={{backgroundImage: `url(${image})`}}>
                                     </div>
-                                    <div className='song-card-info'>
-                                        <div className='song-card-title'>{song.title}</div>
-                                        <div className='song-card-user'>
+                                    <div className='song-info'>
+                                        <div className='song-title'>{song.title}</div>
+                                        <div className='song-user'>
                                             <div
-                                                className='song-card-user-image'
+                                                className='song-user-image'
                                                 style={{backgroundImage: `url(${user.avatar_url})`}}>
                                             </div>
-                                            <div className='song-card-username'>{user.username}</div>
+                                            <div className='song-username'>{user.username}</div>
                                         </div>
                                     </div>
                                 </div>
