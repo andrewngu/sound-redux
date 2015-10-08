@@ -44,7 +44,7 @@ class Songs extends Component {
             let songCards = items.slice(i, i + chunk).map((song, j) => {
                 const index = i + j;
                 return (
-                    <div className='col-1-5' key={song.id}>
+                    <div className='col-1-5' key={index}>
                         <SongCard
                             dispatch={dispatch}
                             isActive={song.id === currentSong.id}
