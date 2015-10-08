@@ -5,7 +5,7 @@ import {navigateBack, navigateTo} from '../actions/navigator';
 import {changeActivePlaylist, fetchSongsIfNeeded} from '../actions/playlists';
 
 import Header from '../components/Header';
-import SongPlayer from '../components/SongPlayer';
+import Player from '../components/Player';
 import Song from '../components/Song';
 import Songs from '../components/Songs';
 
@@ -39,7 +39,7 @@ class App extends Component {
         }
     }
 
-    renderSongPlayer() {
+    renderPlayer() {
         const {dispatch, player, playlists} = this.props;
         const {currentSongIndex, selectedPlaylists} = player;
         const currentPlaylist = selectedPlaylists[selectedPlaylists.length - 1];
@@ -48,7 +48,7 @@ class App extends Component {
         }
 
         return (
-            <SongPlayer
+            <Player
                 dispatch={dispatch}
                 player={player}
                 playlists={playlists}
@@ -61,7 +61,7 @@ class App extends Component {
             <div>
                 <Header />
                 {this.renderContent()}
-                {this.renderSongPlayer()}
+                {this.renderPlayer()}
             </div>
         );
     }

@@ -6,7 +6,7 @@ import SongDetails from '../components/SongDetails';
 import {CHANGE_TYPES} from '../constants/SongConstants';
 import {formatSeconds, formatStreamUrl} from '../helpers/Formatter';
 
-class SongPlayer extends Component {
+class Player extends Component {
     constructor(props) {
         super(props);
         this.changeSong = this.changeSong.bind(this);
@@ -273,10 +273,10 @@ class SongPlayer extends Component {
             const width = currentTime/duration * 100;
             return (
                 <div
-                    className='song-player-seek-duration-bar'
+                    className='player-seek-duration-bar'
                     style={{width: `${width}%`}} >
                     <div
-                        className='song-player-seek-handle'
+                        className='player-seek-handle'
                         onClick={this.handleMouseClick}
                         onMouseDown={this.handleSeekMouseDown}>
                     </div>
@@ -301,10 +301,10 @@ class SongPlayer extends Component {
         const width = muted ? 0 : volume * 100;
         return (
             <div
-                className='song-player-seek-duration-bar'
+                className='player-seek-duration-bar'
                 style={{width: `${width}%`}}>
                 <div
-                    className='song-player-seek-handle'
+                    className='player-seek-handle'
                     onClick={this.handleMouseClick}
                     onMouseDown={this.handleVolumeMouseDown}>
                 </div>
@@ -323,7 +323,7 @@ class SongPlayer extends Component {
             return <i className='icon ion-android-volume-mute'></i>;
         } else if (volume === 1) {
             return (
-                <div className='song-player-volume-button-wrap'>
+                <div className='player-volume-button-wrap'>
                     <i className='icon ion-android-volume-up'></i>
                     <i className='icon ion-android-volume-mute'></i>
                 </div>
@@ -331,7 +331,7 @@ class SongPlayer extends Component {
         }
 
         return (
-            <div className='song-player-volume-button-wrap'>
+            <div className='player-volume-button-wrap'>
                 <i className='icon ion-android-volume-down'></i>
                 <i className='icon ion-android-volume-mute'></i>
             </div>
@@ -343,70 +343,70 @@ class SongPlayer extends Component {
         const {currentTime, duration, isPlaying} = this.state;
 
         return (
-            <div className='song-player'>
+            <div className='player'>
                 <audio ref='audio' src={formatStreamUrl(song.stream_url)}></audio>
                 <div className='container'>
-                    <div className='song-player-main'>
-                        <div className='song-player-section song-player-info'>
-                            <img className='song-player-image' src={song.artwork_url} />
+                    <div className='player-main'>
+                        <div className='player-section player-info'>
+                            <img className='player-image' src={song.artwork_url} />
                             <SongDetails
                                 dispatch={dispatch}
                                 songId={song.id}
                                 title={song.title}
                                 username={song.user.username} />
                         </div>
-                        <div className='song-player-section'>
+                        <div className='player-section'>
                             <div
-                                className='song-player-button'
+                                className='player-button'
                                 onClick={this.changeSong.bind(this, CHANGE_TYPES.PREV)}>
                                 <i className='icon ion-ios-rewind'></i>
                             </div>
                             <div
-                                className='song-player-button'
+                                className='player-button'
                                 onClick={this.togglePlay}>
                                 <i className={'icon ' + (isPlaying ? 'ion-ios-pause' : 'ion-ios-play')}></i>
                             </div>
                             <div
-                                className='song-player-button'
+                                className='player-button'
                                 onClick={this.changeSong.bind(this, this.state.shuffle ? CHANGE_TYPES.SHUFFLE: CHANGE_TYPES.NEXT)}>
                                 <i className='icon ion-ios-fastforward'></i>
                             </div>
                         </div>
-                        <div className='song-player-section song-player-seek'>
-                            <div className='song-player-seek-bar-wrap' onClick={this.seek}>
-                                <div className='song-player-seek-bar' ref='seekBar'>
+                        <div className='player-section player-seek'>
+                            <div className='player-seek-bar-wrap' onClick={this.seek}>
+                                <div className='player-seek-bar' ref='seekBar'>
                                     {this.renderDurationBar()}
                                 </div>
                             </div>
-                            <div className='song-player-time'>
+                            <div className='player-time'>
                                 <span>{formatSeconds(currentTime)}</span>
-                                <span className='song-player-time-divider'>/</span>
+                                <span className='player-time-divider'>/</span>
                                 <span>{formatSeconds(duration)}</span>
                             </div>
                         </div>
-                        <div className='song-player-section'>
+                        <div className='player-section'>
                             <div
-                                className={'song-player-button' + (this.state.repeat ? ' active' : '')}
+                                className={'player-button' + (this.state.repeat ? ' active' : '')}
                                 onClick={this.toggleRepeat}>
                                 <i className='icon ion-loop'></i>
                             </div>
                             <div
-                                className={'song-player-button' + (this.state.shuffle ? ' active' : '')}
+                                className={'player-button' + (this.state.shuffle ? ' active' : '')}
                                 onClick={this.toggleShuffle}>
                                 <i className='icon ion-shuffle'></i>
                             </div>
-                            <Popover className={'song-player-button'}>
+                            <Popover className={'player-button'}>
                                 <i className='icon ion-android-list'></i>
                                 {this.renderPlaylist()}
                             </Popover>
                             <div
-                                className={'song-player-button song-player-volume-button'}
+                                className={'player-button player-volume-button'}
                                 onClick={this.toggleMute}>
                                 {this.renderVolumeIcon()}
                             </div>
-                            <div className='song-player-volume'>
-                                <div className='song-player-seek-bar-wrap' onClick={this.changeVolume}>
-                                    <div className='song-player-seek-bar' ref='volumeBar'>
+                            <div className='player-volume'>
+                                <div className='player-seek-bar-wrap' onClick={this.changeVolume}>
+                                    <div className='player-seek-bar' ref='volumeBar'>
                                         {this.renderVolumeBar()}
                                     </div>
                                 </div>
@@ -419,8 +419,8 @@ class SongPlayer extends Component {
     }
 }
 
-SongPlayer.propTypes = {
+Player.propTypes = {
     song: PropTypes.object
 };
 
-export default SongPlayer;
+export default Player;

@@ -1,4 +1,4 @@
-.song-player {
+.player {
     position: fixed;
     left: 0;
     bottom: 0;
@@ -10,34 +10,34 @@
     -ms-user-select: none;
 }
 
-.song-player-section {
+.player-section {
     display: flex;
     flex-direction: row;
     align-items: center;
 
-    & + .song-player-section {
+    & + .player-section {
         margin-left: 40px;
     }
 }
 
-.song-player-main {
+.player-main {
     display: flex;
     flex-direction: row;
     padding: 8px;
 }
 
-.song-player-info {
+.player-info {
     width: 140px;
 }
 
-.song-player-image {
+.player-image {
     width: 30px;
     height: 30px;
     float: left;
     margin-right: 8px;
 }
 
-.song-player-button {
+.player-button {
     padding: 4px;
 
     & > i {
@@ -68,7 +68,7 @@
         }
     }
 
-    & + .song-player-button {
+    & + .player-button {
         margin-left: 30px;
     }
 
@@ -77,11 +77,11 @@
     }
 }
 
-.song-player-seek {
+.player-seek {
     flex: 1;
 }
 
-.song-player-seek-bar-wrap {
+.player-seek-bar-wrap {
     padding: 6px 0;
     flex: 1;
 
@@ -90,13 +90,13 @@
     }
 }
 
-.song-player-seek-bar {
+.player-seek-bar {
     position: relative;
     height: 2px;
     background-color: #ddd;
 }
 
-.song-player-seek-duration-bar {
+.player-seek-duration-bar {
     position: absolute;
     top: 0;
     left: 0;
@@ -104,7 +104,7 @@
     background-color: #A6D2A5;
 }
 
-.song-player-seek-handle {
+.player-seek-handle {
     position: absolute;
     top: -5px;
     right: -6px;
@@ -115,26 +115,26 @@
     border: 1px solid #e3e3e3;
 }
 
-.song-player-time {
+.player-time {
     margin-left: 30px;
     color: #ccc;
     font-size: 11px;
 }
 
-.song-player-time-divider {
+.player-time-divider {
     margin: 0 10px;
 }
 
-.song-player-volume {
+.player-volume {
     margin-left: 30px;
     width: 100px;
 }
 
-.song-player-volume-button {
+.player-volume-button {
     width: 12px;
 }
 
-.song-player-volume-button-wrap {
+.player-volume-button-wrap {
     position: relative;
 
     .ion-android-volume-up, .ion-android-volume-down {
