@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {playSong} from '../actions/player';
 
 import InfiniteScrollify from '../components/InfiniteScrollify';
-import SongCard from '../components/SongCard';
+import SongsCard from '../components/SongsCard';
 import Spinner from '../components/Spinner';
 import Stickify from '../components/Stickify';
 import Toolbar from '../components/Toolbar';
@@ -45,7 +45,7 @@ class Songs extends Component {
                 const index = i + j;
                 return (
                     <div className='col-1-5' key={index + '-' + song.id}>
-                        <SongCard
+                        <SongsCard
                             dispatch={dispatch}
                             isActive={song.id === currentSong.id}
                             playSong={this.playSong.bind(this, index)}

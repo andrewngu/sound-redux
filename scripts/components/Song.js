@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import CommentCard from '../components/CommentCard';
+import SongCard from '../components/SongCard';
 import Spinner from '../components/Spinner';
 import {getImageUrl} from '../helpers/SongsHelper';
 
@@ -13,6 +14,19 @@ class Song extends Component {
         return comments.slice(0, 10).map(comment => <CommentCard key={comment.id} comment={comment} />);
     }
 
+    renderSongs() {
+        const {songs} = this.props;
+        if (!songs.items) {
+            return;
+        }
+
+        return (
+            <div className='tab-content'>
+                {songs.items.slice(1).map(song => <SongCard key={song.id} song={song} />)}
+            </div>
+        );
+    }
+
     render() {
         const {song} = this.props;
         if (song.isFetching) {
@@ -23,11 +37,11 @@ class Song extends Component {
         const {user} = song;
 
         return (
-            <div className='container song'>
+            <div className='container'>
                 <div className='content'>
-                    <div className='song grid'>
+                    <div className='grid'>
                         <div className='col-7-10'>
-                            <div className='song-card card'>
+                            <div className='song card'>
                                 <div className='song-main'>
                                     <div
                                         className='song-image'
@@ -45,6 +59,7 @@ class Song extends Component {
                                     </div>
                                 </div>
                             </div>
+                            {this.renderSongs()}
                         </div>
                         <div className='col-3-10'>
                             <div className='card sidebar'>
