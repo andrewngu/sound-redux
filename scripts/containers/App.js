@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
+import {changeHeight} from '../actions/height';
 import {navigateBack, navigateTo} from '../actions/navigator';
 import {changeActivePlaylist, fetchSongsIfNeeded} from '../actions/playlists';
 
@@ -8,6 +9,13 @@ import Header from '../components/Header';
 import Player from '../components/Player';
 import Song from '../components/Song';
 import Songs from '../components/Songs';
+
+function initHeight(dispatch) {
+    dispatch(changeHeight(window.innerHeight));
+    window.onresize = () => {
+        dispatch(changeHeight(window.innerHeight));
+    }
+}
 
 function initNavigator(dispatch) {
     window.onpopstate = e => {
@@ -19,6 +27,7 @@ function initNavigator(dispatch) {
 class App extends Component {
     componentDidMount () {
         const {dispatch} = this.props;
+        initHeight(dispatch);
         initNavigator(dispatch);
         dispatch(changeActivePlaylist('house'));
     }

@@ -1,8 +1,12 @@
 .comment-card {
     display: flex;
     padding: 10px;
-    border-top: 1px solid #e3e3e3;
+    border-bottom: 1px solid #e3e3e3;
     font-size: 11px;
+
+    &:last-child {
+        border-bottom: none;
+    }
 }
 
 .comment-card-image {

@@ -2,16 +2,34 @@ import React, {Component, PropTypes} from 'react';
 import CommentCard from '../components/CommentCard';
 import SongCard from '../components/SongCard';
 import Spinner from '../components/Spinner';
+import Stickify from '../components/Stickify';
 import {getImageUrl} from '../helpers/SongsHelper';
 
 class Song extends Component {
+    handleMouseEnter() {
+        document.body.style.overflow = 'hidden';
+    }
+
+    handleMouseLeave() {
+        document.body.style.overflow = 'auto';
+    }
+
     renderComments() {
-        const {comments} = this.props.song;
+        const {height, song} = this.props;
+        const {comments} = song;
         if (!comments) {
             return;
         }
 
-        return comments.slice(0, 10).map(comment => <CommentCard key={comment.id} comment={comment} />);
+        return (
+            <div
+                className='song-comments'
+                onMouseEnter={this.handleMouseEnter}
+                onMouseLeave={this.handleMouseLeave}
+                style={{height: height - 220}}>
+                {comments.map(comment => <CommentCard key={comment.id} comment={comment} />)}
+            </div>
+        );
     }
 
     renderSongs() {
@@ -28,7 +46,7 @@ class Song extends Component {
     }
 
     render() {
-        const {song} = this.props;
+        const {song, sticky} = this.props;
         if (song.isFetching) {
             return <Spinner />;
         }
@@ -62,7 +80,7 @@ class Song extends Component {
                             {this.renderSongs()}
                         </div>
                         <div className='col-3-10'>
-                            <div className='card sidebar'>
+                            <div className={'card sidebar' + (sticky ? ' sticky' : '')}>
                                 <div className='sidebar-header'>Comments</div>
                                 {this.renderComments()}
                             </div>
@@ -78,4 +96,4 @@ Song.propTypes = {
     song: PropTypes.object.isRequired
 };
 
-export default Song;
+export default Stickify(Song, 50);
