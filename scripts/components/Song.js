@@ -3,6 +3,7 @@ import CommentCard from '../components/CommentCard';
 import SongCard from '../components/SongCard';
 import Spinner from '../components/Spinner';
 import Stickify from '../components/Stickify';
+import Waveform from '../components/Waveform';
 import {getImageUrl} from '../helpers/SongsHelper';
 
 class Song extends Component {
@@ -74,6 +75,7 @@ class Song extends Component {
                                             </div>
                                             <div className='song-username'>{user.username}</div>
                                         </div>
+                                        <Waveform waveformUrl={song.waveform_url.replace('https', 'http')} />
                                     </div>
                                 </div>
                             </div>
