@@ -24,7 +24,7 @@ class App extends Component {
     }
 
     renderContent() {
-        const {activePlaylist, navigator, playlists, song} = this.props;
+        const {activePlaylist, height, navigator, playlists, song} = this.props;
         const {path} = navigator;
         if (path[0] === 'songs' && path.length === 1) {
             return (
@@ -34,7 +34,10 @@ class App extends Component {
             );
         } else if (path[0] === 'songs' && path.length === 2) {
             return (
-                <Song song={song} songs={song.title && song.title in playlists ? playlists[song.title] : {}} />
+                <Song
+                    height={height}
+                    song={song}
+                    songs={song.title && song.title in playlists ? playlists[song.title] : {}} />
             );
         }
     }
@@ -77,11 +80,12 @@ App.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const {activePlaylist, activeSongId, navigator, player, playlists, songs} = state;
+    const {activePlaylist, activeSongId, height, navigator, player, playlists, songs} = state;
     const song = activeSongId && activeSongId in songs ? songs[activeSongId] : {};
 
     return {
         activePlaylist,
+        height,
         navigator,
         player,
         playlists,
