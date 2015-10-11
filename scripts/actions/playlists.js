@@ -18,7 +18,7 @@ function fetchSongs(url, playlist) {
         return fetch(url)
             .then(response => response.json())
             .then(json => dispatch(receiveSongs(json, playlist)))
-            .catch(error => {});
+            .catch(error => console.log(error));
     };
 }
 
@@ -42,10 +42,10 @@ function getNextUrl(playlists, playlist) {
 
 function receiveSongs(json, playlist) {
     return {
-      type: types.RECEIVE_SONGS,
-      nextUrl: json.next_href,
-      playlist: playlist,
-      songs: json.collection.filter(song => song.streamable && song.duration < 600000 )
+        type: types.RECEIVE_SONGS,
+        nextUrl: json.next_href,
+        playlist: playlist,
+        songs: json.collection.filter(song => song.streamable && song.duration < 600000 )
     };
 }
 
