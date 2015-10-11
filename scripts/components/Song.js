@@ -1,4 +1,7 @@
 import React, {Component, PropTypes} from 'react';
+
+import {playSong} from '../actions/player';
+
 import CommentCard from '../components/CommentCard';
 import SongCard from '../components/SongCard';
 import Spinner from '../components/Spinner';
@@ -13,6 +16,11 @@ class Song extends Component {
 
     handleMouseLeave() {
         document.body.style.overflow = 'auto';
+    }
+
+    playSong(i) {
+        const {dispatch, song} = this.props;
+        dispatch(playSong(song.title, i));
     }
 
     renderComments() {
@@ -47,11 +55,12 @@ class Song extends Component {
     }
 
     render() {
-        const {song, sticky} = this.props;
+        const {playingSong, song, sticky} = this.props;
         if (song.isFetching) {
             return <Spinner />;
         }
 
+        const isActive = playingSong && playingSong.id === song.id ? true : false;
         const image = getImageUrl(song.artwork_url);
         const {user} = song;
 
@@ -60,11 +69,15 @@ class Song extends Component {
                 <div className='content'>
                     <div className='grid'>
                         <div className='col-7-10'>
-                            <div className='song card'>
+                            <div className={'song card' + (isActive ? ' active' : '')}>
                                 <div className='song-main'>
                                     <div
                                         className='song-image'
+                                        onClick={this.playSong.bind(this, 0)}
                                         style={{backgroundImage: `url(${image})`}}>
+                                        <div className='songs-card-playing'>
+                                            <i className={'songs-card-playing-icon icon ' + (isActive ? 'ion-radio-waves' : 'ion-ios-play')}></i>
+                                        </div>
                                     </div>
                                     <div className='song-info'>
                                         <div className='song-title'>{song.title}</div>

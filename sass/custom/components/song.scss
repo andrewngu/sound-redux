@@ -1,5 +1,21 @@
 .song {
     padding: 10px;
+
+    &.active {
+        border-color: #A6D2A5;
+
+        .song-image {
+            pointer-events: none;
+        }
+
+        .songs-card-playing {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .songs-card-playing-icon {
+            opacity: 1;
+        }
+    }
 }
 
 .song-main {
@@ -16,6 +32,10 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .song-info {

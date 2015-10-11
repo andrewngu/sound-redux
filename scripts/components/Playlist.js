@@ -45,7 +45,7 @@ class Playlist extends Component {
             return (
                 <li
                     className={'playlist-song' + (currentPlaylist === shownPlaylist && i === currentSongIndex ? ' active' : '' )}
-                    key={song.id}
+                    key={song.id + '-' + i}
                     onClick={this.playSong.bind(this, shownPlaylist, i)}>
                     <img className='playlist-song-image' src={song.artwork_url} />
                     <div className='playlist-song-title'>{song.title}</div>

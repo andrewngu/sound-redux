@@ -33,6 +33,9 @@
     flex: 1;
     text-align: center;
     text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .playlist-body {
