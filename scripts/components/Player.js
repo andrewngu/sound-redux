@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {changeSong} from '../actions/player';
+import {changeCurrentTime, changeSong} from '../actions/player';
 import Playlist from '../components/Playlist';
 import Popover from '../components/Popover';
 import SongDetails from '../components/SongDetails';
@@ -113,9 +113,11 @@ class Player extends Component {
     }
 
     handleLoadStart() {
+        const {dispatch} = this.props;
+        dispatch(changeCurrentTime(0));
+
         this.setState({
-            currentTime: 0,
-            duration: 0,
+            duration: 0
         });
     }
 
@@ -140,15 +142,14 @@ class Player extends Component {
     }
 
     handleSeekMouseMove(e) {
+        const {dispatch} = this.props;
         const seekBar = React.findDOMNode(this.refs.seekBar);
         const diff = e.clientX - seekBar.offsetLeft;
         const pos = diff < 0 ? 0 : diff;
         let percent = pos / seekBar.offsetWidth;
         percent = percent > 1 ? 1 : percent;
 
-        this.setState({
-            currentTime: Math.floor(percent * this.state.duration)
-        });
+        dispatch(changeCurrentTime(Math.floor(percent * this.state.duration)));
     }
 
     handleSeekMouseUp(e) {
@@ -158,11 +159,12 @@ class Player extends Component {
 
         document.removeEventListener('mousemove', this.handleSeekMouseMove);
         document.removeEventListener('mouseup', this.handleSeekMouseUp);
+        const {currentTime} = this.props.player;
 
         this.setState({
             isSeeking: false,
         }, function() {
-            React.findDOMNode(this.refs.audio).currentTime = this.state.currentTime;
+            React.findDOMNode(this.refs.audio).currentTime = currentTime;
         });
     }
 
@@ -171,16 +173,15 @@ class Player extends Component {
             return;
         }
 
+        const {dispatch, player} = this.props;
         const audioElement = e.currentTarget;
         const currentTime = Math.floor(audioElement.currentTime);
 
-        if (currentTime === this.state.currentTime) {
+        if (currentTime === player.currentTime) {
             return;
         }
 
-        this.setState({
-            currentTime: currentTime,
-        });
+        dispatch(changeCurrentTime(currentTime));
     }
 
     handleVolumeChange(e) {
@@ -229,13 +230,12 @@ class Player extends Component {
     }
 
     seek(e) {
+        const {dispatch} = this.props;
         const audioElement = React.findDOMNode(this.refs.audio);
         const currentTime = Math.floor(((e.clientX - e.currentTarget.offsetLeft) / e.currentTarget.offsetWidth) * this.state.duration);
-        this.setState({
-            currentTime: currentTime
-        }, function() {
-            audioElement.currentTime = currentTime;
-        });
+
+        dispatch(changeCurrentTime(currentTime));
+        audioElement.currentTime = currentTime;
     }
 
     toggleMute() {
@@ -267,7 +267,8 @@ class Player extends Component {
     }
 
     renderDurationBar() {
-        const {currentTime, duration} = this.state;
+        const {currentTime} = this.props.player;
+        const {duration} = this.state;
 
         if (duration !== 0) {
             const width = currentTime/duration * 100;
@@ -339,8 +340,9 @@ class Player extends Component {
     }
 
     render() {
-        const {dispatch, song} = this.props;
-        const {currentTime, duration, isPlaying} = this.state;
+        const {dispatch, player, song} = this.props;
+        const {currentTime} = player;
+        const {duration, isPlaying} = this.state;
 
         return (
             <div className='player'>

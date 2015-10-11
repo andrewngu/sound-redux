@@ -1,6 +1,13 @@
 import * as types from '../constants/ActionTypes';
 import {CHANGE_TYPES} from '../constants/SongConstants';
 
+export function changeCurrentTime(time) {
+    return {
+        type: types.CHANGE_CURRENT_TIME,
+        time: time
+    };
+}
+
 function changePlayingSong(songIndex) {
     return {
         type: types.CHANGE_PLAYING_SONG,
