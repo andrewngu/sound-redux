@@ -13,19 +13,7 @@ import Toolbar from '../components/Toolbar';
 class Songs extends Component {
     constructor(props) {
         super(props);
-        this.getCurrentSong = this.getCurrentSong.bind(this);
         this.renderSongs = this.renderSongs.bind(this);
-    }
-
-    getCurrentSong() {
-        const {playlists, player} = this.props;
-        const {currentSongIndex, selectedPlaylists} = player;
-        const currentPlaylist = selectedPlaylists[selectedPlaylists.length - 1];
-        if (currentSongIndex === null) {
-            return {};
-        }
-
-        return playlists[currentPlaylist].items[currentSongIndex];
     }
 
     playSong(i) {
@@ -35,9 +23,8 @@ class Songs extends Component {
 
     renderSongs() {
         const chunk = 5;
-        const {activePlaylist, dispatch, playlists, songs} = this.props;
+        const {activePlaylist, dispatch, playlists, playingSong, songs} = this.props;
         const items = activePlaylist in playlists ? playlists[activePlaylist].items : [];
-        const currentSong = this.getCurrentSong();
 
         let result = [];
         for (let i = 0; i < items.length; i += chunk) {
@@ -47,7 +34,7 @@ class Songs extends Component {
                     <div className='col-1-5' key={index + '-' + song.id}>
                         <SongsCard
                             dispatch={dispatch}
-                            isActive={song.id === currentSong.id}
+                            isActive={song.id === playingSong.id}
                             playSong={this.playSong.bind(this, index)}
                             song={song} />
                     </div>
