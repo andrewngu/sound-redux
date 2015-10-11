@@ -21,7 +21,7 @@ function fetchRelatedSongs(userId, songTitle) {
     return dispatch => {
         return fetch(constructUserSongsUrl(userId))
             .then(response => response.json())
-            .then(json => dispatch(receiveSongs(json, songTitle)))
+            .then(json => dispatch(receiveSongs(json.filter(song => songTitle !== song.title), songTitle)))
             .catch(error => console.log(error));
     };
 }

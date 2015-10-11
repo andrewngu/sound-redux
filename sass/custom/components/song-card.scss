@@ -3,8 +3,36 @@
     flex-direction: row;
     align-items: center;
     padding: 10px;
-    border-bottom: 1px solid #e3e3e3;
+    border-top: 1px solid #e3e3e3;
+    border-left: 1px solid #e3e3e3;
+    border-right: 1px solid #e3e3e3;
+
+    &:last-child {
+        border-bottom: 1px solid #e3e3e3;
+    }
+
+    &.active {
+        border-color: #A6D2A5;
+        border-bottom: 1px solid #A6D2A5;
+
+        & + .song-card {
+            border-top: none;
+        }
+
+        .song-card-image {
+            pointer-events: none;
+        }
+
+        .songs-card-playing {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .songs-card-playing-icon {
+            opacity: 1;
+        }
+    }
 }
+
 
 .song-card-image {
     width: 60px;
@@ -16,6 +44,10 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .song-card-title {

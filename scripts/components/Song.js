@@ -42,14 +42,24 @@ class Song extends Component {
     }
 
     renderSongs() {
-        const {songs} = this.props;
+        const {playingSong, songs} = this.props;
         if (!songs.items) {
             return;
         }
 
+        const items = songs.items.slice(1).map((song, i) => {
+            return (
+                <SongCard
+                    isActive={playingSong.id === song.id}
+                    key={song.id}
+                    playSong={this.playSong.bind(this, i + 1)}
+                    song={song} />
+            );
+        });
+
         return (
             <div className='tab-content'>
-                {songs.items.slice(1).map(song => <SongCard key={song.id} song={song} />)}
+                {items}
             </div>
         );
     }
