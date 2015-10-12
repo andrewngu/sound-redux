@@ -53,6 +53,8 @@ export function changeSong(changeType) {
 
 export function playSong(playlist, songIndex) {
     return (dispatch, getState) => {
+        dispatch(changeCurrentTime(0));
+        
         const {player} = getState();
         const {selectedPlaylists} = player;
         const len = selectedPlaylists.length;

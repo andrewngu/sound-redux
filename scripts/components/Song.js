@@ -42,7 +42,7 @@ class Song extends Component {
     }
 
     renderSongs() {
-        const {playingSong, songs} = this.props;
+        const {dispatch, player, playingSong, songs} = this.props;
         if (!songs.items) {
             return;
         }
@@ -50,8 +50,10 @@ class Song extends Component {
         const items = songs.items.slice(1).map((song, i) => {
             return (
                 <SongCard
+                    dispatch={dispatch}
                     isActive={playingSong.id === song.id}
                     key={song.id}
+                    player={player}
                     playSong={this.playSong.bind(this, i + 1)}
                     song={song} />
             );
