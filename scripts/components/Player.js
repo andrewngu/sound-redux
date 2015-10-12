@@ -99,9 +99,9 @@ class Player extends Component {
         if (this.state.repeat) {
             React.findDOMNode(this.refs.audio).play();
         } else if (this.state.shuffle) {
-            this.changeSong('shuffle');
+            this.changeSong(CHANGE_TYPES.SHUFFLE);
         } else {
-            this.changeSong('next');
+            this.changeSong(CHANGE_TYPES.NEXT);
         }
     }
 
@@ -346,7 +346,7 @@ class Player extends Component {
 
         return (
             <div className='player'>
-                <audio ref='audio' src={formatStreamUrl(song.stream_url)}></audio>
+                <audio id='audio' ref='audio' src={formatStreamUrl(song.stream_url)}></audio>
                 <div className='container'>
                     <div className='player-main'>
                         <div className='player-section player-info'>

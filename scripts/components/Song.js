@@ -65,7 +65,7 @@ class Song extends Component {
     }
 
     render() {
-        const {playingSong, player, song, sticky} = this.props;
+        const {dispatch, playingSong, player, song, sticky} = this.props;
         if (song.isFetching) {
             return <Spinner />;
         }
@@ -100,6 +100,7 @@ class Song extends Component {
                                         </div>
                                         <Waveform
                                             currentTime={player.currentTime}
+                                            dispatch={dispatch}
                                             duration={song.duration}
                                             isActive={isActive}
                                             waveformUrl={song.waveform_url.replace('https', 'http')} />
