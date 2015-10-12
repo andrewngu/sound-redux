@@ -38,6 +38,10 @@
     padding: 10px;
 }
 
+.song-card-info {
+    flex: 1;
+}
+
 .song-card-image {
     width: 60px;
     height: 60px;
@@ -55,8 +59,12 @@
 }
 
 .song-card-title {
+    display: block;
     font-size: 14px;
     font-weight: 300;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .song-card-user {
