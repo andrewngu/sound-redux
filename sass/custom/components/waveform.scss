@@ -5,3 +5,26 @@
 .waveform-canvas {
     display: none;
 }
+
+.waveform-image-container {
+    width:  100%;
+    height: 50px;
+    margin-top: 10px;
+    position: relative;
+}
+
+.waveform-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.waveform-image-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #A6D2A5;
+    z-index: 0;
+}

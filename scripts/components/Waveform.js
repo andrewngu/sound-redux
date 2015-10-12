@@ -42,8 +42,13 @@ class Waveform extends Component {
     }
 
     renderWaveform() {
+        const {currentTime, duration, isActive} = this.props;
+        const width = isActive ? currentTime / (duration / 1000) * 100 : 0;
         return (
-            <img className='waveform-image' src={this.props.waveformUrl} />
+            <div className='waveform-image-container'>
+                <img className='waveform-image' src={this.props.waveformUrl} />
+                <div className='waveform-image-bg' style={{width : `${width}%`}} />
+            </div>
         );
     }
 
