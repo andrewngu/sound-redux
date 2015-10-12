@@ -83,23 +83,27 @@ class Song extends Component {
                         <div className='col-7-10'>
                             <div className={'song card' + (isActive ? ' active' : '')}>
                                 <div className='song-main'>
-                                    <div
-                                        className='song-image'
-                                        onClick={this.playSong.bind(this, 0)}
-                                        style={{backgroundImage: `url(${image})`}}>
-                                        <div className='songs-card-playing'>
-                                            <i className={'songs-card-playing-icon icon ' + (isActive ? 'ion-radio-waves' : 'ion-ios-play')}></i>
+                                    <div className='song-detail'>
+                                        <div
+                                            className='song-image'
+                                            onClick={this.playSong.bind(this, 0)}
+                                            style={{backgroundImage: `url(${image})`}}>
+                                            <div className='songs-card-playing'>
+                                                <i className={'songs-card-playing-icon icon ' + (isActive ? 'ion-radio-waves' : 'ion-ios-play')}></i>
+                                            </div>
+                                        </div>
+                                        <div className='song-info'>
+                                            <div className='song-title'>{song.title}</div>
+                                            <div className='song-user'>
+                                                <div
+                                                    className='song-user-image'
+                                                    style={{backgroundImage: `url(${user.avatar_url})`}}>
+                                                </div>
+                                                <div className='song-username'>{user.username}</div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className='song-info'>
-                                        <div className='song-title'>{song.title}</div>
-                                        <div className='song-user'>
-                                            <div
-                                                className='song-user-image'
-                                                style={{backgroundImage: `url(${user.avatar_url})`}}>
-                                            </div>
-                                            <div className='song-username'>{user.username}</div>
-                                        </div>
+                                    <div className='song-waveform'>
                                         <Waveform
                                             currentTime={player.currentTime}
                                             dispatch={dispatch}

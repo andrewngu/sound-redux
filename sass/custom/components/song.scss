@@ -1,6 +1,4 @@
 .song {
-    padding: 10px;
-
     &.active {
         border-color: #A6D2A5;
 
@@ -20,6 +18,12 @@
 
 .song-main {
     display: flex;
+}
+
+.song-detail {
+    display: flex;
+    flex: 1;
+    padding: 10px;
 }
 
 .song-image {
@@ -43,7 +47,8 @@
 }
 
 .song-title {
-    font-size: 26px;
+    display: block;
+    font-size: 20px;
     font-weight: 300;
     white-space: nowrap;
     overflow: hidden;
@@ -74,10 +79,20 @@
     font-size: 18px;
 }
 
-.song-comments {
-    overflow: scroll;
+.song-waveform {
+    width: 200px;
+    height: 142px;
+    border-left: 1px solid #e3e3e3;
+
+    .waveform {
+        height: 100%;
+
+        .waveform-image-container {
+            height: 100%;
+        }
+    }
 }
 
-.song .waveform-image-container {
-    margin-top: 10px;
+.song-comments {
+    overflow: scroll;
 }
