@@ -40,6 +40,7 @@ class SongCard extends Component {
                         dispatch={dispatch}
                         duration={song.duration}
                         isActive={isActive}
+                        playSong={playSong}
                         waveformUrl={song.waveform_url.replace('https', 'http')} />
                 </div>
             </div>

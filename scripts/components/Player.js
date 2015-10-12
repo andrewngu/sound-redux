@@ -113,6 +113,8 @@ class Player extends Component {
     }
 
     handleLoadStart() {
+        const {dispatch} = this.props;
+        dispatch(changeCurrentTime(0));
         this.setState({
             duration: 0
         });

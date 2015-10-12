@@ -109,6 +109,7 @@ class Song extends Component {
                                             dispatch={dispatch}
                                             duration={song.duration}
                                             isActive={isActive}
+                                            playSong={this.playSong.bind(this, 0)}
                                             waveformUrl={song.waveform_url.replace('https', 'http')} />
                                     </div>
                                 </div>

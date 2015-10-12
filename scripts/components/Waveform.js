@@ -76,9 +76,34 @@ class Waveform extends Component {
         this.setState({seekPercent: 0});
     }
 
+    renderClickable() {
+        const {isActive, playSong} = this.props;
+        const seekPercent = this.state.seekPercent * 100;
+        if (!isActive) {
+            return (
+                <div>
+                    <div className='waveform-play-highlight' />
+                    <div
+                        className='waveform-play-highlight-icon'
+                        onClick={playSong}>
+                        <i className='icon ion-ios-play'></i>
+                    </div>
+                </div>
+            );
+        }
+
+        if (seekPercent) {
+            return (
+                <div>
+                    <div className='waveform-seek-line' style={{width: `${seekPercent}%`}} />
+                    <div className='waveform-seek-bar' style={{width: `${seekPercent}%`}} />
+                </div>
+            );
+        }
+    }
+
     renderWaveform() {
         const {currentTime, duration, isActive} = this.props;
-        const seekPercent = this.state.seekPercent * 100;
         const width = isActive ? currentTime / (duration / 1000) * 100 : 0;
         return (
             <div
@@ -88,8 +113,7 @@ class Waveform extends Component {
                 onMouseMove={this.handleMouseMove}>
                 <img className='waveform-image' src={this.props.waveformUrl} />
                 <div className='waveform-image-bg' style={{width : `${width}%`}} />
-                {seekPercent ? <div className='waveform-seek-line' style={{width: `${seekPercent}%`}} /> : null }
-                {seekPercent ? <div className='waveform-seek-bar' style={{width: `${seekPercent}%`}} /> : null }
+                {this.renderClickable()}
             </div>
         );
     }
