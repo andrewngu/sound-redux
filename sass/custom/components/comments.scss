@@ -1,11 +1,3 @@
-.comments-body {
-    overflow: scroll;
-    border-bottom: 1px solid #e3e3e3;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-}
-
 .comments-header {
     display: flex;
     align-items: center;
@@ -16,4 +8,11 @@
 
 .comments-header-title {
     flex: 1;
+}
+
+.comments-body {
+    overflow: scroll;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }

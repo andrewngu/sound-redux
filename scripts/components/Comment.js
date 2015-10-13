@@ -4,12 +4,12 @@ import {getImageUrl} from '../helpers/SongsHelper';
 
 class Comment extends Component {
     render() {
-        const {comment} = this.props;
+        const {comment, i} = this.props;
         const {user} = comment;
         const image =  getImageUrl(user.avatar_url);
 
         return (
-            <div className='comment'>
+            <div className='comment' style={{animationDelay: (i * 50) + 'ms'}}>
                 <div
                     className='comment-image'
                     style={{backgroundImage: `url(${image})`}}>

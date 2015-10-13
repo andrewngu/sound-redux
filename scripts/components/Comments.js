@@ -30,7 +30,7 @@ class Comments extends Component {
                 setTimeout(() => this.setState({
                     currentTime: nextProps.currentTime,
                     transitioning: false
-                }), 200);
+                }), 270);
             });
         }
     }
@@ -61,13 +61,13 @@ class Comments extends Component {
                     return songTime >= currentTime && songTime < (currentTime + COMMENTS_REFRESH_RATE);
                 })
                 .sort((a, b) => a.timestamp - b.timestamp)
-                .map(comment => {
-                    return <Comment key={comment.id} comment={comment} />;
+                .map((comment, i) => {
+                    return <Comment comment={comment} i={i} key={comment.id} />;
                 });
         }
 
-        return comments.slice().sort((a, b) => a.timestamp - b.timestamp).map(comment => {
-            return <Comment key={comment.id} comment={comment} />;
+        return comments.slice().sort((a, b) => a.timestamp - b.timestamp).map((comment, i) => {
+            return <Comment comment={comment} i={i} key={comment.id} />;
         });
     }
 
