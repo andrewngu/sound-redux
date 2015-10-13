@@ -16,7 +16,7 @@ class Song extends Component {
     }
 
     renderComments() {
-        const {height, song} = this.props;
+        const {height, player, playingSong, song} = this.props;
         const {comments} = song;
         if (!comments) {
             return;
@@ -25,7 +25,9 @@ class Song extends Component {
         return (
             <Comments
                 comments={comments}
-                height={height} />
+                currentTime={player.currentTime}
+                height={height}
+                isActive={playingSong.id === song.id} />
         );
     }
 
