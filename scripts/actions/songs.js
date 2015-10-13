@@ -5,7 +5,6 @@ import {constructSongUrl, constructSongCommentsUrl, constructUserSongsUrl} from 
 export function changeActiveSong(songId) {
     return dispatch => {
         dispatch(fetchSongIfNeeded(songId));
-        dispatch(navigateTo(['songs', songId]));
         dispatch(changeActiveSongId(songId));
     };
 }

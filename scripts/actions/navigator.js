@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import {changeActiveSong} from '../actions/songs';
 import * as types from '../constants/ActionTypes';
 
 function changePath(path) {
@@ -18,6 +19,10 @@ export function navigateBack(e) {
 
 export function navigateTo(path) {
     return dispatch => {
+        if (path[0] === 'songs' && path.length === 2) {
+            dispatch(changeActiveSong(path[1]));
+        }
+
         pushState(path);
         return dispatch(changePath(path))
     }

@@ -21,7 +21,8 @@ function initNavigator(dispatch) {
     window.onpopstate = e => {
         dispatch(navigateBack(e));
     };
-    dispatch(navigateTo(['songs']));
+    const path = window.location.hash === '' ? ['songs'] : window.location.hash.replace('#/', '').split('/');
+    dispatch(navigateTo(path));
 }
 
 class App extends Component {
