@@ -9,20 +9,20 @@ class CommentCard extends Component {
         const image =  getImageUrl(user.avatar_url);
 
         return (
-            <div className='comment-card'>
+            <div className='comment'>
                 <div
-                    className='comment-card-image'
+                    className='comment-image'
                     style={{backgroundImage: `url(${image})`}}>
                 </div>
-                <div className='comment-card-info'>
-                    <div className='comment-card-comment'>
+                <div className='comment-info'>
+                    <div className='comment-comment'>
                         {comment.body}
                     </div>
-                    <div className='comment-card-username'>
+                    <div className='comment-username'>
                         {user.username}
                     </div>
                 </div>
-                <div className='comment-card-time'>
+                <div className='comment-time'>
                     {formatSeconds(Math.floor(comment.timestamp/1000))}
                 </div>
             </div>

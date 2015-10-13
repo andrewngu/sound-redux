@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 
 import {playSong} from '../actions/player';
 
-import CommentCard from '../components/CommentCard';
+import Comments from '../components/Comments';
 import SongCard from '../components/SongCard';
 import Spinner from '../components/Spinner';
 import Stickify from '../components/Stickify';
@@ -10,14 +10,6 @@ import Waveform from '../components/Waveform';
 import {getImageUrl} from '../helpers/SongsHelper';
 
 class Song extends Component {
-    handleMouseEnter() {
-        document.body.style.overflow = 'hidden';
-    }
-
-    handleMouseLeave() {
-        document.body.style.overflow = 'auto';
-    }
-
     playSong(i) {
         const {dispatch, song} = this.props;
         dispatch(playSong(song.title, i));
@@ -31,13 +23,9 @@ class Song extends Component {
         }
 
         return (
-            <div
-                className='song-comments'
-                onMouseEnter={this.handleMouseEnter}
-                onMouseLeave={this.handleMouseLeave}
-                style={{height: height - 220}}>
-                {comments.map(comment => <CommentCard key={comment.id} comment={comment} />)}
-            </div>
+            <Comments
+                comments={comments}
+                height={height} />
         );
     }
 
@@ -118,7 +106,6 @@ class Song extends Component {
                         </div>
                         <div className='col-3-10'>
                             <div className={'card sidebar' + (sticky ? ' sticky' : '')}>
-                                <div className='sidebar-header'>Comments</div>
                                 {this.renderComments()}
                             </div>
                         </div>

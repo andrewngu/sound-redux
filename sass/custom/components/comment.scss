@@ -1,4 +1,4 @@
-.comment-card {
+.comment {
     display: flex;
     padding: 10px;
     border-bottom: 1px solid #e3e3e3;
@@ -9,7 +9,7 @@
     }
 }
 
-.comment-card-image {
+.comment-image {
     width: 24px;
     height: 24px;
     margin-right: 20px;
@@ -22,15 +22,15 @@
     background-size: cover;
 };
 
-.comment-card-info {
+.comment-info {
     flex: 1;
     margin-right: 20px;
 }
 
-.comment-card-username {
+.comment-username {
     color: #ccc;
 }
 
-.comment-card-time {
+.comment-time {
     align-items: center;
 }
