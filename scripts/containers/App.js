@@ -9,6 +9,7 @@ import Header from '../components/Header';
 import Player from '../components/Player';
 import Song from '../components/Song';
 import Songs from '../components/Songs';
+import User from '../components/User';
 
 function initHeight(dispatch) {
     dispatch(changeHeight(window.innerHeight));
@@ -34,7 +35,7 @@ class App extends Component {
     }
 
     renderContent() {
-        const {activePlaylist, dispatch, height, navigator, player, playingSong, playlists, song} = this.props;
+        const {activePlaylist, dispatch, height, navigator, player, playingSong, playlists, song, user} = this.props;
         const {path} = navigator;
         if (path[0] === 'songs' && path.length === 1) {
             return (
@@ -51,6 +52,10 @@ class App extends Component {
                     playingSong={playingSong}
                     song={song}
                     songs={song.title && song.title in playlists ? playlists[song.title] : {}} />
+            );
+        } else if (path[0] === 'users' && path.length === 2) {
+            return (
+                <User />
             );
         }
     }
@@ -94,8 +99,9 @@ App.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const {activePlaylist, activeSongId, height, navigator, player, playlists, songs} = state;
+    const {activePlaylist, activeSongId, activeUserId, height, navigator, player, playlists, songs, users} = state;
     const song = activeSongId && activeSongId in songs ? songs[activeSongId] : {};
+    const user = activeUserId && activeUserId in users ? users[activeUserId] : {};
     const playingSong = player.currentSongIndex !== null ? playlists[player.selectedPlaylists[player.selectedPlaylists.length - 1]].items[player.currentSongIndex] : {};
 
     return {
@@ -105,7 +111,8 @@ function mapStateToProps(state) {
         player,
         playingSong,
         playlists,
-        song
+        song,
+        user
     };
 }
 

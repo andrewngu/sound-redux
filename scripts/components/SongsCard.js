@@ -24,6 +24,7 @@ class SongsCard extends Component {
                     <SongDetails
                         dispatch={dispatch}
                         songId={song.id}
+                        userId={song.user.id}
                         title={song.title}
                         username={song.user.username} />
                 </div>

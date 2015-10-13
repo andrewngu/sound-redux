@@ -354,6 +354,7 @@ class Player extends Component {
                                 dispatch={dispatch}
                                 songId={song.id}
                                 title={song.title}
+                                userId={song.user.id}
                                 username={song.user.username} />
                         </div>
                         <div className='player-section'>
