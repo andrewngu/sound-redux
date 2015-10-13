@@ -34,8 +34,8 @@
     align-items: center;
 }
 
-.transitioning .comment {
-    opacity: 0;
+.animate-out .comment {
+    opacity: 0 !important;
     -webkit-transition: opacity 0.2s ease-in-out;
     -moz-transition: opacity 0.2s ease-in-out;
     -ms-transition: opacity 0.2s ease-in-out;
@@ -46,6 +46,8 @@
     animation-name: animateIn;
     animation-duration: 360ms;
     animation-timing-function: ease;
+    opacity: 0;
+    animation-fill-mode: forwards;
 }
 
 @keyframes animateIn {

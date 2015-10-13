@@ -9,9 +9,9 @@ class Comments extends Component {
         super(props);
         this.toggleTimedComments = this.toggleTimedComments.bind(this);
         this.state = {
+            className: null,
             currentTime: 0,
             timedComments: false,
-            transitioning: false
         };
     }
 
@@ -25,12 +25,12 @@ class Comments extends Component {
         if (nextProps.currentTime % COMMENTS_REFRESH_RATE === 0
         || Math.abs(nextProps.currentTime - currentTime) > COMMENTS_REFRESH_RATE) {
             this.setState({
-                transitioning: true
+                className: 'animate-out'
             }, () => {
                 setTimeout(() => this.setState({
+                    className: null,
                     currentTime: nextProps.currentTime,
-                    transitioning: false
-                }), 270);
+                }), 200);
             });
         }
     }
@@ -72,17 +72,17 @@ class Comments extends Component {
     }
 
     render() {
-        const {height} = this.props;
-        const {timedComments, transitioning} = this.state;
+        const {height, isActive} = this.props;
+        const {className, timedComments} = this.state;
 
         return (
-            <div className={'comments' + (timedComments ? ' timed' : '')}>
+            <div className={'comments' + (isActive && timedComments ? ' timed' : '')}>
                 <div className='comments-header'>
                     <div className='comments-header-title'>Comments</div>
                     <Switch isOn={timedComments} toggleFunc={this.toggleTimedComments}  />
                 </div>
                 <div
-                    className={'comments-body' + (transitioning ? ' transitioning' : '')}
+                    className={'comments-body' + (className ? ` ${className}` : '')}
                     onMouseEnter={this.handleMouseEnter}
                     onMouseLeave={this.handleMouseLeave}
                     style={{maxHeight: height - 220}}>
