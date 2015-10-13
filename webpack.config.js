@@ -19,7 +19,7 @@ module.exports = {
     },
     output: {
         publicPath: 'http://localhost:8080/',
-        filename: '/js/[name].js'
+        filename: './public/js/[name].js'
     },
     module: {
         loaders: [
