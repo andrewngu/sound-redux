@@ -1,0 +1,32 @@
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 6px;
+    border-radius: 3px;
+    border: 1px solid #e3e3e3;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.switch-button {
+    position: absolute;
+    top: -4px;
+    left: -2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 1px solid #e3e3e3;
+}
+
+.switch.on {
+    border-color: #3381b7;
+    background-color: #3381b7;
+
+    .switch-button {
+        left: 8px;
+    }
+}

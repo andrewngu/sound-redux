@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {formatSeconds} from '../helpers/Formatter';
 import {getImageUrl} from '../helpers/SongsHelper';
 
-class CommentCard extends Component {
+class Comment extends Component {
     render() {
         const {comment} = this.props;
         const {user} = comment;
@@ -30,8 +30,8 @@ class CommentCard extends Component {
     }
 }
 
-CommentCard.propTypes = {
+Comment.propTypes = {
     comment: PropTypes.object.isRequired
 };
 
-export default CommentCard;
+export default Comment;
