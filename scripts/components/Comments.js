@@ -41,9 +41,9 @@ class Comments extends Component {
 
     renderComments() {
         const {currentTime, timedComments} = this.state;
-        const {comments} = this.props;
+        const {comments, isActive} = this.props;
 
-        if (timedComments) {
+        if (isActive && timedComments) {
             return comments
                 .slice()
                 .filter(song => {
