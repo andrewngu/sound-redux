@@ -107,7 +107,7 @@ class Song extends Component {
                             {this.renderSongs()}
                         </div>
                         <div className='col-3-10'>
-                            <div className={'card sidebar' + (sticky ? ' sticky' : '')}>
+                            <div className={'sidebar' + (sticky ? ' sticky' : '')}>
                                 {this.renderComments()}
                             </div>
                         </div>

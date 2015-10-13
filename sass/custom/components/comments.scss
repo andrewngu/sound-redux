@@ -1,12 +1,14 @@
 .comments-body {
     overflow: scroll;
+    border-bottom: 1px solid #e3e3e3;
 }
 
 .comments-header {
     display: flex;
     align-items: center;
     padding: 20px;
-    border-bottom: 1px solid #e3e3e3;
+    background-color: #fff;
+    border: 1px solid #e3e3e3;
 }
 
 .comments-header-title {

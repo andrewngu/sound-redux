@@ -15,7 +15,10 @@ class Comments extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.currentTime % COMMENTS_REFRESH_RATE === 0) {
+        const {currentTime} = this.state;
+
+        if (nextProps.currentTime % COMMENTS_REFRESH_RATE === 0
+        || Math.abs(nextProps.currentTime - currentTime) > COMMENTS_REFRESH_RATE) {
             this.setState({
                 currentTime: nextProps.currentTime
             });
@@ -72,7 +75,7 @@ class Comments extends Component {
                     className='comments-body'
                     onMouseEnter={this.handleMouseEnter}
                     onMouseLeave={this.handleMouseLeave}
-                    style={{height: height - 220}}>
+                    style={{maxHeight: height - 220}}>
                     {this.renderComments()}
                 </div>
             </div>
