@@ -10,17 +10,27 @@ class Comments extends Component {
         this.toggleTimedComments = this.toggleTimedComments.bind(this);
         this.state = {
             currentTime: 0,
-            timedComments: false
+            timedComments: false,
+            transitioning: false
         };
     }
 
     componentWillReceiveProps(nextProps) {
-        const {currentTime} = this.state;
+        const {currentTime, timedComments} = this.state;
+
+        if (!timedComments || !nextProps.isActive) {
+            return;
+        }
 
         if (nextProps.currentTime % COMMENTS_REFRESH_RATE === 0
         || Math.abs(nextProps.currentTime - currentTime) > COMMENTS_REFRESH_RATE) {
             this.setState({
-                currentTime: nextProps.currentTime
+                transitioning: true
+            }, () => {
+                setTimeout(() => this.setState({
+                    currentTime: nextProps.currentTime,
+                    transitioning: false
+                }), 200);
             });
         }
     }
@@ -63,16 +73,16 @@ class Comments extends Component {
 
     render() {
         const {height} = this.props;
-        const {timedComments} = this.state;
+        const {timedComments, transitioning} = this.state;
 
         return (
-            <div className='comments'>
+            <div className={'comments' + (timedComments ? ' timed' : '')}>
                 <div className='comments-header'>
                     <div className='comments-header-title'>Comments</div>
                     <Switch isOn={timedComments} toggleFunc={this.toggleTimedComments}  />
                 </div>
                 <div
-                    className='comments-body'
+                    className={'comments-body' + (transitioning ? ' transitioning' : '')}
                     onMouseEnter={this.handleMouseEnter}
                     onMouseLeave={this.handleMouseLeave}
                     style={{maxHeight: height - 220}}>

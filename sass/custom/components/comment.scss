@@ -37,3 +37,29 @@
 .comment-time {
     align-items: center;
 }
+
+.transitioning .comment {
+    opacity: 0;
+    -webkit-transition: opacity 0.2s ease-in-out;
+    -moz-transition: opacity 0.2s ease-in-out;
+    -ms-transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.timed .comment {
+    animation-name: animateIn;
+    animation-duration: 360ms;
+    animation-timing-function: ease;
+}
+
+@keyframes animateIn {
+   from {
+       transform: translateX(200px);
+       opacity: 0;
+    }
+
+    to {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
