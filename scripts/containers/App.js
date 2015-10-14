@@ -55,7 +55,11 @@ class App extends Component {
             );
         } else if (path[0] === 'users' && path.length === 2) {
             return (
-                <User />
+                <User
+                    dispatch={dispatch}
+                    player={player}
+                    playingSong={playingSong}
+                    user={user} />
             );
         }
     }

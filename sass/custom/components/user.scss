@@ -1,0 +1,21 @@
+.user {
+    padding: 10px;
+}
+
+.user-detail {
+    display: flex;
+    flex-direction: row;
+}
+
+.user-image {
+    width: 120px;
+    height: 120px;
+    margin-right: 20px;
+    border-radius: 50%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
