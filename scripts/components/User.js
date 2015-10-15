@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {playSong} from '../actions/player';
+import Followings from '../components/Followings';
 import SongCard from '../components/SongCard';
 import {getImageUrl} from '../helpers/SongsHelper';
 
@@ -7,6 +8,15 @@ class User extends Component {
     playSong(i) {
         const {dispatch, user} = this.props;
         dispatch(playSong(user.username, i));
+    }
+
+    renderFollowings() {
+        const {dispatch, user} = this.props;
+        if (!user.followings) {
+            return;
+        }
+
+        return <Followings users={user.followings} />;
     }
 
     renderLocation() {
@@ -71,6 +81,11 @@ class User extends Component {
                                 </div>
                             </div>
                             {this.renderSongs()}
+                        </div>
+                        <div className='col-3-10'>
+                            <div className='sidebar'>
+                                {this.renderFollowings()}
+                            </div>
                         </div>
                     </div>
                 </div>

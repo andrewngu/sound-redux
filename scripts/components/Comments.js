@@ -89,7 +89,7 @@ class Comments extends Component {
                     {this.renderComments()}
                 </div>
             </div>
-        )
+        );
     }
 }
 

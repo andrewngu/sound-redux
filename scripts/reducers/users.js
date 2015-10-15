@@ -17,6 +17,11 @@ function user(state = {}, action) {
             isFetching: false
         });
 
+    case types.RECEIVE_USER_FOLLOWINGS:
+        return Object.assign({}, state, {
+            followings: [...action.users]
+        });
+
     case types.REQUEST_USER:
         return Object.assign({}, state, {
             isFetching: true
@@ -30,6 +35,11 @@ function user(state = {}, action) {
 export function users(state = {}, action) {
     switch(action.type) {
     case types.RECEIVE_USER:
+        return Object.assign({}, state, {
+            [action.userId]: user(state[action.userId], action)
+        });
+
+    case types.RECEIVE_USER_FOLLOWINGS:
         return Object.assign({}, state, {
             [action.userId]: user(state[action.userId], action)
         });

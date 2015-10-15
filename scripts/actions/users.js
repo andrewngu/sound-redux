@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes';
-import {constructUserUrl, constructUserTracksUrl} from '../helpers/UsersHelper';
+import {constructUserFollowingsUrl, constructUserTracksUrl, constructUserUrl} from '../helpers/UsersHelper';
 
 export function changeActiveUser(userId) {
     return dispatch => {
@@ -33,6 +33,15 @@ function fetchUser(userId) {
     };
 }
 
+function fetchUserFollowings(userId) {
+    return dispatch => {
+        return fetch(constructUserFollowingsUrl(userId))
+            .then(response => response.json())
+            .then(json => dispatch(receiveUserFollowings(userId, json)))
+            .catch(error => console.log(error));
+    }
+}
+
 function fetchUserTracks(userId, username) {
     return dispatch => {
         return fetch(constructUserTracksUrl(userId))
@@ -48,6 +57,14 @@ function receiveSongs(songs, username) {
         nextUrl: null,
         playlist: username,
         songs: songs
+    };
+}
+
+function receiveUserFollowings(userId, users) {
+    return {
+        type: types.RECEIVE_USER_FOLLOWINGS,
+        userId: userId,
+        users: users
     };
 }
 
