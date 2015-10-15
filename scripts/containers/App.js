@@ -59,6 +59,7 @@ class App extends Component {
                     dispatch={dispatch}
                     player={player}
                     playingSong={playingSong}
+                    songs={user.username && user.username in playlists ? playlists[user.username] : {}}
                     user={user} />
             );
         }

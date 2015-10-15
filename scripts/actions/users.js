@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes';
-import {constructUserUrl} from '../helpers/UsersHelper';
+import {constructUserUrl, constructUserTracksUrl} from '../helpers/UsersHelper';
 
 export function changeActiveUser(userId) {
     return dispatch => {
@@ -28,9 +28,34 @@ function fetchUser(userId) {
     return dispatch => {
         return fetch(constructUserUrl(userId))
             .then(response => response.json())
-            .then(json => dispatch(receiveUser(userId, json)))
+            .then(json => dispatch(receiveUserPre(userId, json)))
             .catch(error => console.log(error));
-    }
+    };
+}
+
+function fetchUserTracks(userId, username) {
+    return dispatch => {
+        return fetch(constructUserTracksUrl(userId))
+            .then(response => response.json())
+            .then(json => dispatch(receiveSongs(json, username)))
+            .catch(error => console.log(error));
+    };
+}
+
+function receiveSongs(songs, username) {
+    return {
+        type: types.RECEIVE_SONGS,
+        nextUrl: null,
+        playlist: username,
+        songs: songs
+    };
+}
+
+function receiveUserPre(userId, user) {
+    return dispatch => {
+        dispatch(receiveUser(userId, user));
+        dispatch(fetchUserTracks(userId, user.username));
+    };
 }
 
 function receiveUser(userId, user) {
@@ -38,5 +63,5 @@ function receiveUser(userId, user) {
         type: types.RECEIVE_USER,
         user: user,
         userId: user.id
-    }
+    };
 }

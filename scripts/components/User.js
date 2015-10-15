@@ -1,7 +1,14 @@
 import React, {Component, PropTypes} from 'react';
+import {playSong} from '../actions/player';
+import SongCard from '../components/SongCard';
 import {getImageUrl} from '../helpers/SongsHelper';
 
 class User extends Component {
+    playSong(i) {
+        const {dispatch, user} = this.props;
+        dispatch(playSong(user.username, i));
+    }
+
     renderLocation() {
         const {user} = this.props;
 
@@ -14,6 +21,31 @@ class User extends Component {
         }
 
         return 'Earth';
+    }
+
+    renderSongs() {
+        const {dispatch, player, playingSong, songs} = this.props;
+        if (!songs.items) {
+            return;
+        }
+
+        const items = songs.items.map((song, i) => {
+            return (
+                <SongCard
+                    dispatch={dispatch}
+                    isActive={playingSong.id === song.id}
+                    key={song.id}
+                    player={player}
+                    playSong={this.playSong.bind(this, i)}
+                    song={song} />
+            );
+        });
+
+        return (
+            <div className='tab-content'>
+                {items}
+            </div>
+        );
     }
 
     render() {
@@ -38,6 +70,7 @@ class User extends Component {
                                     </div>
                                 </div>
                             </div>
+                            {this.renderSongs()}
                         </div>
                     </div>
                 </div>
