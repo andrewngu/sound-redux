@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {playSong} from '../actions/player';
 import Followings from '../components/Followings';
 import SongCard from '../components/SongCard';
+import Stickify from '../components/Stickify';
 import {getImageUrl} from '../helpers/SongsHelper';
 
 class User extends Component {
@@ -59,7 +60,7 @@ class User extends Component {
     }
 
     render() {
-        const {user} = this.props;
+        const {sticky, user} = this.props;
         const image = user.avatar_url ? getImageUrl(user.avatar_url) : null;
         return (
             <div className='container'>
@@ -83,7 +84,7 @@ class User extends Component {
                             {this.renderSongs()}
                         </div>
                         <div className='col-3-10'>
-                            <div className='sidebar'>
+                            <div className={'sidebar' + (sticky ? ' sticky' : '')}>
                                 {this.renderFollowings()}
                             </div>
                         </div>
@@ -98,4 +99,4 @@ User.propTypes = {
     user: PropTypes.object.isRequired
 };
 
-export default User;
+export default Stickify(User, 50);

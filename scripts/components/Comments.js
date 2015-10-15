@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import Comment from '../components/Comment';
+import SidebarContent from '../components/SidebarContent';
 import Switch from '../components/Switch';
 
 const COMMENTS_REFRESH_RATE = 10;
@@ -81,13 +82,11 @@ class Comments extends Component {
                     <div className='comments-header-title'>Comments</div>
                     <Switch isOn={timedComments} toggleFunc={this.toggleTimedComments}  />
                 </div>
-                <div
-                    className={'comments-body' + (className ? ` ${className}` : '')}
-                    onMouseEnter={this.handleMouseEnter}
-                    onMouseLeave={this.handleMouseLeave}
-                    style={{maxHeight: height - 220}}>
+                <SidebarContent
+                    className={className}
+                    height={height - 220}>
                     {this.renderComments()}
-                </div>
+                </SidebarContent>
             </div>
         );
     }

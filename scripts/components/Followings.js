@@ -1,9 +1,10 @@
 import React, {Component, PropTypes} from 'react';
+import UserCard from '../components/UserCard';
 
 class Followings extends Component {
     renderFollowings() {
         const {users} = this.props;
-        return users.map(user => <Following user={user} />);
+        return users.map(user => <UserCard key={user.id} user={user} />);
     }
 
     render() {
@@ -25,3 +26,9 @@ class Followings extends Component {
         );
     }
 }
+
+Followings.propTypes = {
+    users: PropTypes.array.isRequired
+};
+
+export default Followings;

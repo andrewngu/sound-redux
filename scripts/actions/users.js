@@ -72,6 +72,7 @@ function receiveUserPre(userId, user) {
     return dispatch => {
         dispatch(receiveUser(userId, user));
         dispatch(fetchUserTracks(userId, user.username));
+        dispatch(fetchUserFollowings(userId));
     };
 }
 

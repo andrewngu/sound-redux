@@ -3,3 +3,10 @@
     top: 40px;
     width: 351px;
 }
+
+.sidebar-content {
+    overflow: scroll;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
