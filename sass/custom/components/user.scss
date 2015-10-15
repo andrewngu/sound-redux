@@ -1,4 +1,5 @@
 .user {
+    display: flex;
     padding: 10px;
 }
 
@@ -18,4 +19,26 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+.user-info {
+    flex: 1;
+}
+
+.user-username {
+    display: block;
+    font-size: 20px;
+    font-weight: 300;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-location {
+    color: #ccc;
+    font-size: 18px;
+
+    i {
+        margin-right: 10px;
+    }
 }
