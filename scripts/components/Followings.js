@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import SidebarContent from '../components/SidebarContent';
 import UserCard from '../components/UserCard';
 
 class Followings extends Component {
@@ -8,20 +9,17 @@ class Followings extends Component {
     }
 
     render() {
-        const {height} = this.props;
+        const {height, users} = this.props;
 
         return (
             <div className='followings'>
                 <div className='followings-header'>
-                    <div className='followings-header-title'>Following Users</div>
+                    <div className='followings-title'>Following Users</div>
+                    <div className='followings-count'>{users.length}</div>
                 </div>
-                <div
-                    className='followings-body'
-                    onMouseEnter={this.handleMouseEnter}
-                    onMouseLeave={this.handleMouseLeave}
-                    style={{maxHeight: height - 220}}>
+                <SidebarContent height={height - 220}>
                     {this.renderFollowings()}
-                </div>
+                </SidebarContent>
             </div>
         );
     }

@@ -12,12 +12,12 @@ class User extends Component {
     }
 
     renderFollowings() {
-        const {dispatch, user} = this.props;
+        const {dispatch, height, user} = this.props;
         if (!user.followings) {
             return;
         }
 
-        return <Followings users={user.followings} />;
+        return <Followings height={height} users={user.followings} />;
     }
 
     renderLocation() {

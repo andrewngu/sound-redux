@@ -57,6 +57,7 @@ class App extends Component {
             return (
                 <User
                     dispatch={dispatch}
+                    height={height}
                     player={player}
                     playingSong={playingSong}
                     songs={user.username && user.username in playlists ? playlists[user.username] : {}}

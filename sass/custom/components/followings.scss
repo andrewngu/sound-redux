@@ -1,5 +1,11 @@
 .followings-header {
+    display: flex;
+    flex-direction: row;
     padding: 20px;
     background-color: #fff;
-    border: 1px solid #e3e3e3;    
+    border: 1px solid #e3e3e3;
+}
+
+.followings-title {
+    flex: 1;
 }
