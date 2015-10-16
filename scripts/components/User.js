@@ -19,7 +19,7 @@ class User extends Component {
             return;
         }
 
-        return <Followings height={height} users={user.followings} />;
+        return <Followings dispatch={dispatch} height={height} users={user.followings} />;
     }
 
     renderSongs() {

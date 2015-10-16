@@ -1,18 +1,22 @@
 import React, {Component, PropTypes} from 'react';
+import Link from '../components/Link';
 import {addCommas} from '../helpers/Formatter';
 import {getUserLocation} from '../helpers/UsersHelper';
 
 class UserCard extends Component {
     render() {
-        const {user} = this.props;
+        const {dispatch, user} = this.props;
 
         return (
             <div className='user-card'>
                 <img className='user-card-image' src={user.avatar_url} />
                 <div className='user-card-info'>
-                    <div className='user-card-title'>
+                    <Link
+                        className='user-card-title'
+                        dispatch={dispatch}
+                        path={['users', user.id]}>
                         {user.username}
-                    </div>
+                    </Link>
                     <div className='user-card-subtitle'>
                         <i className='icon ion-location'></i>
                         {getUserLocation(user)}

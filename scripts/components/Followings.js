@@ -4,8 +4,8 @@ import UserCard from '../components/UserCard';
 
 class Followings extends Component {
     renderFollowings() {
-        const {users} = this.props;
-        return users.map(user => <UserCard key={user.id} user={user} />);
+        const {dispatch, users} = this.props;
+        return users.map(user => <UserCard dispatch={dispatch} key={user.id} user={user} />);
     }
 
     render() {
