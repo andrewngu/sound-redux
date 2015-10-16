@@ -42,3 +42,16 @@
         margin-right: 10px;
     }
 }
+
+.user-profiles {
+    margin-top: 10px;
+    font-size: 11px;
+}
+
+.user-description {
+    margin-top: 10px;
+    font-size: 11px;
+    max-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

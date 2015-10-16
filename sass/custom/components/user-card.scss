@@ -1,13 +1,34 @@
 .user-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     padding: 10px;
     background-color: #fff;
     border-bottom: 1px solid #e3e3e3;
     border-left: 1px solid #e3e3e3;
     border-right: 1px solid #e3e3e3;
+    font-size: 11px;
 }
 
 .user-card-image {
     width: 30px;
     height: 30px;
+    margin-right: 10px;
     border-radius: 50%;
+}
+
+.user-card-info {
+    flex: 1;
+}
+
+.user-card-followers {
+    text-align: right;
+}
+
+.user-card-subtitle {
+    color: #ccc;
+
+    i {
+        margin-right: 4px;
+    }
 }

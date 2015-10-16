@@ -3,7 +3,9 @@ import {playSong} from '../actions/player';
 import Followings from '../components/Followings';
 import SongCard from '../components/SongCard';
 import Stickify from '../components/Stickify';
+import {addCommas} from '../helpers/Formatter';
 import {getImageUrl} from '../helpers/SongsHelper';
+import {getUserLocation} from '../helpers/UsersHelper';
 
 class User extends Component {
     playSong(i) {
@@ -18,20 +20,6 @@ class User extends Component {
         }
 
         return <Followings height={height} users={user.followings} />;
-    }
-
-    renderLocation() {
-        const {user} = this.props;
-
-        if (user.city && user.country) {
-            return `${user.city}, ${user.country}`;
-        } else if (user.city) {
-            return user.city;
-        } else if (user.country) {
-            return user.country;
-        }
-
-        return 'Earth';
     }
 
     renderSongs() {
@@ -75,10 +63,12 @@ class User extends Component {
                                     <div className='user-username'>{user.username}</div>
                                     <div className='user-location'>
                                         <i className='icon ion-location'></i>
-                                        {this.renderLocation()}
+                                        {getUserLocation(user)}
                                     </div>
-                                    <div className='user-description' dangerouslySetInnerHTML={{__html: user.description}}>
+                                    <div className='user-profiles'>
+                                        <div className='user-profile'>{addCommas(user.followers_count) + ' followers'}</div>
                                     </div>
+                                    <div className='user-description' dangerouslySetInnerHTML={{__html: user.description}}></div>
                                 </div>
                             </div>
                             {this.renderSongs()}

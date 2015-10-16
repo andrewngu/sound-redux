@@ -1,5 +1,13 @@
 import {CLIENT_ID} from '../constants/Config';
 
+export function addCommas(i) {
+    if (i === null || i === undefined) {
+        return;
+    }
+
+    return i.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 export function formatSongTitle(str) {
     if (!str) {
         return '';

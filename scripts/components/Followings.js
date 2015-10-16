@@ -14,8 +14,9 @@ class Followings extends Component {
         return (
             <div className='followings'>
                 <div className='followings-header'>
-                    <div className='followings-title'>Following Users</div>
-                    <div className='followings-count'>{users.length}</div>
+                    <div className='followings-title'>
+                        {`Following ${users.length} Users`}
+                    </div>
                 </div>
                 <SidebarContent height={height - 220}>
                     {this.renderFollowings()}
