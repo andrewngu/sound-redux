@@ -26,6 +26,7 @@ function fetchUserIfNeeded(userId) {
 
 function fetchUser(userId) {
     return dispatch => {
+        dispatch(requestUser(userId));
         return fetch(constructUserUrl(userId))
             .then(response => response.json())
             .then(json => dispatch(receiveUserPre(userId, json)))
@@ -81,5 +82,12 @@ function receiveUser(userId, user) {
         type: types.RECEIVE_USER,
         user: user,
         userId: user.id
+    };
+}
+
+function requestUser(userId) {
+    return {
+        type: types.REQUEST_USER,
+        userId: userId
     };
 }

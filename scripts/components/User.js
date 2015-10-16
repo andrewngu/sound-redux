@@ -1,8 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {playSong} from '../actions/player';
+
 import Followings from '../components/Followings';
 import SongCard from '../components/SongCard';
+import Spinner from '../components/Spinner';
 import Stickify from '../components/Stickify';
+
 import {addCommas} from '../helpers/Formatter';
 import {getImageUrl} from '../helpers/SongsHelper';
 import {getUserLocation} from '../helpers/UsersHelper';
@@ -49,6 +52,11 @@ class User extends Component {
 
     render() {
         const {sticky, user} = this.props;
+
+        if (user.isFetching) {
+            return <Spinner />;
+        }
+
         const image = user.avatar_url ? getImageUrl(user.avatar_url) : null;
         return (
             <div className='container'>
