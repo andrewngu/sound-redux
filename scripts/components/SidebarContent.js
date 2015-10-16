@@ -1,6 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 
 class SidebarContent extends Component {
+    componentWillUnmount() {
+        document.body.style.overflow = 'auto';
+    }
+
     handleMouseEnter() {
         document.body.style.overflow = 'hidden';
     }

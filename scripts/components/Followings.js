@@ -5,7 +5,9 @@ import UserCard from '../components/UserCard';
 class Followings extends Component {
     renderFollowings() {
         const {dispatch, users} = this.props;
-        return users.map(user => <UserCard dispatch={dispatch} key={user.id} user={user} />);
+        return users
+            .sort((a, b) => b.followers_count - a.followers_count)
+            .map(user => <UserCard dispatch={dispatch} key={user.id} user={user} />);
     }
 
     render() {
