@@ -84,9 +84,11 @@ class App extends Component {
     }
 
     render() {
+        const {dispatch} = this.props;
+
         return (
             <div>
-                <Header />
+                <Header dispatch={dispatch} />
                 {this.renderContent()}
                 {this.renderPlayer()}
             </div>

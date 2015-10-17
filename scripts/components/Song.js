@@ -3,6 +3,7 @@ import React, {Component, PropTypes} from 'react';
 import {playSong} from '../actions/player';
 
 import Comments from '../components/Comments';
+import Link from '../components/Link';
 import SongCard from '../components/SongCard';
 import Spinner from '../components/Spinner';
 import Stickify from '../components/Stickify';
@@ -89,7 +90,12 @@ class Song extends Component {
                                                     className='song-user-image'
                                                     style={{backgroundImage: `url(${user.avatar_url})`}}>
                                                 </div>
-                                                <div className='song-username'>{user.username}</div>
+                                                <Link
+                                                    className='song-username'
+                                                    dispatch={dispatch}
+                                                    path={['users', user.id]}>
+                                                    {user.username}
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>

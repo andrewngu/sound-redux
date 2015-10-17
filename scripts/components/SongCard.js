@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import Link from '../components/Link';
 import Waveform from '../components/Waveform';
 import {getImageUrl} from '../helpers/SongsHelper';
 
@@ -20,17 +21,23 @@ class SongCard extends Component {
                         </div>
                     </div>
                     <div className='song-card-info'>
-                        <div className='song-card-title'>
+                        <Link
+                            className='song-card-title'
+                            dispatch={dispatch}
+                            path={['songs', song.id]}>
                             {song.title}
-                        </div>
+                        </Link>
                         <div className='song-card-user'>
                             <div
                                 className='song-card-user-image'
                                 style={{backgroundImage: `url(${user.avatar_url})`}}>
                             </div>
-                            <div className='song-card-username'>
+                            <Link
+                                className='song-card-username'
+                                dispatch={dispatch}
+                                path={['users', song.user_id]}>
                                 {user.username}
-                            </div>
+                            </Link>
                         </div>
                     </div>
                 </div>

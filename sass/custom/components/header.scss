@@ -26,14 +26,12 @@
     text-transform: uppercase;
 
     &:hover {
-        border-bottom: 1px dotted #fff;
         text-decoration: none;
     }
 
     &.active {
         color: #fff;
         text-decoration: none;
-        pointer-events: none;
     }
 }
 

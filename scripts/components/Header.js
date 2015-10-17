@@ -1,7 +1,10 @@
 import React, {Component, PropTypes} from 'react';
+import Link from '../components/Link';
 
 class Header extends Component {
     render() {
+        const {dispatch} = this.props;
+
         return (
             <div className='header'>
                 <div className='container'>
@@ -10,7 +13,12 @@ class Header extends Component {
                     </div>
                     <ul className='header-nav'>
                         <li className='header-nav-item'>
-                            <a className='header-nav-item-link active'>SoundRedux</a>
+                            <Link
+                                className='header-nav-item-link active'
+                                dispatch={dispatch}
+                                path={['songs']}>
+                                SoundRedux
+                            </Link>
                         </li>
                     </ul>
                 </div>
