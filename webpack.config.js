@@ -9,6 +9,14 @@ function getEntrySources(sources) {
     return sources;
 }
 
+function getOutputFilename() {
+    if (process.env.NODE_ENV === 'production') {
+        return './public/js/[name].js';
+    }
+
+    return '/js/[name].js';
+}
+
 var ignore = new webpack.IgnorePlugin(/\.svg$/)
 
 module.exports = {
@@ -19,7 +27,7 @@ module.exports = {
     },
     output: {
         publicPath: 'http://localhost:8080/',
-        filename: '/js/[name].js'
+        filename: getOutputFilename()
     },
     module: {
         loaders: [
