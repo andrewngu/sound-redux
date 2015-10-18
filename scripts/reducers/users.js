@@ -10,7 +10,10 @@ export function activeUserId(state = null, action) {
     }
 }
 
-function user(state = {}, action) {
+function user(state = {
+    followings: [],
+    profiles: []
+}, action) {
     switch(action.type) {
     case types.RECEIVE_USER:
         return Object.assign({}, action.user, {
@@ -20,6 +23,11 @@ function user(state = {}, action) {
     case types.RECEIVE_USER_FOLLOWINGS:
         return Object.assign({}, state, {
             followings: [...action.users]
+        });
+
+    case types.RECEIVE_USER_PROFILES:
+        return Object.assign({}, state, {
+            profiles: [...action.profiles]
         });
 
     case types.REQUEST_USER:
@@ -40,6 +48,11 @@ export function users(state = {}, action) {
         });
 
     case types.RECEIVE_USER_FOLLOWINGS:
+        return Object.assign({}, state, {
+            [action.userId]: user(state[action.userId], action)
+        });
+
+    case types.RECEIVE_USER_PROFILES:
         return Object.assign({}, state, {
             [action.userId]: user(state[action.userId], action)
         });

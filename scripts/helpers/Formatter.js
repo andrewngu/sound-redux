@@ -28,6 +28,31 @@ export function formatStreamUrl(str) {
     return `${str}?client_id=${CLIENT_ID}`;
 }
 
+export function getSocialIcon(service) {
+    switch(service) {
+    case 'facebook':
+        return 'ion-social-facebook';
+    case 'twitter':
+        return 'ion-social-twitter';
+    case 'instagram':
+        return 'ion-social-instagram';
+    case 'youtube':
+        return 'ion-social-youtube';
+    case 'hypem':
+        return 'ion-heart';
+    case 'google_plus':
+        return 'ion-social-googleplus';
+    case 'spotify':
+        return 'ion-music-note';
+    case 'songkick':
+        return 'ion-music-note';
+    case 'soundcloud':
+        return 'ion-music-note';
+    default:
+        return 'ion-ios-world-outline';
+    }
+}
+
 function padZero(num, size) {
     let s = num + '';
     while (s.length < size) {

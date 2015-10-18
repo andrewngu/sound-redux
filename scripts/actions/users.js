@@ -1,5 +1,9 @@
 import * as types from '../constants/ActionTypes';
-import {constructUserFollowingsUrl, constructUserTracksUrl, constructUserUrl} from '../helpers/UsersHelper';
+import {
+    constructUserFollowingsUrl,
+    constructUserTracksUrl,
+    constructUserUrl,
+    constructUserProfilesUrl} from '../helpers/UsersHelper';
 
 export function changeActiveUser(userId) {
     return dispatch => {
@@ -40,7 +44,16 @@ function fetchUserFollowings(userId) {
             .then(response => response.json())
             .then(json => dispatch(receiveUserFollowings(userId, json)))
             .catch(error => console.log(error));
-    }
+    };
+}
+
+function fetchUserProfiles(userId) {
+    return dispatch => {
+        return fetch(constructUserProfilesUrl(userId))
+            .then(response => response.json())
+            .then(json => dispatch(receiveUserProfiles(userId, json)))
+            .catch(error => console.log(error));
+    };
 }
 
 function fetchUserTracks(userId, username) {
@@ -74,6 +87,7 @@ function receiveUserPre(userId, user) {
         dispatch(receiveUser(userId, user));
         dispatch(fetchUserTracks(userId, user.username));
         dispatch(fetchUserFollowings(userId));
+        dispatch(fetchUserProfiles(userId));
     };
 }
 
@@ -82,6 +96,14 @@ function receiveUser(userId, user) {
         type: types.RECEIVE_USER,
         user: user,
         userId: user.id
+    };
+}
+
+function receiveUserProfiles(userId, profiles) {
+    return {
+        type: types.RECEIVE_USER_PROFILES,
+        userId: userId,
+        profiles: profiles
     };
 }
 

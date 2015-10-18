@@ -48,6 +48,19 @@
     font-size: 11px;
 }
 
+.user-profile {
+    display: inline-block;
+
+    & + .user-profile {
+        margin-left: 20px;
+    }
+
+    i {
+        margin-right: 6px;
+        color: #ccc;
+    }
+}
+
 .user-description {
     margin-top: 10px;
     font-size: 11px;

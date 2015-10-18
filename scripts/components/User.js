@@ -6,7 +6,7 @@ import SongCard from '../components/SongCard';
 import Spinner from '../components/Spinner';
 import Stickify from '../components/Stickify';
 
-import {addCommas} from '../helpers/Formatter';
+import {addCommas, getSocialIcon} from '../helpers/Formatter';
 import {getImageUrl} from '../helpers/SongsHelper';
 import {getUserLocation} from '../helpers/UsersHelper';
 
@@ -50,6 +50,22 @@ class User extends Component {
         );
     }
 
+    renderUserProfiles() {
+        const {profiles} = this.props.user;
+        if (!profiles) {
+            return;
+        }
+
+        return profiles.slice(0,6).map(profile => {
+            return (
+                <div className='user-profile' key={profile.id}>
+                    <i className={'icon ' + getSocialIcon(profile.service)}></i>
+                    <a href={profile.url} target='_blank'>{profile.title}</a>
+                </div>
+            );
+        });
+    }
+
     render() {
         const {sticky, user} = this.props;
 
@@ -75,6 +91,7 @@ class User extends Component {
                                     </div>
                                     <div className='user-profiles'>
                                         <div className='user-profile'>{addCommas(user.followers_count) + ' followers'}</div>
+                                        {this.renderUserProfiles()}
                                     </div>
                                     <div className='user-description' dangerouslySetInnerHTML={{__html: user.description}}></div>
                                 </div>
