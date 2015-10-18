@@ -53,11 +53,11 @@ function fetchSongComments(songId) {
     };
 }
 
-function receiveSong(songId, song) {
+export function receiveSong(songId, song) {
     return {
         type: types.RECEIVE_SONG,
-        song: song,
-        songId: songId
+        song,
+        songId
     };
 }
 

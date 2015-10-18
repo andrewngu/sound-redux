@@ -12,10 +12,10 @@ export function changeActiveUser(userId) {
     };
 }
 
-function changeActiveUserId(userId) {
+export function changeActiveUserId(userId) {
     return {
         type: types.CHANGE_ACTIVE_USER_ID,
-        userId: userId
+        userId
     };
 }
 
@@ -65,33 +65,33 @@ function fetchUserTracks(userId, username) {
     };
 }
 
-function receiveSongs(songs, username) {
+export function receiveSongs(songs, playlist) {
     return {
         type: types.RECEIVE_SONGS,
         nextUrl: null,
-        playlist: username,
-        songs: songs
+        playlist,
+        songs
     };
 }
 
-function receiveUserFollowings(userId, users) {
+export function receiveUserFollowings(userId, users) {
     return {
         type: types.RECEIVE_USER_FOLLOWINGS,
-        userId: userId,
-        users: users
+        userId,
+        users,
     };
 }
 
 function receiveUserPre(userId, user) {
     return dispatch => {
-        dispatch(receiveUser(userId, user));
+        dispatch(receiveUser(user));
         dispatch(fetchUserTracks(userId, user.username));
         dispatch(fetchUserFollowings(userId));
         dispatch(fetchUserProfiles(userId));
     };
 }
 
-function receiveUser(userId, user) {
+export function receiveUser(user) {
     return {
         type: types.RECEIVE_USER,
         user: user,
@@ -99,7 +99,7 @@ function receiveUser(userId, user) {
     };
 }
 
-function receiveUserProfiles(userId, profiles) {
+export function receiveUserProfiles(userId, profiles) {
     return {
         type: types.RECEIVE_USER_PROFILES,
         userId: userId,
@@ -107,7 +107,7 @@ function receiveUserProfiles(userId, profiles) {
     };
 }
 
-function requestUser(userId) {
+export function requestUser(userId) {
     return {
         type: types.REQUEST_USER,
         userId: userId
