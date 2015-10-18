@@ -6,7 +6,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack -p",
     "start": "webpack-dev-server --progress --colors --hot --content-base ./public --config ./webpack.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --compilers js:babel-core/register --recursive"
   },
   "repository": {
     "type": "git",
@@ -22,8 +22,10 @@
     "babel-core": "^5.8.25",
     "babel-loader": "^5.3.2",
     "css-loader": "^0.18.0",
+    "expect": "^1.12.2",
     "isomorphic-fetch": "^2.1.1",
     "jsx-loader": "^0.13.2",
+    "mocha": "^2.3.3",
     "node-sass": "^3.3.3",
     "react": "^0.13.3",
     "react-hot-loader": "^1.3.0",

@@ -3,7 +3,7 @@ import {changeActiveSong} from '../actions/songs';
 import {changeActiveUser} from '../actions/users';
 import * as types from '../constants/ActionTypes';
 
-function changePath(path) {
+export function changePath(path) {
     return {
         type: types.CHANGE_PATH,
         path: path
