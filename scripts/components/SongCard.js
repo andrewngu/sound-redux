@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import Link from '../components/Link';
 import Waveform from '../components/Waveform';
+
+import {addCommas} from '../helpers/Formatter';
 import {getImageUrl} from '../helpers/SongsHelper';
 
 class SongCard extends Component {
@@ -27,17 +29,33 @@ class SongCard extends Component {
                             path={['songs', song.id]}>
                             {song.title}
                         </Link>
-                        <div className='song-card-user'>
-                            <div
-                                className='song-card-user-image'
-                                style={{backgroundImage: `url(${user.avatar_url})`}}>
+                        <div className='song-card-info-extra'>
+                            <div className='song-card-user'>
+                                <div
+                                    className='song-card-user-image'
+                                    style={{backgroundImage: `url(${user.avatar_url})`}}>
+                                </div>
+                                <Link
+                                    className='song-card-username'
+                                    dispatch={dispatch}
+                                    path={['users', song.user_id]}>
+                                    {user.username}
+                                </Link>
                             </div>
-                            <Link
-                                className='song-card-username'
-                                dispatch={dispatch}
-                                path={['users', song.user_id]}>
-                                {user.username}
-                            </Link>
+                            <div className='song-card-stats'>
+                                <div className='song-card-stat'>
+                                    <i className='icon ion-play'></i>
+                                    <span>{addCommas(song.playback_count)}</span>
+                                </div>
+                                <div className='song-card-stat'>
+                                    <i className='icon ion-ios-heart'></i>
+                                    <span>{addCommas(song.favoritings_count)}</span>
+                                </div>
+                                <div className='song-card-stat'>
+                                    <i className='icon ion-chatbubble'></i>
+                                    <span>{addCommas(song.comment_count)}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

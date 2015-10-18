@@ -72,7 +72,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-top: 8px;
 }
 
 .song-card-user-image {
@@ -86,6 +85,33 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+.song-card-info-extra {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.song-card-stats {
+    flex: 1;
+    margin-left: 20px;
+    font-size: 11px;
+    color: #ccc;
+}
+
+.song-card-stat {
+    display: inline-block;
+    width: 80px;
+
+    & + .song-card-stat {
+        margin-left: 20px;
+    }
+
+    i {
+        margin-right: 10px;
+    }
 }
 
 .song-card-waveform {

@@ -8,6 +8,8 @@ import SongCard from '../components/SongCard';
 import Spinner from '../components/Spinner';
 import Stickify from '../components/Stickify';
 import Waveform from '../components/Waveform';
+
+import {addCommas} from '../helpers/Formatter';
 import {getImageUrl} from '../helpers/SongsHelper';
 
 class Song extends Component {
@@ -96,6 +98,23 @@ class Song extends Component {
                                                     path={['users', user.id]}>
                                                     {user.username}
                                                 </Link>
+                                            </div>
+                                            <div className='song-stats'>
+                                                <div className='song-stat'>
+                                                    <i className='icon ion-play'></i>
+                                                    <span>{addCommas(song.playback_count)}</span>
+                                                </div>
+                                                <div className='song-stat'>
+                                                    <i className='icon ion-ios-heart'></i>
+                                                    <span>{addCommas(song.favoritings_count)}</span>
+                                                </div>
+                                                <div className='song-stat'>
+                                                    <i className='icon ion-chatbubble'></i>
+                                                    <span>{addCommas(song.comment_count)}</span>
+                                                </div>
+                                            </div>
+                                            <div className='song-description'>
+                                                {song.description}
                                             </div>
                                         </div>
                                     </div>

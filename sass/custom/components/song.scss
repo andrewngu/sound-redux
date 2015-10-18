@@ -78,6 +78,33 @@
     font-size: 18px;
 }
 
+.song-stats {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #ccc;
+}
+
+.song-stat {
+    display: inline-block;
+    width: 80px;
+
+    & + .song-stat {
+        margin-left: 20px;
+    }
+
+    i {
+        margin-right: 10px;
+    }
+}
+
+.song-description {
+    margin-top: 10px;
+    font-size: 11px;
+    max-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .song-waveform {
     width: 200px;
     height: 142px;
