@@ -1,6 +1,7 @@
 import expect from 'expect';
 import * as actions from '../../scripts/actions/player';
 import * as types from '../../scripts/constants/ActionTypes';
+import {mockStore} from '../TestUtils';
 
 describe('player actions', () => {
     it('changeCurrentTime should create CHANGE_CURRENT_TIME action', () => {
@@ -40,5 +41,24 @@ describe('changeSelectedPlaylists action', () => {
             type: types.CHANGE_SELECTED_PLAYLISTS,
             playlists: ['trance', 'dubstep', 'house']
         });
+    });
+});
+
+describe('playSong action', () => {
+    const storeBefore = {
+        currentSongIndex: null,
+        player: {
+            selectedPlaylists: ['trance', 'dubstep']
+        }
+    };
+
+    it('should create CHANGE_CURRENT_TIME, CHANGE_SELECTED_PLAYLISTS, CHANGE_PLAYING_SONG actions', (done) => {
+        const expectedActions = [
+            {type: types.CHANGE_CURRENT_TIME, time: 0},
+            {type: types.CHANGE_SELECTED_PLAYLISTS, playlists: ['trance', 'dubstep', 'house']},
+            {type: types.CHANGE_PLAYING_SONG, songIndex: 1}
+        ];
+        const store = mockStore(storeBefore, expectedActions, done);
+        store.dispatch(actions.playSong('house', 1));
     });
 });

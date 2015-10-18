@@ -4,7 +4,7 @@ import thunkMiddleware from 'redux-thunk';
 
 const middlewares = [thunkMiddleware];
 
-export function mockstore(getState, expectedActions, onLastAction) {
+export function mockStore(getState, expectedActions, onLastAction) {
     if (!Array.isArray(expectedActions)) {
         throw new Error('expectedActions should be an array');
     }
@@ -22,7 +22,7 @@ export function mockstore(getState, expectedActions, onLastAction) {
             dispatch(action) {
                 const expectedAction = expectedActions.shift();
                 expect(action).toEqual(expectedAction);
-                if (onLastAction && !expectedAction.length) {
+                if (onLastAction && !expectedActions.length) {
                     onLastAction();
                 }
                 return action;
