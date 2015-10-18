@@ -4,18 +4,18 @@ import {CHANGE_TYPES} from '../constants/SongConstants';
 export function changeCurrentTime(time) {
     return {
         type: types.CHANGE_CURRENT_TIME,
-        time: time
+        time
     };
 }
 
-function changePlayingSong(songIndex) {
+export function changePlayingSong(songIndex) {
     return {
         type: types.CHANGE_PLAYING_SONG,
-        songIndex: songIndex
+        songIndex
     };
 }
 
-function changeSelectedPlaylists(playlists, playlist) {
+export function changeSelectedPlaylists(playlists, playlist) {
     const index = playlists.indexOf(playlist);
     if (index > -1) {
         playlists.splice(index, 1);
@@ -23,8 +23,8 @@ function changeSelectedPlaylists(playlists, playlist) {
     playlists.push(playlist);
 
     return {
-        type: types.CHANGE_SELECTED_PLAYLIST,
-        playlists: playlists
+        type: types.CHANGE_SELECTED_PLAYLISTS,
+        playlists
     }
 }
 
@@ -54,7 +54,7 @@ export function changeSong(changeType) {
 export function playSong(playlist, songIndex) {
     return (dispatch, getState) => {
         dispatch(changeCurrentTime(0));
-        
+
         const {player} = getState();
         const {selectedPlaylists} = player;
         const len = selectedPlaylists.length;

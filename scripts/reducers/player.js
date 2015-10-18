@@ -16,7 +16,7 @@ export default function player(state = {
             currentSongIndex: action.songIndex
         });
 
-    case types.CHANGE_SELECTED_PLAYLIST:
+    case types.CHANGE_SELECTED_PLAYLISTS:
         return Object.assign({}, state, {
             selectedPlaylists: action.playlists
         });
