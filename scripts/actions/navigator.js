@@ -6,7 +6,7 @@ import * as types from '../constants/ActionTypes';
 export function changePath(path) {
     return {
         type: types.CHANGE_PATH,
-        path: path
+        path
     };
 }
 

@@ -3,7 +3,7 @@ import * as actions from '../../scripts/actions/navigator';
 import * as types from '../../scripts/constants/ActionTypes';
 import {mockstore} from '../TestUtils';
 
-describe('actions', () => {
+describe('navigator actions', () => {
     it('changePath should create CHANGE_PATH action', () => {
         const path = ['songs'];
         expect(actions.changePath(path)).toEqual({type: types.CHANGE_PATH, path});
