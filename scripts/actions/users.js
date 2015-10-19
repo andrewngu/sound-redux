@@ -19,7 +19,7 @@ export function changeActiveUserId(userId) {
     };
 }
 
-function fetchUserIfNeeded(userId) {
+export function fetchUserIfNeeded(userId) {
     return (dispatch, getState) => {
         const {users} = getState();
         if (!(userId in users)) {
