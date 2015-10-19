@@ -59,7 +59,7 @@ function requestSongs(playlist) {
 function setActivePlaylist(playlist) {
     return {
         type: types.CHANGE_ACTIVE_PLAYLIST,
-        playlist: playlist
+        playlist
     };
 }
 

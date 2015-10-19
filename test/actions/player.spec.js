@@ -1,7 +1,7 @@
 import expect from 'expect';
 import * as actions from '../../scripts/actions/player';
 import * as types from '../../scripts/constants/ActionTypes';
-import {CHANGE_TYPES} from '../../scripts/constants/SongConstants'
+import {CHANGE_TYPES} from '../../scripts/constants/SongConstants';
 import {mockStore} from '../TestUtils';
 
 describe('player actions', () => {

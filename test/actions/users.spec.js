@@ -45,6 +45,10 @@ describe('users actions', () => {
 });
 
 describe('fetchUser action', () => {
+    afterEach(() => {
+        nock.cleanAll();
+    });
+    
     it('nothing happens if user is already loaded', (done) => {
         const expectedActions = [];
         const store = mockStore({users: {100: {id: 100}}}, []);
