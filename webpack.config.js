@@ -11,7 +11,7 @@ function getEntrySources(sources) {
 
 function getOutputFilename() {
     if (process.env.NODE_ENV === 'production') {
-        return './public/js/[name].js';
+        return './server/public/js/[name].js';
     }
 
     return '/js/[name].js';

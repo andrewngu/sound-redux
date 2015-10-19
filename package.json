@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "NODE_ENV=production webpack -p",
-    "start": "webpack-dev-server --progress --colors --hot --content-base ./public --config ./webpack.config.js",
+    "start": "webpack-dev-server --progress --colors --hot --content-base ./server/public --config ./webpack.config.js",
     "test": "mocha --compilers js:babel-core/register --recursive"
   },
   "repository": {
