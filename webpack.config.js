@@ -20,6 +20,7 @@ function getOutputFilename() {
 var ignore = new webpack.IgnorePlugin(/\.svg$/)
 
 module.exports = {
+    devtool: 'source-map',
     entry: {
         main: getEntrySources([
             './scripts/main.js'
@@ -31,7 +32,7 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.js$/, loaders: ['react-hot', 'jsx', 'babel'], exclude: /node_modules/ },
+            { test: /\.js$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/ },
             { test: /\.scss$/, loaders: ['style', 'css', 'autoprefixer', 'sass'] }
         ]
     },
