@@ -4,7 +4,7 @@ In an effort to learn es6 and [redux](https://github.com/rackt/redux), this is S
 
 See it in action at http://soundredux.io
 
-Todo: use [normalizr](https://github.com/gaearon/normalizr) for less data duplication
+Uses [normalizr](https://github.com/gaearon/normalizr)
 
 1. `npm install`
 2. `npm run start`

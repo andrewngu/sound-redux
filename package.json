@@ -30,6 +30,7 @@
     "mocha": "^2.3.3",
     "nock": "^2.15.0",
     "node-sass": "^3.3.3",
+    "normalizr": "^1.3.1",
     "react": "^0.13.3",
     "react-hot-loader": "^1.3.0",
     "react-redux": "^2.1.2",
