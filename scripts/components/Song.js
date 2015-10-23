@@ -14,7 +14,7 @@ import {addCommas} from '../helpers/Formatter';
 import {getImageUrl} from '../helpers/SongsHelper';
 
 class Song extends Component {
-    componentDidMount() {
+    componentWillMount() {
         const {dispatch, songId} = this.props;
         dispatch(fetchSongIfNeeded(songId));
     }

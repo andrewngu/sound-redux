@@ -12,7 +12,7 @@ import {getImageUrl} from '../helpers/SongsHelper';
 import {getUserLocation} from '../helpers/UsersHelper';
 
 class User extends Component {
-    componentDidMount() {
+    componentWillMount() {
         const {dispatch, userId} = this.props;
         dispatch(fetchUserIfNeeded(userId));
     }
