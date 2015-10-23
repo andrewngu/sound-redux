@@ -1,22 +1,7 @@
 import {arrayOf, normalize} from 'normalizr';
 import * as types from '../constants/ActionTypes';
 import {songSchema} from '../constants/Schemas';
-import {navigateTo} from '../actions/navigator';
 import {constructSongUrl, constructSongCommentsUrl, constructUserSongsUrl} from '../helpers/SongsHelper';
-
-export function changeActiveSong(songId) {
-    return dispatch => {
-        dispatch(fetchSongIfNeeded(songId));
-        dispatch(changeActiveSongId(songId));
-    };
-}
-
-function changeActiveSongId(songId) {
-    return {
-        type: types.CHANGE_ACTIVE_SONG_ID,
-        songId: songId
-    };
-}
 
 function fetchRelatedSongs(userId, songTitle) {
     return dispatch => {

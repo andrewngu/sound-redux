@@ -7,21 +7,8 @@ import {
     constructUserFollowingsUrl,
     constructUserTracksUrl,
     constructUserUrl,
-    constructUserProfilesUrl} from '../helpers/UsersHelper';
-
-export function changeActiveUser(userId) {
-    return dispatch => {
-        dispatch(fetchUserIfNeeded(userId));
-        dispatch(changeActiveUserId(userId));
-    };
-}
-
-export function changeActiveUserId(userId) {
-    return {
-        type: types.CHANGE_ACTIVE_USER_ID,
-        userId
-    };
-}
+    constructUserProfilesUrl
+} from '../helpers/UsersHelper';
 
 function fetchUserData(userId, username) {
     return dispatch => {
