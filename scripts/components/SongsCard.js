@@ -17,7 +17,7 @@ class SongsCard extends Component {
                         <i className={'songs-card-playing-icon icon ' + (isActive ? 'ion-radio-waves' : 'ion-ios-play')}></i>
                     </div>
                 </div>
-                <div className='songs-card-user'>
+                <div className='songs-card-user clearfix'>
                     <img
                         className='songs-card-user-image'
                         src={user.avatar_url} />
