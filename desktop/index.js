@@ -19,13 +19,12 @@ app.on('window-all-closed', () => {
 // initialization and is ready to create browser windows.
 app.on('ready', () => {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow = new BrowserWindow({});
+
+  mainWindow.maximize();
 
   // Load app from webpack dev server.
   mainWindow.loadUrl('http://localhost:8080');
-
-  // Open the DevTools.
-  mainWindow.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
