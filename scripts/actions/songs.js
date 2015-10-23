@@ -1,4 +1,6 @@
+import {arrayOf, normalize} from 'normalizr';
 import * as types from '../constants/ActionTypes';
+import {songSchema} from '../constants/Schemas';
 import {navigateTo} from '../actions/navigator';
 import {constructSongUrl, constructSongCommentsUrl, constructUserSongsUrl} from '../helpers/SongsHelper';
 
@@ -20,16 +22,23 @@ function fetchRelatedSongs(userId, songTitle) {
     return dispatch => {
         return fetch(constructUserSongsUrl(userId))
             .then(response => response.json())
-            .then(json => dispatch(receiveSongs(json.filter(song => songTitle !== song.title), songTitle)))
+            .then(json => {
+                const songs = json.filter(song => songTitle !== song.title);
+                const normalized = normalize(songs, arrayOf(songSchema));
+                dispatch(receiveSongs(normalized.result, normalized.entities, songTitle));
+            })
             .catch(error => console.log(error));
     };
 }
 
-function fetchSongIfNeeded(songId) {
+export function fetchSongIfNeeded(songId) {
     return (dispatch, getState) => {
-        const {songs} = getState();
+        const {entities} = getState();
+        const {songs} = entities;
         if (!(songId in songs)) {
-            return dispatch(fetchSong(songId));
+            dispatch(fetchSong(songId));
+        } else if (!('comments' in songs[songId])) {
+            dispatch(fetchSongData(songId, songs[songId].user_id, songs[songId].title));
         }
     };
 }
@@ -39,7 +48,10 @@ function fetchSong(songId) {
         dispatch(requestSong(songId));
         return fetch(constructSongUrl(songId))
             .then(response => response.json())
-            .then(json => dispatch(receiveSongPre(songId, json)))
+            .then(json => {
+                const normalized = normalize(json, songSchema);
+                dispatch(receiveSongPre(songId, normalized.entities));
+            })
             .catch(error => console.log(error));
     };
 }
@@ -53,37 +65,50 @@ function fetchSongComments(songId) {
     };
 }
 
-export function receiveSong(songId, song) {
+function fetchSongData(songId, userId, songTitle) {
+    return dispatch => {
+        dispatch(fetchRelatedSongs(userId, songTitle));
+        dispatch(fetchSongComments(songId));
+    }
+}
+
+export function receiveSong(entities) {
     return {
         type: types.RECEIVE_SONG,
-        song,
-        songId
+        entities: entities
     };
 }
 
 function receiveSongComments(songId, comments) {
     return {
         type: types.RECEIVE_SONG_COMMENTS,
-        comments: comments,
-        songId: songId
+        entities: {
+            songs: {
+                [songId]: {
+                    comments: comments
+                }
+            }
+        }
     };
 }
 
-function receiveSongPre(songId, song) {
+function receiveSongPre(songId, entities) {
     return dispatch => {
-        dispatch(fetchRelatedSongs(song.user_id, song.title));
-        dispatch(fetchSongComments(songId));
-        dispatch(receiveSong(songId, song));
-        dispatch(receiveSongs([song], song.title));
+        const songTitle = entities.songs[songId].title;
+        const userId = entities.songs[songId].user_id;
+        dispatch(receiveSong(entities));
+        dispatch(receiveSongs([songId], entities, songTitle));
+        dispatch(fetchSongData(songId, userId, songTitle));
     };
 }
 
-function receiveSongs(songs, songTitle) {
+function receiveSongs(songs, entities, songTitle) {
     return {
       type: types.RECEIVE_SONGS,
+      entities,
       nextUrl: null,
       playlist: songTitle,
-      songs: songs
+      songs
     };
 }
 

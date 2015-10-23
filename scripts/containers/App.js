@@ -50,8 +50,10 @@ class App extends Component {
                     height={height}
                     player={player}
                     playingSong={playingSong}
-                    song={song}
-                    songs={song.title && song.title in playlists ? playlists[song.title] : {}} />
+                    playlists={playlists}
+                    songId={path[1]}
+                    songs={songs}
+                    users={users} />
             );
         } else if (path[0] === 'users' && path.length === 2) {
             return (
@@ -104,13 +106,10 @@ App.propTypes = {
     player: PropTypes.object.isRequired,
     playingSong: PropTypes.object,
     playlists: PropTypes.object.isRequired,
-    song: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
-    const {activePlaylist, activeSongId, activeUserId, entities, height, navigator, player, playlists, songs, users} = state;
-    const song = activeSongId && activeSongId in entities.songs ? entities.songs[activeSongId] : {};
-    const user = activeUserId && activeUserId in entities.users ? entities.users[activeUserId] : {};
+    const {activePlaylist, activeUserId, entities, height, navigator, player, playlists, users} = state;
     const playingSongId = player.currentSongIndex !== null ? playlists[player.selectedPlaylists[player.selectedPlaylists.length - 1]].items[player.currentSongIndex] : null;
     let playingSong = playingSongId in entities.songs ? entities.songs[playingSongId] : {};
 
@@ -122,9 +121,7 @@ function mapStateToProps(state) {
         playingSong,
         playingSongId,
         playlists,
-        song,
         songs: entities.songs,
-        user,
         users: entities.users
     };
 }

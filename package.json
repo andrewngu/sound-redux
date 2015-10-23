@@ -26,6 +26,7 @@
     "expect": "^1.12.2",
     "isomorphic-fetch": "^2.1.1",
     "jsx-loader": "^0.13.2",
+    "lodash": "^3.10.1",
     "mocha": "^2.3.3",
     "nock": "^2.15.0",
     "node-sass": "^3.3.3",

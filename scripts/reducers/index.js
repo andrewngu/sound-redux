@@ -16,7 +16,6 @@ const rootReducer = combineReducers({
     navigator,
     player,
     playlists,
-    songs,
     users
 });
 
