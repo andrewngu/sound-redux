@@ -1,5 +1,6 @@
 import app from 'app';
 import BrowserWindow from 'browser-window';
+import globalShortcut from 'global-shortcut';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -33,4 +34,16 @@ app.on('ready', () => {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  globalShortcut.register('MediaNextTrack', () => {
+    mainWindow.webContents.executeJavaScript('Player.nextSong()');
+  });
+
+  globalShortcut.register('MediaPreviousTrack', () => {
+    mainWindow.webContents.executeJavaScript('Player.prevSong()');
+  });
+});
+
+app.on('will-quit', () => {
+  globalShortcut.unregisterAll();
 });

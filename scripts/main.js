@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import App from './containers/App';
 import configureStore from './store/configureStore';
+import {changeSong} from './actions/player';
+import {CHANGE_TYPES} from './constants/SongConstants';
 
 require('../styles/main.scss');
 
@@ -15,3 +17,15 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('main')
 );
+
+// Expose a global API for controlling the player.
+// Used for example by the Electron Desktop wrapper for media key bindings.
+window.Player = {
+  nextSong() {
+    store.dispatch(changeSong(CHANGE_TYPES.NEXT));
+  },
+
+  prevSong() {
+    store.dispatch(changeSong(CHANGE_TYPES.PREV));
+  }
+};
