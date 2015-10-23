@@ -8,3 +8,4 @@ song.define({
 });
 
 export const songSchema = song;
+export const userSchema = user;

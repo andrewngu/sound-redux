@@ -19,6 +19,13 @@ class Song extends Component {
         dispatch(fetchSongIfNeeded(songId));
     }
 
+    componentWillReceiveProps(nextProps) {
+        const {dispatch, songId} = this.props;
+        if (nextProps.songId !== songId) {
+            dispatch(fetchSongIfNeeded(nextProps.songId));
+        }
+    }
+
     playSong(i) {
         const {dispatch, songId, songs} = this.props;
         const song = songs[songId];

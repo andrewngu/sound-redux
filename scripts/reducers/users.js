@@ -42,25 +42,25 @@ function user(state = {
 
 export function users(state = {}, action) {
     switch(action.type) {
-    case types.RECEIVE_USER:
-        return Object.assign({}, state, {
-            [action.userId]: user(state[action.userId], action)
-        });
-
-    case types.RECEIVE_USER_FOLLOWINGS:
-        return Object.assign({}, state, {
-            [action.userId]: user(state[action.userId], action)
-        });
-
-    case types.RECEIVE_USER_PROFILES:
-        return Object.assign({}, state, {
-            [action.userId]: user(state[action.userId], action)
-        });
-
-    case types.REQUEST_USER:
-        return Object.assign({}, state, {
-            [action.userId]: user(state[action.userId], action)
-        });
+    // case types.RECEIVE_USER:
+    //     return Object.assign({}, state, {
+    //         [action.userId]: user(state[action.userId], action)
+    //     });
+    //
+    // case types.RECEIVE_USER_FOLLOWINGS:
+    //     return Object.assign({}, state, {
+    //         [action.userId]: user(state[action.userId], action)
+    //     });
+    //
+    // case types.RECEIVE_USER_PROFILES:
+    //     return Object.assign({}, state, {
+    //         [action.userId]: user(state[action.userId], action)
+    //     });
+    //
+    // case types.REQUEST_USER:
+    //     return Object.assign({}, state, {
+    //         [action.userId]: user(state[action.userId], action)
+    //     });
     default:
         return state;
     }

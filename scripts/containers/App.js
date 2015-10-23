@@ -35,7 +35,7 @@ class App extends Component {
     }
 
     renderContent() {
-        const {activePlaylist, dispatch, height, navigator, player, playingSong, playlists, song, songs, user, users} = this.props;
+        const {activePlaylist, dispatch, height, navigator, player, playingSong, playlists, songs, users} = this.props;
         const {path} = navigator;
         if (path[0] === 'songs' && path.length === 1) {
             return (
@@ -62,8 +62,10 @@ class App extends Component {
                     height={height}
                     player={player}
                     playingSong={playingSong}
-                    songs={user.username && user.username in playlists ? playlists[user.username] : {}}
-                    user={user} />
+                    playlists={playlists}
+                    songs={songs}
+                    userId={path[1]}
+                    users={users} />
             );
         }
     }
