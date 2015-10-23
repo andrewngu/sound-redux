@@ -23,12 +23,14 @@ class Songs extends Component {
 
     renderSongs() {
         const chunk = 5;
-        const {activePlaylist, dispatch, playlists, playingSong, songs} = this.props;
+        const {activePlaylist, dispatch, playlists, playingSong, songs, users} = this.props;
         const items = activePlaylist in playlists ? playlists[activePlaylist].items : [];
 
         let result = [];
         for (let i = 0; i < items.length; i += chunk) {
-            let songCards = items.slice(i, i + chunk).map((song, j) => {
+            let songCards = items.slice(i, i + chunk).map((songId, j) => {
+                const song = songs[songId];
+                const user = users[song.user_id];
                 const index = i + j;
                 return (
                     <div className='col-1-5' key={index + '-' + song.id}>
@@ -36,7 +38,8 @@ class Songs extends Component {
                             dispatch={dispatch}
                             isActive={song.id === playingSong.id}
                             playSong={this.playSong.bind(this, index)}
-                            song={song} />
+                            song={song}
+                            user={user} />
                     </div>
                 );
             }, this);

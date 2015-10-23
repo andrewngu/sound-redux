@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-fetch';
+import {arrayOf, normalize} from 'normalizr';
 import * as types from '../constants/ActionTypes';
+import {songSchema} from '../constants/Schemas';
 import {constructUrl} from '../helpers/SongsHelper';
 
 export function changeActivePlaylist(playlist) {
@@ -17,7 +19,12 @@ function fetchSongs(url, playlist) {
         dispatch(requestSongs(playlist));
         return fetch(url)
             .then(response => response.json())
-            .then(json => dispatch(receiveSongs(json, playlist)))
+            .then(json => {
+                const songs = json.collection.filter(song => song.streamable && song.duration < 600000 );
+                const nextUrl = json.next_href;
+                const normalized = normalize(songs, arrayOf(songSchema));
+                dispatch(receiveSongs(normalized.entities, normalized.result, nextUrl, playlist));
+            })
             .catch(error => console.log(error));
     };
 }
@@ -40,12 +47,13 @@ function getNextUrl(playlists, playlist) {
     return activePlaylist.nextUrl;
 }
 
-function receiveSongs(json, playlist) {
+function receiveSongs(entities, songs, nextUrl, playlist) {
     return {
         type: types.RECEIVE_SONGS,
-        nextUrl: json.next_href,
-        playlist: playlist,
-        songs: json.collection.filter(song => song.streamable && song.duration < 600000 )
+        entities,
+        nextUrl,
+        playlist,
+        songs
     };
 }
 

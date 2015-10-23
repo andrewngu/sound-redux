@@ -4,7 +4,7 @@ import {getImageUrl} from '../helpers/SongsHelper';
 
 class SongsCard extends Component {
     render() {
-        const {dispatch, isActive, playSong, song} = this.props;
+        const {dispatch, isActive, playSong, song, user} = this.props;
         const image = getImageUrl(song.artwork_url);
 
         return (
@@ -20,13 +20,13 @@ class SongsCard extends Component {
                 <div className='songs-card-user'>
                     <img
                         className='songs-card-user-image'
-                        src={song.user.avatar_url} />
+                        src={user.avatar_url} />
                     <SongDetails
                         dispatch={dispatch}
                         songId={song.id}
-                        userId={song.user.id}
+                        userId={user.id}
                         title={song.title}
-                        username={song.user.username} />
+                        username={user.username} />
                 </div>
             </div>
         );
