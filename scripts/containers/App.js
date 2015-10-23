@@ -51,7 +51,7 @@ class App extends Component {
                     player={player}
                     playingSongId={playingSongId}
                     playlists={playlists}
-                    songId={path[1]}
+                    songId={parseInt(path[1])}
                     songs={songs}
                     users={users} />
             );
@@ -64,7 +64,7 @@ class App extends Component {
                     playingSongId={playingSongId}
                     playlists={playlists}
                     songs={songs}
-                    userId={path[1]}
+                    userId={parseInt(path[1])}
                     users={users} />
             );
         }
@@ -76,20 +76,19 @@ class App extends Component {
             return;
         }
 
-        const song = songs[playingSongId];
-        const user = users[song.user_id];
         return (
             <Player
                 dispatch={dispatch}
                 player={player}
+                playingSongId={playingSongId}
                 playlists={playlists}
-                song={song}
-                user={user} />
+                songs={songs}
+                users={users} />
         );
     }
 
     render() {
-        const {dispatch} = this.props;
+        const {dispatch, playingSongId} = this.props;
 
         return (
             <div>

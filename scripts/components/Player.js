@@ -56,7 +56,7 @@ class Player extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.song && prevProps.song.id === this.props.song.id) {
+        if (prevProps.playingSongId && prevProps.playingSongId === this.props.playingSongId) {
             return;
         }
 
@@ -286,13 +286,14 @@ class Player extends Component {
     }
 
     renderPlaylist() {
-        const {dispatch, player, playlists} = this.props;
+        const {dispatch, player, playlists, songs} = this.props;
 
         return (
             <Playlist
                 dispatch={dispatch}
                 player={player}
-                playlists={playlists} />
+                playlists={playlists}
+                songs={songs} />
         );
     }
 
@@ -339,7 +340,9 @@ class Player extends Component {
     }
 
     render() {
-        const {dispatch, player, song, user} = this.props;
+        const {dispatch, player, playingSongId, songs, users} = this.props;
+        const song = songs[playingSongId];
+        const user = users[song.user_id];
         const {currentTime} = player;
         const {duration, isPlaying} = this.state;
 
