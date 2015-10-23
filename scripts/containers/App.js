@@ -111,7 +111,7 @@ App.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const {activePlaylist, activeUserId, entities, height, navigator, player, playlists, users} = state;
+    const {activePlaylist, entities, height, navigator, player, playlists} = state;
     const playingSongId = player.currentSongIndex !== null ? playlists[player.selectedPlaylists[player.selectedPlaylists.length - 1]].items[player.currentSongIndex] : null;
     let playingSong = playingSongId in entities.songs ? entities.songs[playingSongId] : {};
 
