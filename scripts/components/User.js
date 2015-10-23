@@ -46,7 +46,7 @@ class User extends Component {
     }
 
     renderSongs() {
-        const {dispatch, player, playingSong, playlists, songs, userId, users} = this.props;
+        const {dispatch, player, playingSongId, playlists, songs, userId, users} = this.props;
         const user = users[userId];
         const userSongs = user.username && user.username in playlists ? playlists[user.username] : {}
         if (!userSongs.items) {
@@ -59,7 +59,7 @@ class User extends Component {
             return (
                 <SongCard
                     dispatch={dispatch}
-                    isActive={playingSong.id === song.id}
+                    isActive={playingSongId === song.id}
                     key={song.id}
                     player={player}
                     playSong={this.playSong.bind(this, i)}
@@ -95,7 +95,7 @@ class User extends Component {
     render() {
         const {sticky, userId, users} = this.props;
         const user = users[userId];
-        if (!user || user.isFetching) {
+        if (!user) {
             return <Spinner />;
         }
 

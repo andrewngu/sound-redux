@@ -35,7 +35,7 @@ export function fetchUserIfNeeded(userId) {
     return (dispatch, getState) => {
         const {entities} = getState();
         const {users} = entities;
-        if (!(userId in users)) {
+        if (!(userId in users) || !users[userId].description) {
             return dispatch(fetchUser(userId));
         } else if (!('followings' in users[userId])) {
             return dispatch(fetchUserData(userId, users[userId].username));

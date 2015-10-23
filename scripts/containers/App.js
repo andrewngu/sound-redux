@@ -35,7 +35,7 @@ class App extends Component {
     }
 
     renderContent() {
-        const {activePlaylist, dispatch, height, navigator, player, playingSong, playlists, songs, users} = this.props;
+        const {activePlaylist, dispatch, height, navigator, player, playingSongId, playlists, songs, users} = this.props;
         const {path} = navigator;
         if (path[0] === 'songs' && path.length === 1) {
             return (
@@ -49,7 +49,7 @@ class App extends Component {
                     dispatch={dispatch}
                     height={height}
                     player={player}
-                    playingSong={playingSong}
+                    playingSongId={playingSongId}
                     playlists={playlists}
                     songId={path[1]}
                     songs={songs}
@@ -61,7 +61,7 @@ class App extends Component {
                     dispatch={dispatch}
                     height={height}
                     player={player}
-                    playingSong={playingSong}
+                    playingSongId={playingSongId}
                     playlists={playlists}
                     songs={songs}
                     userId={path[1]}
@@ -106,21 +106,19 @@ App.propTypes = {
     dispatch: PropTypes.func.isRequired,
     navigator: PropTypes.object.isRequired,
     player: PropTypes.object.isRequired,
-    playingSong: PropTypes.object,
+    playingSongId: PropTypes.number,
     playlists: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
     const {activePlaylist, entities, height, navigator, player, playlists} = state;
     const playingSongId = player.currentSongIndex !== null ? playlists[player.selectedPlaylists[player.selectedPlaylists.length - 1]].items[player.currentSongIndex] : null;
-    let playingSong = playingSongId in entities.songs ? entities.songs[playingSongId] : {};
 
     return {
         activePlaylist,
         height,
         navigator,
         player,
-        playingSong,
         playingSongId,
         playlists,
         songs: entities.songs,

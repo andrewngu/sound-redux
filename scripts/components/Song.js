@@ -37,7 +37,7 @@ class Song extends Component {
     }
 
     renderComments() {
-        const {height, player, playingSong, songId, songs} = this.props;
+        const {height, player, playingSongId, songId, songs} = this.props;
         const song = songs[songId];
         if (!song || !song.comments) {
             return;
@@ -48,12 +48,12 @@ class Song extends Component {
                 comments={song.comments}
                 currentTime={player.currentTime}
                 height={height}
-                isActive={playingSong.id === song.id} />
+                isActive={playingSongId === song.id} />
         );
     }
 
     renderSongs() {
-        const {dispatch, player, playingSong, playlists, songId, songs, users} = this.props;
+        const {dispatch, player, playingSongId, playlists, songId, songs, users} = this.props;
         const song = songs[songId];
         const relatedSongs = song.title && song.title in playlists ? playlists[song.title] : {}
         if (!relatedSongs.items) {
@@ -66,7 +66,7 @@ class Song extends Component {
             return (
                 <SongCard
                     dispatch={dispatch}
-                    isActive={playingSong.id === relatedSong.id}
+                    isActive={playingSongId === relatedSong.id}
                     key={relatedSong.id}
                     player={player}
                     playSong={this.playSong.bind(this, i + 1)}
@@ -83,13 +83,13 @@ class Song extends Component {
     }
 
     render() {
-        const {dispatch, playingSong, player, songId, songs, sticky, users} = this.props;
+        const {dispatch, playingSongId, player, songId, songs, sticky, users} = this.props;
         const song = songs[songId];
-        if (!song || song.isFetching) {
+        if (!song) {
             return <Spinner />;
         }
 
-        const isActive = playingSong && playingSong.id === song.id ? true : false;
+        const isActive = playingSongId && playingSongId === song.id ? true : false;
         const image = getImageUrl(song.artwork_url);
         const user = song.user_id in users ? users[song.user_id] : {};
 

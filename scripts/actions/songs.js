@@ -33,12 +33,19 @@ function fetchRelatedSongs(userId, songTitle) {
 
 export function fetchSongIfNeeded(songId) {
     return (dispatch, getState) => {
-        const {entities} = getState();
+        const {entities, playlists} = getState();
         const {songs} = entities;
         if (!(songId in songs)) {
             dispatch(fetchSong(songId));
-        } else if (!('comments' in songs[songId])) {
-            dispatch(fetchSongData(songId, songs[songId].user_id, songs[songId].title));
+        } else {
+            const song = songs[songId];
+            if (!(song.title in playlists)) {
+                dispatch(receiveSongs([songId], {}, song.title));
+            }
+
+            if (!('comments' in songs[songId])) {
+                dispatch(fetchSongData(songId, song.user_id, song.title));
+            }
         }
     };
 }

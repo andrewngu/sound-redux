@@ -23,7 +23,7 @@ class Songs extends Component {
 
     renderSongs() {
         const chunk = 5;
-        const {activePlaylist, dispatch, playlists, playingSong, songs, users} = this.props;
+        const {activePlaylist, dispatch, playlists, playingSongId, songs, users} = this.props;
         const items = activePlaylist in playlists ? playlists[activePlaylist].items : [];
 
         let result = [];
@@ -36,7 +36,7 @@ class Songs extends Component {
                     <div className='col-1-5' key={index + '-' + song.id}>
                         <SongsCard
                             dispatch={dispatch}
-                            isActive={song.id === playingSong.id}
+                            isActive={song.id === playingSongId}
                             playSong={this.playSong.bind(this, index)}
                             song={song}
                             user={user} />
