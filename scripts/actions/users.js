@@ -68,13 +68,7 @@ function fetchUserProfiles(userId) {
         return fetch(constructUserProfilesUrl(userId))
             .then(response => response.json())
             .then(json => {
-                const entities = {
-                    users: {
-                        [userId]: {
-                            profiles: json
-                        }
-                    }
-                };
+                const entities = {users: {[userId]: {profiles: json}}};
                 dispatch(receiveUserProfiles(entities))
             })
             .catch(error => console.log(error));
