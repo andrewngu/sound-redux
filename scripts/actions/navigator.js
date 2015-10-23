@@ -20,13 +20,6 @@ export function navigateBack(e) {
 
 export function navigateTo(path, shouldPushState = true) {
     return dispatch => {
-        if (path[0] === 'songs' && path.length === 2) {
-            dispatch(changeActiveSong(path[1]));
-
-        } else if (path[0] === 'users' && path.length === 2) {
-            dispatch(changeActiveUser(path[1]));
-        }
-
         if (shouldPushState) {
             pushState(path);
         }

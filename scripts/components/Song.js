@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
 import {playSong} from '../actions/player';
+import {fetchSongIfNeeded} from '../actions/songs';
 
 import Comments from '../components/Comments';
 import Link from '../components/Link';
@@ -13,42 +14,64 @@ import {addCommas} from '../helpers/Formatter';
 import {getImageUrl} from '../helpers/SongsHelper';
 
 class Song extends Component {
+    componentDidMount() {
+        const {dispatch, songId} = this.props;
+        dispatch(fetchSongIfNeeded(songId));
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const {dispatch, songId} = this.props;
+        if (nextProps.songId !== songId) {
+            dispatch(fetchSongIfNeeded(nextProps.songId));
+        }
+    }
+
     playSong(i) {
-        const {dispatch, song} = this.props;
+        const {dispatch, songId, songs} = this.props;
+        const song = songs[songId];
+        if (!song) {
+            return;
+        }
+
         dispatch(playSong(song.title, i));
     }
 
     renderComments() {
-        const {height, player, playingSong, song} = this.props;
-        const {comments} = song;
-        if (!comments) {
+        const {height, player, playingSongId, songId, songs} = this.props;
+        const song = songs[songId];
+        if (!song || !song.comments) {
             return;
         }
 
         return (
             <Comments
-                comments={comments}
+                comments={song.comments}
                 currentTime={player.currentTime}
                 height={height}
-                isActive={playingSong.id === song.id} />
+                isActive={playingSongId === song.id} />
         );
     }
 
     renderSongs() {
-        const {dispatch, player, playingSong, songs} = this.props;
-        if (!songs.items) {
+        const {dispatch, player, playingSongId, playlists, songId, songs, users} = this.props;
+        const song = songs[songId];
+        const relatedSongs = song.title && song.title in playlists ? playlists[song.title] : {}
+        if (!relatedSongs.items) {
             return;
         }
 
-        const items = songs.items.slice(1).map((song, i) => {
+        const items = relatedSongs.items.slice(1).map((songId, i) => {
+            const relatedSong = songs[songId];
+            const user = users[relatedSong.user_id];
             return (
                 <SongCard
                     dispatch={dispatch}
-                    isActive={playingSong.id === song.id}
-                    key={song.id}
+                    isActive={playingSongId === relatedSong.id}
+                    key={relatedSong.id}
                     player={player}
                     playSong={this.playSong.bind(this, i + 1)}
-                    song={song} />
+                    song={relatedSong}
+                    user={user} />
             );
         });
 
@@ -60,14 +83,15 @@ class Song extends Component {
     }
 
     render() {
-        const {dispatch, playingSong, player, song, sticky} = this.props;
-        if (song.isFetching) {
+        const {dispatch, playingSongId, player, songId, songs, sticky, users} = this.props;
+        const song = songs[songId];
+        if (!song) {
             return <Spinner />;
         }
 
-        const isActive = playingSong && playingSong.id === song.id ? true : false;
+        const isActive = playingSongId && playingSongId === song.id ? true : false;
         const image = getImageUrl(song.artwork_url);
-        const {user} = song;
+        const user = song.user_id in users ? users[song.user_id] : {};
 
         return (
             <div className='container'>
@@ -142,9 +166,5 @@ class Song extends Component {
         );
     }
 }
-
-Song.propTypes = {
-    song: PropTypes.object.isRequired
-};
 
 export default Stickify(Song, 50);

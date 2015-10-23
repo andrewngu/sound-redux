@@ -339,7 +339,7 @@ class Player extends Component {
     }
 
     render() {
-        const {dispatch, player, song} = this.props;
+        const {dispatch, player, song, user} = this.props;
         const {currentTime} = player;
         const {duration, isPlaying} = this.state;
 
@@ -354,8 +354,8 @@ class Player extends Component {
                                 dispatch={dispatch}
                                 songId={song.id}
                                 title={song.title}
-                                userId={song.user.id}
-                                username={song.user.username} />
+                                userId={user.id}
+                                username={user.username} />
                         </div>
                         <div className='player-section'>
                             <div

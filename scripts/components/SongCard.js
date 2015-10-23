@@ -7,8 +7,7 @@ import {getImageUrl} from '../helpers/SongsHelper';
 
 class SongCard extends Component {
     render() {
-        const {dispatch, isActive, player, playSong, song} = this.props;
-        const {user} = song;
+        const {dispatch, isActive, player, playSong, song, user} = this.props;
         const image = getImageUrl(song.artwork_url);
 
         return (

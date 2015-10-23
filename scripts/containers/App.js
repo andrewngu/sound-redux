@@ -35,7 +35,7 @@ class App extends Component {
     }
 
     renderContent() {
-        const {activePlaylist, dispatch, height, navigator, player, playingSong, playlists, song, user} = this.props;
+        const {activePlaylist, dispatch, height, navigator, player, playingSongId, playlists, songs, users} = this.props;
         const {path} = navigator;
         if (path[0] === 'songs' && path.length === 1) {
             return (
@@ -49,9 +49,11 @@ class App extends Component {
                     dispatch={dispatch}
                     height={height}
                     player={player}
-                    playingSong={playingSong}
-                    song={song}
-                    songs={song.title && song.title in playlists ? playlists[song.title] : {}} />
+                    playingSongId={playingSongId}
+                    playlists={playlists}
+                    songId={path[1]}
+                    songs={songs}
+                    users={users} />
             );
         } else if (path[0] === 'users' && path.length === 2) {
             return (
@@ -59,27 +61,30 @@ class App extends Component {
                     dispatch={dispatch}
                     height={height}
                     player={player}
-                    playingSong={playingSong}
-                    songs={user.username && user.username in playlists ? playlists[user.username] : {}}
-                    user={user} />
+                    playingSongId={playingSongId}
+                    playlists={playlists}
+                    songs={songs}
+                    userId={path[1]}
+                    users={users} />
             );
         }
     }
 
     renderPlayer() {
-        const {dispatch, player, playlists} = this.props;
-        const {currentSongIndex, selectedPlaylists} = player;
-        const currentPlaylist = selectedPlaylists[selectedPlaylists.length - 1];
-        if (currentSongIndex === null) {
+        const {dispatch, player, playingSongId, playlists, songs, users} = this.props;
+        if (playingSongId === null) {
             return;
         }
 
+        const song = songs[playingSongId];
+        const user = users[song.user_id];
         return (
             <Player
                 dispatch={dispatch}
                 player={player}
                 playlists={playlists}
-                song={playlists[currentPlaylist].items[currentSongIndex]} />
+                song={song}
+                user={user} />
         );
     }
 
@@ -101,26 +106,23 @@ App.propTypes = {
     dispatch: PropTypes.func.isRequired,
     navigator: PropTypes.object.isRequired,
     player: PropTypes.object.isRequired,
-    playingSong: PropTypes.object,
+    playingSongId: PropTypes.number,
     playlists: PropTypes.object.isRequired,
-    song: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
-    const {activePlaylist, activeSongId, activeUserId, height, navigator, player, playlists, songs, users} = state;
-    const song = activeSongId && activeSongId in songs ? songs[activeSongId] : {};
-    const user = activeUserId && activeUserId in users ? users[activeUserId] : {};
-    const playingSong = player.currentSongIndex !== null ? playlists[player.selectedPlaylists[player.selectedPlaylists.length - 1]].items[player.currentSongIndex] : {};
+    const {activePlaylist, entities, height, navigator, player, playlists} = state;
+    const playingSongId = player.currentSongIndex !== null ? playlists[player.selectedPlaylists[player.selectedPlaylists.length - 1]].items[player.currentSongIndex] : null;
 
     return {
         activePlaylist,
         height,
         navigator,
         player,
-        playingSong,
+        playingSongId,
         playlists,
-        song,
-        user
+        songs: entities.songs,
+        users: entities.users
     };
 }
 

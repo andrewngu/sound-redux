@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {playSong} from '../actions/player';
+import {fetchUserIfNeeded} from '../actions/users';
 
 import Followings from '../components/Followings';
 import SongCard from '../components/SongCard';
@@ -11,35 +12,59 @@ import {getImageUrl} from '../helpers/SongsHelper';
 import {getUserLocation} from '../helpers/UsersHelper';
 
 class User extends Component {
+    componentDidMount() {
+        const {dispatch, userId} = this.props;
+        dispatch(fetchUserIfNeeded(userId));
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const {dispatch, userId} = this.props;
+        if (nextProps.userId !== userId) {
+            dispatch(fetchUserIfNeeded(nextProps.userId));
+        }
+    }
+
     playSong(i) {
-        const {dispatch, user} = this.props;
+        const {dispatch, userId, users} = this.props;
+        const user = users[userId];
+        if (!user) {
+            return;
+        }
+
         dispatch(playSong(user.username, i));
     }
 
     renderFollowings() {
-        const {dispatch, height, user} = this.props;
-        if (!user.followings) {
+        const {dispatch, height, userId, users} = this.props;
+        const user = users[userId];
+        if (!user || !user.followings) {
             return;
         }
 
-        return <Followings dispatch={dispatch} height={height} users={user.followings} />;
+        const followings = user.followings.map(followingId => users[followingId]);
+        return <Followings dispatch={dispatch} height={height} users={followings} />;
     }
 
     renderSongs() {
-        const {dispatch, player, playingSong, songs} = this.props;
-        if (!songs.items) {
+        const {dispatch, player, playingSongId, playlists, songs, userId, users} = this.props;
+        const user = users[userId];
+        const userSongs = user.username && user.username in playlists ? playlists[user.username] : {}
+        if (!userSongs.items) {
             return;
         }
 
-        const items = songs.items.map((song, i) => {
+        const items = userSongs.items.map((songId, i) => {
+            const song = songs[songId];
+            const user = users[song.user_id];
             return (
                 <SongCard
                     dispatch={dispatch}
-                    isActive={playingSong.id === song.id}
+                    isActive={playingSongId === song.id}
                     key={song.id}
                     player={player}
                     playSong={this.playSong.bind(this, i)}
-                    song={song} />
+                    song={song}
+                    user={user} />
             );
         });
 
@@ -51,25 +76,26 @@ class User extends Component {
     }
 
     renderUserProfiles() {
-        const {profiles} = this.props.user;
-        if (!profiles) {
+        const {userId, users} = this.props;
+        const user = users[userId];
+        if (!user || !user.profiles) {
             return;
         }
 
-        return profiles.slice(0,6).map(profile => {
+        return user.profiles.slice(0,6).map(profile => {
             return (
                 <div className='user-profile' key={profile.id}>
                     <i className={'icon ' + getSocialIcon(profile.service)}></i>
-                    <a href={profile.url} target='_blank'>{profile.title}</a>
+                    <a href={profile.url} target='_blank'>{profile.title ? profile.title : profile.service}</a>
                 </div>
             );
         });
     }
 
     render() {
-        const {sticky, user} = this.props;
-
-        if (user.isFetching) {
+        const {sticky, userId, users} = this.props;
+        const user = users[userId];
+        if (!user) {
             return <Spinner />;
         }
 
@@ -111,7 +137,6 @@ class User extends Component {
 }
 
 User.propTypes = {
-    user: PropTypes.object.isRequired
 };
 
 export default Stickify(User, 50);
