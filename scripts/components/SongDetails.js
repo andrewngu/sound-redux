@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import Link from '../components/Link';
-import {formatSongTitle} from '../helpers/Formatter';
+import {formatSongTitle} from '../utils/FormatUtils';
 
 class SongDetails extends Component {
     constructor(props) {

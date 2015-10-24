@@ -7,9 +7,9 @@ import SongCard from '../components/SongCard';
 import Spinner from '../components/Spinner';
 import Stickify from '../components/Stickify';
 
-import {addCommas, getSocialIcon} from '../helpers/Formatter';
-import {getImageUrl} from '../helpers/SongsHelper';
-import {getUserLocation} from '../helpers/UsersHelper';
+import {addCommas, getSocialIcon} from '../utils/FormatUtils';
+import {getImageUrl} from '../utils/SongUtils';
+import {getUserLocation} from '../utils/UserUtils';
 
 class User extends Component {
     componentWillMount() {

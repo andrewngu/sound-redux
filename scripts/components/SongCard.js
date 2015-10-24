@@ -2,8 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import Link from '../components/Link';
 import Waveform from '../components/Waveform';
 
-import {addCommas} from '../helpers/Formatter';
-import {getImageUrl} from '../helpers/SongsHelper';
+import {addCommas} from '../utils/FormatUtils';
+import {getImageUrl} from '../utils/SongUtils';
 
 class SongCard extends Component {
     render() {

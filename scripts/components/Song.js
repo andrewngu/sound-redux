@@ -10,8 +10,8 @@ import Spinner from '../components/Spinner';
 import Stickify from '../components/Stickify';
 import Waveform from '../components/Waveform';
 
-import {addCommas} from '../helpers/Formatter';
-import {getImageUrl} from '../helpers/SongsHelper';
+import {addCommas} from '../utils/FormatUtils';
+import {getImageUrl} from '../utils/SongUtils';
 
 class Song extends Component {
     componentWillMount() {

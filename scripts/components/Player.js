@@ -4,7 +4,7 @@ import Playlist from '../components/Playlist';
 import Popover from '../components/Popover';
 import SongDetails from '../components/SongDetails';
 import {CHANGE_TYPES} from '../constants/SongConstants';
-import {formatSeconds, formatStreamUrl} from '../helpers/Formatter';
+import {formatSeconds, formatStreamUrl} from '../utils/FormatUtils';
 
 class Player extends Component {
     constructor(props) {

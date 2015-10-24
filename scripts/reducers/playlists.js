@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes';
-import {constructUrl} from '../helpers/SongsHelper';
+import {constructUrl} from '../utils/SongUtils';
 
 function playlist(state = {
     isFetching: false,
