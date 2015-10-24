@@ -1,0 +1,16 @@
+.header-search {
+    padding: 4px 10px;
+    background-color: #2B2B2B;
+    border-radius: 3px;
+
+    i {
+        color: #808080;
+    }
+}
+
+input[type="text"].header-search-input {
+    width: 140px;
+    color: #e3e3e3;
+    font-weight: 300;
+    background-color: transparent;
+}

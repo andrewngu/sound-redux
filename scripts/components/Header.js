@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import HeaderSearch from '../components/HeaderSearch';
 import Link from '../components/Link';
 
 class Header extends Component {
@@ -7,11 +8,11 @@ class Header extends Component {
 
         return (
             <div className='header'>
-                <div className='container'>
+                <div className='container clearfix'>
                     <div className='header-logo'>
                         <i className='icon ion-radio-waves' />
                     </div>
-                    <ul className='header-nav'>
+                    <ul className='header-nav float-left'>
                         <li className='header-nav-item'>
                             <Link
                                 className='header-nav-item-link active'
@@ -19,6 +20,11 @@ class Header extends Component {
                                 path={['songs']}>
                                 SoundRedux
                             </Link>
+                        </li>
+                    </ul>
+                    <ul className='header-nav float-right'>
+                        <li className='header-nav-item'>
+                            <HeaderSearch dispatch={dispatch} />
                         </li>
                     </ul>
                 </div>

@@ -60,7 +60,7 @@ class User extends Component {
                 <SongCard
                     dispatch={dispatch}
                     isActive={playingSongId === song.id}
-                    key={song.id}
+                    key={song.id + '-' + i}
                     player={player}
                     playSong={this.playSong.bind(this, i)}
                     song={song}
@@ -95,7 +95,7 @@ class User extends Component {
     render() {
         const {sticky, userId, users} = this.props;
         const user = users[userId];
-        if (!user || !user.description) {
+        if (!user || !user.hasOwnProperty('description')) {
             return <Spinner />;
         }
 

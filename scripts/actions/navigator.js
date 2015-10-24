@@ -19,7 +19,12 @@ export function navigateBack(e) {
 }
 
 export function navigateTo(path, shouldPushState = true) {
-    return dispatch => {
+    return (dispatch, getState) => {
+        const {navigator} = getState();
+        if (path.join('/') === navigator.path.join('/')) {
+            return;
+        }
+
         if (shouldPushState) {
             pushState(path);
         }
