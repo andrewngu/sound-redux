@@ -5,8 +5,7 @@ import {mockStore} from '../TestUtils';
 
 describe('navigator actions', () => {
     it('changePath should create CHANGE_PATH action', () => {
-        const path = ['songs'];
-        const query = {q: 'dubstep'};
-        expect(actions.changePath(path, query)).toEqual({type: types.CHANGE_PATH, path, query});
+        const route = {path: ['songs'], query: {q: 'drake'}};
+        expect(actions.changePath(route)).toEqual({type: types.CHANGE_PATH, route});
     });
 });

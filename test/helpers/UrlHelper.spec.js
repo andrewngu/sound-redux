@@ -4,9 +4,8 @@ import * as UrlHelper from '../../scripts/helpers/UrlHelper';
 describe('UrlHelper', () => {
     describe('constructUrl', () => {
         it('should correctly construct a url', () => {
-            const path = ['songs'];
-            const query = {q: 'drake'};
-            expect(UrlHelper.constructUrl(path, query)).toEqual('songs?q=drake');
+            const route = {path: ['songs'], query: {q: 'drake'}};
+            expect(UrlHelper.constructUrl(route)).toEqual('songs?q=drake');
         });
     });
 
