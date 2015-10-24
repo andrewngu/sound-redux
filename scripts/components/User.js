@@ -95,7 +95,7 @@ class User extends Component {
     render() {
         const {sticky, userId, users} = this.props;
         const user = users[userId];
-        if (!user) {
+        if (!user || !user.description) {
             return <Spinner />;
         }
 
