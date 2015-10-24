@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {changeActiveSong} from '../actions/songs';
 import {changeActiveUser} from '../actions/users';
 import * as types from '../constants/ActionTypes';
-import {constructUrl} from '../helpers/UrlHelper';
+import {constructUrl} from '../utils/RouteUtils';
 
 export function changePath(route) {
     return {

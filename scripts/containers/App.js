@@ -11,7 +11,7 @@ import Song from '../components/Song';
 import Songs from '../components/Songs';
 import User from '../components/User';
 
-import {parseUrl} from '../helpers/UrlHelper';
+import {parseUrl} from '../utils/RouteUtils';
 
 function initHeight(dispatch) {
     dispatch(changeHeight(window.innerHeight));

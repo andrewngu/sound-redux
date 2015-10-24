@@ -1,7 +1,7 @@
 import {arrayOf, normalize} from 'normalizr';
 import * as types from '../constants/ActionTypes';
 import {songSchema} from '../constants/Schemas';
-import {constructSongUrl, constructSongCommentsUrl, constructUserSongsUrl} from '../helpers/SongsHelper';
+import {constructSongUrl, constructSongCommentsUrl, constructUserSongsUrl} from '../utils/SongUtils';
 
 function fetchRelatedSongs(userId, songTitle) {
     return dispatch => {

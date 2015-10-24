@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import SongDetails from '../components/SongDetails';
-import {getImageUrl} from '../helpers/SongsHelper';
+import {getImageUrl} from '../utils/SongUtils';
 
 class SongsCard extends Component {
     render() {

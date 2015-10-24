@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch';
 import {arrayOf, normalize} from 'normalizr';
 import * as types from '../constants/ActionTypes';
 import {songSchema} from '../constants/Schemas';
-import {constructUrl} from '../helpers/SongsHelper';
+import {constructUrl} from '../utils/SongUtils';
 
 function fetchSongs(url, playlist) {
     return (dispatch, getState) => {

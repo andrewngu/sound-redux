@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import Link from '../components/Link';
-import {addCommas} from '../helpers/Formatter';
-import {getUserLocation} from '../helpers/UsersHelper';
+import {addCommas} from '../utils/FormatUtils';
+import {getUserLocation} from '../utils/UserUtils';
 
 class UserCard extends Component {
     render() {

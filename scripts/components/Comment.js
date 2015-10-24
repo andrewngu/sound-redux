@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-import {formatSeconds} from '../helpers/Formatter';
-import {getImageUrl} from '../helpers/SongsHelper';
+import {formatSeconds} from '../utils/FormatUtils';
+import {getImageUrl} from '../utils/SongUtils';
 
 class Comment extends Component {
     render() {

@@ -8,7 +8,7 @@ import {
     constructUserTracksUrl,
     constructUserUrl,
     constructUserProfilesUrl
-} from '../helpers/UsersHelper';
+} from '../utils/UserUtils';
 
 function fetchUserData(userId, username) {
     return dispatch => {
