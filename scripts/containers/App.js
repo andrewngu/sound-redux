@@ -25,8 +25,7 @@ function initNavigator(dispatch) {
         dispatch(navigateBack(e));
     };
     if (window.location.hash !== '') {
-        const {path, query} = parseUrl(window.location.hash);
-        dispatch(navigateTo(path, query));
+        dispatch(navigateTo(parseUrl(window.location.hash)));
     }
 }
 
