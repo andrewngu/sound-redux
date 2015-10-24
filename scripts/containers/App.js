@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import {changeHeight} from '../actions/height';
 import {navigateBack, navigateTo} from '../actions/navigator';
-import {changeActivePlaylist, fetchSongsIfNeeded} from '../actions/playlists';
+import {fetchSongsIfNeeded} from '../actions/playlists';
 
 import Header from '../components/Header';
 import Player from '../components/Player';

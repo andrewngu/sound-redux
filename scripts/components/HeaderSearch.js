@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
 import {navigateTo} from '../actions/navigator';
-import {changeActivePlaylist} from '../actions/playlists';
 
 class HeaderSearch extends Component {
     constructor(props) {

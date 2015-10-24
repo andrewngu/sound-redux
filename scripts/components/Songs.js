@@ -92,7 +92,6 @@ class Songs extends Component {
 }
 
 Songs.propTypes = {
-    activePlaylist: PropTypes.string,
     playlists: PropTypes.object.isRequired,
 };
 
