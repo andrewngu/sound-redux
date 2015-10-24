@@ -9,8 +9,8 @@ class Link extends Component {
 
     handleClick(e) {
         e.preventDefault();
-        const {dispatch, path} = this.props;
-        dispatch(navigateTo(path));
+        const {dispatch, path, query} = this.props;
+        dispatch(navigateTo(path, query ? query : {}));
     }
 
     render() {

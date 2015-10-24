@@ -1,35 +1,27 @@
 import React, {Component, PropTypes} from 'react';
-import {changeActivePlaylist} from '../actions/playlists';
+import {navigateTo} from '../actions/navigator';
+import Link from '../components/Link';
 import {GENRES, GENRES_MAP} from '../constants/SongConstants';
 
 class Toolbar extends Component {
-    changeActivePlaylist(playlist) {
-        const {activePlaylist, dispatch} = this.props;
-        if (activePlaylist === playlist) {
-            return;
-        }
-
-        dispatch(changeActivePlaylist(playlist));
-    }
-
     renderGenres() {
-        const {activePlaylist} = this.props;
+        const {dispatch, playlist} = this.props;
 
         return GENRES.map(genre => {
             return (
-                <div
-                    className={'toolbar-item toolbar-genre' + (activePlaylist === genre ? ' active' : '')}
+                <Link
+                    className={'toolbar-item toolbar-genre' + (playlist === genre ? ' active' : '')}
+                    dispatch={dispatch}
                     key={genre}
-                    onClick={this.changeActivePlaylist.bind(this, genre)}>
+                    path={['songs']}
+                    query={{q: genre}}>
                     {genre}
-                </div>
+                </Link>
             );
         });
     }
 
     render() {
-        const {activePlaylist} = this.props;
-
         return (
             <div className='toolbar'>
                 <div className='container'>

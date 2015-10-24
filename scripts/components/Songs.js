@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
 import {playSong} from '../actions/player';
+import {fetchSongsIfNeeded} from '../actions/playlists';
 
 import InfiniteScrollify from '../components/InfiniteScrollify';
 import SongsCard from '../components/SongsCard';
@@ -16,15 +17,29 @@ class Songs extends Component {
         this.renderSongs = this.renderSongs.bind(this);
     }
 
+    componentWillMount() {
+        const {dispatch, playlist} = this.props;
+        dispatch(fetchSongsIfNeeded(playlist));
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const {dispatch, playlist, playlists} = this.props;
+        if (playlist !== nextProps.playlist) {
+            if (!(nextProps.playlist in playlists) || playlists[nextProps.playlist].items.length === 0) {
+                dispatch(fetchSongsIfNeeded(nextProps.playlist));
+            }
+        }
+    }
+
     playSong(i) {
-        const {activePlaylist, dispatch} = this.props;
-        dispatch(playSong(activePlaylist, i));
+        const {playlist, dispatch} = this.props;
+        dispatch(playSong(playlist, i));
     }
 
     renderSongs() {
         const chunk = 5;
-        const {activePlaylist, dispatch, playlists, playingSongId, songs, users} = this.props;
-        const items = activePlaylist in playlists ? playlists[activePlaylist].items : [];
+        const {dispatch, playlist, playlists, playingSongId, songs, users} = this.props;
+        const items = playlist in playlists ? playlists[playlist].items : [];
 
         let result = [];
         for (let i = 0; i < items.length; i += chunk) {
@@ -59,12 +74,12 @@ class Songs extends Component {
     }
 
     render() {
-        const {dispatch, activePlaylist, playlists, sticky} = this.props;
-        const isFetching = activePlaylist in playlists ? playlists[activePlaylist].isFetching : false;
+        const {dispatch, playlist, playlists, sticky} = this.props;
+        const isFetching = playlist in playlists ? playlists[playlist].isFetching : false;
 
         return (
             <div className={'songs' + (sticky ? ' sticky' : '')}>
-                <Toolbar activePlaylist={activePlaylist} dispatch={dispatch} sticky={sticky} />
+                <Toolbar playlist={playlist} dispatch={dispatch} sticky={sticky} />
                 <div className='container'>
                     <div className='content'>
                         {this.renderSongs()}

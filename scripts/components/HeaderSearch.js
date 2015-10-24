@@ -12,8 +12,7 @@ class HeaderSearch extends Component {
         if (e.charCode === 13) {
             const value = e.currentTarget.value.trim();
             if (value !== '') {
-                this.props.dispatch(navigateTo(['songs']));
-                this.props.dispatch(changeActivePlaylist(value));
+                this.props.dispatch(navigateTo(['songs'], {q: value}));
             }
         }
     }

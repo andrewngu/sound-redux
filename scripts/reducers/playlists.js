@@ -1,15 +1,6 @@
 import * as types from '../constants/ActionTypes';
 import {constructUrl} from '../helpers/SongsHelper';
 
-export function activePlaylist(state = null, action) {
-    switch (action.type) {
-    case types.CHANGE_ACTIVE_PLAYLIST:
-        return action.playlist;
-    default:
-        return state;
-    }
-}
-
 function playlist(state = {
     isFetching: false,
     items: [],
@@ -34,7 +25,7 @@ function playlist(state = {
     }
 }
 
-export function playlists(state = {}, action) {
+export default function playlists(state = {}, action) {
     switch(action.type) {
     case types.RECEIVE_SONGS:
         return Object.assign({}, state, {

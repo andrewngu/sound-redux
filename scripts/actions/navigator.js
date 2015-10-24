@@ -2,36 +2,38 @@ import React, {Component, PropTypes} from 'react';
 import {changeActiveSong} from '../actions/songs';
 import {changeActiveUser} from '../actions/users';
 import * as types from '../constants/ActionTypes';
+import {constructUrl} from '../helpers/UrlHelper';
 
-export function changePath(path) {
+export function changePath(path, query) {
     return {
         type: types.CHANGE_PATH,
-        path
+        path,
+        query
     };
 }
 
 export function navigateBack(e) {
     return dispatch => {
         if (e.state) {
-            return dispatch(navigateTo(e.state.path, false));
+            return dispatch(navigateTo(e.state.path, e.state.query, false));
         }
     }
 }
 
-export function navigateTo(path, shouldPushState = true) {
+export function navigateTo(path, query, shouldPushState = true) {
     return (dispatch, getState) => {
         const {navigator} = getState();
-        if (path.join('/') === navigator.path.join('/')) {
+        if (constructUrl(path, query) === constructUrl(navigator.path, navigator.query)) {
             return;
         }
 
         if (shouldPushState) {
-            pushState(path);
+            pushState(path, query);
         }
-        return dispatch(changePath(path))
+        return dispatch(changePath(path, query))
     }
 }
 
-function pushState(path) {
-    history.pushState({path: path}, '', '#/' + path.join('/'));
+function pushState(path, query) {
+    history.pushState({path, query}, '', '#/' + constructUrl(path, query));
 }

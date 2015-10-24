@@ -11,6 +11,8 @@ import Song from '../components/Song';
 import Songs from '../components/Songs';
 import User from '../components/User';
 
+import {parseUrl} from '../helpers/UrlHelper';
+
 function initHeight(dispatch) {
     dispatch(changeHeight(window.innerHeight));
     window.onresize = () => {
@@ -22,8 +24,10 @@ function initNavigator(dispatch) {
     window.onpopstate = e => {
         dispatch(navigateBack(e));
     };
-    const path = window.location.hash === '' ? ['songs'] : window.location.hash.replace('#/', '').split('/');
-    dispatch(navigateTo(path));
+    if (window.location.hash !== '') {
+        const {path, query} = parseUrl(window.location.hash);
+        dispatch(navigateTo(path, query));
+    }
 }
 
 class App extends Component {
@@ -31,17 +35,18 @@ class App extends Component {
         const {dispatch} = this.props;
         initHeight(dispatch);
         initNavigator(dispatch);
-        dispatch(changeActivePlaylist('house'));
     }
 
     renderContent() {
-        const {activePlaylist, dispatch, height, navigator, player, playingSongId, playlists, songs, users} = this.props;
-        const {path} = navigator;
+        const {dispatch, height, navigator, player, playingSongId, playlists, songs, users} = this.props;
+        const {path, query} = navigator;
         if (path[0] === 'songs' && path.length === 1) {
+            const playlist = query.q ? query.q : 'house';
             return (
                 <Songs
                     {...this.props}
-                    scrollFunc={fetchSongsIfNeeded.bind(null, activePlaylist)} />
+                    playlist={playlist}
+                    scrollFunc={fetchSongsIfNeeded.bind(null, playlist)} />
             );
         } else if (path[0] === 'songs' && path.length === 2) {
             return (
@@ -101,7 +106,6 @@ class App extends Component {
 }
 
 App.propTypes = {
-    activePlaylist: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
     navigator: PropTypes.object.isRequired,
     player: PropTypes.object.isRequired,
@@ -110,11 +114,10 @@ App.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const {activePlaylist, entities, height, navigator, player, playlists} = state;
+    const {entities, height, navigator, player, playlists} = state;
     const playingSongId = player.currentSongIndex !== null ? playlists[player.selectedPlaylists[player.selectedPlaylists.length - 1]].items[player.currentSongIndex] : null;
 
     return {
-        activePlaylist,
         height,
         navigator,
         player,
