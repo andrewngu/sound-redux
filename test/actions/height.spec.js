@@ -3,8 +3,10 @@ import * as actions from '../../scripts/actions/height';
 import * as types from '../../scripts/constants/ActionTypes';
 
 describe('height actions', () => {
-    it('changeHeight should create CHANGE_HEIGHT action', () => {
-        const height = 200;
-        expect(actions.changeHeight(height)).toEqual({type: types.CHANGE_HEIGHT, height});
+    describe('changeHeight', () => {
+        it('should create CHANGE_HEIGHT action', () => {
+            const height = 200;
+            expect(actions.changeHeight(height)).toEqual({type: types.CHANGE_HEIGHT, height});
+        });
     });
 });
