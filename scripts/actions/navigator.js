@@ -4,36 +4,35 @@ import {changeActiveUser} from '../actions/users';
 import * as types from '../constants/ActionTypes';
 import {constructUrl} from '../helpers/UrlHelper';
 
-export function changePath(path, query) {
+export function changePath(route) {
     return {
         type: types.CHANGE_PATH,
-        path,
-        query
+        route: route
     };
 }
 
 export function navigateBack(e) {
     return dispatch => {
         if (e.state) {
-            return dispatch(navigateTo(e.state.path, e.state.query, false));
+            return dispatch(navigateTo(e.state.route, false));
         }
     }
 }
 
-export function navigateTo(path, query, shouldPushState = true) {
+export function navigateTo(route, shouldPushState = true) {
     return (dispatch, getState) => {
         const {navigator} = getState();
-        if (constructUrl(path, query) === constructUrl(navigator.path, navigator.query)) {
+        if (constructUrl(route) === constructUrl(navigator.route)) {
             return;
         }
 
         if (shouldPushState) {
-            pushState(path, query);
+            pushState(route);
         }
-        return dispatch(changePath(path, query))
+        return dispatch(changePath(route))
     }
 }
 
-function pushState(path, query) {
-    history.pushState({path, query}, '', '#/' + constructUrl(path, query));
+function pushState(route) {
+    history.pushState({route}, '', '#/' + constructUrl(route));
 }

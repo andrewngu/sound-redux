@@ -39,7 +39,7 @@ class App extends Component {
 
     renderContent() {
         const {dispatch, height, navigator, player, playingSongId, playlists, songs, users} = this.props;
-        const {path, query} = navigator;
+        const {path, query} = navigator.route;
         if (path[0] === 'songs' && path.length === 1) {
             const playlist = query.q ? query.q : 'house';
             return (

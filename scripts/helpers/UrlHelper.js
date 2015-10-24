@@ -1,4 +1,5 @@
-export function constructUrl(path, query) {
+export function constructUrl(route) {
+    const {path, query} = route;
     let result = path.join('/');
     let queryArr = [];
     if (query && typeof query === 'object') {
