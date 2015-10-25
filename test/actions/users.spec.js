@@ -10,7 +10,7 @@ import {songSchema, userSchema} from '../../scripts/constants/Schemas';
 import {mockStore} from '../TestUtils';
 
 describe('users actions', () => {
-    describe('fetchUser', () => {
+    describe('fetchUserIfNeeded', () => {
         afterEach(() => {
             nock.cleanAll();
         });
@@ -21,48 +21,6 @@ describe('users actions', () => {
             store.dispatch(actions.fetchUserIfNeeded(100));
             done();
         });
-
-        // it('should create REQUEST_USER, RECEIVE_USER, RECEIVE_SONGS, RECEIVE_USER_FOLLOWINGS, RECEIVE_USER_PROFILES actions if the user isn\'t loaded', (done) => {
-        //     const userId = 100;
-        //     const user = { id: 100, username: 'kygo'};
-        //     const songs = [{id: 1}, {id: 2}];
-        //     const users = [{id: 101}, {id: 102}];
-        //     const profiles = [{id: 123}, {id: 124}];
-        //
-        //     nock('http://api.soundcloud.com')
-        //         .get(`/users/${userId}?client_id=${CLIENT_ID}`)
-        //         .reply(200, user);
-        //
-        //     nock('http://api.soundcloud.com')
-        //         .get(`/users/${userId}/tracks?client_id=${CLIENT_ID}`)
-        //         .reply(200, songs);
-        //
-        //     nock('http://api.soundcloud.com')
-        //         .get(`/users/${userId}/followings?client_id=${CLIENT_ID}`)
-        //         .reply(200, users);
-        //
-        //     nock('http://api.soundcloud.com')
-        //         .get(`/users/${userId}/web-profiles?client_id=${CLIENT_ID}`)
-        //         .reply(200, profiles);
-        //
-        //     const normalizedSongs = normalize(songs, arrayOf(songSchema));
-        //     const normalizedFollowings = normalize(users, arrayOf(userSchema));
-        //     const followingsEntities = merge({}, normalizedFollowings.entities, {
-        //         users: {[userId]: {followings: normalizedFollowings.result}}
-        //     });
-        //     const profilesEntities = {users: {[userId]: { profiles: profiles}}};
-        //
-        //     const expectedActions = [
-        //         {type: types.REQUEST_USER, userId},
-        //         {type: types.RECEIVE_USER, entities: normalize(user, userSchema).entities},
-        //         {type: types.RECEIVE_SONGS, nextUrl: null, entities: normalizedSongs.entities, playlist: user.username, songs: normalizedSongs.result},
-        //         {type: types.RECEIVE_USER_FOLLOWINGS, entities: followingsEntities},
-        //         {type: types.RECEIVE_USER_PROFILES, entities: profilesEntities}
-        //     ];
-        //
-        //     const store = mockStore({entities: {users: {}}}, expectedActions, done);
-        //     store.dispatch(actions.fetchUserIfNeeded(userId));
-        // });
     });
 
     describe('receiveSongs', () => {
