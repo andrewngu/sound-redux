@@ -1,7 +1,10 @@
+import moment from 'moment';
 import {CLIENT_ID} from '../constants/Config';
 import {GENRES_MAP} from '../constants/SongConstants';
 
 export function constructUrl(category) {
+    const catArr = category.split(' - ');
+    category = catArr[0];
     let result = `http://api.soundcloud.com/tracks?linked_partitioning=1&client_id=${CLIENT_ID}&limit=50&offset=0`;
     if (category in GENRES_MAP) {
         if (category !== 'house'
@@ -13,6 +16,11 @@ export function constructUrl(category) {
         result += `&tags=${category}`;
     } else {
         result += `&q=${category}`;
+    }
+
+    if (catArr.length > 1) {
+        const formattedTime = moment().subtract(catArr[1], 'days').format('YYYY-MM-DD%2012:00:00');
+        result += `&created_at[from]=${formattedTime}`;
     }
 
     return result;

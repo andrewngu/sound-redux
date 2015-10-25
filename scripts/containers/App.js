@@ -40,11 +40,17 @@ class App extends Component {
         const {dispatch, height, navigator, player, playingSongId, playlists, songs, users} = this.props;
         const {path, query} = navigator.route;
         if (path[0] === 'songs' && path.length === 1) {
-            const playlist = query.q ? query.q : 'house';
+            const time = query.t ? query.t : null;
+            let playlist = query.q ? query.q : 'house';
+            if (time) {
+                playlist = `${playlist} - ${time}`;
+            }
+
             return (
                 <Songs
                     {...this.props}
                     playlist={playlist}
+                    time={time}
                     scrollFunc={fetchSongsIfNeeded.bind(null, playlist)} />
             );
         } else if (path[0] === 'songs' && path.length === 2) {

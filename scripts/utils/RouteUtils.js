@@ -3,7 +3,9 @@ export function constructUrl(route) {
     let result = path.join('/');
     let queryArr = [];
     if (query && typeof query === 'object') {
-        queryArr = Object.keys(query).sort().map(key => `${key}=${query[key]}`);
+        queryArr = Object.keys(query).sort()
+            .filter(key => query[key] !== null)
+            .map(key => `${key}=${query[key]}`);
     }
 
     if (queryArr.length > 0) {
@@ -22,7 +24,13 @@ export function parseUrl(windowHash) {
     if (hashArr.length > 1) {
         hashArr[1].split('&').forEach(str => {
             const arr = str.split('=');
-            query[arr[0]] = arr[1];
+            const key = arr[0];
+            const value = arr[1];
+            if (isNaN(value)) {
+                query[key] = value;
+            } else {
+                query[key] = parseInt(value);
+            }
         });
     }
     return {path, query};
