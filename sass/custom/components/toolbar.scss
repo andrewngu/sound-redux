@@ -30,17 +30,6 @@
     -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
 
-    &:hover {
-        color: #2D2D11;
-        text-decoration: none;
-        box-shadow: inset 0 -2px 0 #A6D2A5;
-        cursor: pointer;
-    }
-
-    &.active {
-        color: #2D2D11;
-        box-shadow: inset 0 -2px 0 #A6D2A5;
-    }
 
     &:last-child {
         border-right: 1px solid #e3e3e3;
@@ -53,6 +42,18 @@
     font-weight: 300;
     justify-content: center;
     text-transform: uppercase;
+
+    &:hover {
+        color: #2D2D11;
+        text-decoration: none;
+        box-shadow: inset 0 -2px 0 #A6D2A5;
+        cursor: pointer;
+    }
+
+    &.active {
+        color: #2D2D11;
+        box-shadow: inset 0 -2px 0 #A6D2A5;
+    }
 }
 
 .toolbar-search {
@@ -70,5 +71,44 @@
     input {
         width: 100%;
         height: 90%;
+    }
+}
+
+.toolbar-filter {
+    justify-content: center;
+
+    i {
+        margin-right: 20px;
+        color: #ddd;
+    }
+}
+
+.toolbar-times {
+    flex: none;
+    width: 234px;
+    background-color: #fff;
+    box-shadow: none;
+}
+
+.toolbar-time {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    color: #adadad;
+    font-weight: 300;
+    font-size: 11px;
+
+    & + .toolbar-time {
+        margin-left: 20px;
+    }
+
+    &:hover {
+        color: #3381b7;
+        text-decoration: none;
+    }
+
+    &.active {
+        color: #3381b7;
+        box-shadow: inset 0 -1px 0 #3381b7;
     }
 }
