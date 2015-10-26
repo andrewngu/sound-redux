@@ -25,7 +25,7 @@ class SongCard extends Component {
                         <Link
                             className='song-card-title'
                             dispatch={dispatch}
-                            path={['songs', song.id]}>
+                            route={{path: ['songs', song.id]}}>
                             {song.title}
                         </Link>
                         <div className='song-card-info-extra'>
@@ -37,7 +37,7 @@ class SongCard extends Component {
                                 <Link
                                     className='song-card-username'
                                     dispatch={dispatch}
-                                    path={['users', song.user_id]}>
+                                    route={{path: ['users', song.user_id]}}>
                                     {user.username}
                                 </Link>
                             </div>

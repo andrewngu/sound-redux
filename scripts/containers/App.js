@@ -6,6 +6,7 @@ import {navigateBack, navigateTo} from '../actions/navigator';
 import {fetchSongsIfNeeded} from '../actions/playlists';
 
 import Header from '../components/Header';
+import Modal from '../components/Modal';
 import Player from '../components/Player';
 import Song from '../components/Song';
 import Songs from '../components/Songs';
@@ -40,8 +41,8 @@ class App extends Component {
         const {dispatch, height, navigator, player, playingSongId, playlists, songs, users} = this.props;
         const {path, query} = navigator.route;
         if (path[0] === 'songs' && path.length === 1) {
-            const time = query.t ? query.t : null;
-            let playlist = query.q ? query.q : 'house';
+            const time = query && query.t ? query.t : null;
+            let playlist = query && query.q ? query.q : 'house';
             if (time) {
                 playlist = `${playlist} - ${time}`;
             }
@@ -80,6 +81,15 @@ class App extends Component {
         }
     }
 
+    renderModal() {
+        const {dispatch, modal} = this.props;
+        if (!modal) {
+            return;
+        }
+
+        return <Modal dispatch={dispatch} modal={modal} />;
+    }
+
     renderPlayer() {
         const {dispatch, player, playingSongId, playlists, songs, users} = this.props;
         if (playingSongId === null) {
@@ -98,13 +108,14 @@ class App extends Component {
     }
 
     render() {
-        const {dispatch, playingSongId} = this.props;
+        const {dispatch, navigator, playingSongId} = this.props;
 
         return (
             <div>
-                <Header dispatch={dispatch} />
+                <Header dispatch={dispatch} navigator={navigator} />
                 {this.renderContent()}
                 {this.renderPlayer()}
+                {this.renderModal()}
             </div>
         );
     }
@@ -119,11 +130,12 @@ App.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const {entities, height, navigator, player, playlists} = state;
+    const {entities, height, modal, navigator, player, playlists} = state;
     const playingSongId = player.currentSongIndex !== null ? playlists[player.selectedPlaylists[player.selectedPlaylists.length - 1]].items[player.currentSongIndex] : null;
 
     return {
         height,
+        modal,
         navigator,
         player,
         playingSongId,

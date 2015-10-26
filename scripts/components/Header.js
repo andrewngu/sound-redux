@@ -1,8 +1,19 @@
 import React, {Component, PropTypes} from 'react';
+import {changeModal} from '../actions/modal';
 import HeaderSearch from '../components/HeaderSearch';
 import Link from '../components/Link';
 
 class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.openLoginModal = this.openLoginModal.bind(this);
+    }
+
+    openLoginModal() {
+        const {dispatch} = this.props;
+        dispatch(changeModal('login'));
+    }
+
     render() {
         const {dispatch} = this.props;
 
@@ -17,7 +28,7 @@ class Header extends Component {
                             <Link
                                 className='header-nav-item-link active'
                                 dispatch={dispatch}
-                                path={['songs']}>
+                                route={{path: ['songs']}}>
                                 SoundRedux
                             </Link>
                         </li>
@@ -25,6 +36,12 @@ class Header extends Component {
                     <ul className='header-nav float-right'>
                         <li className='header-nav-item'>
                             <HeaderSearch dispatch={dispatch} />
+                        </li>
+                        <li className='header-nav-item'>
+                            <a className='header-login-link' onClick={this.openLoginModal}>
+                                <i className='icon ion-person'></i>
+                                <i className='icon ion-chevron-down'></i>
+                            </a>
                         </li>
                     </ul>
                 </div>

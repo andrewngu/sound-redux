@@ -14,7 +14,7 @@ class UserCard extends Component {
                     <Link
                         className='user-card-title'
                         dispatch={dispatch}
-                        path={['users', user.id]}>
+                        route={{path: ['users', user.id]}}>
                         {user.username}
                     </Link>
                     <div className='user-card-subtitle'>

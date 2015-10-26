@@ -42,3 +42,18 @@
     font-size: 20px;
     float: left;
 }
+
+.header-login-link {
+    margin-left: 30px;
+    color: #fff;
+
+    .ion-person {
+        margin-right: 6px;
+        font-size: 20px;
+    }
+
+    .ion-chevron-down {
+        color: #6B6B6B;
+        font-size: 10px;
+    }
+}

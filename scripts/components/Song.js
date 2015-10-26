@@ -119,7 +119,7 @@ class Song extends Component {
                                                 <Link
                                                     className='song-username'
                                                     dispatch={dispatch}
-                                                    path={['users', user.id]}>
+                                                    route={{path: ['users', user.id]}}>
                                                     {user.username}
                                                 </Link>
                                             </div>

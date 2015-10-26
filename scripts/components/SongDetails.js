@@ -15,13 +15,13 @@ class SongDetails extends Component {
                 <Link
                     className='songs-card-title'
                     dispatch={dispatch}
-                    path={['songs', songId]}>
+                    route={{path: ['songs', songId]}}>
                     {formatSongTitle(title)}
                 </Link>
                 <Link
                     className='songs-card-user-username'
                     dispatch={dispatch}
-                    path={['users', userId]}>
+                    route={{path: ['users', userId]}}>
                     {username}
                 </Link>
             </div>
