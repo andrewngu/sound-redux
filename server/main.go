@@ -16,6 +16,7 @@ func main() {
 	r := mux.NewRouter()
 	r.Handle("/", http.FileServer(http.Dir("public"))).Methods("GET")
 	r.HandleFunc("/api/status", status).Methods("GET")
+	r.HandleFunc("/api/callback", action(authCallback))
 
 	n := negroni.Classic()
 	n.UseHandler(r)

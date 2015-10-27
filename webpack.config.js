@@ -20,5 +20,10 @@ module.exports = {
             { test: /\.scss$/, loaders: ['style', 'css', 'autoprefixer', 'sass'] }
         ]
     },
-    plugins: [ignore]
+    plugins: [ignore],
+    devServer: {
+        proxy: {
+            '/api/*': 'http://localhost:8081',
+        }
+    }
 };

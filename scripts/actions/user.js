@@ -1,8 +1,8 @@
 import * as types from '../constants/ActionTypes';
 import {CLIENT_ID} from '../constants/Config';
 
-function authUser(user) {
-    console.log(user);
+function authUser(accessToken) {
+    console.log(accessToken);
     return {
         type: types.AUTH_USER,
         user
@@ -13,11 +13,12 @@ export function loginUser() {
     return dispatch => {
         SC.initialize({
             client_id: CLIENT_ID,
-            redirect_uri: `http://${window.location.host}/callback`
+            redirect_uri: `http://${window.location.host}/api/callback`
         });
 
-        SC.connect().then(function() {
-            return SC.get('/me');
-        }).then(user => dispatch(authUser(user)));
+        SC.connect().then(accessToken => dispatch(authUser(accessToken)))
+        .catch(error => {
+            throw error;
+        });
     };
 }
