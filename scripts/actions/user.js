@@ -1,5 +1,6 @@
 import * as types from '../constants/ActionTypes';
 import {CLIENT_ID} from '../constants/Config';
+import SC from 'soundcloud';
 
 function authUser(accessToken) {
     console.log(accessToken);
