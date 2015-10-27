@@ -15,6 +15,7 @@
     top: 40px;
     width: 600px;
     margin: 0 auto 50px auto;
+    padding: 20px;
     background: white;
     -moz-box-shadow: rgba(32, 43, 56, 0.25) 0 0 15px;
     -webkit-box-shadow: rgba(32, 43, 56, 0.25) 0 0 15px;
@@ -23,6 +24,12 @@
     animation-duration: 360ms;
     animation-timing-function: ease;
     animation-fill-mode: forwards;
+}
+
+.modal-header {
+    font-size: 28px;
+    font-weight: 300;
+    text-align: center;
 }
 
 @keyframes animateDown {

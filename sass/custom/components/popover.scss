@@ -28,3 +28,31 @@
     border-top: 0;
     box-sizing: border-box;
  }
+
+.popover.top-right .popover-content:after {
+    bottom: -13px;
+    right: 14px;
+    border-width: 7px;
+    border-top: 7px solid #f4f4f4;
+}
+
+.popover.top-right .popover-content:before {
+    bottom: -14px ;
+    right: 14px ;
+    border-width: 7px;
+    border-top: 7px solid #999;
+}
+
+.popover.bottom-right .popover-content:after {
+    top: -6px;
+    right: 14px;
+    border-width: 7px;
+    border-bottom: 7px solid #fff;
+}
+
+.popover.bottom-right .popover-content:before {
+    top: -7px ;
+    right: 14px ;
+    border-width: 7px;
+    border-bottom: 7px solid #999;
+}

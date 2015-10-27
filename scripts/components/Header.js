@@ -1,17 +1,19 @@
 import React, {Component, PropTypes} from 'react';
-import {changeModal} from '../actions/modal';
+import {loginUser} from '../actions/user';
 import HeaderSearch from '../components/HeaderSearch';
 import Link from '../components/Link';
+import Popover from '../components/Popover';
+
 
 class Header extends Component {
     constructor(props) {
         super(props);
-        this.openLoginModal = this.openLoginModal.bind(this);
+        this.login = this.login.bind(this);
     }
 
-    openLoginModal() {
+    login() {
         const {dispatch} = this.props;
-        dispatch(changeModal('login'));
+        dispatch(loginUser());
     }
 
     render() {
@@ -38,10 +40,19 @@ class Header extends Component {
                             <HeaderSearch dispatch={dispatch} />
                         </li>
                         <li className='header-nav-item'>
-                            <a className='header-login-link' onClick={this.openLoginModal}>
-                                <i className='icon ion-person'></i>
-                                <i className='icon ion-chevron-down'></i>
-                            </a>
+                            <Popover className='header-user bottom-right'>
+                                <div className='header-user-link'>
+                                    <i className='icon ion-person'></i>
+                                    <i className='icon ion-chevron-down'></i>
+                                </div>
+                                <div className='header-user-panel popover-content'>
+                                    <ul className='header-user-panel-list'>
+                                        <li className='header-user-panel-item'>
+                                            <a className='button orange block' onClick={this.login}>Sign into SoundCloud</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </Popover>
                         </li>
                     </ul>
                 </div>

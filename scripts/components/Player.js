@@ -400,7 +400,7 @@ class Player extends Component {
                                 onClick={this.toggleShuffle}>
                                 <i className='icon ion-shuffle'></i>
                             </div>
-                            <Popover className={'player-button'}>
+                            <Popover className={'player-button top-right'}>
                                 <i className='icon ion-android-list'></i>
                                 {this.renderPlaylist()}
                             </Popover>

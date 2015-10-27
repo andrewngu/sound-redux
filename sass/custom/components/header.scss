@@ -43,9 +43,15 @@
     float: left;
 }
 
-.header-login-link {
+.header-user-link {
+    display: flex;
+    align-items: center;
     margin-left: 30px;
     color: #fff;
+
+    &:hover {
+        cursor: pointer;
+    }
 
     .ion-person {
         margin-right: 6px;
@@ -56,4 +62,19 @@
         color: #6B6B6B;
         font-size: 10px;
     }
+}
+
+.header-user-panel {
+    top: 40px;
+    right: 2px;
+    width: 200px;
+}
+
+.header-user-panel-list {
+    list-style: none;
+}
+
+.header-user-panel-item {
+    font-size: 11px;
+    padding: 10px;
 }
