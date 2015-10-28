@@ -4,7 +4,7 @@ import * as types from '../constants/ActionTypes';
 import {songSchema} from '../constants/Schemas';
 import {constructUrl} from '../utils/SongUtils';
 
-function fetchSongs(url, playlist) {
+export function fetchSongs(url, playlist) {
     return (dispatch, getState) => {
         dispatch(requestSongs(playlist));
         return fetch(url)
