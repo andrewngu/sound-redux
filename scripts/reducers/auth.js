@@ -5,7 +5,7 @@ const initialState = {
     user: null
 };
 
-export function auth(state = initialState, action) {
+export default function auth(state = initialState, action) {
     switch(action.type) {
     case types.RECEIVE_ACCESS_TOKEN:
         return Object.assign({}, state, {

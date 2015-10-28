@@ -4,7 +4,6 @@ import {fetchSongs} from '../actions/playlists';
 import * as types from '../constants/ActionTypes';
 import {CLIENT_ID} from '../constants/Config';
 
-
 function authUser(accessToken) {
     return dispatch => {
         dispatch(receiveAccessToken(accessToken));
@@ -25,7 +24,7 @@ function fetchAuthUser(accessToken) {
 
 function fetchStream(accessToken) {
     return dispatch => {
-        dispatch(fetchSongs(`http://api.soundcloud.com/me/activities/tracks/affiliated?oauth_token=${accessToken}`, 'stream'));
+        dispatch(fetchSongs(`http://api.soundcloud.com/me/activities/tracks/affiliated?limit=50&oauth_token=${accessToken}`, 'stream'));
     };
 }
 

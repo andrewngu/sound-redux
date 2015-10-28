@@ -35,6 +35,7 @@ class Songs extends Component {
                         playingSongId={playingSongId}
                         playlist={playlist}
                         playlists={playlists}
+                        scrollFunc={fetchSongsIfNeeded.bind(null, playlist)}
                         songs={songs}
                         users={users} />
                 </div>
@@ -47,4 +48,4 @@ Songs.propTypes = {
     playlists: PropTypes.object.isRequired,
 };
 
-export default InfiniteScrollify(Stickify(Songs, 50));
+export default Stickify(Songs, 50);

@@ -6,16 +6,19 @@ import {constructUrl} from '../utils/SongUtils';
 
 export function fetchSongs(url, playlist) {
     return (dispatch, getState) => {
+        const {auth} = getState();
         dispatch(requestSongs(playlist));
         return fetch(url)
             .then(response => response.json())
             .then(json => {
-                const songs = json.collection.filter(song => song.streamable && song.duration < 600000 );
-                const nextUrl = json.next_href;
+                const songs = json.collection
+                    .map(song => song.origin ? song.origin : song)
+                    .filter(song => song.streamable && song.duration < 600000 );
+                const nextUrl = json.next_href + ( auth.accessToken ? `&oauth_token=${auth.accessToken}` : '');
                 const normalized = normalize(songs, arrayOf(songSchema));
                 dispatch(receiveSongs(normalized.entities, normalized.result, nextUrl, playlist));
             })
-            .catch(error => console.log(error));
+            .catch(error => {throw error});
     };
 }
 

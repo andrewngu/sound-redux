@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {playSong} from '../actions/player';
+import {fetchSongsIfNeeded} from '../actions/playlists';
+import InfiniteScrollify from '../components/InfiniteScrollify';
 import SongsCard from '../components/SongsCard';
 import Spinner from '../components/Spinner';
 
@@ -26,6 +28,7 @@ class SongsCards extends Component {
                             dispatch={dispatch}
                             isActive={song.id === playingSongId}
                             playSong={this.playSong.bind(this, index)}
+                            scrollFunc={fetchSongsIfNeeded.bind(null, playlist)}
                             song={song}
                             user={user} />
                     </div>
@@ -58,4 +61,4 @@ class SongsCards extends Component {
     }
 }
 
-export default SongsCards;
+export default InfiniteScrollify(SongsCards);

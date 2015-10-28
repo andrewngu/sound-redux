@@ -52,8 +52,7 @@ class App extends Component {
                 <Songs
                     {...this.props}
                     playlist={playlist}
-                    time={time}
-                    scrollFunc={fetchSongsIfNeeded.bind(null, playlist)} />
+                    time={time} />
             );
         } else if (path[0] === 'songs' && path.length === 2) {
             return (
