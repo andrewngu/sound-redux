@@ -1,8 +1,10 @@
+import {arrayOf, normalize} from 'normalizr';
 import SC from 'soundcloud';
 import {navigateTo} from '../actions/navigator';
-import {fetchSongs} from '../actions/playlists';
+import {fetchSongs, receiveSongs} from '../actions/playlists';
 import * as types from '../constants/ActionTypes';
 import {CLIENT_ID} from '../constants/Config';
+import {songSchema} from '../constants/Schemas';
 
 function authUser(accessToken) {
     return dispatch => {
@@ -17,7 +19,19 @@ function fetchAuthUser(accessToken) {
     return dispatch => {
         return fetch(`http://api.soundcloud.com/me?oauth_token=${accessToken}`)
             .then(response => response.json())
-            .then(json => receiveAuthUser(json))
+            .then(json => dispatch(receiveAuthUserPre(accessToken, json)))
+            .catch(error => {throw error});
+    };
+}
+
+function fetchLikes(userId, accessToken) {
+    return dispatch => {
+        return fetch(`http://api.soundcloud.com/users/${userId}/favorites?oauth_token=${accessToken}`)
+            .then(response => response.json())
+            .then(json => {
+                const normalized = normalize(json, arrayOf(songSchema));
+                dispatch(receiveSongs(normalized.entities, normalized.result, null, 'likes'));
+            })
             .catch(error => {throw error});
     };
 }
@@ -25,20 +39,6 @@ function fetchAuthUser(accessToken) {
 function fetchStream(accessToken) {
     return dispatch => {
         dispatch(fetchSongs(`http://api.soundcloud.com/me/activities/tracks/affiliated?limit=50&oauth_token=${accessToken}`, 'stream'));
-    };
-}
-
-function receiveAccessToken(accessToken) {
-    return {
-        type: types.RECEIVE_ACCESS_TOKEN,
-        accessToken
-    };
-}
-
-function receiveAuthUser(user) {
-    return {
-        type: types.RECEIVE_AUTH_USER,
-        user
     };
 }
 
@@ -53,5 +53,26 @@ export function loginUser() {
         .catch(error => {
             throw error;
         });
+    };
+}
+
+function receiveAccessToken(accessToken) {
+    return {
+        type: types.RECEIVE_ACCESS_TOKEN,
+        accessToken
+    };
+}
+
+function receiveAuthUserPre(accessToken, user) {
+    return dispatch => {
+        dispatch(receiveAuthUser(user));
+        dispatch(fetchLikes(user.id, accessToken));
+    };
+}
+
+function receiveAuthUser(user) {
+    return {
+        type: types.RECEIVE_AUTH_USER,
+        user
     };
 }

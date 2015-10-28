@@ -11,6 +11,8 @@ class Me extends Component {
         switch(path[1]) {
         case 'stream':
             return 'stream';
+        case 'likes':
+            return 'likes';
         default:
             return 'stream';
         }

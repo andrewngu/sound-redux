@@ -40,7 +40,7 @@ function getNextUrl(playlists, playlist) {
     return activePlaylist.nextUrl;
 }
 
-function receiveSongs(entities, songs, nextUrl, playlist) {
+export function receiveSongs(entities, songs, nextUrl, playlist) {
     return {
         type: types.RECEIVE_SONGS,
         entities,

@@ -25,7 +25,12 @@ function playlist(state = {
     }
 }
 
-export default function playlists(state = {}, action) {
+const initialState = {
+    likes: {isFetching: false, items: [], nextUrl: null},
+    stream: {isFetching: false, items: [], nextUrl: null}
+};
+
+export default function playlists(state = initialState, action) {
     switch(action.type) {
     case types.RECEIVE_SONGS:
         return Object.assign({}, state, {
