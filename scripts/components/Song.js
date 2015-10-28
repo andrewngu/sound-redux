@@ -85,7 +85,7 @@ class Song extends Component {
     render() {
         const {dispatch, playingSongId, player, songId, songs, sticky, users} = this.props;
         const song = songs[songId];
-        if (!song) {
+        if (!song || (song.waveform_url && song.waveform_url.indexOf('json') > -1)) {
             return <Spinner />;
         }
 

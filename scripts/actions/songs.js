@@ -20,7 +20,7 @@ export function fetchSongIfNeeded(songId) {
     return (dispatch, getState) => {
         const {entities, playlists} = getState();
         const {songs} = entities;
-        if (!(songId in songs)) {
+        if (!(songId in songs) || songs[songId].waveform_url.indexOf('json') > -1) {
             dispatch(fetchSong(songId));
         } else {
             const song = songs[songId];
