@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {fetchSongsIfNeeded} from '../actions/playlists';
 import InfiniteScrollify from '../components/InfiniteScrollify';
+import MeToolbar from '../components/MeToolbar';
 import SongsCards from '../components/SongsCards';
 import Stickify from '../components/Stickify';
 
@@ -21,6 +22,7 @@ class Me extends Component {
 
         return (
             <div className={'me' + (sticky ? ' sticky' : '')}>
+                <MeToolbar dispatch={dispatch} route={route} />
                 <div className='container'>
                     <SongsCards
                         dispatch={dispatch}
