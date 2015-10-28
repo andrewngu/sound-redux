@@ -1,4 +1,5 @@
 import SC from 'soundcloud';
+import {navigateTo} from '../actions/navigator';
 import {fetchSongs} from '../actions/playlists';
 import * as types from '../constants/ActionTypes';
 import {CLIENT_ID} from '../constants/Config';
@@ -9,6 +10,7 @@ function authUser(accessToken) {
         dispatch(receiveAccessToken(accessToken));
         dispatch(fetchAuthUser(accessToken));
         dispatch(fetchStream(accessToken));
+        dispatch(navigateTo({path: ['me', 'stream']}));
     };
 }
 

@@ -6,6 +6,7 @@ import {navigateBack, navigateTo} from '../actions/navigator';
 import {fetchSongsIfNeeded} from '../actions/playlists';
 
 import Header from '../components/Header';
+import Me from '../components/Me';
 import Modal from '../components/Modal';
 import Player from '../components/Player';
 import Song from '../components/Song';
@@ -38,7 +39,7 @@ class App extends Component {
     }
 
     renderContent() {
-        const {dispatch, height, navigator, player, playingSongId, playlists, songs, users} = this.props;
+        const {auth, dispatch, height, navigator, player, playingSongId, playlists, songs, users} = this.props;
         const {path, query} = navigator.route;
         if (path[0] === 'songs' && path.length === 1) {
             const time = query && query.t ? query.t : null;
@@ -76,6 +77,18 @@ class App extends Component {
                     playlists={playlists}
                     songs={songs}
                     userId={parseInt(path[1])}
+                    users={users} />
+            );
+        } else if (path[0] === 'me') {
+            return (
+                <Me
+                    auth={auth}
+                    dispatch={dispatch}
+                    player={player}
+                    playingSongId={playingSongId}
+                    playlists={playlists}
+                    route={navigator.route}
+                    songs={songs}
                     users={users} />
             );
         }
@@ -130,10 +143,11 @@ App.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const {entities, height, modal, navigator, player, playlists} = state;
+    const {auth, entities, height, modal, navigator, player, playlists} = state;
     const playingSongId = player.currentSongIndex !== null ? playlists[player.selectedPlaylists[player.selectedPlaylists.length - 1]].items[player.currentSongIndex] : null;
 
     return {
+        auth,
         height,
         modal,
         navigator,
