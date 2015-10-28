@@ -3,12 +3,12 @@ import Link from '../components/Link';
 
 const PATHS = ['stream', 'likes', 'playlists'];
 
-class MeToolbar extends React {
+class MeToolbar extends Component {
     renderItems() {
         const {dispatch, route} = this.props;
         return PATHS.map(path =>
             <Link
-                className={'toolbar-item' + (path === route.path[1] ? ' active' : '')}
+                className={'toolbar-item toolbar-genre' + (path === route.path[1] ? ' active' : '')}
                 dispatch={dispatch}
                 key={path}
                 route={{path: ['me', path]}}>

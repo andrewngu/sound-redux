@@ -17,7 +17,7 @@ class Me extends Component {
     }
 
     render() {
-        const {dispatch, playingSongId, playlists, songs, sticky, users} = this.props;
+        const {dispatch, playingSongId, playlists, route, songs, sticky, users} = this.props;
         const playlist = this.getPlaylist();
 
         return (
