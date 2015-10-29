@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import auth from '../reducers/auth';
+import authed from '../reducers/authed';
 import entities from '../reducers/entities';
 import height from '../reducers/height';
 import modal from '../reducers/modal';
@@ -8,7 +8,7 @@ import player from '../reducers/player';
 import playlists from '../reducers/playlists';
 
 const rootReducer = combineReducers({
-    auth,
+    authed,
     entities,
     height,
     modal,

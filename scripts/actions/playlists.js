@@ -6,7 +6,7 @@ import {constructUrl} from '../utils/SongUtils';
 
 export function fetchSongs(url, playlist) {
     return (dispatch, getState) => {
-        const {auth} = getState();
+        const {authed} = getState();
         dispatch(requestSongs(playlist));
         return fetch(url)
             .then(response => response.json())
@@ -14,7 +14,7 @@ export function fetchSongs(url, playlist) {
                 const songs = json.collection
                     .map(song => song.origin ? song.origin : song)
                     .filter(song => song.streamable && song.duration < 600000 );
-                const nextUrl = json.next_href + ( auth.accessToken ? `&oauth_token=${auth.accessToken}` : '');
+                const nextUrl = json.next_href + ( authed.accessToken ? `&oauth_token=${authed.accessToken}` : '');
                 const normalized = normalize(songs, arrayOf(songSchema));
                 dispatch(receiveSongs(normalized.entities, normalized.result, nextUrl, playlist));
             })

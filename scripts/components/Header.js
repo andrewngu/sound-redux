@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {loginUser} from '../actions/auth';
+import {loginUser} from '../actions/authed';
 import HeaderSearch from '../components/HeaderSearch';
 import Link from '../components/Link';
 import Popover from '../components/Popover';
