@@ -12,11 +12,11 @@ export default function authed(state = initialState, action) {
         return Object.assign({}, state, {
             accessToken: action.accessToken
         });
-    case types.RECEIVE_AUTH_USER:
+    case types.RECEIVE_AUTHED_USER:
         return Object.assign({}, state, {
             user: action.user
         });
-    case types.RECEIVE_AUTH_PLAYLISTS:
+    case types.RECEIVE_AUTHED_PLAYLISTS:
         return Object.assign({}, state, {
             playlists: action.playlists
         });

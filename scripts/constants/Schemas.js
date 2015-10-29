@@ -2,7 +2,7 @@ import { normalize, Schema, arrayOf } from 'normalizr';
 
 let song = new Schema('songs');
 let user = new Schema('users');
-let playlist = new Schema('playlist');
+let playlist = new Schema('playlists');
 
 song.define({
     user: user

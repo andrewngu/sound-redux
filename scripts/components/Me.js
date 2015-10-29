@@ -19,12 +19,12 @@ class Me extends Component {
     }
 
     render() {
-        const {dispatch, playingSongId, playlists, route, songs, sticky, users} = this.props;
+        const {authed, authedPlaylists, dispatch, playingSongId, playlists, route, songs, sticky, users} = this.props;
         const playlist = this.getPlaylist();
 
         return (
             <div className={'me' + (sticky ? ' sticky' : '')}>
-                <MeToolbar dispatch={dispatch} route={route} />
+                <MeToolbar authed={authed} authedPlaylists={authedPlaylists} dispatch={dispatch} route={route} />
                 <div className='container'>
                     <SongsCards
                         dispatch={dispatch}

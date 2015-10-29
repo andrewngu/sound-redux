@@ -3,7 +3,7 @@ import {navigateTo} from '../actions/navigator';
 import Link from '../components/Link';
 import {GENRES, GENRES_MAP} from '../constants/SongConstants';
 
-const DAYS = [30, 60, 90];
+const DAYS = [7, 30, 90];
 
 class Toolbar extends Component {
     renderGenres() {

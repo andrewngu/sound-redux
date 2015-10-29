@@ -39,7 +39,7 @@ class App extends Component {
     }
 
     renderContent() {
-        const {auth, dispatch, height, navigator, player, playingSongId, playlists, songs, users} = this.props;
+        const {authed, authedPlaylists, dispatch, height, navigator, player, playingSongId, playlists, songs, users} = this.props;
         const {path, query} = navigator.route;
         if (path[0] === 'songs' && path.length === 1) {
             const time = query && query.t ? query.t : null;
@@ -81,7 +81,8 @@ class App extends Component {
         } else if (path[0] === 'me') {
             return (
                 <Me
-                    auth={auth}
+                    authed={authed}
+                    authedPlaylists={authedPlaylists}
                     dispatch={dispatch}
                     player={player}
                     playingSongId={playingSongId}
@@ -142,11 +143,12 @@ App.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const {auth, entities, height, modal, navigator, player, playlists} = state;
+    const {authed, entities, height, modal, navigator, player, playlists} = state;
     const playingSongId = player.currentSongIndex !== null ? playlists[player.selectedPlaylists[player.selectedPlaylists.length - 1]].items[player.currentSongIndex] : null;
 
     return {
-        auth,
+        authed,
+        authedPlaylists: entities.playlists,
         height,
         modal,
         navigator,
