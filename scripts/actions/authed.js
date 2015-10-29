@@ -43,7 +43,7 @@ function fetchPlaylists(accessToken) {
             .then(response => response.json())
             .then(json => {
                 const normalized = normalize(json, arrayOf(playlistSchema));
-                dispatch(receivePlaylists(normalized.result, normalized.entities));
+                dispatch(receiveAuthedPlaylists(normalized.result, normalized.entities));
                 normalized.result.forEach(playlistId => {
                     const playlist = normalized.entities[playlistId];
                     dispatch(receiveSongs({}, playlist.tracks, null, playlist.name));
