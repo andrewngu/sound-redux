@@ -13,10 +13,16 @@ export function fetchSongs(url, playlist) {
             .then(json => {
                 const songs = json.collection
                     .map(song => song.origin ? song.origin : song)
-                    .filter(song => song.streamable && song.duration < 600000 );
+                    .filter(song => song.streamable && song.kind === 'track');
                 const nextUrl = json.next_href + ( authed.accessToken ? `&oauth_token=${authed.accessToken}` : '');
                 const normalized = normalize(songs, arrayOf(songSchema));
-                dispatch(receiveSongs(normalized.entities, normalized.result, nextUrl, playlist));
+                const result = normalized.result.reduce((arr, songId) => {
+                    if (arr.indexOf(songId) === -1) {
+                        arr.push(songId);
+                    }
+                    return arr;
+                }, []);
+                dispatch(receiveSongs(normalized.entities, result, nextUrl, playlist));
             })
             .catch(error => {throw error});
     };
