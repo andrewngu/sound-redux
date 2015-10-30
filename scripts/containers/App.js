@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
+import {initAuth} from '../actions/authed';
 import {changeHeight} from '../actions/height';
 import {navigateBack, navigateTo} from '../actions/navigator';
 import {fetchSongsIfNeeded} from '../actions/playlists';
@@ -34,6 +35,7 @@ function initNavigator(dispatch) {
 class App extends Component {
     componentDidMount () {
         const {dispatch} = this.props;
+        dispatch(initAuth());
         initHeight(dispatch);
         initNavigator(dispatch);
     }

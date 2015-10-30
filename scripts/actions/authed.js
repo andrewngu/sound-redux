@@ -1,17 +1,20 @@
 import {arrayOf, normalize} from 'normalizr';
 import SC from 'soundcloud';
+import Cookies from 'js-cookie';
 import {navigateTo} from '../actions/navigator';
 import {fetchSongs, receiveSongs} from '../actions/playlists';
 import * as types from '../constants/ActionTypes';
 import {CLIENT_ID} from '../constants/Config';
 import {playlistSchema, songSchema} from '../constants/Schemas';
 
-function authUser(accessToken) {
+function authUser(accessToken, shouldShowStream = false) {
     return dispatch => {
         dispatch(receiveAccessToken(accessToken));
         dispatch(fetchAuthedUser(accessToken));
         dispatch(fetchStream(accessToken));
-        dispatch(navigateTo({path: ['me', 'stream']}));
+        if (shouldShowStream) {
+            dispatch(navigateTo({path: ['me', 'stream']}));
+        }
     };
 }
 
@@ -59,6 +62,16 @@ function fetchStream(accessToken) {
     };
 }
 
+export function initAuth() {
+    return dispatch => {
+        const accessToken = Cookies.get('accessToken');
+        if (accessToken) {
+            return dispatch(authUser(accessToken));
+        }
+        return null;
+    }
+}
+
 export function loginUser() {
     return dispatch => {
         SC.initialize({
@@ -66,7 +79,10 @@ export function loginUser() {
             redirect_uri: `http://${window.location.host}/api/callback`
         });
 
-        SC.connect().then(authObj => dispatch(authUser(authObj.oauth_token)))
+        SC.connect().then(authObj => {
+            Cookies.set('accessToken', authObj.oauth_token);
+            dispatch(authUser(authObj.oauth_token, true));
+        })
         .catch(error => {
             throw error;
         });
