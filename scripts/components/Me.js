@@ -31,14 +31,7 @@ class Me extends Component {
         const playlist = this.getPlaylist();
 
         return (
-            <div className={'me' + (sticky ? ' sticky' : '')}>
-                <MeToolbar
-                    authed={authed}
-                    authedPlaylists={authedPlaylists}
-                    dispatch={dispatch}
-                    playlist={playlist}
-                    route={route}
-                    songs={songs} />
+            <div className='me'>
                 <div className='container'>
                     <SongsCards
                         dispatch={dispatch}
@@ -54,4 +47,4 @@ class Me extends Component {
     }
 }
 
-export default Stickify(Me, 50);
+export default Me;

@@ -2,6 +2,7 @@ import fetch from 'isomorphic-fetch';
 import {arrayOf, normalize} from 'normalizr';
 import * as types from '../constants/ActionTypes';
 import {songSchema} from '../constants/Schemas';
+import {GENRES_MAP} from '../constants/SongConstants';
 import {constructUrl} from '../utils/SongUtils';
 
 export function fetchSongs(url, playlist) {
@@ -11,10 +12,19 @@ export function fetchSongs(url, playlist) {
         return fetch(url)
             .then(response => response.json())
             .then(json => {
+                let nextUrl = null;
+                if (json.next_href) {
+                    nextUrl = json.next_href + ( authed.accessToken ? `&oauth_token=${authed.accessToken}` : '');
+                }
+
                 const songs = json.collection
                     .map(song => song.origin ? song.origin : song)
-                    .filter(song => song.streamable && song.kind === 'track');
-                const nextUrl = json.next_href + ( authed.accessToken ? `&oauth_token=${authed.accessToken}` : '');
+                    .filter(song => {
+                        if (playlist in GENRES_MAP) {
+                            return song.streamable && song.kind === 'track' && song.duration < 600000;
+                        }
+                        return song.streamable && song.kind === 'track';
+                    });
                 const normalized = normalize(songs, arrayOf(songSchema));
                 const result = normalized.result.reduce((arr, songId) => {
                     if (arr.indexOf(songId) === -1) {
