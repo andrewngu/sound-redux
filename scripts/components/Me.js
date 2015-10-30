@@ -7,12 +7,20 @@ import Stickify from '../components/Stickify';
 
 class Me extends Component {
     getPlaylist() {
-        const {path} = this.props.route;
+        const {authedPlaylists, route} = this.props;
+        const {path} = route;
+
         switch(path[1]) {
         case 'stream':
             return 'stream';
         case 'likes':
             return 'likes';
+        case 'playlists':
+            if (path.length < 3 || !(path[2] in authedPlaylists)) {
+                return 'playlists';
+            };
+            const playlist = authedPlaylists[path[2]];
+            return playlist.title;
         default:
             return 'stream';
         }
@@ -24,7 +32,13 @@ class Me extends Component {
 
         return (
             <div className={'me' + (sticky ? ' sticky' : '')}>
-                <MeToolbar authed={authed} authedPlaylists={authedPlaylists} dispatch={dispatch} route={route} />
+                <MeToolbar
+                    authed={authed}
+                    authedPlaylists={authedPlaylists}
+                    dispatch={dispatch}
+                    playlist={playlist}
+                    route={route}
+                    songs={songs} />
                 <div className='container'>
                     <SongsCards
                         dispatch={dispatch}

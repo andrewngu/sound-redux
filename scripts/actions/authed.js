@@ -46,7 +46,7 @@ function fetchPlaylists(accessToken) {
                 dispatch(receiveAuthedPlaylists(normalized.result, normalized.entities));
                 normalized.result.forEach(playlistId => {
                     const playlist = normalized.entities.playlists[playlistId];
-                    dispatch(receiveSongs({}, playlist.tracks, null, playlist.name));
+                    dispatch(receiveSongs({}, playlist.tracks, null, playlist.title));
                 });
             })
             .catch(error => { throw error; });
