@@ -16,6 +16,41 @@ class Header extends Component {
         dispatch(loginUser());
     }
 
+    renderHeaderUser() {
+        const {authed, dispatch, navigator} = this.props;
+        const {path} = navigator.route;
+        const isActive = path[0] === 'me' ? true : false;
+        const targetRoute = isActive ? {path: ['songs']} : {path: ['me', 'stream']};
+
+        if (authed.user) {
+            return (
+                <Link
+                    className={'header-authed' + (isActive ? ' active' : '')}
+                    dispatch={dispatch}
+                    route={targetRoute}>
+                    <img className='header-authed-image' src={authed.user.avatar_url} />
+                    <div className='header-authed-dot'></div>
+                </Link>
+            );
+        }
+
+        return (
+            <Popover className='header-user bottom-right'>
+                <div className='header-user-link'>
+                    <i className='icon ion-person'></i>
+                    <i className='icon ion-chevron-down'></i>
+                </div>
+                <div className='header-user-panel popover-content'>
+                    <ul className='header-user-panel-list'>
+                        <li className='header-user-panel-item'>
+                            <a className='button orange block' onClick={this.login}>Sign into SoundCloud</a>
+                        </li>
+                    </ul>
+                </div>
+            </Popover>
+        );
+    }
+
     render() {
         const {dispatch} = this.props;
 
@@ -40,19 +75,7 @@ class Header extends Component {
                             <HeaderSearch dispatch={dispatch} />
                         </li>
                         <li className='header-nav-item'>
-                            <Popover className='header-user bottom-right'>
-                                <div className='header-user-link'>
-                                    <i className='icon ion-person'></i>
-                                    <i className='icon ion-chevron-down'></i>
-                                </div>
-                                <div className='header-user-panel popover-content'>
-                                    <ul className='header-user-panel-list'>
-                                        <li className='header-user-panel-item'>
-                                            <a className='button orange block' onClick={this.login}>Sign into SoundCloud</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </Popover>
+                            {this.renderHeaderUser()}
                         </li>
                     </ul>
                 </div>

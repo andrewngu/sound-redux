@@ -75,6 +75,36 @@
 }
 
 .header-user-panel-item {
-    font-size: 11px;
     padding: 10px;
+    font-size: 11px;
+}
+
+.header-authed {
+    position: relative;
+    display: inline-block;
+    margin-top: 4px;
+    margin-left: 30px;
+
+    &.active {
+        .header-authed-dot {
+            background-color: #A6D2A5;
+        }
+    }
+}
+
+.header-authed-dot {
+    position: absolute;
+    bottom: 3px;
+    right: -2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    border: 2px solid #3a3f41;
+    background-color: rgba(166, 210, 165, 0.6);
+}
+
+.header-authed-image {
+    width: 29px;
+    height: 29px;
+    border-radius: 100%;
 }
