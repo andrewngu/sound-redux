@@ -10,8 +10,10 @@ import Toolbar from '../components/Toolbar';
 
 class Songs extends Component {
     componentWillMount() {
-        const {dispatch, playlist} = this.props;
-        dispatch(fetchSongsIfNeeded(playlist));
+        const {dispatch, playlist, playlists} = this.props;
+        if (!(playlist in playlists) || playlists[playlist].items.length === 0) {
+            dispatch(fetchSongsIfNeeded(playlist));
+        }
     }
 
     componentWillReceiveProps(nextProps) {

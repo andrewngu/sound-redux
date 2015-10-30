@@ -54,11 +54,11 @@
     }
 
     .ion-person {
-        margin-right: 6px;
         font-size: 20px;
     }
 
     .ion-chevron-down {
+        margin-left: 6px;
         color: #6B6B6B;
         font-size: 10px;
     }
@@ -80,12 +80,20 @@
 }
 
 .header-authed {
-    position: relative;
-    display: inline-block;
-    margin-top: 4px;
-    margin-left: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 32px;
+
+    &:hover .header-authed-image {
+        opacity: 0.8;
+    }
 
     &.active {
+        .header-authed-image {
+            opacity: 1;
+        }
+
         .header-authed-dot {
             background-color: #A6D2A5;
         }
@@ -107,4 +115,5 @@
     width: 29px;
     height: 29px;
     border-radius: 100%;
+    opacity: 0.6;
 }

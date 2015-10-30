@@ -20,7 +20,7 @@ class Header extends Component {
         const {authed, dispatch, navigator} = this.props;
         const {path} = navigator.route;
         const isActive = path[0] === 'me' ? true : false;
-        const targetRoute = isActive ? {path: ['songs']} : {path: ['me', 'stream']};
+        const targetRoute = isActive ? {path: ['songs'], query: {q: 'house'}} : {path: ['me', 'stream']};
 
         if (authed.user) {
             return (
@@ -29,7 +29,6 @@ class Header extends Component {
                     dispatch={dispatch}
                     route={targetRoute}>
                     <img className='header-authed-image' src={authed.user.avatar_url} />
-                    <div className='header-authed-dot'></div>
                 </Link>
             );
         }
