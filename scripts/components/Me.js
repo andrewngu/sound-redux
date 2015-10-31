@@ -4,6 +4,7 @@ import InfiniteScrollify from '../components/InfiniteScrollify';
 import MeToolbar from '../components/MeToolbar';
 import SongsCards from '../components/SongsCards';
 import Stickify from '../components/Stickify';
+import {AUTHED_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
 
 class Me extends Component {
     getPlaylist() {
@@ -28,7 +29,7 @@ class Me extends Component {
 
     render() {
         const {authed, authedPlaylists, dispatch, playingSongId, playlists, route, songs, sticky, users} = this.props;
-        const playlist = this.getPlaylist();
+        const playlist = this.getPlaylist() + AUTHED_PLAYLIST_SUFFIX;
 
         return (
             <div className='me'>

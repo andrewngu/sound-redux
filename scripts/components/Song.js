@@ -10,6 +10,8 @@ import Spinner from '../components/Spinner';
 import Stickify from '../components/Stickify';
 import Waveform from '../components/Waveform';
 
+import {SONG_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
+
 import {addCommas} from '../utils/FormatUtils';
 import {getImageUrl} from '../utils/SongUtils';
 
@@ -33,7 +35,7 @@ class Song extends Component {
             return;
         }
 
-        dispatch(playSong(song.title, i));
+        dispatch(playSong(song.title + SONG_PLAYLIST_SUFFIX, i));
     }
 
     renderComments() {
@@ -55,7 +57,8 @@ class Song extends Component {
     renderSongs() {
         const {dispatch, player, playingSongId, playlists, songId, songs, users} = this.props;
         const song = songs[songId];
-        const relatedSongs = song.title && song.title in playlists ? playlists[song.title] : {}
+        const playlist = song.title + SONG_PLAYLIST_SUFFIX;
+        const relatedSongs = playlist in playlists ? playlists[playlist] : {}
         if (!relatedSongs.items) {
             return;
         }

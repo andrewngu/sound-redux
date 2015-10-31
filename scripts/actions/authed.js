@@ -5,6 +5,7 @@ import {navigateTo} from '../actions/navigator';
 import {fetchSongs, receiveSongs} from '../actions/playlists';
 import * as types from '../constants/ActionTypes';
 import {CLIENT_ID} from '../constants/Config';
+import {AUTHED_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
 import {playlistSchema, songSchema} from '../constants/Schemas';
 
 const COOKIE_PATH = 'accessToken';
@@ -36,7 +37,7 @@ function fetchLikes(accessToken) {
             .then(json => {
                 const songs = json.filter(song => song.streamable);
                 const normalized = normalize(songs, arrayOf(songSchema));
-                dispatch(receiveSongs(normalized.entities, normalized.result, 'likes', null));
+                dispatch(receiveSongs(normalized.entities, normalized.result, 'likes' + AUTHED_PLAYLIST_SUFFIX, null));
             })
             .catch(error => {throw error});
     };
@@ -51,7 +52,7 @@ function fetchPlaylists(accessToken) {
                 dispatch(receiveAuthedPlaylists(normalized.result, normalized.entities));
                 normalized.result.forEach(playlistId => {
                     const playlist = normalized.entities.playlists[playlistId];
-                    dispatch(receiveSongs({}, playlist.tracks, playlist.title, null));
+                    dispatch(receiveSongs({}, playlist.tracks, playlist.title + AUTHED_PLAYLIST_SUFFIX, null));
                 });
             })
             .catch(error => { throw error; });
@@ -60,7 +61,7 @@ function fetchPlaylists(accessToken) {
 
 function fetchStream(accessToken) {
     return dispatch => {
-        dispatch(fetchSongs(`http://api.soundcloud.com/me/activities/tracks/affiliated?limit=50&oauth_token=${accessToken}`, 'stream'));
+        dispatch(fetchSongs(`http://api.soundcloud.com/me/activities/tracks/affiliated?limit=50&oauth_token=${accessToken}`, 'stream' + AUTHED_PLAYLIST_SUFFIX));
     };
 }
 
