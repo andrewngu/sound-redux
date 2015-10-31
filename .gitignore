@@ -1,4 +1,6 @@
 node_modules
 scripts/constants/Config.js
+server/config
+server/public/css
 server/public/js
 npm-debug.log

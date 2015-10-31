@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "NODE_ENV=production webpack -p",
+    "build": "NODE_ENV=production webpack -p --config ./webpack.prod.config.js",
     "start": "webpack-dev-server --progress --colors --hot --content-base ./server/public --config ./webpack.config.js",
     "test": "mocha --compilers js:babel-core/register --recursive"
   },
@@ -24,6 +24,7 @@
     "babel-loader": "^5.3.2",
     "css-loader": "^0.18.0",
     "expect": "^1.12.2",
+    "extract-text-webpack-plugin": "^0.8.2",
     "isomorphic-fetch": "^2.1.1",
     "jsx-loader": "^0.13.2",
     "lodash": "^3.10.1",
