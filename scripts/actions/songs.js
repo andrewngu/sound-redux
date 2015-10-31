@@ -14,7 +14,7 @@ function fetchRelatedSongs(userId, songTitle) {
                 const normalized = normalize(songs, arrayOf(songSchema));
                 dispatch(receiveSongs(normalized.entities, normalized.result, songTitle + SONG_PLAYLIST_SUFFIX, null));
             })
-            .catch(error => console.log(error));
+            .catch(error => { throw error; });
     };
 }
 

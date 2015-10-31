@@ -48,7 +48,7 @@ class User extends Component {
     }
 
     renderSongs() {
-        const {dispatch, player, playingSongId, playlists, songs, userId, users} = this.props;
+        const {authed, dispatch, player, playingSongId, playlists, songs, userId, users} = this.props;
         const user = users[userId];
         const playlist = user.username + USER_PLAYLIST_SUFFIX;
         const userSongs = playlist in playlists ? playlists[playlist] : {}
@@ -61,6 +61,7 @@ class User extends Component {
             const user = users[song.user_id];
             return (
                 <SongCard
+                    authed={authed}
                     dispatch={dispatch}
                     isActive={playingSongId === song.id}
                     key={song.id + '-' + i}

@@ -8,7 +8,7 @@ import {getImageUrl} from '../utils/SongUtils';
 
 class SongCard extends Component {
     render() {
-        const {dispatch, isActive, isLiked, player, playSong, song, user} = this.props;
+        const {authed, dispatch, isActive, player, playSong, song, user} = this.props;
         const image = getImageUrl(song.artwork_url);
 
         return (
@@ -44,9 +44,9 @@ class SongCard extends Component {
                             </div>
                             <div className='song-card-stats'>
                                 <SongHeartCount
+                                    authed={authed}
                                     count={song.favoritings_count}
                                     dispatch={dispatch}
-                                    isLiked={isLiked}
                                     songId={song.id} />
                                 <div className='song-card-stat'>
                                     <i className='icon ion-play'></i>

@@ -73,6 +73,7 @@ class App extends Component {
         } else if (path[0] === 'users' && path.length === 2) {
             return (
                 <User
+                    authed={authed}
                     dispatch={dispatch}
                     height={height}
                     player={player}

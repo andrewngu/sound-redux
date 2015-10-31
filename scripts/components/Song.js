@@ -70,9 +70,9 @@ class Song extends Component {
             const user = users[relatedSong.user_id];
             return (
                 <SongCard
+                    authed={authed}
                     dispatch={dispatch}
                     isActive={playingSongId === relatedSong.id}
-                    isLiked={relatedSong.id in likes && likes[relatedSong.id] === 1}
                     key={relatedSong.id}
                     player={player}
                     playSong={this.playSong.bind(this, i + 1)}
@@ -96,7 +96,6 @@ class Song extends Component {
         }
 
         const isActive = playingSongId && playingSongId === song.id ? true : false;
-        const isLiked = song.id in authed.likes && authed.likes[song.id];
         const image = getImageUrl(song.artwork_url);
         const user = song.user_id in users ? users[song.user_id] : {};
 
@@ -132,9 +131,9 @@ class Song extends Component {
                                             </div>
                                             <div className='song-stats'>
                                                 <SongHeartCount
+                                                    authed={authed}
                                                     count={song.favoritings_count}
                                                     dispatch={dispatch}
-                                                    isLiked={isLiked}
                                                     songId={song.id} />
                                                 <div className='song-stat'>
                                                     <i className='icon ion-play'></i>
