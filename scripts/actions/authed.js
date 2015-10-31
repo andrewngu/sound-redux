@@ -103,7 +103,7 @@ export function logoutUser() {
         const {authed, entities, navigator} = getState();
         const {path} = navigator.route;
         const playlists = authed.playlists.map((playlistId) => {
-            return entities.playlists[playlistId].title;
+            return entities.playlists[playlistId].title + AUTHED_PLAYLIST_SUFFIX;
         });
 
         if (path[0] === 'me') {
