@@ -17,22 +17,17 @@ function appendLike(songId) {
     };
 }
 
-function authUser(accessToken, shouldShowStream = false) {
+function authUser(accessToken, shouldShowStream = true) {
     return dispatch => {
-        dispatch(receiveAccessToken(accessToken));
-        dispatch(fetchAuthedUser(accessToken));
-        dispatch(fetchStream(accessToken));
-        if (shouldShowStream) {
-            dispatch(navigateTo({path: ['me', 'stream']}));
-        }
+        dispatch(fetchAuthedUser(accessToken, shouldShowStream));
     };
 }
 
-function fetchAuthedUser(accessToken) {
+function fetchAuthedUser(accessToken, shouldShowStream) {
     return dispatch => {
         return fetch(`http://api.soundcloud.com/me?oauth_token=${accessToken}`)
             .then(response => response.json())
-            .then(json => dispatch(receiveAuthedUserPre(accessToken, json)))
+            .then(json => dispatch(receiveAuthedUserPre(accessToken, json, shouldShowStream)))
             .catch(error => {throw error});
     };
 }
@@ -79,7 +74,7 @@ export function initAuth() {
     return dispatch => {
         const accessToken = Cookies.get(COOKIE_PATH);
         if (accessToken) {
-            return dispatch(authUser(accessToken));
+            return dispatch(authUser(accessToken, false));
         }
         return null;
     }
@@ -126,11 +121,16 @@ function receiveAccessToken(accessToken) {
     };
 }
 
-function receiveAuthedUserPre(accessToken, user) {
+function receiveAuthedUserPre(accessToken, user, shouldShowStream) {
     return dispatch => {
+        dispatch(receiveAccessToken(accessToken));
         dispatch(receiveAuthedUser(user));
         dispatch(fetchLikes(accessToken));
         dispatch(fetchPlaylists(accessToken));
+        dispatch(fetchStream(accessToken));
+        if (shouldShowStream) {
+            dispatch(navigateTo({path: ['me', 'stream']}));
+        }
     };
 }
 
