@@ -20,6 +20,8 @@ export default function authed(state = initialState, action) {
         return Object.assign({}, state, {
             playlists: action.playlists
         });
+    case types.RESET_AUTHED:
+        return Object.assign({}, state, initialState);
     default:
         return state;
     }

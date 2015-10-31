@@ -7,6 +7,8 @@ import * as types from '../constants/ActionTypes';
 import {CLIENT_ID} from '../constants/Config';
 import {playlistSchema, songSchema} from '../constants/Schemas';
 
+const COOKIE_PATH = 'accessToken';
+
 function authUser(accessToken, shouldShowStream = false) {
     return dispatch => {
         dispatch(receiveAccessToken(accessToken));
@@ -64,7 +66,7 @@ function fetchStream(accessToken) {
 
 export function initAuth() {
     return dispatch => {
-        const accessToken = Cookies.get('accessToken');
+        const accessToken = Cookies.get(COOKIE_PATH);
         if (accessToken) {
             return dispatch(authUser(accessToken));
         }
@@ -80,13 +82,30 @@ export function loginUser() {
         });
 
         SC.connect().then(authObj => {
-            Cookies.set('accessToken', authObj.oauth_token);
+            Cookies.set(COOKIE_PATH, authObj.oauth_token);
             dispatch(authUser(authObj.oauth_token, true));
         })
         .catch(error => {
             throw error;
         });
     };
+}
+
+export function logoutUser() {
+    return (dispatch, getState) => {
+        Cookies.remove(COOKIE_PATH);
+        const {authed, entities, navigator} = getState();
+        const {path} = navigator.route;
+        const playlists = authed.playlists.map((playlistId) => {
+            return entities.playlists[playlistId].title;
+        });
+
+        if (path[0] === 'me') {
+            dispatch(navigateTo({path: ['songs']}));
+        }
+
+        return dispatch(resetAuthed(playlists));
+    }
 }
 
 function receiveAccessToken(accessToken) {
@@ -116,5 +135,12 @@ function receiveAuthedUser(user) {
     return {
         type: types.RECEIVE_AUTHED_USER,
         user
+    };
+}
+
+function resetAuthed(playlists) {
+    return {
+        type: types.RESET_AUTHED,
+        playlists: playlists
     };
 }

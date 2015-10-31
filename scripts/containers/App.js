@@ -123,11 +123,16 @@ class App extends Component {
     }
 
     render() {
-        const {authed, dispatch, navigator, playingSongId, route} = this.props;
+        const {authed, authedPlaylists, dispatch, navigator, playingSongId, songs, route} = this.props;
 
         return (
             <div>
-                <Header authed={authed} dispatch={dispatch} navigator={navigator} />
+                <Header
+                    authed={authed}
+                    authedPlaylists={authedPlaylists}
+                    dispatch={dispatch}
+                    navigator={navigator}
+                    songs={songs} />
                 {this.renderContent()}
                 {this.renderPlayer()}
                 {this.renderModal()}

@@ -1,19 +1,46 @@
 import React, {Component, PropTypes} from 'react';
-import {loginUser} from '../actions/authed';
+import {loginUser, logoutUser} from '../actions/authed';
 import HeaderSearch from '../components/HeaderSearch';
 import Link from '../components/Link';
 import Popover from '../components/Popover';
 
+const PATHS = ['stream', 'likes'];
 
 class Header extends Component {
     constructor(props) {
         super(props);
         this.login = this.login.bind(this);
+        this.logout = this.logout.bind(this);
+    }
+
+    getPlaylist() {
+        const {authedPlaylists, navigator} = this.props;
+        const {path} = navigator.route;
+
+        if (path[0] === 'me'
+        && path[1] === 'playlists'
+        && path[2] in authedPlaylists) {
+            return authedPlaylists[path[2]].title;
+        }
+
+        return 'playlists';
     }
 
     login() {
         const {dispatch} = this.props;
         dispatch(loginUser());
+    }
+
+    logout() {
+        const {dispatch} = this.props;
+        dispatch(logoutUser())
+    }
+
+    renderArtworks(playlist) {
+        const {songs} = this.props;
+        return playlist.tracks.slice(0, 10).map(songId =>
+            <img className='header-playlist-image' key={songId} src={songs[songId].artwork_url} />
+        );
     }
 
     renderHeaderUser() {
@@ -24,12 +51,20 @@ class Header extends Component {
 
         if (authed.user) {
             return (
-                <Link
-                    className={'header-authed' + (isActive ? ' active' : '')}
-                    dispatch={dispatch}
-                    route={targetRoute}>
-                    <img className='header-authed-image' src={authed.user.avatar_url} />
-                </Link>
+                <Popover className='header-user bottom-right'>
+                    <div className='header-user-link'>
+                        <img className='header-authed-image' src={authed.user.avatar_url} />
+                        <i className='icon ion-chevron-down'></i>
+                        <i className='icon ion-chevron-up'></i>
+                    </div>
+                    <div className='header-user-panel popover-content'>
+                        <ul className='header-user-panel-list'>
+                            <li className='header-user-panel-item'>
+                                <a onClick={this.logout}>Log Out</a>
+                            </li>
+                        </ul>
+                    </div>
+                </Popover>
             );
         }
 
@@ -38,6 +73,7 @@ class Header extends Component {
                 <div className='header-user-link'>
                     <i className='icon ion-person'></i>
                     <i className='icon ion-chevron-down'></i>
+                    <i className='icon ion-chevron-up'></i>
                 </div>
                 <div className='header-user-panel popover-content'>
                     <ul className='header-user-panel-list'>
@@ -45,6 +81,67 @@ class Header extends Component {
                             <a className='button orange block' onClick={this.login}>Sign into SoundCloud</a>
                         </li>
                     </ul>
+                </div>
+            </Popover>
+        );
+    }
+
+    renderUserLinks() {
+        const {authed, dispatch, navigator} = this.props;
+        const {route} = navigator;
+        if (!authed.user) {
+            return;
+        }
+
+        return PATHS.map(path =>
+            <li className='header-nav-item' key={path}>
+                <Link
+                    className={'header-nav-user-link' + (path === route.path[1] ? ' active' : '')}
+                    dispatch={dispatch}
+                    route={{path: ['me', path]}}>
+                    {path}
+                </Link>
+            </li>
+        );
+    }
+
+    renderPlaylists() {
+        const {authed, authedPlaylists, dispatch} = this.props;
+        return authed.playlists.map(playlistId => {
+            const playlist = authedPlaylists[playlistId];
+            return (
+                <Link
+                    className='header-playlist'
+                    dispatch={dispatch}
+                    key={playlistId}
+                    route={{path: ['me', 'playlists', playlistId]}}>
+                    <div className='header-playlist-title'>
+                        {`${playlist.title} (${playlist.track_count})`}
+                    </div>
+                    {this.renderArtworks(playlist)}
+                </Link>
+            );
+        });
+    }
+
+    renderPlaylistsPopover() {
+        const {authed, dispatch, navigator} = this.props;
+        const {path} = navigator.route;
+        const playlist = this.getPlaylist();
+
+        if (!authed.user) {
+            return;
+        }
+
+        return (
+            <Popover className='header-nav-item header-playlists bottom-left'>
+                <div>
+                    <span className={'header-nav-user-link' + (path[1] === 'playlists' ? ' active' : '')}>{playlist}</span>
+                    <i className='icon ion-chevron-down'></i>
+                    <i className='icon ion-chevron-up'></i>
+                </div>
+                <div className='header-playlists-popover popover-content'>
+                    {this.renderPlaylists()}
                 </div>
             </Popover>
         );
@@ -68,6 +165,8 @@ class Header extends Component {
                                 SoundRedux
                             </Link>
                         </li>
+                        {this.renderUserLinks()}
+                        {this.renderPlaylistsPopover()}
                     </ul>
                     <ul className='header-nav float-right'>
                         <li className='header-nav-item'>

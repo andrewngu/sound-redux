@@ -70,3 +70,19 @@
     border-width: 7px;
     border-bottom: 7px solid #999;
 }
+
+.popover.bottom-left, .popover.bottom-right {
+    .ion-chevron-up {
+        display: none;
+    }
+
+    &.open {
+        .ion-chevron-up {
+            display: inline-block;
+        }
+
+        .ion-chevron-down {
+            display: none;
+        }
+    }
+}

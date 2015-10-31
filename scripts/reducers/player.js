@@ -1,10 +1,12 @@
 import * as types from '../constants/ActionTypes';
 
-export default function player(state = {
+const initialState = {
     currentSongIndex: null,
     currentTime: 0,
-    selectedPlaylists: [],
-}, action) {
+    selectedPlaylists: []
+};
+
+export default function player(state = initialState, action) {
     switch(action.type) {
     case types.CHANGE_CURRENT_TIME:
         return Object.assign({}, state, {
@@ -20,6 +22,9 @@ export default function player(state = {
         return Object.assign({}, state, {
             selectedPlaylists: action.playlists
         });
+
+    case types.RESET_AUTHED:
+        return Object.assign({}, state, initialState);
 
     default:
         return state;

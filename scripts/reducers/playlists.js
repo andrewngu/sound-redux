@@ -1,11 +1,14 @@
 import * as types from '../constants/ActionTypes';
+import merge from 'lodash/object/merge';
 import {constructUrl} from '../utils/SongUtils';
 
-function playlist(state = {
+const initialPlaylistState = {
     isFetching: false,
     items: [],
     nextUrl: false
-}, action) {
+};
+
+function playlist(state = initialPlaylistState, action) {
     switch(action.type) {
     case types.RECEIVE_SONGS:
         return Object.assign({}, state, {
@@ -41,6 +44,12 @@ export default function playlists(state = initialState, action) {
         return Object.assign({}, state, {
             [action.playlist]: playlist(state[action.playlist], action)
         });
+
+    case types.RESET_AUTHED:
+        const playlists = [...action.playlists, 'stream', 'likes'];
+        const newState = playlists.reduce((obj, playlist) => merge({}, obj, {[playlist]: initialPlaylistState}), {});
+        return Object.assign({}, state, newState);
+
     default:
         return state;
     }

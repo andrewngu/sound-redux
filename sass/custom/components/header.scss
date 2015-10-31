@@ -35,6 +35,26 @@
     }
 }
 
+.header-nav-user-link {
+    margin: 0px 40px;
+    color: rgba(255,255,255, 0.5);
+    border-bottom: 1px dotted #3a3f41;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 2px;
+
+    &:hover {
+        text-decoration: none;
+        border-bottom-color: #fff;
+    }
+
+    &.active {
+        color: #fff;
+        border-bottom-color: #fff;
+    }
+}
+
 .header-logo {
     display: inline-block;
     padding: 11px 0;
@@ -46,7 +66,6 @@
 .header-user-link {
     display: flex;
     align-items: center;
-    margin-left: 30px;
     color: #fff;
 
     &:hover {
@@ -54,10 +73,11 @@
     }
 
     .ion-person {
+        margin-left: 30px;
         font-size: 20px;
     }
 
-    .ion-chevron-down {
+    .ion-chevron-down, .ion-chevron-up {
         margin-left: 6px;
         color: #6B6B6B;
         font-size: 10px;
@@ -83,21 +103,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: 32px;
-
-    &:hover .header-authed-image {
-        opacity: 0.8;
-    }
-
-    &.active {
-        .header-authed-image {
-            opacity: 1;
-        }
-
-        .header-authed-dot {
-            background-color: #A6D2A5;
-        }
-    }
 }
 
 .header-authed-dot {
@@ -114,6 +119,6 @@
 .header-authed-image {
     width: 29px;
     height: 29px;
+    margin-left: 17px;
     border-radius: 100%;
-    opacity: 0.6;
 }
