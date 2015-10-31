@@ -32,7 +32,7 @@ export function fetchSongs(url, playlist) {
                     }
                     return arr;
                 }, []);
-                dispatch(receiveSongs(normalized.entities, result, nextUrl, playlist));
+                dispatch(receiveSongs(normalized.entities, result, playlist, nextUrl));
             })
             .catch(error => {throw error});
     };
@@ -56,7 +56,7 @@ function getNextUrl(playlists, playlist) {
     return activePlaylist.nextUrl;
 }
 
-export function receiveSongs(entities, songs, nextUrl, playlist) {
+export function receiveSongs(entities, songs, playlist, nextUrl) {
     return {
         type: types.RECEIVE_SONGS,
         entities,

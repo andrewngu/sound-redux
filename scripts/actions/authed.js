@@ -36,7 +36,7 @@ function fetchLikes(accessToken) {
             .then(json => {
                 const songs = json.filter(song => song.streamable);
                 const normalized = normalize(songs, arrayOf(songSchema));
-                dispatch(receiveSongs(normalized.entities, normalized.result, null, 'likes'));
+                dispatch(receiveSongs(normalized.entities, normalized.result, 'likes', null));
             })
             .catch(error => {throw error});
     };
@@ -51,7 +51,7 @@ function fetchPlaylists(accessToken) {
                 dispatch(receiveAuthedPlaylists(normalized.result, normalized.entities));
                 normalized.result.forEach(playlistId => {
                     const playlist = normalized.entities.playlists[playlistId];
-                    dispatch(receiveSongs({}, playlist.tracks, null, playlist.title));
+                    dispatch(receiveSongs({}, playlist.tracks, playlist.title, null));
                 });
             })
             .catch(error => { throw error; });
