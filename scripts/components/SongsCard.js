@@ -7,7 +7,8 @@ import {getImageUrl} from '../utils/SongUtils';
 
 class SongsCard extends Component {
     render() {
-        const {dispatch, isActive, isLiked, playSong, song, user} = this.props;
+        const {authed, dispatch, isActive, playSong, song, user} = this.props;
+        const isLiked = song.id in authed.likes && authed.likes[song.id] == 1;
         const image = getImageUrl(song.artwork_url);
 
         return (
@@ -38,6 +39,7 @@ class SongsCard extends Component {
                             {user.username}
                         </Link>
                         <SongHeart
+                            authed={authed}
                             className='songs-card-heart'
                             dispatch={dispatch}
                             isLiked={isLiked}

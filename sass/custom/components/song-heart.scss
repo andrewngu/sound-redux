@@ -10,3 +10,22 @@
         color: #e17d74;
     }
 }
+
+.song-heart-panel {
+    width: 213px;
+    right: -10px;
+}
+
+.song-heart-panel:before {
+    top: -7px;
+    right: 10px;
+    border-width: 7px;
+    border-bottom: 7px solid #999;
+}
+
+.song-heart-panel:after {
+    top: -6px;
+    right: 10px;
+    border-width: 7px;
+    border-bottom: 7px solid #fff;
+}

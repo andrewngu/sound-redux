@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {toggleLike} from '../actions/authed';
+import Popover from '../components/Popover';
 
 class SongHeart extends Component {
     constructor() {
@@ -13,7 +14,22 @@ class SongHeart extends Component {
     }
 
     render() {
-        const {isLiked} = this.props;
+        const {authed, isLiked} = this.props;
+        if (!authed.user) {
+            return (
+                <Popover className={'song-heart bottom-right ' + this.props.className}>
+                    <i className='icon ion-ios-heart'></i>
+                    <div className='song-heart-panel popover-content'>
+                        <ul className='header-user-panel-list'>
+                            <li className='header-user-panel-item'>
+                                <a className='button orange block' onClick={this.login}>Sign into SoundCloud</a>
+                            </li>
+                        </ul>
+                    </div>
+                </Popover>
+            );
+        }
+
         return (
             <a
                 className={'song-heart ' + this.props.className + (isLiked ? ' liked' : '')}

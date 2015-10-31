@@ -90,6 +90,20 @@
     width: 200px;
 }
 
+.header-user-panel.popover-content:before {
+    top: -7px ;
+    right: 14px ;
+    border-width: 7px;
+    border-bottom: 7px solid #999;
+}
+
+.header-user-panel.popover-content:after {
+    top: -6px;
+    right: 14px;
+    border-width: 7px;
+    border-bottom: 7px solid #fff;
+}
+
 .header-user-panel-list {
     list-style: none;
 }

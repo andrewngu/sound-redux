@@ -24,9 +24,9 @@ class SongsCards extends Component {
                 return (
                     <div className='col-1-5' key={index + '-' + song.id}>
                         <SongsCard
+                            authed={authed}
                             dispatch={dispatch}
                             isActive={song.id === playingSongId}
-                            isLiked={song.id in authed.likes && authed.likes[song.id] == 1}
                             playSong={this.playSong.bind(this, index)}
                             scrollFunc={fetchSongsIfNeeded.bind(null, playlist)}
                             song={song}
