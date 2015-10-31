@@ -6,6 +6,7 @@ import {fetchSongIfNeeded} from '../actions/songs';
 import Comments from '../components/Comments';
 import Link from '../components/Link';
 import SongCard from '../components/SongCard';
+import SongHeartCount from '../components/SongHeartCount';
 import Spinner from '../components/Spinner';
 import Stickify from '../components/Stickify';
 import Waveform from '../components/Waveform';
@@ -55,7 +56,8 @@ class Song extends Component {
     }
 
     renderSongs() {
-        const {dispatch, player, playingSongId, playlists, songId, songs, users} = this.props;
+        const {authed, dispatch, player, playingSongId, playlists, songId, songs, users} = this.props;
+        const {likes} = authed;
         const song = songs[songId];
         const playlist = song.title + SONG_PLAYLIST_SUFFIX;
         const relatedSongs = playlist in playlists ? playlists[playlist] : {}
@@ -70,6 +72,7 @@ class Song extends Component {
                 <SongCard
                     dispatch={dispatch}
                     isActive={playingSongId === relatedSong.id}
+                    isLiked={relatedSong.id in likes && likes[relatedSong.id] === 1}
                     key={relatedSong.id}
                     player={player}
                     playSong={this.playSong.bind(this, i + 1)}
@@ -86,13 +89,14 @@ class Song extends Component {
     }
 
     render() {
-        const {dispatch, playingSongId, player, songId, songs, sticky, users} = this.props;
+        const {authed, dispatch, playingSongId, player, songId, songs, sticky, users} = this.props;
         const song = songs[songId];
         if (!song || (song.waveform_url && song.waveform_url.indexOf('json') > -1)) {
             return <Spinner />;
         }
 
         const isActive = playingSongId && playingSongId === song.id ? true : false;
+        const isLiked = song.id in authed.likes && authed.likes[song.id];
         const image = getImageUrl(song.artwork_url);
         const user = song.user_id in users ? users[song.user_id] : {};
 
@@ -127,13 +131,14 @@ class Song extends Component {
                                                 </Link>
                                             </div>
                                             <div className='song-stats'>
+                                                <SongHeartCount
+                                                    count={song.favoritings_count}
+                                                    dispatch={dispatch}
+                                                    isLiked={isLiked}
+                                                    songId={song.id} />
                                                 <div className='song-stat'>
                                                     <i className='icon ion-play'></i>
                                                     <span>{addCommas(song.playback_count)}</span>
-                                                </div>
-                                                <div className='song-stat'>
-                                                    <i className='icon ion-ios-heart'></i>
-                                                    <span>{addCommas(song.favoritings_count)}</span>
                                                 </div>
                                                 <div className='song-stat'>
                                                     <i className='icon ion-chatbubble'></i>

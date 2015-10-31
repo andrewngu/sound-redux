@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import Link from '../components/Link';
+import SongHeartCount from '../components/SongHeartCount';
 import Waveform from '../components/Waveform';
 
 import {addCommas} from '../utils/FormatUtils';
@@ -7,7 +8,7 @@ import {getImageUrl} from '../utils/SongUtils';
 
 class SongCard extends Component {
     render() {
-        const {dispatch, isActive, player, playSong, song, user} = this.props;
+        const {dispatch, isActive, isLiked, player, playSong, song, user} = this.props;
         const image = getImageUrl(song.artwork_url);
 
         return (
@@ -42,13 +43,14 @@ class SongCard extends Component {
                                 </Link>
                             </div>
                             <div className='song-card-stats'>
+                                <SongHeartCount
+                                    count={song.favoritings_count}
+                                    dispatch={dispatch}
+                                    isLiked={isLiked}
+                                    songId={song.id} />
                                 <div className='song-card-stat'>
                                     <i className='icon ion-play'></i>
                                     <span>{addCommas(song.playback_count)}</span>
-                                </div>
-                                <div className='song-card-stat'>
-                                    <i className='icon ion-ios-heart'></i>
-                                    <span>{addCommas(song.favoritings_count)}</span>
                                 </div>
                                 <div className='song-card-stat'>
                                     <i className='icon ion-chatbubble'></i>

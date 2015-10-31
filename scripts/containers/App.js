@@ -57,14 +57,16 @@ class App extends Component {
                     time={time} />
             );
         } else if (path[0] === 'songs' && path.length === 2) {
+            const songId = parseInt(path[1]);
             return (
                 <Song
+                    authed={authed}
                     dispatch={dispatch}
                     height={height}
                     player={player}
                     playingSongId={playingSongId}
                     playlists={playlists}
-                    songId={parseInt(path[1])}
+                    songId={songId}
                     songs={songs}
                     users={users} />
             );
