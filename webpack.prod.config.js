@@ -23,7 +23,7 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.js$/, loaders: ['babel'], exclude: [nodeModulesDir] },
-            { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css!sass!autoprefixer') }
+            { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css!autoprefixer!sass') }
         ]
     },
     plugins: [
