@@ -13,9 +13,8 @@ class SongsCards extends Component {
 
     renderSongs() {
         const chunk = 5;
-        const {dispatch, playlist, playlists, playingSongId, songs, users} = this.props;
+        const {authed, dispatch, playlist, playlists, playingSongId, songs, users} = this.props;
         const items = playlist in playlists ? playlists[playlist].items : [];
-
         let result = [];
         for (let i = 0; i < items.length; i += chunk) {
             let songCards = items.slice(i, i + chunk).map((songId, j) => {
@@ -27,6 +26,7 @@ class SongsCards extends Component {
                         <SongsCard
                             dispatch={dispatch}
                             isActive={song.id === playingSongId}
+                            isLiked={song.id in authed.likes && authed.likes[song.id] == 1}
                             playSong={this.playSong.bind(this, index)}
                             scrollFunc={fetchSongsIfNeeded.bind(null, playlist)}
                             song={song}

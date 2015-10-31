@@ -35,6 +35,7 @@ class Me extends Component {
             <div className='me'>
                 <div className='container'>
                     <SongsCards
+                        authed={authed}
                         dispatch={dispatch}
                         playingSongId={playingSongId}
                         playlist={playlist}

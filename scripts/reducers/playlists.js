@@ -1,4 +1,5 @@
 import * as types from '../constants/ActionTypes';
+import {AUTHED_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
 import merge from 'lodash/object/merge';
 import {constructUrl} from '../utils/SongUtils';
 
@@ -10,6 +11,10 @@ const initialPlaylistState = {
 
 function playlist(state = initialPlaylistState, action) {
     switch(action.type) {
+    case types.APPEND_LIKE:
+        return Object.assign({}, state, {
+            items: [action.songId, ...state.items]
+        });
     case types.RECEIVE_SONGS:
         return Object.assign({}, state, {
             isFetching: false,
@@ -29,12 +34,16 @@ function playlist(state = initialPlaylistState, action) {
 }
 
 const initialState = {
-    likes: {isFetching: false, items: [], nextUrl: null},
-    stream: {isFetching: false, items: [], nextUrl: null}
+    ['likes' + AUTHED_PLAYLIST_SUFFIX]: {isFetching: false, items: [], nextUrl: null},
+    ['stream' + AUTHED_PLAYLIST_SUFFIX]: {isFetching: false, items: [], nextUrl: null}
 };
 
 export default function playlists(state = initialState, action) {
     switch(action.type) {
+    case types.APPEND_LIKE:
+        return Object.assign({}, state, {
+            ['likes' + AUTHED_PLAYLIST_SUFFIX]: playlist(state['likes' + AUTHED_PLAYLIST_SUFFIX], action)
+        });
     case types.RECEIVE_SONGS:
         return Object.assign({}, state, {
             [action.playlist]: playlist(state[action.playlist], action)

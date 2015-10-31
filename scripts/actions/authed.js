@@ -10,6 +10,13 @@ import {playlistSchema, songSchema} from '../constants/Schemas';
 
 const COOKIE_PATH = 'accessToken';
 
+function appendLike(songId) {
+    return {
+        type: types.APPEND_LIKE,
+        songId
+    };
+}
+
 function authUser(accessToken, shouldShowStream = false) {
     return dispatch => {
         dispatch(receiveAccessToken(accessToken));
@@ -37,6 +44,9 @@ function fetchLikes(accessToken) {
             .then(json => {
                 const songs = json.filter(song => song.streamable);
                 const normalized = normalize(songs, arrayOf(songSchema));
+                const likes = normalized.result
+                    .reduce((obj, songId) => Object.assign({}, obj, {[songId]: 1}), {});
+                dispatch(receiveLikes(likes));
                 dispatch(receiveSongs(normalized.entities, normalized.result, 'likes' + AUTHED_PLAYLIST_SUFFIX, null));
             })
             .catch(error => {throw error});
@@ -139,9 +149,41 @@ function receiveAuthedUser(user) {
     };
 }
 
+function receiveLikes(likes) {
+    return {
+        type: types.RECEIVE_LIKES,
+        likes
+    };
+}
+
 function resetAuthed(playlists) {
     return {
         type: types.RESET_AUTHED,
         playlists: playlists
+    };
+}
+
+function setLike(songId, liked) {
+    return {
+        type: types.SET_LIKE,
+        liked,
+        songId
+    };
+}
+
+function syncLike(userId, accessToken, songId, liked) {
+    fetch(`http://api.soundcloud.com/users/${userId}/favorites/${songId}?oauth_token=${accessToken}`, {method: liked ? 'put' : 'delete'});
+}
+
+export function toggleLike(songId) {
+    return (dispatch, getState) => {
+        const {authed} = getState();
+        const {likes} = authed;
+        const liked = songId in likes && likes[songId] === 1 ? 0 : 1;
+        if (!(songId in likes)) {
+            dispatch(appendLike(songId));
+        }
+        dispatch(setLike(songId, liked));
+        syncLike(authed.user.id, authed.accessToken, songId, liked);
     };
 }
