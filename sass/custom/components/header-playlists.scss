@@ -82,3 +82,17 @@
         margin-left: 6px;
     }
 }
+
+.header-playlists-popover.popover-content:before {
+    top: -7px ;
+    left: 14px ;
+    border-width: 7px;
+    border-bottom: 7px solid #999;
+}
+
+.header-playlists-popover.popover-content:after {
+    top: -6px;
+    left: 14px;
+    border-width: 7px;
+    border-bottom: 7px solid #fff;
+}

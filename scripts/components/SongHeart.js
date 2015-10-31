@@ -1,11 +1,17 @@
 import React, {Component, PropTypes} from 'react';
-import {toggleLike} from '../actions/authed';
+import {loginUser, toggleLike} from '../actions/authed';
 import Popover from '../components/Popover';
 
 class SongHeart extends Component {
     constructor() {
         super();
+        this.login = this.login.bind(this);
         this.toggleLike = this.toggleLike.bind(this);
+    }
+
+    login() {
+        const {dispatch} = this.props;
+        dispatch(loginUser(false));
     }
 
     toggleLike() {
@@ -17,7 +23,7 @@ class SongHeart extends Component {
         const {authed, isLiked} = this.props;
         if (!authed.user) {
             return (
-                <Popover className={'song-heart bottom-right ' + this.props.className}>
+                <Popover className={'song-heart ' + this.props.className}>
                     <i className='icon ion-ios-heart'></i>
                     <div className='song-heart-panel popover-content'>
                         <ul className='header-user-panel-list'>

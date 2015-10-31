@@ -51,7 +51,7 @@ class Header extends Component {
 
         if (authed.user) {
             return (
-                <Popover className='header-user bottom-right'>
+                <Popover className='header-user'>
                     <div className='header-user-link'>
                         <img className='header-authed-image' src={authed.user.avatar_url} />
                         <i className='icon ion-chevron-down'></i>
@@ -69,7 +69,7 @@ class Header extends Component {
         }
 
         return (
-            <Popover className='header-user bottom-right'>
+            <Popover className='header-user'>
                 <div className='header-user-link'>
                     <i className='icon ion-person'></i>
                     <i className='icon ion-chevron-down'></i>
@@ -134,7 +134,7 @@ class Header extends Component {
         }
 
         return (
-            <Popover className='header-nav-item header-playlists bottom-left'>
+            <Popover className='header-nav-item header-playlists'>
                 <div>
                     <span className={'header-nav-user-link' + (path[1] === 'playlists' ? ' active' : '')}>{playlist}</span>
                     <i className='icon ion-chevron-down'></i>

@@ -85,7 +85,7 @@ export function initAuth() {
     }
 }
 
-export function loginUser() {
+export function loginUser(shouldShowStream = true) {
     return dispatch => {
         SC.initialize({
             client_id: CLIENT_ID,
@@ -94,7 +94,7 @@ export function loginUser() {
 
         SC.connect().then(authObj => {
             Cookies.set(COOKIE_PATH, authObj.oauth_token);
-            dispatch(authUser(authObj.oauth_token, true));
+            dispatch(authUser(authObj.oauth_token, shouldShowStream));
         })
         .catch(error => {
             throw error;

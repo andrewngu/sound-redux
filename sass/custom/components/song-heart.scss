@@ -4,6 +4,7 @@
 
     &:hover {
         color: #F9C5C5;
+        cursor: pointer;
     }
 
     &.liked {
@@ -12,20 +13,21 @@
 }
 
 .song-heart-panel {
-    width: 213px;
+    top: 20px;
     right: -10px;
+    width: 200px;
 }
 
 .song-heart-panel:before {
     top: -7px;
-    right: 10px;
+    right: 8px;
     border-width: 7px;
     border-bottom: 7px solid #999;
 }
 
 .song-heart-panel:after {
     top: -6px;
-    right: 10px;
+    right: 8px;
     border-width: 7px;
     border-bottom: 7px solid #fff;
 }

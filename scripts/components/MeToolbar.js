@@ -52,7 +52,7 @@ class MeToolbar extends Component {
                 <div className='container'>
                     <div className='toolbar-items'>
                         {this.renderItems()}
-                        <Popover className={'toolbar-playlists toolbar-item toolbar-genre bottom-left' + (path[1] === 'playlists' ? ' active' : '')}>
+                        <Popover className={'toolbar-playlists toolbar-item toolbar-genre' + (path[1] === 'playlists' ? ' active' : '')}>
                             <div>
                                 <span>{path[1] === 'playlists' ? playlist : 'playlists'}</span>
                                 <i className='icon ion-chevron-down'></i>
