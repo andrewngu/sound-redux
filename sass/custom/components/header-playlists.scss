@@ -1,6 +1,7 @@
 .header-playlists {
     .header-nav-user-link {
         margin-right: 0;
+
         &:hover {
             cursor: pointer;
         }
@@ -71,9 +72,21 @@
     flex: 1;
     color: #333;
     font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.header-playlist-images {
+    width: 200px;
+    white-space: nowrap;
+    overflow: scroll;
+    text-align: right;
+    min-height: 30px;
 }
 
 .header-playlist-image {
+    display: inline-block;
     width: 30px;
     height: 30px;
     opacity: 0.2;

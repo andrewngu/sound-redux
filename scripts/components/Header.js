@@ -94,14 +94,14 @@ class Header extends Component {
         }
 
         return PATHS.map(path =>
-            <li className='header-nav-item' key={path}>
+            <div className='header-nav-item' key={path}>
                 <Link
                     className={'header-nav-user-link' + (path === route.path[1] ? ' active' : '')}
                     dispatch={dispatch}
                     route={{path: ['me', path]}}>
                     {path}
                 </Link>
-            </li>
+            </div>
         );
     }
 
@@ -118,7 +118,9 @@ class Header extends Component {
                     <div className='header-playlist-title'>
                         {`${playlist.title} (${playlist.track_count})`}
                     </div>
-                    {this.renderArtworks(playlist)}
+                    <div className='header-playlist-images'>
+                        {this.renderArtworks(playlist)}
+                    </div>
                 </Link>
             );
         });
@@ -156,26 +158,26 @@ class Header extends Component {
                     <div className='header-logo'>
                         <i className='icon ion-radio-waves' />
                     </div>
-                    <ul className='header-nav float-left'>
-                        <li className='header-nav-item'>
+                    <div className='header-nav float-left'>
+                        <div className='header-nav-item'>
                             <Link
                                 className='header-nav-item-link active'
                                 dispatch={dispatch}
                                 route={{path: ['songs']}}>
                                 SoundRedux
                             </Link>
-                        </li>
+                        </div>
                         {this.renderUserLinks()}
                         {this.renderPlaylistsPopover()}
-                    </ul>
-                    <ul className='header-nav float-right'>
-                        <li className='header-nav-item'>
+                    </div>
+                    <div className='header-nav float-right'>
+                        <div className='header-nav-item'>
                             <HeaderSearch dispatch={dispatch} />
-                        </li>
-                        <li className='header-nav-item'>
+                        </div>
+                        <div className='header-nav-item'>
                             {this.renderHeaderUser()}
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
