@@ -111,7 +111,7 @@ class Waveform extends Component {
                 onMouseDown={this.handleMouseDown}
                 onMouseLeave={this.handleMouseLeave}
                 onMouseMove={this.handleMouseMove}>
-                <img className='waveform-image' src={this.props.waveformUrl} />
+                <img className='waveform-image' src={this.props.waveformUrl.replace('http:', '')} />
                 <div className='waveform-image-bg' style={{width : `${width}%`}} />
                 {this.renderClickable()}
             </div>
