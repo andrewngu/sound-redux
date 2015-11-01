@@ -10,7 +10,6 @@
 .header-nav {
     display: table;
     height: 100%;
-    list-style: none;
 }
 
 .header-nav-item {
@@ -19,8 +18,8 @@
 }
 
 .header-nav-item-link {
+    display: inline-block;
     margin: 10px 30px;
-    padding: 2px 0;
     color: rgba(255,255,255, 0.5);
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -35,10 +34,114 @@
     }
 }
 
+.header-nav-user-link {
+    display: flex;
+    align-items: center;
+    margin: 2px 40px 0;
+    color: rgba(255,255,255, 0.5);
+    border-bottom: 1px dotted #3a3f41;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 2px;
+
+    &:hover {
+        text-decoration: none;
+        border-bottom-color: #fff;
+    }
+
+    &.active {
+        color: #fff;
+        border-bottom-color: #fff;
+    }
+}
+
+.header-nav-selected-playlist {
+    display: inline-block;
+    max-width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .header-logo {
     display: inline-block;
     padding: 11px 0;
     color: #fff;
     font-size: 20px;
     float: left;
+}
+
+.header-user-link {
+    display: flex;
+    align-items: center;
+    color: #fff;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    .ion-person {
+        margin-left: 30px;
+        font-size: 20px;
+    }
+
+    .ion-chevron-down, .ion-chevron-up {
+        margin-left: 6px;
+        color: #6B6B6B;
+        font-size: 10px;
+    }
+}
+
+.header-user-panel {
+    top: 40px;
+    right: 2px;
+    width: 200px;
+}
+
+.header-user-panel.popover-content:before {
+    top: -7px ;
+    right: 14px ;
+    border-width: 7px;
+    border-bottom: 7px solid #999;
+}
+
+.header-user-panel.popover-content:after {
+    top: -6px;
+    right: 14px;
+    border-width: 7px;
+    border-bottom: 7px solid #fff;
+}
+
+.header-user-panel-list {
+    list-style: none;
+}
+
+.header-user-panel-item {
+    padding: 10px;
+    font-size: 11px;
+}
+
+.header-authed {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header-authed-dot {
+    position: absolute;
+    bottom: 3px;
+    right: -2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    border: 2px solid #3a3f41;
+    background-color: rgba(166, 210, 165, 0.6);
+}
+
+.header-authed-image {
+    width: 29px;
+    height: 29px;
+    margin-left: 17px;
+    border-radius: 100%;
 }

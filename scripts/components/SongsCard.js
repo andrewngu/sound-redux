@@ -1,10 +1,14 @@
 import React, {Component, PropTypes} from 'react';
+import Link from '../components/Link';
 import SongDetails from '../components/SongDetails';
+import SongHeart from '../components/SongHeart';
+import {formatSongTitle} from '../utils/FormatUtils';
 import {getImageUrl} from '../utils/SongUtils';
 
 class SongsCard extends Component {
     render() {
-        const {dispatch, isActive, playSong, song, user} = this.props;
+        const {authed, dispatch, isActive, playSong, song, user} = this.props;
+        const isLiked = song.id in authed.likes && authed.likes[song.id] == 1;
         const image = getImageUrl(song.artwork_url);
 
         return (
@@ -21,12 +25,26 @@ class SongsCard extends Component {
                     <img
                         className='songs-card-user-image'
                         src={user.avatar_url} />
-                    <SongDetails
-                        dispatch={dispatch}
-                        songId={song.id}
-                        userId={user.id}
-                        title={song.title}
-                        username={user.username} />
+                    <div className='songs-card-details'>
+                        <Link
+                            className='songs-card-title'
+                            dispatch={dispatch}
+                            route={{path: ['songs', song.id]}}>
+                            {formatSongTitle(song.title)}
+                        </Link>
+                        <Link
+                            className='songs-card-user-username'
+                            dispatch={dispatch}
+                            route={{path: ['users', user.id]}}>
+                            {user.username}
+                        </Link>
+                        <SongHeart
+                            authed={authed}
+                            className='songs-card-heart'
+                            dispatch={dispatch}
+                            isLiked={isLiked}
+                            songId={song.id} />
+                    </div>
                 </div>
             </div>
         );

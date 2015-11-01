@@ -7,6 +7,8 @@ import SongCard from '../components/SongCard';
 import Spinner from '../components/Spinner';
 import Stickify from '../components/Stickify';
 
+import {USER_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
+
 import {addCommas, getSocialIcon} from '../utils/FormatUtils';
 import {getImageUrl} from '../utils/SongUtils';
 import {getUserLocation} from '../utils/UserUtils';
@@ -31,7 +33,7 @@ class User extends Component {
             return;
         }
 
-        dispatch(playSong(user.username, i));
+        dispatch(playSong(user.username + USER_PLAYLIST_SUFFIX, i));
     }
 
     renderFollowings() {
@@ -46,9 +48,10 @@ class User extends Component {
     }
 
     renderSongs() {
-        const {dispatch, player, playingSongId, playlists, songs, userId, users} = this.props;
+        const {authed, dispatch, player, playingSongId, playlists, songs, userId, users} = this.props;
         const user = users[userId];
-        const userSongs = user.username && user.username in playlists ? playlists[user.username] : {}
+        const playlist = user.username + USER_PLAYLIST_SUFFIX;
+        const userSongs = playlist in playlists ? playlists[playlist] : {}
         if (!userSongs.items) {
             return;
         }
@@ -58,6 +61,7 @@ class User extends Component {
             const user = users[song.user_id];
             return (
                 <SongCard
+                    authed={authed}
                     dispatch={dispatch}
                     isActive={playingSongId === song.id}
                     key={song.id + '-' + i}

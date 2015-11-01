@@ -1,6 +1,8 @@
 import {arrayOf, normalize} from 'normalizr';
 import merge from 'lodash/object/merge';
+import {receiveSongs} from '../actions/playlists';
 import * as types from '../constants/ActionTypes';
+import {USER_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
 import {songSchema, userSchema} from '../constants/Schemas';
 
 import {
@@ -81,19 +83,9 @@ function fetchUserTracks(userId, username) {
             .then(response => response.json())
             .then(json => {
                 const normalized = normalize(json, arrayOf(songSchema))
-                dispatch(receiveSongs(normalized.result, normalized.entities, username))
+                dispatch(receiveSongs(normalized.entities, normalized.result, username + USER_PLAYLIST_SUFFIX, null))
             })
             .catch(error => console.log(error));
-    };
-}
-
-export function receiveSongs(songs, entities, playlist) {
-    return {
-        type: types.RECEIVE_SONGS,
-        entities,
-        nextUrl: null,
-        playlist,
-        songs
     };
 }
 

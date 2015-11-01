@@ -3,7 +3,7 @@ import {navigateTo} from '../actions/navigator';
 import Link from '../components/Link';
 import {GENRES, GENRES_MAP} from '../constants/SongConstants';
 
-const DAYS = [30, 60, 90];
+const DAYS = [7, 30, 90];
 
 class Toolbar extends Component {
     renderGenres() {
@@ -11,13 +11,20 @@ class Toolbar extends Component {
         const genre = playlist.split(' - ')[0];
 
         return GENRES.map(g => {
+            const route = {
+                path: ['songs'],
+                query: {
+                    q: g,
+                    t: time
+                }
+            };
+
             return (
                 <Link
                     className={'toolbar-item toolbar-genre' + (g === genre ? ' active' : '')}
                     dispatch={dispatch}
                     key={g}
-                    path={['songs']}
-                    query={{q: g, t: time}}>
+                    route={route}>
                     {g}
                 </Link>
             );
@@ -29,13 +36,20 @@ class Toolbar extends Component {
         const genre = playlist.split(' - ')[0];
 
         return DAYS.map(t => {
+            const route = {
+                path: ['songs'],
+                query: {
+                    q: genre,
+                    t: (t === time ? null : t)
+                }
+            };
+
             return (
                 <Link
                     className={'toolbar-time' + (t === time ? ' active' : '')}
                     dispatch={dispatch}
                     key={t}
-                    path={['songs']}
-                    query={{q: genre, t: (t === time ? null : t)}}>
+                    route={route}>
                     {`${t} days`}
                 </Link>
             );

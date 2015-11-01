@@ -1,13 +1,16 @@
+@import 'components/button';
 @import 'components/card';
 @import 'components/comment';
 @import 'components/comments';
 @import 'components/content';
 @import 'components/followings';
 @import 'components/grid';
+@import 'components/header-playlists';
 @import 'components/header-search';
 @import 'components/header';
 @import 'components/input';
 @import 'components/links';
+@import 'components/modal';
 @import 'components/player';
 @import 'components/playlist';
 @import 'components/popover';
@@ -15,7 +18,8 @@
 @import 'components/sidebar';
 @import 'components/song';
 @import 'components/song-card';
-@import 'components/song-details';
+@import 'components/song-heart';
+@import 'components/song-heart-count';
 @import 'components/songs';
 @import 'components/songs-card';
 @import 'components/spinner';

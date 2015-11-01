@@ -1,5 +1,7 @@
 import {arrayOf, normalize} from 'normalizr';
+import {receiveSongs} from '../actions/playlists';
 import * as types from '../constants/ActionTypes';
+import {SONG_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
 import {songSchema} from '../constants/Schemas';
 import {constructSongUrl, constructSongCommentsUrl, constructUserSongsUrl} from '../utils/SongUtils';
 
@@ -10,9 +12,9 @@ function fetchRelatedSongs(userId, songTitle) {
             .then(json => {
                 const songs = json.filter(song => songTitle !== song.title);
                 const normalized = normalize(songs, arrayOf(songSchema));
-                dispatch(receiveSongs(normalized.result, normalized.entities, songTitle));
+                dispatch(receiveSongs(normalized.entities, normalized.result, songTitle + SONG_PLAYLIST_SUFFIX, null));
             })
-            .catch(error => console.log(error));
+            .catch(error => { throw error; });
     };
 }
 
@@ -20,12 +22,12 @@ export function fetchSongIfNeeded(songId) {
     return (dispatch, getState) => {
         const {entities, playlists} = getState();
         const {songs} = entities;
-        if (!(songId in songs)) {
+        if (!(songId in songs) || songs[songId].waveform_url.indexOf('json') > -1) {
             dispatch(fetchSong(songId));
         } else {
             const song = songs[songId];
             if (!(song.title in playlists)) {
-                dispatch(receiveSongs([songId], {}, song.title));
+                dispatch(receiveSongs({}, [songId], song.title + SONG_PLAYLIST_SUFFIX, null));
             }
 
             if (!('comments' in songs[songId])) {
@@ -89,18 +91,8 @@ function receiveSongPre(songId, entities) {
         const songTitle = entities.songs[songId].title;
         const userId = entities.songs[songId].user_id;
         dispatch(receiveSong(entities));
-        dispatch(receiveSongs([songId], entities, songTitle));
+        dispatch(receiveSongs(entities, [songId], songTitle + SONG_PLAYLIST_SUFFIX, null));
         dispatch(fetchSongData(songId, userId, songTitle));
-    };
-}
-
-function receiveSongs(songs, entities, songTitle) {
-    return {
-      type: types.RECEIVE_SONGS,
-      entities,
-      nextUrl: null,
-      playlist: songTitle,
-      songs
     };
 }
 

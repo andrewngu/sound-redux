@@ -9,12 +9,7 @@ class Link extends Component {
 
     handleClick(e) {
         e.preventDefault();
-        const {dispatch, path, query} = this.props;
-        const route = {
-            path,
-            query: query ? query: {}
-        };
-
+        const {dispatch, route} = this.props;
         dispatch(navigateTo(route));
     }
 
@@ -30,7 +25,7 @@ class Link extends Component {
 Link.propTypes = {
     className: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
-    path: PropTypes.array.isRequired
+    route: PropTypes.object.isRequired
 };
 
 export default Link;

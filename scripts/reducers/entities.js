@@ -1,6 +1,7 @@
 import merge from 'lodash/object/merge';
 
 const initialState = {
+    playlists: {},
     songs: {},
     users: {}
 };

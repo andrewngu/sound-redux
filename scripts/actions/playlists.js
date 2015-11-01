@@ -2,20 +2,39 @@ import fetch from 'isomorphic-fetch';
 import {arrayOf, normalize} from 'normalizr';
 import * as types from '../constants/ActionTypes';
 import {songSchema} from '../constants/Schemas';
+import {GENRES_MAP} from '../constants/SongConstants';
 import {constructUrl} from '../utils/SongUtils';
 
-function fetchSongs(url, playlist) {
+export function fetchSongs(url, playlist) {
     return (dispatch, getState) => {
+        const {authed} = getState();
         dispatch(requestSongs(playlist));
         return fetch(url)
             .then(response => response.json())
             .then(json => {
-                const songs = json.collection.filter(song => song.streamable && song.duration < 600000 );
-                const nextUrl = json.next_href;
+                let nextUrl = null;
+                if (json.next_href) {
+                    nextUrl = json.next_href + ( authed.accessToken ? `&oauth_token=${authed.accessToken}` : '');
+                }
+
+                const songs = json.collection
+                    .map(song => song.origin ? song.origin : song)
+                    .filter(song => {
+                        if (playlist in GENRES_MAP) {
+                            return song.streamable && song.kind === 'track' && song.duration < 600000;
+                        }
+                        return song.streamable && song.kind === 'track';
+                    });
                 const normalized = normalize(songs, arrayOf(songSchema));
-                dispatch(receiveSongs(normalized.entities, normalized.result, nextUrl, playlist));
+                const result = normalized.result.reduce((arr, songId) => {
+                    if (arr.indexOf(songId) === -1) {
+                        arr.push(songId);
+                    }
+                    return arr;
+                }, []);
+                dispatch(receiveSongs(normalized.entities, result, playlist, nextUrl));
             })
-            .catch(error => console.log(error));
+            .catch(error => {throw error});
     };
 }
 
@@ -37,7 +56,7 @@ function getNextUrl(playlists, playlist) {
     return activePlaylist.nextUrl;
 }
 
-function receiveSongs(entities, songs, nextUrl, playlist) {
+export function receiveSongs(entities, songs, playlist, nextUrl) {
     return {
         type: types.RECEIVE_SONGS,
         entities,

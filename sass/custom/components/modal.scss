@@ -1,0 +1,45 @@
+.modal {
+    background: rgba(58, 63, 65, 0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    z-index: 12000;
+    overflow: auto;
+}
+
+.modal-content {
+    position: relative;
+    top: 40px;
+    width: 600px;
+    margin: 0 auto 50px auto;
+    padding: 20px;
+    background: white;
+    -moz-box-shadow: rgba(32, 43, 56, 0.25) 0 0 15px;
+    -webkit-box-shadow: rgba(32, 43, 56, 0.25) 0 0 15px;
+    box-shadow: rgba(32, 43, 56, 0.25) 0 0 15px;
+    animation-name: animateDown;
+    animation-duration: 360ms;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+.modal-header {
+    font-size: 28px;
+    font-weight: 300;
+    text-align: center;
+}
+
+@keyframes animateDown {
+   from {
+       transform: translateY(-40px);
+       opacity: 0;
+    }
+
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}

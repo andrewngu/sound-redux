@@ -35,13 +35,12 @@
 }
 
 .songs-card-user {
-    display: flex;
-    flex-direction: row;
+    display: block;
     width: 100%;
-    overflow: hidden;
 }
 
 .songs-card-user-image {
+    display: block;
     width: 24px;
     height: 24px;
     margin-top: 4px;
@@ -79,4 +78,33 @@
     -moz-transition: opacity 0.2s ease-in-out;
     -ms-transition: opacity 0.2s ease-in-out;
     transition: opacity 0.2s ease-in-out;
+}
+
+.songs-card-details {
+    position: relative;
+}
+
+.songs-card-user-username {
+    display: block;
+    margin-right: 30px;
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.songs-card-title {
+    display: block;
+    color: #222;
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.songs-card-heart {
+    position: absolute;
+    bottom: -2px;
+    right: 0;
+    font-size: 14px;
 }

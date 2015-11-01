@@ -26,6 +26,7 @@
     "expect": "^1.12.2",
     "extract-text-webpack-plugin": "^0.8.2",
     "isomorphic-fetch": "^2.1.1",
+    "js-cookie": "^2.0.4",
     "jsx-loader": "^0.13.2",
     "lodash": "^3.10.1",
     "mocha": "^2.3.3",
@@ -39,6 +40,7 @@
     "redux": "^3.0.0",
     "redux-thunk": "^1.0.0",
     "sass-loader": "^2.0.1",
+    "soundcloud": "^3.0.1",
     "style-loader": "^0.12.4",
     "webpack": "^1.12.2",
     "webpack-dev-server": "^1.11.0"

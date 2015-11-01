@@ -6,9 +6,12 @@ import {fetchSongIfNeeded} from '../actions/songs';
 import Comments from '../components/Comments';
 import Link from '../components/Link';
 import SongCard from '../components/SongCard';
+import SongHeartCount from '../components/SongHeartCount';
 import Spinner from '../components/Spinner';
 import Stickify from '../components/Stickify';
 import Waveform from '../components/Waveform';
+
+import {SONG_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
 
 import {addCommas} from '../utils/FormatUtils';
 import {getImageUrl} from '../utils/SongUtils';
@@ -33,7 +36,7 @@ class Song extends Component {
             return;
         }
 
-        dispatch(playSong(song.title, i));
+        dispatch(playSong(song.title + SONG_PLAYLIST_SUFFIX, i));
     }
 
     renderComments() {
@@ -53,9 +56,11 @@ class Song extends Component {
     }
 
     renderSongs() {
-        const {dispatch, player, playingSongId, playlists, songId, songs, users} = this.props;
+        const {authed, dispatch, player, playingSongId, playlists, songId, songs, users} = this.props;
+        const {likes} = authed;
         const song = songs[songId];
-        const relatedSongs = song.title && song.title in playlists ? playlists[song.title] : {}
+        const playlist = song.title + SONG_PLAYLIST_SUFFIX;
+        const relatedSongs = playlist in playlists ? playlists[playlist] : {}
         if (!relatedSongs.items) {
             return;
         }
@@ -65,6 +70,7 @@ class Song extends Component {
             const user = users[relatedSong.user_id];
             return (
                 <SongCard
+                    authed={authed}
                     dispatch={dispatch}
                     isActive={playingSongId === relatedSong.id}
                     key={relatedSong.id}
@@ -83,9 +89,9 @@ class Song extends Component {
     }
 
     render() {
-        const {dispatch, playingSongId, player, songId, songs, sticky, users} = this.props;
+        const {authed, dispatch, playingSongId, player, songId, songs, sticky, users} = this.props;
         const song = songs[songId];
-        if (!song) {
+        if (!song || (song.waveform_url && song.waveform_url.indexOf('json') > -1)) {
             return <Spinner />;
         }
 
@@ -119,18 +125,19 @@ class Song extends Component {
                                                 <Link
                                                     className='song-username'
                                                     dispatch={dispatch}
-                                                    path={['users', user.id]}>
+                                                    route={{path: ['users', user.id]}}>
                                                     {user.username}
                                                 </Link>
                                             </div>
                                             <div className='song-stats'>
+                                                <SongHeartCount
+                                                    authed={authed}
+                                                    count={song.favoritings_count}
+                                                    dispatch={dispatch}
+                                                    songId={song.id} />
                                                 <div className='song-stat'>
                                                     <i className='icon ion-play'></i>
                                                     <span>{addCommas(song.playback_count)}</span>
-                                                </div>
-                                                <div className='song-stat'>
-                                                    <i className='icon ion-ios-heart'></i>
-                                                    <span>{addCommas(song.favoritings_count)}</span>
                                                 </div>
                                                 <div className='song-stat'>
                                                     <i className='icon ion-chatbubble'></i>

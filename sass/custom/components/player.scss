@@ -9,6 +9,10 @@
     -webkit-user-select: none;
     -ms-user-select: none;
     z-index: 999;
+
+    .songs-card-details {
+        overflow: hidden;
+    }
 }
 
 .player-section {

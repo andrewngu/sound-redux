@@ -66,7 +66,7 @@ class Playlist extends Component {
                         onClick={this.changeShownPlaylistIndex.bind(this, shownPlaylistIndex - 1)}>
                         <i className='icon ion-ios-arrow-back'></i>
                     </a>
-                    <div className='playlist-header-title'>{shownPlaylist}</div>
+                    <div className='playlist-header-title'>{shownPlaylist.split('|')[0]}</div>
                     <a
                         className={'playlist-header-button' + (shownPlaylistIndex === selectedPlaylists.length - 1 ? ' disabled' : '')}
                         onClick={this.changeShownPlaylistIndex.bind(this, shownPlaylistIndex + 1)}>
