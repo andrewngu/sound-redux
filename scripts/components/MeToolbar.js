@@ -8,7 +8,7 @@ class MeToolbar extends Component {
     renderArtworks(playlist) {
         const {songs} = this.props;
         return playlist.tracks.slice(0, 10).map(songId =>
-            <img className='toolbar-playlist-image' key={songId} src={songs[songId].artwork_url} />
+            <img className='toolbar-playlist-image' key={songId} src={getImageUrl(songs[songId].artwork_url)} />
         );
     }
 

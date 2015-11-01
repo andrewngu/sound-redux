@@ -121,7 +121,7 @@ class Song extends Component {
                                             <div className='song-user'>
                                                 <div
                                                     className='song-user-image'
-                                                    style={{backgroundImage: `url(${user.avatar_url})`}}>
+                                                    style={{backgroundImage: `url(${getImageUrl(user.avatar_url)})`}}>
                                                 </div>
                                                 <Link
                                                     className='song-username'

@@ -25,7 +25,7 @@ class SongsCard extends Component {
                 <div className='songs-card-user clearfix'>
                     <img
                         className='songs-card-user-image'
-                        src={user.avatar_url} />
+                        src={getImageUrl(user.avatar_url)} />
                     <div className='songs-card-details'>
                         <Link
                             className='songs-card-title'

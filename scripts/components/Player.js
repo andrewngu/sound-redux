@@ -5,6 +5,7 @@ import Popover from '../components/Popover';
 import SongDetails from '../components/SongDetails';
 import {CHANGE_TYPES} from '../constants/SongConstants';
 import {formatSeconds, formatStreamUrl} from '../utils/FormatUtils';
+import {getImageUrl} from '../utils/SongUtils';
 
 class Player extends Component {
     constructor(props) {
@@ -352,7 +353,7 @@ class Player extends Component {
                 <div className='container'>
                     <div className='player-main'>
                         <div className='player-section player-info'>
-                            <img className='player-image' src={song.artwork_url} />
+                            <img className='player-image' src={getImageUrl(song.artwork_url)} />
                             <SongDetails
                                 dispatch={dispatch}
                                 songId={song.id}

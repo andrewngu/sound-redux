@@ -3,6 +3,7 @@ import {loginUser, logoutUser} from '../actions/authed';
 import HeaderSearch from '../components/HeaderSearch';
 import Link from '../components/Link';
 import Popover from '../components/Popover';
+import {getImageUrl} from '../utils/SongUtils';
 
 const PATHS = ['stream', 'likes'];
 
@@ -39,7 +40,7 @@ class Header extends Component {
     renderArtworks(playlist) {
         const {songs} = this.props;
         return playlist.tracks.slice(0, 10).map(songId =>
-            <img className='header-playlist-image' key={songId} src={songs[songId].artwork_url} />
+            <img className='header-playlist-image' key={songId} src={getImageUrl(songs[songId].artwork_url)} />
         );
     }
 
@@ -53,7 +54,7 @@ class Header extends Component {
             return (
                 <Popover className='header-user'>
                     <div className='header-user-link'>
-                        <img className='header-authed-image' src={authed.user.avatar_url} />
+                        <img className='header-authed-image' src={getImageUrl(authed.user.avatar_url)} />
                         <i className='icon ion-chevron-down'></i>
                         <i className='icon ion-chevron-up'></i>
                     </div>

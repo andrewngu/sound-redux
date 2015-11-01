@@ -35,7 +35,7 @@ class SongCard extends Component {
                             <div className='song-card-user'>
                                 <div
                                     className='song-card-user-image'
-                                    style={{backgroundImage: `url(${user.avatar_url})`}}>
+                                    style={{backgroundImage: `url(${getImageUrl(user.avatar_url)})`}}>
                                 </div>
                                 <Link
                                     className='song-card-username'

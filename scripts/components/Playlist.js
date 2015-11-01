@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {playSong} from '../actions/player';
+import {getImageUrl} from '../utils/SongUtils';
 
 class Playlist extends Component {
     constructor(props) {
@@ -48,7 +49,7 @@ class Playlist extends Component {
                     className={'playlist-song' + (currentPlaylist === shownPlaylist && i === currentSongIndex ? ' active' : '' )}
                     key={song.id + '-' + i}
                     onClick={this.playSong.bind(this, shownPlaylist, i)}>
-                    <img className='playlist-song-image' src={song.artwork_url} />
+                    <img className='playlist-song-image' src={getImageUrl(song.artwork_url)} />
                     <div className='playlist-song-title'>{song.title}</div>
                 </li>
             );

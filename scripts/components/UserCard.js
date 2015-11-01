@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import Link from '../components/Link';
 import {addCommas} from '../utils/FormatUtils';
+import {getImageUrl} from '../utils/SongUtils';
 import {getUserLocation} from '../utils/UserUtils';
 
 class UserCard extends Component {
@@ -9,7 +10,7 @@ class UserCard extends Component {
 
         return (
             <div className='user-card'>
-                <img className='user-card-image' src={user.avatar_url} />
+                <img className='user-card-image' src={getImageUrl(user.avatar_url)} />
                 <div className='user-card-info'>
                     <Link
                         className='user-card-title'
