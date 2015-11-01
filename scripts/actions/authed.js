@@ -25,7 +25,7 @@ function authUser(accessToken, shouldShowStream = true) {
 
 function fetchAuthedUser(accessToken, shouldShowStream) {
     return dispatch => {
-        return fetch(`http://api.soundcloud.com/me?oauth_token=${accessToken}`)
+        return fetch(`//api.soundcloud.com/me?oauth_token=${accessToken}`)
             .then(response => response.json())
             .then(json => dispatch(receiveAuthedUserPre(accessToken, json, shouldShowStream)))
             .catch(error => {throw error});
@@ -34,7 +34,7 @@ function fetchAuthedUser(accessToken, shouldShowStream) {
 
 function fetchLikes(accessToken) {
     return dispatch => {
-        return fetch(`http://api.soundcloud.com/me/favorites?oauth_token=${accessToken}`)
+        return fetch(`//api.soundcloud.com/me/favorites?oauth_token=${accessToken}`)
             .then(response => response.json())
             .then(json => {
                 const songs = json.filter(song => song.streamable);
@@ -50,7 +50,7 @@ function fetchLikes(accessToken) {
 
 function fetchPlaylists(accessToken) {
     return dispatch => {
-        return fetch(`http://api.soundcloud.com/me/playlists?oauth_token=${accessToken}`)
+        return fetch(`//api.soundcloud.com/me/playlists?oauth_token=${accessToken}`)
             .then(response => response.json())
             .then(json => {
                 const normalized = normalize(json, arrayOf(playlistSchema));
@@ -66,7 +66,7 @@ function fetchPlaylists(accessToken) {
 
 function fetchStream(accessToken) {
     return dispatch => {
-        dispatch(fetchSongs(`http://api.soundcloud.com/me/activities/tracks/affiliated?limit=50&oauth_token=${accessToken}`, 'stream' + AUTHED_PLAYLIST_SUFFIX));
+        dispatch(fetchSongs(`//api.soundcloud.com/me/activities/tracks/affiliated?limit=50&oauth_token=${accessToken}`, 'stream' + AUTHED_PLAYLIST_SUFFIX));
     };
 }
 
@@ -84,7 +84,7 @@ export function loginUser(shouldShowStream = true) {
     return dispatch => {
         SC.initialize({
             client_id: CLIENT_ID,
-            redirect_uri: `http://${window.location.host}/api/callback`
+            redirect_uri: `//${window.location.host}/api/callback`
         });
 
         SC.connect().then(authObj => {
