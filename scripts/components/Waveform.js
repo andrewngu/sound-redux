@@ -102,6 +102,15 @@ class Waveform extends Component {
         }
     }
 
+    renderImage() {
+        const {waveformUrl} = this.props;
+        if (waveformUrl.indexOf('json') > -1) {
+            return;
+        }
+
+        return <img className='waveform-image' src={waveformUrl.replace('http:', '')} />;
+    }
+
     renderWaveform() {
         const {currentTime, duration, isActive} = this.props;
         const width = isActive ? currentTime / (duration / 1000) * 100 : 0;
@@ -111,7 +120,7 @@ class Waveform extends Component {
                 onMouseDown={this.handleMouseDown}
                 onMouseLeave={this.handleMouseLeave}
                 onMouseMove={this.handleMouseMove}>
-                <img className='waveform-image' src={this.props.waveformUrl.replace('http:', '')} />
+                {this.renderImage()}
                 <div className='waveform-image-bg' style={{width : `${width}%`}} />
                 {this.renderClickable()}
             </div>
