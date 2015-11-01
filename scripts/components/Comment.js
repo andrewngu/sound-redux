@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import {IMAGE_SIZES} from '../constants/SongConstants';
 import {formatSeconds} from '../utils/FormatUtils';
 import {getImageUrl} from '../utils/SongUtils';
 
@@ -6,7 +7,7 @@ class Comment extends Component {
     render() {
         const {comment, i} = this.props;
         const {user} = comment;
-        const image =  getImageUrl(user.avatar_url);
+        const image =  getImageUrl(user.avatar_url, IMAGE_SIZES.LARGE);
 
         return (
             <div className='comment' style={{animationDelay: (i * 50) + 'ms'}}>

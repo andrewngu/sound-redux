@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import Link from '../components/Link';
 import SongDetails from '../components/SongDetails';
 import SongHeart from '../components/SongHeart';
+import {IMAGE_SIZES} from '../constants/SongConstants';
 import {formatSongTitle} from '../utils/FormatUtils';
 import {getImageUrl} from '../utils/SongUtils';
 
@@ -9,7 +10,7 @@ class SongsCard extends Component {
     render() {
         const {authed, dispatch, isActive, playSong, song, user} = this.props;
         const isLiked = song.id in authed.likes && authed.likes[song.id] == 1;
-        const image = getImageUrl(song.artwork_url);
+        const image = getImageUrl(song.artwork_url, IMAGE_SIZES.LARGE);
 
         return (
             <div className={'card songs-card' + (isActive ? ' active' : '')}>
