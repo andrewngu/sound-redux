@@ -3,13 +3,15 @@ import Link from '../components/Link';
 import SongHeartCount from '../components/SongHeartCount';
 import Waveform from '../components/Waveform';
 
+import {IMAGE_SIZES} from '../constants/SongConstants';
+
 import {addCommas} from '../utils/FormatUtils';
 import {getImageUrl} from '../utils/SongUtils';
 
 class SongCard extends Component {
     render() {
         const {authed, dispatch, isActive, player, playSong, song, user} = this.props;
-        const image = getImageUrl(song.artwork_url);
+        const image = getImageUrl(song.artwork_url, IMAGE_SIZES.LARGE);
 
         return (
             <div className={'song-card' + (isActive ? ' active' : '')}>

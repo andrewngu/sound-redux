@@ -12,6 +12,7 @@ import Stickify from '../components/Stickify';
 import Waveform from '../components/Waveform';
 
 import {SONG_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
+import {IMAGE_SIZES} from '../constants/SongConstants';
 
 import {addCommas} from '../utils/FormatUtils';
 import {getImageUrl} from '../utils/SongUtils';
@@ -96,7 +97,7 @@ class Song extends Component {
         }
 
         const isActive = playingSongId && playingSongId === song.id ? true : false;
-        const image = getImageUrl(song.artwork_url);
+        const image = getImageUrl(song.artwork_url, IMAGE_SIZES.LARGE);
         const user = song.user_id in users ? users[song.user_id] : {};
 
         return (

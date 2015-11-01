@@ -1,6 +1,6 @@
 import moment from 'moment';
 import {CLIENT_ID} from '../constants/Config';
-import {GENRES_MAP} from '../constants/SongConstants';
+import {GENRES_MAP, IMAGE_SIZES} from '../constants/SongConstants';
 
 export function constructUrl(category) {
     const catArr = category.split(' - ');
@@ -38,10 +38,17 @@ export function constructUserSongsUrl(userId) {
     return `//api.soundcloud.com/users/${userId}/tracks?client_id=${CLIENT_ID}`;
 }
 
-export function getImageUrl(str) {
+export function getImageUrl(str, size = null) {
     if (!str) {
         return '';
     }
 
-    return str.replace('large', 't300x300');
+    str = str.replace('http:' , '');
+
+    switch(size) {
+    case IMAGE_SIZES.LARGE:
+        return str.replace('large', IMAGE_SIZES.LARGE);
+    default:
+        return str;
+    }
 }

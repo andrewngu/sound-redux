@@ -8,6 +8,7 @@ import Spinner from '../components/Spinner';
 import Stickify from '../components/Stickify';
 
 import {USER_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
+import {IMAGE_SIZES} from '../constants/SongConstants';
 
 import {addCommas, getSocialIcon} from '../utils/FormatUtils';
 import {getImageUrl} from '../utils/SongUtils';
@@ -103,7 +104,7 @@ class User extends Component {
             return <Spinner />;
         }
 
-        const image = user.avatar_url ? getImageUrl(user.avatar_url) : null;
+        const image = user.avatar_url ? getImageUrl(user.avatar_url, IMAGE_SIZES.LARGE) : null;
         return (
             <div className='container'>
                 <div className='content'>
