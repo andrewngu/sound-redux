@@ -18,8 +18,8 @@
 }
 
 .header-nav-item-link {
+    display: inline-block;
     margin: 10px 30px;
-    padding: 2px 0;
     color: rgba(255,255,255, 0.5);
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -35,7 +35,9 @@
 }
 
 .header-nav-user-link {
-    margin: 0px 40px;
+    display: flex;
+    align-items: center;
+    margin: 2px 40px 0;
     color: rgba(255,255,255, 0.5);
     border-bottom: 1px dotted #3a3f41;
     text-transform: uppercase;
@@ -52,6 +54,14 @@
         color: #fff;
         border-bottom-color: #fff;
     }
+}
+
+.header-nav-selected-playlist {
+    display: inline-block;
+    max-width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .header-logo {

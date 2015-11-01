@@ -137,8 +137,10 @@ class Header extends Component {
 
         return (
             <Popover className='header-nav-item header-playlists'>
-                <div>
-                    <span className={'header-nav-user-link' + (path[1] === 'playlists' ? ' active' : '')}>{playlist}</span>
+                <div className={'header-nav-user-link' + (path[1] === 'playlists' ? ' active' : '')}>
+                    <div className='header-nav-selected-playlist'>
+                        {playlist}
+                    </div>
                     <i className='icon ion-chevron-down'></i>
                     <i className='icon ion-chevron-up'></i>
                 </div>
