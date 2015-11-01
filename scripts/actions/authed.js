@@ -172,7 +172,7 @@ function setLike(songId, liked) {
 }
 
 function syncLike(userId, accessToken, songId, liked) {
-    fetch(`http://api.soundcloud.com/users/${userId}/favorites/${songId}?oauth_token=${accessToken}`, {method: liked ? 'put' : 'delete'});
+    fetch(`//api.soundcloud.com/users/${userId}/favorites/${songId}?oauth_token=${accessToken}`, {method: liked ? 'put' : 'delete'});
 }
 
 export function toggleLike(songId) {
