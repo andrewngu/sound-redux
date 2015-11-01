@@ -84,7 +84,7 @@ export function loginUser(shouldShowStream = true) {
     return dispatch => {
         SC.initialize({
             client_id: CLIENT_ID,
-            redirect_uri: `//${window.location.host}/api/callback`
+            redirect_uri: `${window.location.protocol}//${window.location.host}/api/callback`
         });
 
         SC.connect().then(authObj => {
