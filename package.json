@@ -6,7 +6,9 @@
   "scripts": {
     "build": "NODE_ENV=production webpack -p --config ./webpack.prod.config.js",
     "start": "webpack-dev-server --progress --colors --hot --content-base ./server/public --config ./webpack.config.js",
-    "test": "mocha --compilers js:babel-core/register --recursive"
+    "test": "mocha --compilers js:babel-core/register --recursive",
+    "prebuild": "sed -i.bak \"s/'.*'/'${SOUND_REDUX_PROD:-f4323c6f7c0cd73d2d786a2b1cdae80c}'/\" ./scripts/constants/Config.js",
+    "postbuild": "sed -i.bak \"s/'.*'/'${SOUND_REDUX_DEV:-f4323c6f7c0cd73d2d786a2b1cdae80c}'/\" ./scripts/constants/Config.js && rm ./scripts/constants/Config.js.bak"
   },
   "repository": {
     "type": "git",
