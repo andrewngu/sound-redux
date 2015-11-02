@@ -28,7 +28,7 @@ class Me extends Component {
     }
 
     render() {
-        const {authed, authedPlaylists, dispatch, playingSongId, playlists, route, songs, sticky, users} = this.props;
+        const {authed, authedPlaylists, dispatch, height, playingSongId, playlists, route, songs, sticky, users} = this.props;
         const playlist = this.getPlaylist() + AUTHED_PLAYLIST_SUFFIX;
 
         return (
@@ -37,6 +37,7 @@ class Me extends Component {
                     <SongsCards
                         authed={authed}
                         dispatch={dispatch}
+                        height={height}
                         playingSongId={playingSongId}
                         playlist={playlist}
                         playlists={playlists}

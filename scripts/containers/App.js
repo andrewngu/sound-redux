@@ -89,6 +89,7 @@ class App extends Component {
                     authed={authed}
                     authedPlaylists={authedPlaylists}
                     dispatch={dispatch}
+                    height={height}
                     player={player}
                     playingSongId={playingSongId}
                     playlists={playlists}
