@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import App from './containers/App';
 import configureStore from './store/configureStore';
-import {changeSong} from './actions/player';
+import {changeSong, toggleIsPlay} from './actions/player';
 import {CHANGE_TYPES} from './constants/SongConstants';
 
 require('../styles/main.scss');
@@ -27,5 +27,10 @@ window.Player = {
 
   prevSong() {
     store.dispatch(changeSong(CHANGE_TYPES.PREV));
+  },
+
+  togglePlay() {
+    const {player: {isPlaying}} = store.getState();
+    store.dispatch(togglePlay(isPlaying));
   }
 };

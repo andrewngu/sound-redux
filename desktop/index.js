@@ -41,6 +41,10 @@ app.on('ready', () => {
   globalShortcut.register('MediaPreviousTrack', () => {
     mainWindow.webContents.executeJavaScript('Player.prevSong()');
   });
+
+  globalShortcut.register('MediaPlayPause', () => {
+    mainWindow.webContents.executeJavaScript('Player.togglePlay()');
+  });
 });
 
 app.on('will-quit', () => {

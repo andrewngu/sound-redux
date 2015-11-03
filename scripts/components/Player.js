@@ -57,12 +57,17 @@ class Player extends Component {
         audioElement.addEventListener('play', this.handlePlay, false);
         audioElement.addEventListener('timeupdate', this.handleTimeUpdate, false);
         audioElement.addEventListener('volumechange', this.handleVolumeChange, false);
-        audioElement.play();
+        if (this.props.player.isPlaying) {
+            audioElement.play();
+        }
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.playingSongId && prevProps.playingSongId === this.props.playingSongId) {
-            return;
+    componentDidUpdate() {
+        const audioElement = React.findDOMNode(this.refs.audio);
+        if (this.props.player.isPlaying) {
+            audioElement.play();
+        } else {
+            audioElement.pause();
         }
 
         ReactDOM.findDOMNode(this.refs.audio).play();
