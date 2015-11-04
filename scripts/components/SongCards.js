@@ -5,7 +5,7 @@ import InfiniteScrollify from '../components/InfiniteScrollify';
 import SongsCard from '../components/SongsCard';
 import Spinner from '../components/Spinner';
 
-class SongsCards extends Component {
+class SongCards extends Component {
     constructor(props) {
         super(props);
         this.getScrollState = this.getScrollState.bind(this);
@@ -153,4 +153,4 @@ class SongsCards extends Component {
     }
 }
 
-export default InfiniteScrollify(SongsCards);
+export default InfiniteScrollify(SongCards);

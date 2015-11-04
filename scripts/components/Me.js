@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {fetchSongsIfNeeded} from '../actions/playlists';
 import InfiniteScrollify from '../components/InfiniteScrollify';
 import MeToolbar from '../components/MeToolbar';
-import SongsCards from '../components/SongsCards';
+import SongCards from '../components/SongCards';
 import Stickify from '../components/Stickify';
 import {AUTHED_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
 
@@ -34,7 +34,7 @@ class Me extends Component {
         return (
             <div className='me'>
                 <div className='container'>
-                    <SongsCards
+                    <SongCards
                         authed={authed}
                         dispatch={dispatch}
                         height={height}

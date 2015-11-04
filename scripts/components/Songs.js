@@ -3,8 +3,7 @@ import {connect} from 'react-redux';
 
 import {fetchSongsIfNeeded} from '../actions/playlists';
 
-import InfiniteScrollify from '../components/InfiniteScrollify';
-import SongsCards from '../components/SongsCards';
+import SongCards from '../components/SongCards';
 import Stickify from '../components/Stickify';
 import Toolbar from '../components/Toolbar';
 
@@ -32,7 +31,7 @@ class Songs extends Component {
             <div className={'songs' + (sticky ? ' sticky' : '')}>
                 <Toolbar dispatch={dispatch} playlist={playlist} sticky={sticky} time={time} />
                 <div className='container'>
-                    <SongsCards
+                    <SongCards
                         authed={authed}
                         dispatch={dispatch}
                         height={height}
