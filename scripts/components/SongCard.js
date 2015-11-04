@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {playSong} from '../actions/player';
 import {fetchSongsIfNeeded} from '../actions/playlists';
 import InfiniteScrollify from '../components/InfiniteScrollify';
-import SongsCard from '../components/SongsCard';
+import SongCard from '../components/SongCard';
 import Spinner from '../components/Spinner';
 
 class SongCards extends Component {
@@ -110,7 +110,7 @@ class SongCards extends Component {
                 const index = i + j;
                 return (
                     <div className='col-1-5' key={index + '-' + song.id}>
-                        <SongsCard
+                        <SongCard
                             authed={authed}
                             dispatch={dispatch}
                             isActive={song.id === playingSongId}

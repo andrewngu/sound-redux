@@ -20,8 +20,8 @@ class SongListItem extends Component {
                         className='song-list-item-image'
                         onClick={playSong}
                         style={{backgroundImage: `url(${image})`}}>
-                        <div className='songs-card-playing'>
-                            <i className={'songs-card-playing-icon icon ' + (isActive ? 'ion-radio-waves' : 'ion-ios-play')}></i>
+                        <div className='song-card-playing'>
+                            <i className={'song-card-playing-icon icon ' + (isActive ? 'ion-radio-waves' : 'ion-ios-play')}></i>
                         </div>
                     </div>
                     <div className='song-list-item-info'>

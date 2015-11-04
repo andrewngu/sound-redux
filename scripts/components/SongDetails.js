@@ -11,15 +11,15 @@ class SongDetails extends Component {
         const {dispatch, songId, title, userId, username} = this.props;
 
         return (
-            <div className='songs-card-details'>
+            <div className='song-card-details'>
                 <Link
-                    className='songs-card-title'
+                    className='song-card-title'
                     dispatch={dispatch}
                     route={{path: ['songs', songId]}}>
                     {formatSongTitle(title)}
                 </Link>
                 <Link
-                    className='songs-card-user-username'
+                    className='song-card-user-username'
                     dispatch={dispatch}
                     route={{path: ['users', userId]}}>
                     {username}

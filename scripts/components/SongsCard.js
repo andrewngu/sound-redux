@@ -6,42 +6,42 @@ import {IMAGE_SIZES} from '../constants/SongConstants';
 import {formatSongTitle} from '../utils/FormatUtils';
 import {getImageUrl} from '../utils/SongUtils';
 
-class SongsCard extends Component {
+class SongCard extends Component {
     render() {
         const {authed, dispatch, isActive, playSong, song, user} = this.props;
         const isLiked = song.id in authed.likes && authed.likes[song.id] == 1;
         const image = getImageUrl(song.artwork_url, IMAGE_SIZES.LARGE);
 
         return (
-            <div className={'card songs-card' + (isActive ? ' active' : '')}>
+            <div className={'card song-card' + (isActive ? ' active' : '')}>
                 <div
-                    className='songs-card-image'
+                    className='song-card-image'
                     onClick={playSong}
                     style={{backgroundImage: `url(${image})`}}>
-                    <div className='songs-card-playing'>
-                        <i className={'songs-card-playing-icon icon ' + (isActive ? 'ion-radio-waves' : 'ion-ios-play')}></i>
+                    <div className='song-card-playing'>
+                        <i className={'song-card-playing-icon icon ' + (isActive ? 'ion-radio-waves' : 'ion-ios-play')}></i>
                     </div>
                 </div>
-                <div className='songs-card-user clearfix'>
+                <div className='song-card-user clearfix'>
                     <img
-                        className='songs-card-user-image'
+                        className='song-card-user-image'
                         src={getImageUrl(user.avatar_url)} />
-                    <div className='songs-card-details'>
+                    <div className='song-card-details'>
                         <Link
-                            className='songs-card-title'
+                            className='song-card-title'
                             dispatch={dispatch}
                             route={{path: ['songs', song.id]}}>
                             {formatSongTitle(song.title)}
                         </Link>
                         <Link
-                            className='songs-card-user-username'
+                            className='song-card-user-username'
                             dispatch={dispatch}
                             route={{path: ['users', user.id]}}>
                             {user.username}
                         </Link>
                         <SongHeart
                             authed={authed}
-                            className='songs-card-heart'
+                            className='song-card-heart'
                             dispatch={dispatch}
                             isLiked={isLiked}
                             songId={song.id} />
@@ -52,10 +52,10 @@ class SongsCard extends Component {
     }
 }
 
-SongsCard.propTypes = {
+SongCard.propTypes = {
     isActive: PropTypes.bool.isRequired,
     playSong: PropTypes.func.isRequired,
     song: PropTypes.object.isRequired
 };
 
-export default SongsCard;
+export default SongCard;

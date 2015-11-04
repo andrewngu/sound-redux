@@ -112,8 +112,8 @@ class Song extends Component {
                                             className='song-image'
                                             onClick={this.playSong.bind(this, 0)}
                                             style={{backgroundImage: `url(${image})`}}>
-                                            <div className='songs-card-playing'>
-                                                <i className={'songs-card-playing-icon icon ' + (isActive ? 'ion-radio-waves' : 'ion-ios-play')}></i>
+                                            <div className='song-card-playing'>
+                                                <i className={'song-card-playing-icon icon ' + (isActive ? 'ion-radio-waves' : 'ion-ios-play')}></i>
                                             </div>
                                         </div>
                                         <div className='song-info'>

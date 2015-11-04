@@ -1,24 +1,24 @@
-.songs-card {
+.song-card {
     padding: 10px;
 
     &.active {
         border-color: #A6D2A5;
 
-        .songs-card-image {
+        .song-card-image {
             pointer-events: none;
         }
 
-        .songs-card-playing {
+        .song-card-playing {
             background-color: rgba(0, 0, 0, 0.8);
         }
 
-        .songs-card-playing-icon {
+        .song-card-playing-icon {
             opacity: 1;
         }
     }
 }
 
-.songs-card-image {
+.song-card-image {
     width: 100%;
     height: 70px;
     margin-bottom: 10px;
@@ -34,12 +34,12 @@
     }
 }
 
-.songs-card-user {
+.song-card-user {
     display: block;
     width: 100%;
 }
 
-.songs-card-user-image {
+.song-card-user-image {
     display: block;
     width: 24px;
     height: 24px;
@@ -49,7 +49,7 @@
     float: left;
 }
 
-.songs-card-playing {
+.song-card-playing {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -64,13 +64,13 @@
     &:hover {
         background-color: rgba(0, 0, 0, 0.8);
 
-        .songs-card-playing-icon {
+        .song-card-playing-icon {
             opacity: 1;
         }
     }
 }
 
-.songs-card-playing-icon {
+.song-card-playing-icon {
     color: #A6D2A5;
     font-size: 28px;
     opacity: 0;
@@ -80,11 +80,11 @@
     transition: opacity 0.2s ease-in-out;
 }
 
-.songs-card-details {
+.song-card-details {
     position: relative;
 }
 
-.songs-card-user-username {
+.song-card-user-username {
     display: block;
     margin-right: 30px;
     font-size: 11px;
@@ -93,7 +93,7 @@
     white-space: nowrap;
 }
 
-.songs-card-title {
+.song-card-title {
     display: block;
     color: #222;
     font-size: 11px;
@@ -102,7 +102,7 @@
     white-space: nowrap;
 }
 
-.songs-card-heart {
+.song-card-heart {
     position: absolute;
     bottom: -2px;
     right: 0;
