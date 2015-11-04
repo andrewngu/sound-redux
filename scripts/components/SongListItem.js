@@ -8,53 +8,53 @@ import {IMAGE_SIZES} from '../constants/SongConstants';
 import {addCommas} from '../utils/FormatUtils';
 import {getImageUrl} from '../utils/SongUtils';
 
-class SongCard extends Component {
+class SongListItem extends Component {
     render() {
         const {authed, dispatch, isActive, player, playSong, song, user} = this.props;
         const image = getImageUrl(song.artwork_url, IMAGE_SIZES.LARGE);
 
         return (
-            <div className={'song-card' + (isActive ? ' active' : '')}>
-                <div className='song-card-detail'>
+            <div className={'song-list-item' + (isActive ? ' active' : '')}>
+                <div className='song-list-item-detail'>
                     <div
-                        className='song-card-image'
+                        className='song-list-item-image'
                         onClick={playSong}
                         style={{backgroundImage: `url(${image})`}}>
                         <div className='songs-card-playing'>
                             <i className={'songs-card-playing-icon icon ' + (isActive ? 'ion-radio-waves' : 'ion-ios-play')}></i>
                         </div>
                     </div>
-                    <div className='song-card-info'>
+                    <div className='song-list-item-info'>
                         <Link
-                            className='song-card-title'
+                            className='song-list-item-title'
                             dispatch={dispatch}
                             route={{path: ['songs', song.id]}}>
                             {song.title}
                         </Link>
-                        <div className='song-card-info-extra'>
-                            <div className='song-card-user'>
+                        <div className='song-list-item-info-extra'>
+                            <div className='song-list-item-user'>
                                 <div
-                                    className='song-card-user-image'
+                                    className='song-list-item-user-image'
                                     style={{backgroundImage: `url(${getImageUrl(user.avatar_url)})`}}>
                                 </div>
                                 <Link
-                                    className='song-card-username'
+                                    className='song-list-item-username'
                                     dispatch={dispatch}
                                     route={{path: ['users', song.user_id]}}>
                                     {user.username}
                                 </Link>
                             </div>
-                            <div className='song-card-stats'>
+                            <div className='song-list-item-stats'>
                                 <SongHeartCount
                                     authed={authed}
                                     count={song.favoritings_count}
                                     dispatch={dispatch}
                                     songId={song.id} />
-                                <div className='song-card-stat'>
+                                <div className='song-list-item-stat'>
                                     <i className='icon ion-play'></i>
                                     <span>{addCommas(song.playback_count)}</span>
                                 </div>
-                                <div className='song-card-stat'>
+                                <div className='song-list-item-stat'>
                                     <i className='icon ion-chatbubble'></i>
                                     <span>{addCommas(song.comment_count)}</span>
                                 </div>
@@ -62,7 +62,7 @@ class SongCard extends Component {
                         </div>
                     </div>
                 </div>
-                <div className='song-card-waveform'>
+                <div className='song-list-item-waveform'>
                     <Waveform
                         currentTime={player.currentTime}
                         dispatch={dispatch}
@@ -76,8 +76,8 @@ class SongCard extends Component {
     }
 }
 
-SongCard.propTypes = {
+SongListItem.propTypes = {
     song: PropTypes.object.isRequired
 };
 
-export default SongCard;
+export default SongListItem;

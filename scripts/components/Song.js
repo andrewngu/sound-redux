@@ -5,7 +5,7 @@ import {fetchSongIfNeeded} from '../actions/songs';
 
 import Comments from '../components/Comments';
 import Link from '../components/Link';
-import SongCard from '../components/SongCard';
+import SongListItem from '../components/SongListItem';
 import SongHeartCount from '../components/SongHeartCount';
 import Spinner from '../components/Spinner';
 import Stickify from '../components/Stickify';
@@ -70,7 +70,7 @@ class Song extends Component {
             const relatedSong = songs[songId];
             const user = users[relatedSong.user_id];
             return (
-                <SongCard
+                <SongListItem
                     authed={authed}
                     dispatch={dispatch}
                     isActive={playingSongId === relatedSong.id}

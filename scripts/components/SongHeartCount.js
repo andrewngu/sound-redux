@@ -26,7 +26,7 @@ class SongHeartCount extends Component {
 
         if (!authed.user) {
             return (
-                <Popover className={'song-card-stat song-heart-count ' + this.props.className}>
+                <Popover className={'song-list-item-stat song-heart-count ' + this.props.className}>
                     <div>
                         <i className='icon ion-ios-heart'></i>
                         <span>{addCommas(count + (isLiked ? 1 : 0))}</span>
@@ -44,7 +44,7 @@ class SongHeartCount extends Component {
 
         return (
             <div
-                className={'song-card-stat song-heart-count' + (isLiked ? ' liked' : '')}
+                className={'song-list-item-stat song-heart-count' + (isLiked ? ' liked' : '')}
                 onClick={this.toggleLike}>
                 <i className='icon ion-ios-heart'></i>
                 <span>{addCommas(count + (isLiked ? 1 : 0))}</span>

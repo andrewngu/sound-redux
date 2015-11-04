@@ -3,7 +3,7 @@ import {playSong} from '../actions/player';
 import {fetchUserIfNeeded} from '../actions/users';
 
 import Followings from '../components/Followings';
-import SongCard from '../components/SongCard';
+import SongListItem from '../components/SongListItem';
 import Spinner from '../components/Spinner';
 import Stickify from '../components/Stickify';
 
@@ -61,7 +61,7 @@ class User extends Component {
             const song = songs[songId];
             const user = users[song.user_id];
             return (
-                <SongCard
+                <SongListItem
                     authed={authed}
                     dispatch={dispatch}
                     isActive={playingSongId === song.id}

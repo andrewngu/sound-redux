@@ -1,4 +1,4 @@
-.song-card {
+.song-list-item {
     display: flex;
     flex-direction: row;
     border-top: 1px solid #e3e3e3;
@@ -13,11 +13,11 @@
         border-color: #A6D2A5;
         border-bottom: 1px solid #A6D2A5;
 
-        & + .song-card {
+        & + .song-list-item {
             border-top: none;
         }
 
-        .song-card-image {
+        .song-list-item-image {
             pointer-events: none;
         }
 
@@ -31,18 +31,18 @@
     }
 }
 
-.song-card-detail {
+.song-list-item-detail {
     display: flex;
     flex: 1;
     align-items: center;
     padding: 10px;
 }
 
-.song-card-info {
+.song-list-item-info {
     flex: 1;
 }
 
-.song-card-image {
+.song-list-item-image {
     width: 60px;
     height: 60px;
     margin-right: 20px;
@@ -58,7 +58,7 @@
     }
 }
 
-.song-card-title {
+.song-list-item-title {
     display: block;
     color: #222;
     font-size: 14px;
@@ -68,13 +68,13 @@
     text-overflow: ellipsis;
 }
 
-.song-card-user {
+.song-list-item-user {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.song-card-user-image {
+.song-list-item-user-image {
     width: 24px;
     height: 24px;
     margin-right: 10px;
@@ -87,25 +87,25 @@
     background-size: cover;
 }
 
-.song-card-info-extra {
+.song-list-item-info-extra {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-top: 10px;
 }
 
-.song-card-stats {
+.song-list-item-stats {
     flex: 1;
     margin-left: 20px;
     font-size: 11px;
     color: #ccc;
 }
 
-.song-card-stat {
+.song-list-item-stat {
     display: inline-block;
     width: 80px;
 
-    & + .song-card-stat {
+    & + .song-list-item-stat {
         margin-left: 20px;
     }
 
@@ -114,14 +114,14 @@
     }
 }
 
-.song-card-waveform {
+.song-list-item-waveform {
     display: flex;
     align-items: center;
     width: 200px;
     height: 80px;
     border-left: 1px solid #e3e3e3;
 }
-.song-card-waveform .waveform {
+.song-list-item-waveform .waveform {
     height: 100%;
 
     .waveform-image-container {
