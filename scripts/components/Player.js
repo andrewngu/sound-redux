@@ -54,6 +54,13 @@ class Player extends Component {
         audioElement.addEventListener('timeupdate', this.handleTimeUpdate, false);
         audioElement.addEventListener('volumechange', this.handleVolumeChange, false);
         audioElement.play();
+
+        document.addEventListener('keypress', function(e) {
+            e.preventDefault();
+            if ( e.keyCode === 32 || e.which === 32 )
+                this.togglePlay();
+        }.bind(this));
+
     }
 
     componentDidUpdate(prevProps) {
