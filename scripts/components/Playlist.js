@@ -12,7 +12,8 @@ class Playlist extends Component {
         this.setState({shownPlaylistIndex : null});
     }
 
-    changeShownPlaylistIndex(i) {
+    changeShownPlaylistIndex(i, e) {
+        e.preventDefault();
         const {player} = this.props;
         const {selectedPlaylists} = player;
         if (i < 0 || i >= selectedPlaylists.length) {
@@ -64,12 +65,14 @@ class Playlist extends Component {
                 <div className='playlist-header'>
                     <a
                         className={'playlist-header-button' + (shownPlaylistIndex === 0 ? ' disabled' : '')}
+                        href='#'
                         onClick={this.changeShownPlaylistIndex.bind(this, shownPlaylistIndex - 1)}>
                         <i className='icon ion-ios-arrow-back'></i>
                     </a>
                     <div className='playlist-header-title'>{shownPlaylist.split('|')[0]}</div>
                     <a
                         className={'playlist-header-button' + (shownPlaylistIndex === selectedPlaylists.length - 1 ? ' disabled' : '')}
+                        href='#'
                         onClick={this.changeShownPlaylistIndex.bind(this, shownPlaylistIndex + 1)}>
                         <i className='icon ion-ios-arrow-forward'></i>
                     </a>

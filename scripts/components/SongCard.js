@@ -14,14 +14,15 @@ class SongCard extends Component {
 
         return (
             <div className={'card song-card' + (isActive ? ' active' : '')}>
-                <div
+                <a
                     className='song-card-image'
+                    href='#'
                     onClick={playSong}
                     style={{backgroundImage: `url(${image})`}}>
                     <div className='song-card-playing'>
                         <i className={'song-card-playing-icon icon ' + (isActive ? 'ion-radio-waves' : 'ion-ios-play')}></i>
                     </div>
-                </div>
+                </a>
                 <div className='song-card-user clearfix'>
                     <img
                         className='song-card-user-image'

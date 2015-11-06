@@ -9,12 +9,14 @@ class SongHeart extends Component {
         this.toggleLike = this.toggleLike.bind(this);
     }
 
-    login() {
+    login(e) {
+        e.preventDefault();
         const {dispatch} = this.props;
         dispatch(loginUser(false));
     }
 
-    toggleLike() {
+    toggleLike(e) {
+        e.preventDefault();
         const {dispatch, songId} = this.props;
         dispatch(toggleLike(songId));
     }
@@ -28,7 +30,7 @@ class SongHeart extends Component {
                     <div className='song-heart-panel popover-content'>
                         <ul className='header-user-panel-list'>
                             <li className='header-user-panel-item'>
-                                <a className='button orange block' onClick={this.login}>Sign into SoundCloud</a>
+                                <a href='#' className='button orange block' onClick={this.login}>Sign into SoundCloud</a>
                             </li>
                         </ul>
                     </div>
@@ -39,6 +41,7 @@ class SongHeart extends Component {
         return (
             <a
                 className={'song-heart ' + this.props.className + (isLiked ? ' liked' : '')}
+                href='#'
                 onClick={this.toggleLike}>
                 <i className='icon ion-ios-heart'></i>
             </a>

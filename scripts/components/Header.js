@@ -27,12 +27,14 @@ class Header extends Component {
         return 'playlists';
     }
 
-    login() {
+    login(e) {
+        e.preventDefault();
         const {dispatch} = this.props;
         dispatch(loginUser());
     }
 
-    logout() {
+    logout(e) {
+        e.preventDefault();
         const {dispatch} = this.props;
         dispatch(logoutUser())
     }
@@ -61,7 +63,7 @@ class Header extends Component {
                     <div className='header-user-panel popover-content'>
                         <ul className='header-user-panel-list'>
                             <li className='header-user-panel-item'>
-                                <a onClick={this.logout}>Log Out</a>
+                                <a href='#' onClick={this.logout}>Log Out</a>
                             </li>
                         </ul>
                     </div>
@@ -79,7 +81,7 @@ class Header extends Component {
                 <div className='header-user-panel popover-content'>
                     <ul className='header-user-panel-list'>
                         <li className='header-user-panel-item'>
-                            <a className='button orange block' onClick={this.login}>Sign into SoundCloud</a>
+                            <a href='#' className='button orange block' onClick={this.login}>Sign into SoundCloud</a>
                         </li>
                     </ul>
                 </div>

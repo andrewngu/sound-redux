@@ -93,7 +93,8 @@ class SongCards extends Component {
         }
     }
 
-    playSong(i) {
+    playSong(i, e) {
+        e.preventDefault();
         const {playlist, dispatch} = this.props;
         dispatch(playSong(playlist, i));
     }

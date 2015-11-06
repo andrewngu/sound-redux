@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {navigateTo} from '../actions/navigator';
+import {constructUrl} from '../utils/RouteUtils';
 
 class Link extends Component {
     constructor(props) {
@@ -14,10 +15,10 @@ class Link extends Component {
     }
 
     render() {
-        const {children, className} = this.props;
+        const {children, className, route} = this.props;
 
         return (
-            <a className={className} onClick={this.handleClick}>{children}</a>
+            <a className={className} href={`/#/${constructUrl(route)}`} onClick={this.handleClick}>{children}</a>
         );
     }
 }
