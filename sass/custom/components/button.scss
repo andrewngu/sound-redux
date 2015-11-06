@@ -7,7 +7,7 @@
     color: #222;
     font-size: 12px;
     border: 1px solid #C7C7C7;
-    border-radius: 3px;
+    border-radius: 2px;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
@@ -15,6 +15,11 @@
     -moz-transition: background-color 0.2s ease-in-out;
     -ms-transition: background-color 0.2s ease-in-out;
     transition: background-color 0.2s ease-in-out;
+
+    &.small {
+        padding: 4px 6px;
+        font-size: 11px;
+    }
 
     &:hover {
         background-color: #fafafa;
@@ -49,5 +54,14 @@
 
     &:active {
         background-color: #F55A0D;
+    }
+}
+
+.button.red-white {
+
+    &.active {
+        border-color: #DE7168;
+        background-color: #e17d74;
+        color: #fff;
     }
 }

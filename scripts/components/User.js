@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import {toggleFollow} from '../actions/authed';
 import {playSong} from '../actions/player';
 import {fetchUserIfNeeded} from '../actions/users';
 
@@ -15,6 +16,11 @@ import {getImageUrl} from '../utils/SongUtils';
 import {getUserLocation} from '../utils/UserUtils';
 
 class User extends Component {
+    constructor() {
+        super();
+        this.toggleFollow = this.toggleFollow.bind(this);
+    }
+
     componentWillMount() {
         const {dispatch, userId} = this.props;
         dispatch(fetchUserIfNeeded(userId));
@@ -35,6 +41,23 @@ class User extends Component {
         }
 
         dispatch(playSong(user.username + USER_PLAYLIST_SUFFIX, i));
+    }
+
+    toggleFollow() {
+        const {dispatch, userId} = this.props;
+        dispatch(toggleFollow(userId));
+    }
+
+    renderFollowButton() {
+        const {authed, userId} = this.props;
+        const isFollowing = userId in authed.followings && authed.followings[userId] === 1;
+        return (
+            <a
+                className={'user-follow-button button red-white small' + (isFollowing ? ' active' : '')}
+                onClick={this.toggleFollow}>
+                {isFollowing ? 'following' : 'follow'}
+            </a>
+        );
     }
 
     renderFollowings() {
@@ -115,6 +138,7 @@ class User extends Component {
                                     <img className='user-image' src={image} />
                                 </div>
                                 <div className='user-info'>
+                                    {this.renderFollowButton()}
                                     <div className='user-username'>{user.username}</div>
                                     <div className='user-location'>
                                         <i className='icon ion-location'></i>

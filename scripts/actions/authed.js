@@ -6,7 +6,7 @@ import {fetchSongs, receiveSongs} from '../actions/playlists';
 import * as types from '../constants/ActionTypes';
 import {CLIENT_ID} from '../constants/Config';
 import {AUTHED_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
-import {playlistSchema, songSchema} from '../constants/Schemas';
+import {playlistSchema, songSchema, userSchema} from '../constants/Schemas';
 
 const COOKIE_PATH = 'accessToken';
 
@@ -32,6 +32,21 @@ function fetchAuthedUser(accessToken, shouldShowStream) {
     };
 }
 
+function fetchFollowings(accessToken) {
+    return dispatch => {
+        return fetch(`//api.soundcloud.com/me/followings?oauth_token=${accessToken}`)
+            .then(response => response.json())
+            .then(json => normalize(json, arrayOf(userSchema)))
+            .then(normalized => {
+                const users = normalized.result.reduce((obj, userId) => Object.assign({}, obj, {[userId]: 1}), {});
+                console.log(normalized.result);
+                console.log(users);
+                dispatch(receiveAuthedFollowings(users, normalized.entities));
+            })
+            .catch(error => {throw error});
+  }
+}
+
 function fetchLikes(accessToken) {
     return dispatch => {
         return fetch(`//api.soundcloud.com/me/favorites?oauth_token=${accessToken}`)
@@ -39,8 +54,7 @@ function fetchLikes(accessToken) {
             .then(json => {
                 const songs = json.filter(song => song.streamable);
                 const normalized = normalize(songs, arrayOf(songSchema));
-                const likes = normalized.result
-                    .reduce((obj, songId) => Object.assign({}, obj, {[songId]: 1}), {});
+                const likes = normalized.result.reduce((obj, songId) => Object.assign({}, obj, {[songId]: 1}), {});
                 dispatch(receiveLikes(likes));
                 dispatch(receiveSongs(normalized.entities, normalized.result, 'likes' + AUTHED_PLAYLIST_SUFFIX, null));
             })
@@ -128,9 +142,18 @@ function receiveAuthedUserPre(accessToken, user, shouldShowStream) {
         dispatch(fetchLikes(accessToken));
         dispatch(fetchPlaylists(accessToken));
         dispatch(fetchStream(accessToken));
+        dispatch(fetchFollowings(accessToken));
         if (shouldShowStream) {
             dispatch(navigateTo({path: ['me', 'stream']}));
         }
+    };
+}
+
+function receiveAuthedFollowings(users, entities) {
+    return {
+        type: types.RECEIVE_AUTHED_FOLLOWINGS,
+        entities,
+        users
     };
 }
 
@@ -163,6 +186,14 @@ function resetAuthed(playlists) {
     };
 }
 
+function setFollowing(userId, following) {
+    return {
+        type: types.SET_FOLLOWING,
+        following,
+        userId
+    };
+}
+
 function setLike(songId, liked) {
     return {
         type: types.SET_LIKE,
@@ -171,8 +202,22 @@ function setLike(songId, liked) {
     };
 }
 
-function syncLike(userId, accessToken, songId, liked) {
-    fetch(`//api.soundcloud.com/users/${userId}/favorites/${songId}?oauth_token=${accessToken}`, {method: liked ? 'put' : 'delete'});
+function syncFollowing(accessToken, userId, following) {
+    fetch(`//api.soundcloud.com/me/followings/${userId}?oauth_token=${accessToken}`, {method: following ? 'put' : 'delete'});
+}
+
+function syncLike(accessToken, songId, liked) {
+    fetch(`//api.soundcloud.com/me/favorites/${songId}?oauth_token=${accessToken}`, {method: liked ? 'put' : 'delete'});
+}
+
+export function toggleFollow(userId) {
+    return (dispatch, getState) => {
+        const {authed} = getState();
+        const {followings} = authed;
+        const following = userId in followings && followings[userId] === 1 ? 0 : 1;
+        dispatch(setFollowing(userId, following));
+        syncFollowing(authed.accessToken, userId, following);
+    }
 }
 
 export function toggleLike(songId) {
@@ -180,10 +225,10 @@ export function toggleLike(songId) {
         const {authed} = getState();
         const {likes} = authed;
         const liked = songId in likes && likes[songId] === 1 ? 0 : 1;
-        if (!(songId in likes)) {
+        if (liked === 1) {
             dispatch(appendLike(songId));
         }
         dispatch(setLike(songId, liked));
-        syncLike(authed.user.id, authed.accessToken, songId, liked);
+        syncLike(authed.accessToken, songId, liked);
     };
 }
