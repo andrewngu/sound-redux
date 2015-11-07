@@ -56,13 +56,11 @@ class Player extends Component {
         audioElement.play();
 
         document.addEventListener('keypress', (event) => {
-            event.preventDefault();
             const keyCode = event.keyCode || event.which;
-
-            console.log(keyCode);
 
             switch(keyCode) {
                 case 32:
+                    event.preventDefault();
                     this.togglePlay();
                     break;
 
