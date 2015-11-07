@@ -25,6 +25,7 @@ class Player extends Component {
         this.handlePause = this.handlePause.bind(this);
         this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
         this.handleVolumeChange = this.handleVolumeChange.bind(this);
+        this.onKeyPress = this.onKeyPress.bind(this);
         this.seek = this.seek.bind(this);
         this.toggleMute = this.toggleMute.bind(this);
         this.togglePlay = this.togglePlay.bind(this);
@@ -45,6 +46,8 @@ class Player extends Component {
     }
 
     componentDidMount() {
+        document.addEventListener('keypress', this.onKeyPress);
+
         const audioElement = React.findDOMNode(this.refs.audio);
         audioElement.addEventListener('ended', this.handleEnded, false);
         audioElement.addEventListener('loadedmetadata', this.handleLoadedMetadata, false);
@@ -54,26 +57,6 @@ class Player extends Component {
         audioElement.addEventListener('timeupdate', this.handleTimeUpdate, false);
         audioElement.addEventListener('volumechange', this.handleVolumeChange, false);
         audioElement.play();
-
-        document.addEventListener('keypress', (e) => {
-            const keyCode = e.keyCode || e.which;
-            if (e.target.tagName.toLowerCase().match(/input|textarea/))
-                return false;
-
-            switch(keyCode) {
-                case 32:
-                    e.preventDefault();
-                    this.togglePlay();
-                    break;
-                case 106:
-                    this.changeSong(CHANGE_TYPES.NEXT)
-                    break;
-                case 107:
-                    this.changeSong(CHANGE_TYPES.PREV)
-                    break;
-            }
-        });
-
     }
 
     componentDidUpdate(prevProps) {
@@ -85,6 +68,8 @@ class Player extends Component {
     }
 
     componentWillUnmount() {
+        document.removeEventListener('keypress', this.onKeyPress, false);
+
         const audioElement = React.findDOMNode(this.refs.audio);
         audioElement.removeEventListener('ended', this.handleEnded, false);
         audioElement.removeEventListener('loadedmetadata', this.handleLoadedMetadata, false);
@@ -247,6 +232,25 @@ class Player extends Component {
         }, function() {
             React.findDOMNode(this.refs.audio).volume = this.state.volume;
         });
+    }
+
+    onKeyPress(e) {
+        const keyCode = e.keyCode || e.which;
+        const isInsideInput = e.target.tagName.toLowerCase().match(/input|textarea/);
+        if (isInsideInput) {
+            return;
+        }
+
+        if (keyCode === 32) {
+            e.preventDefault();
+            this.togglePlay();
+        } else if (keyCode === 106) {
+            e.preventDefault();
+            this.changeSong(CHANGE_TYPES.PREV);
+        } else if (keyCode === 107) {
+            e.preventDefault();
+            this.changeSong(CHANGE_TYPES.NEXT);
+        }
     }
 
     seek(e) {

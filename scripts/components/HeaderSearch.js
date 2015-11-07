@@ -5,16 +5,15 @@ class HeaderSearch extends Component {
     constructor(props) {
         super(props);
         this.handleOnKeyPress = this.handleOnKeyPress.bind(this);
+        this.onSlashPress = this.onSlashPress.bind(this);
     }
 
     componentDidMount() {
-        document.addEventListener('keypress', (event) => {
-            const keyCode = event.keyCode || event.which;
-            if (keyCode === 47) {
-                event.preventDefault();
-                React.findDOMNode(this.refs.query).focus();
-            }
-        });
+        document.addEventListener('keypress', this.onSlashPress, false);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keyCode', this.onSlashPress, false)
     }
 
     handleOnKeyPress(e) {
@@ -23,6 +22,15 @@ class HeaderSearch extends Component {
             if (value !== '') {
                 this.props.dispatch(navigateTo({path: ['songs'], query: {q: value}}));
             }
+        }
+    }
+
+    onSlashPress(e) {
+        const keyCode = e.keyCode || e.which;
+        const isInsideInput = e.target.tagName.toLowerCase().match(/input|textarea/);
+        if (keyCode === 47 && !isInsideInput) {
+            e.preventDefault();
+            React.findDOMNode(this.refs.query).focus();
         }
     }
 
