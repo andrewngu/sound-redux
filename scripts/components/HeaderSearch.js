@@ -7,6 +7,16 @@ class HeaderSearch extends Component {
         this.handleOnKeyPress = this.handleOnKeyPress.bind(this);
     }
 
+    componentDidMount() {
+        document.addEventListener('keypress', (event) => {
+            const keyCode = event.keyCode || event.which;
+            if (keyCode === 47) {
+                event.preventDefault();
+                React.findDOMNode(this.refs.query).focus();
+            }
+        });
+    }
+
     handleOnKeyPress(e) {
         if (e.charCode === 13) {
             const value = e.currentTarget.value.trim();
@@ -20,7 +30,7 @@ class HeaderSearch extends Component {
         return (
             <div className='header-search'>
                 <i className='icon ion-search'></i>
-                <input className='header-search-input' placeholder='SEARCH' onKeyPress={this.handleOnKeyPress} type='text' />
+                <input ref="query" className='header-search-input' placeholder='SEARCH' onKeyPress={this.handleOnKeyPress} type='text' />
             </div>
         );
     }
