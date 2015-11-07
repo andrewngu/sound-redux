@@ -1,0 +1,12 @@
+@media only screen and (max-device-width: 480px) {
+    [class*='col-'] {
+        float: none;
+        min-height: 1px;
+        width: auto;
+        padding: 10px;
+    }
+
+    [class*='col-'] {
+        padding-right: 0;
+    }
+}
