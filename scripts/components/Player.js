@@ -55,9 +55,11 @@ class Player extends Component {
         audioElement.addEventListener('volumechange', this.handleVolumeChange, false);
         audioElement.play();
 
-        document.addEventListener('keypress', function(e) {
-            e.preventDefault();
-            const keyCode = e.keyCode || e.which;
+        document.addEventListener('keypress', (event) => {
+            event.preventDefault();
+            const keyCode = event.keyCode || event.which;
+
+            console.log(keyCode);
 
             switch(keyCode) {
                 case 32:
@@ -72,7 +74,7 @@ class Player extends Component {
                     this.changeSong(CHANGE_TYPES.PREV)
                     break;
             }
-        }.bind(this));
+        });
 
     }
 
