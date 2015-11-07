@@ -55,12 +55,15 @@ class Player extends Component {
         audioElement.addEventListener('volumechange', this.handleVolumeChange, false);
         audioElement.play();
 
-        document.addEventListener('keypress', (event) => {
-            const keyCode = event.keyCode || event.which;
+        document.addEventListener('keypress', (e) => {
+            const keyCode = e.keyCode || e.which;
+
+            if (e.target.tagName.toLowerCase().match(/input|textarea/))
+                return false;
 
             switch(keyCode) {
                 case 32:
-                    event.preventDefault();
+                    e.preventDefault();
                     this.togglePlay();
                     break;
 
