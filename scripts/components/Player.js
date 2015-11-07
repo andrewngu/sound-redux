@@ -57,8 +57,21 @@ class Player extends Component {
 
         document.addEventListener('keypress', function(e) {
             e.preventDefault();
-            if ( e.keyCode === 32 || e.which === 32 )
-                this.togglePlay();
+            const keyCode = e.keyCode || e.which;
+
+            switch(keyCode) {
+                case 32:
+                    this.togglePlay();
+                    break;
+
+                case 106:
+                    this.changeSong(CHANGE_TYPES.NEXT)
+                    break;
+
+                case 107:
+                    this.changeSong(CHANGE_TYPES.PREV)
+                    break;
+            }
         }.bind(this));
 
     }
