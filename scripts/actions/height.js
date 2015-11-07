@@ -1,8 +1,17 @@
 import * as types from '../constants/ActionTypes';
 
-export function changeHeight(height) {
+function changeHeight(height) {
     return {
         type: types.CHANGE_HEIGHT,
         height
     };
+}
+
+export function initHeight() {
+    return dispatch => {
+        dispatch(changeHeight(window.innerHeight));
+        window.onresize = () => {
+            dispatch(changeHeight(window.innerHeight));
+        }
+    }
 }

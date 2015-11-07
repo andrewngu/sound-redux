@@ -1,35 +1,71 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
+import {initAuth} from '../actions/authed';
 import {initEnvironment} from '../actions/environment';
-import Desktop from '../containers/Desktop';
-import Mobile from '../containers/Mobile';
+import {initHeight} from '../actions/height';
+import {initNavigator} from '../actions/navigator';
+
+import HeaderContainer from '../containers/HeaderContainer';
+import MeContainer from '../containers/MeContainer';
+import ModalContainer from '../containers/ModalContainer';
+import PlayerContainer from '../containers/PlayerContainer';
+import SongContainer from '../containers/SongContainer';
+import SongsContainer from '../containers/SongsContainer';
+import UserContainer from '../containers/UserContainer';
 
 class App extends Component {
-    componentWillMount() {
+    componentDidMount () {
         const {dispatch} = this.props;
         dispatch(initEnvironment());
+        dispatch(initAuth());
+        dispatch(initHeight());
+        dispatch(initNavigator());
+    }
+
+    renderContent() {
+        const {path} = this.props;
+        switch(path[0]) {
+        case 'songs':
+            switch(path.length) {
+            case 1:
+                return <SongsContainer />;
+            case 2:
+                return <SongContainer />;
+            }
+        case 'users':
+            return <UserContainer />;
+        case 'me':
+            return <MeContainer />;
+        default:
+            return;
+        }
     }
 
     render() {
-        const {isMobile} = this.props.environment;
-        if (isMobile) {
-            return <Mobile />;
-        }
-
-        return <Desktop />;
+        return (
+            <div>
+                <HeaderContainer />
+                {this.renderContent()}
+                <PlayerContainer />
+                <ModalContainer />
+            </div>
+        );
     }
 }
 
 App.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    environment: PropTypes.object.isRequired
+    navigator: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
-    const {environment} = state;
+    const {navigator} = state;
 
-    return { environment };
+    return {
+        path: navigator.route.path
+    };
 }
+
 
 export default connect(mapStateToProps)(App);
