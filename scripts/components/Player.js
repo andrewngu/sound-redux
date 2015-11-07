@@ -57,7 +57,6 @@ class Player extends Component {
 
         document.addEventListener('keypress', (e) => {
             const keyCode = e.keyCode || e.which;
-
             if (e.target.tagName.toLowerCase().match(/input|textarea/))
                 return false;
 
@@ -66,11 +65,9 @@ class Player extends Component {
                     e.preventDefault();
                     this.togglePlay();
                     break;
-
                 case 106:
                     this.changeSong(CHANGE_TYPES.NEXT)
                     break;
-
                 case 107:
                     this.changeSong(CHANGE_TYPES.PREV)
                     break;
