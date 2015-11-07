@@ -39,8 +39,6 @@ function fetchFollowings(accessToken) {
             .then(json => normalize(json, arrayOf(userSchema)))
             .then(normalized => {
                 const users = normalized.result.reduce((obj, userId) => Object.assign({}, obj, {[userId]: 1}), {});
-                console.log(normalized.result);
-                console.log(users);
                 dispatch(receiveAuthedFollowings(users, normalized.entities));
             })
             .catch(error => {throw error});

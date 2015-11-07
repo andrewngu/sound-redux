@@ -50,6 +50,10 @@ class User extends Component {
 
     renderFollowButton() {
         const {authed, userId} = this.props;
+        if (!authed.user) {
+            return;
+        }
+
         const isFollowing = userId in authed.followings && authed.followings[userId] === 1;
         return (
             <a
