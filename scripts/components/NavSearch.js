@@ -36,9 +36,9 @@ class NavSearch extends Component {
 
     render() {
         return (
-            <div className='header-search'>
+            <div className='nav-search'>
                 <i className='icon ion-search'></i>
-                <input ref="query" className='header-search-input' placeholder='SEARCH' onKeyPress={this.handleOnKeyPress} type='text' />
+                <input ref="query" className='nav-search-input' placeholder='SEARCH' onKeyPress={this.handleOnKeyPress} type='text' />
             </div>
         );
     }

@@ -1,4 +1,4 @@
-.header {
+.nav {
     height: 50px;
     background-color: #3a3f41;
 
@@ -7,17 +7,17 @@
     }
 };
 
-.header-nav {
+.nav-nav {
     display: table;
     height: 100%;
 }
 
-.header-nav-item {
+.nav-nav-item {
     display: table-cell;
     vertical-align: middle;
 }
 
-.header-nav-item-link {
+.nav-nav-item-link {
     display: inline-block;
     margin: 10px 30px;
     color: rgba(255,255,255, 0.5);
@@ -34,7 +34,7 @@
     }
 }
 
-.header-nav-user-link {
+.nav-nav-user-link {
     display: flex;
     align-items: center;
     margin: 2px 40px 0;
@@ -56,7 +56,7 @@
     }
 }
 
-.header-nav-selected-playlist {
+.nav-nav-selected-playlist {
     display: inline-block;
     max-width: 130px;
     white-space: nowrap;
@@ -64,7 +64,7 @@
     text-overflow: ellipsis;
 }
 
-.header-logo {
+.nav-logo {
     display: inline-block;
     padding: 11px 0;
     color: #fff;
@@ -72,7 +72,7 @@
     float: left;
 }
 
-.header-user-link {
+.nav-user-link {
     display: flex;
     align-items: center;
     color: #fff;
@@ -93,42 +93,42 @@
     }
 }
 
-.header-user-panel {
+.nav-user-panel {
     top: 40px;
     right: 2px;
     width: 200px;
 }
 
-.header-user-panel.popover-content:before {
+.nav-user-panel.popover-content:before {
     top: -7px ;
     right: 14px ;
     border-width: 7px;
     border-bottom: 7px solid #999;
 }
 
-.header-user-panel.popover-content:after {
+.nav-user-panel.popover-content:after {
     top: -6px;
     right: 14px;
     border-width: 7px;
     border-bottom: 7px solid #fff;
 }
 
-.header-user-panel-list {
+.nav-user-panel-list {
     list-style: none;
 }
 
-.header-user-panel-item {
+.nav-user-panel-item {
     padding: 10px;
     font-size: 11px;
 }
 
-.header-authed {
+.nav-authed {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.header-authed-dot {
+.nav-authed-dot {
     position: absolute;
     bottom: 3px;
     right: -2px;
@@ -139,7 +139,7 @@
     background-color: rgba(166, 210, 165, 0.6);
 }
 
-.header-authed-image {
+.nav-authed-image {
     width: 29px;
     height: 29px;
     margin-left: 17px;
