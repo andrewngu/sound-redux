@@ -10,7 +10,7 @@ class SongContainer extends Component {
 }
 
 function mapStateToProps(state) {
-    const {authed, entities, height, navigator, player, playlists} = state;
+    const {authed, entities, environment, navigator, player, playlists} = state;
     const {path, query} = navigator.route;
     const songId = parseInt(path[1]);
 
@@ -18,7 +18,7 @@ function mapStateToProps(state) {
 
     return {
         authed,
-        height,
+        height: environment.height,
         player,
         playingSongId,
         playlists,

@@ -10,13 +10,13 @@ class MeContainer extends Component {
 }
 
 function mapStateToProps(state) {
-    const {authed, entities, height, navigator, player, playlists} = state;
+    const {authed, entities, environment, navigator, player, playlists} = state;
     const playingSongId = getPlayingSongId(player, playlists);
 
     return {
         authed,
         authedPlaylists: entities.playlists,
-        height,
+        height: environment.height,
         player,
         playingSongId,
         playlists,

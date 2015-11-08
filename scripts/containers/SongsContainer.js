@@ -1,16 +1,22 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {fetchSongsIfNeeded} from '../actions/playlists';
+import MobileSongs from '../components/MobileSongs';
 import Songs from '../components/Songs';
 
 class SongsContainer extends Component {
     render() {
+        const {isMobile} = this.props;
+        if (isMobile) {
+            return <MobileSongs {...this.props} />;
+        }
+
         return <Songs {...this.props} />;
     }
 }
 
 function mapStateToProps(state) {
-    const {authed, entities, height, navigator, player, playlists} = state;
+    const {authed, entities, environment, navigator, player, playlists} = state;
 
     const playingSongId = player.currentSongIndex !== null ? playlists[player.selectedPlaylists[player.selectedPlaylists.length - 1]].items[player.currentSongIndex] : null;
 
@@ -23,7 +29,8 @@ function mapStateToProps(state) {
 
     return {
         authed,
-        height,
+        height: environment.height,
+        isMobile: environment.isMobile,
         playingSongId,
         playlist,
         playlists,

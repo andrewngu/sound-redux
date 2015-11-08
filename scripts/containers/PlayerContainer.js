@@ -1,12 +1,13 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import MobilePlayer from '../components/MobilePlayer';
 import Player from '../components/Player';
 import {getPlayingSongId} from '../utils/PlayerUtils';
 
 class PlayerContainer extends Component {
     render() {
         if (!this.props.playingSongId) {
-            return <div/>;
+            return <MobilePlayer {...this.props} />;
         }
 
         return <Player {...this.props} />;

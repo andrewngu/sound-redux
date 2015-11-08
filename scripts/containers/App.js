@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 
 import {initAuth} from '../actions/authed';
 import {initEnvironment} from '../actions/environment';
-import {initHeight} from '../actions/height';
 import {initNavigator} from '../actions/navigator';
 
 import MobileFooter from '../components/MobileFooter';
@@ -16,14 +15,11 @@ import SongContainer from '../containers/SongContainer';
 import SongsContainer from '../containers/SongsContainer';
 import UserContainer from '../containers/UserContainer';
 
-import styles from '../../styles/mobile/container';
-
 class App extends Component {
     componentDidMount () {
         const {dispatch} = this.props;
         dispatch(initEnvironment());
         dispatch(initAuth());
-        dispatch(initHeight());
         dispatch(initNavigator());
     }
 
@@ -47,11 +43,12 @@ class App extends Component {
     }
 
     render() {
-        const {isMobile} = this.props;
+        const {height, isMobile, width} = this.props;
         if (isMobile) {
             return (
-                <div style={styles.container}>
-                    <ModalContainer />
+                <div className='mobile' style={{height: `${height}px`, width: `${width}px`}}>
+                    {this.renderContent()}
+                    <NavContainer />
                 </div>
             );
         }
@@ -76,8 +73,10 @@ function mapStateToProps(state) {
     const {environment, navigator} = state;
 
     return {
+        height: environment.height,
         isMobile: environment.isMobile,
-        path: navigator.route.path
+        path: navigator.route.path,
+        width: environment.width
     };
 }
 
