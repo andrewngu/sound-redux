@@ -3,20 +3,25 @@ import {getImageUrl} from '../utils/SongUtils';
 
 class MobileSongListItem extends Component {
     render() {
-        const {song, user} = this.props;
+        const {playSong, song, user} = this.props;
 
         return (
-            <div>
-                <img src={getImageUrl(song.artwork_url)} />
-                <div>
-                    <div>
+            <a
+                className='mobile-song-list-item'
+                href='#'
+                onClick={playSong}>
+                <img
+                    className='mobile-song-list-item-image'
+                    src={getImageUrl(song.artwork_url)} />
+                <div className='mobile-song-list-item-info'>
+                    <div className='mobile-song-list-item-title'>
                         {song.title}
                     </div>
-                    <div>
+                    <div className='mobile-song-list-item-user'>
                         {user.username}
                     </div>
                 </div>
-            </div>
+            </a>
         );
     }
 }

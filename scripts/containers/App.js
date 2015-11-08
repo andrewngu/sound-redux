@@ -47,6 +47,7 @@ class App extends Component {
         if (isMobile) {
             return (
                 <div className='mobile' style={{height: `${height}px`, width: `${width}px`}}>
+                    <PlayerContainer />
                     {this.renderContent()}
                     <NavContainer />
                 </div>

@@ -6,7 +6,7 @@ class MobileNav extends Component {
 
         return (
             <div className='mobile-nav'>
-                <div className='mobile-nav-itm'>
+                <div className='mobile-nav-item'>
                     {'Hello'}
                 </div>
             </div>

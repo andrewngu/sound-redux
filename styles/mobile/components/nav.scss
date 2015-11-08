@@ -1,0 +1,14 @@
+.mobile-nav {
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    border: 1px solid #e3e3e3;
+}
+
+.mobile-nav-item {
+    display: flex;
+    flex: 1;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+}
