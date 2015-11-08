@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import ReactDOM from 'react-dom';
 import {navigateTo} from '../actions/navigator';
 
 class NavSearch extends Component {
@@ -30,7 +31,7 @@ class NavSearch extends Component {
         const isInsideInput = e.target.tagName.toLowerCase().match(/input|textarea/);
         if (keyCode === 47 && !isInsideInput) {
             e.preventDefault();
-            React.findDOMNode(this.refs.query).focus();
+            ReactDOM.findDOMNode(this.refs.query).focus();
         }
     }
 
