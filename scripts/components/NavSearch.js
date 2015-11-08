@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {navigateTo} from '../actions/navigator';
 
-class HeaderSearch extends Component {
+class NavSearch extends Component {
     constructor(props) {
         super(props);
         this.handleOnKeyPress = this.handleOnKeyPress.bind(this);
@@ -44,4 +44,4 @@ class HeaderSearch extends Component {
     }
 }
 
-export default HeaderSearch;
+export default NavSearch;

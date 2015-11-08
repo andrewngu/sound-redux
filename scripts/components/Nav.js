@@ -1,13 +1,13 @@
 import React, {Component, PropTypes} from 'react';
 import {loginUser, logoutUser} from '../actions/authed';
-import HeaderSearch from '../components/HeaderSearch';
 import Link from '../components/Link';
+import NavSearch from '../components/NavSearch';
 import Popover from '../components/Popover';
 import {getImageUrl} from '../utils/SongUtils';
 
 const PATHS = ['stream', 'likes'];
 
-class Header extends Component {
+class Nav extends Component {
     constructor(props) {
         super(props);
         this.login = this.login.bind(this);
@@ -177,7 +177,7 @@ class Header extends Component {
                     </div>
                     <div className='header-nav float-right'>
                         <div className='header-nav-item'>
-                            <HeaderSearch dispatch={dispatch} />
+                            <NavSearch dispatch={dispatch} />
                         </div>
                         <div className='header-nav-item'>
                             {this.renderHeaderUser()}
@@ -189,8 +189,8 @@ class Header extends Component {
     }
 }
 
-Header.propTypes = {
+Nav.propTypes = {
 
 };
 
-export default Header;
+export default Nav;

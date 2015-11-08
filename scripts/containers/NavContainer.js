@@ -1,10 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import Header from '../components/Header';
+import Nav from '../components/Nav';
 
-class HeaderContainer extends Component {
+class NavContainer extends Component {
     render() {
-        return <Header {...this.props} />;
+        return <Nav {...this.props} />;
     }
 }
 
@@ -19,4 +19,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(HeaderContainer);
+export default connect(mapStateToProps)(NavContainer);

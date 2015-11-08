@@ -6,13 +6,17 @@ import {initEnvironment} from '../actions/environment';
 import {initHeight} from '../actions/height';
 import {initNavigator} from '../actions/navigator';
 
-import HeaderContainer from '../containers/HeaderContainer';
+import MobileFooter from '../components/MobileFooter';
+
+import NavContainer from '../containers/NavContainer';
 import MeContainer from '../containers/MeContainer';
 import ModalContainer from '../containers/ModalContainer';
 import PlayerContainer from '../containers/PlayerContainer';
 import SongContainer from '../containers/SongContainer';
 import SongsContainer from '../containers/SongsContainer';
 import UserContainer from '../containers/UserContainer';
+
+import styles from '../../styles/mobile/container';
 
 class App extends Component {
     componentDidMount () {
@@ -43,9 +47,18 @@ class App extends Component {
     }
 
     render() {
+        const {isMobile} = this.props;
+        if (isMobile) {
+            return (
+                <div style={styles.container}>
+                    <ModalContainer />
+                </div>
+            );
+        }
+
         return (
             <div>
-                <HeaderContainer />
+                <NavContainer />
                 {this.renderContent()}
                 <PlayerContainer />
                 <ModalContainer />
@@ -56,13 +69,14 @@ class App extends Component {
 
 App.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    navigator: PropTypes.object.isRequired
+    path: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {
-    const {navigator} = state;
+    const {environment, navigator} = state;
 
     return {
+        isMobile: environment.isMobile,
         path: navigator.route.path
     };
 }
