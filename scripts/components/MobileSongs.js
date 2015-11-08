@@ -4,11 +4,6 @@ import {playSong} from '../actions/player';
 import MobileSongListItem from '../components/MobileSongListItem';
 
 class MobileSongs extends Component {
-    constructor() {
-        super();
-        this.playSong = this.playSong.bind(this);
-    }
-
     componentWillMount() {
         const {dispatch, playlist, playlists} = this.props;
         if (!(playlist in playlists) || playlists[playlist].items.length === 0) {
@@ -26,7 +21,6 @@ class MobileSongs extends Component {
     }
 
     playSong(playlist, i) {
-        console.log(playlist, i);
         const {dispatch} = this.props;
         dispatch(playSong(playlist, i));
     }
@@ -38,7 +32,7 @@ class MobileSongs extends Component {
             const user = users[song.user_id];
             return (
                 <MobileSongListItem
-                    playSong={this.playSong.bind(null, playlist, i)}
+                    playSong={this.playSong.bind(this, playlist, i)}
                     song={song}
                     user={user} />
             );
@@ -47,7 +41,7 @@ class MobileSongs extends Component {
 
     render() {
         return (
-            <div className='mobile-songs'>
+            <div className={'mobile-songs'}>
                 {this.renderSongsListItems()}
             </div>
         );

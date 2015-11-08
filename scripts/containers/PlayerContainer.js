@@ -6,7 +6,12 @@ import {getPlayingSongId} from '../utils/PlayerUtils';
 
 class PlayerContainer extends Component {
     render() {
-        if (!this.props.playingSongId) {
+        const {isMobile, playingSongId} = this.props;
+        if (playingSongId === null) {
+            return <div/>;
+        }
+
+        if (isMobile) {
             return <MobilePlayer {...this.props} />;
         }
 
@@ -15,10 +20,11 @@ class PlayerContainer extends Component {
 }
 
 function mapStateToProps(state) {
-    const {entities, navigator, player, playlists} = state;
+    const {entities, environment, navigator, player, playlists} = state;
     const playingSongId = getPlayingSongId(player, playlists);
 
     return {
+        isMobile: environment.isMobile,
         player,
         playingSongId,
         playlists,
