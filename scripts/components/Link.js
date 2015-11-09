@@ -15,10 +15,10 @@ class Link extends Component {
     }
 
     render() {
-        const {children, className, route} = this.props;
+        const {children, className, route, title} = this.props;
 
         return (
-            <a className={className} href={`/#/${constructUrl(route)}`} onClick={this.handleClick}>{children}</a>
+            <a className={className} title={title ? title : ''} href={`/#/${constructUrl(route)}`} onClick={this.handleClick}>{children}</a>
         );
     }
 }
@@ -26,7 +26,8 @@ class Link extends Component {
 Link.propTypes = {
     className: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
-    route: PropTypes.object.isRequired
+    route: PropTypes.object.isRequired,
+    title: PropTypes.string
 };
 
 export default Link;
