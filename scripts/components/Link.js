@@ -18,7 +18,13 @@ class Link extends Component {
         const {children, className, route, title} = this.props;
 
         return (
-            <a className={className} title={title ? title : ''} href={`/#/${constructUrl(route)}`} onClick={this.handleClick}>{children}</a>
+            <a
+                className={className}
+                href={`/#/${constructUrl(route)}`}
+                onClick={this.handleClick}
+                title={title ? title : ''}>
+                {children}
+            </a>
         );
     }
 }
