@@ -1,13 +1,13 @@
 import React, {Component, PropTypes} from 'react';
 import {loginUser, logoutUser} from '../actions/authed';
-import HeaderSearch from '../components/HeaderSearch';
 import Link from '../components/Link';
+import NavSearch from '../components/NavSearch';
 import Popover from '../components/Popover';
 import {getImageUrl} from '../utils/SongUtils';
 
 const PATHS = ['stream', 'likes'];
 
-class Header extends Component {
+class Nav extends Component {
     constructor(props) {
         super(props);
         this.login = this.login.bind(this);
@@ -42,11 +42,11 @@ class Header extends Component {
     renderArtworks(playlist) {
         const {songs} = this.props;
         return playlist.tracks.slice(0, 10).map(songId =>
-            <img className='header-playlist-image' key={songId} src={getImageUrl(songs[songId].artwork_url)} />
+            <img className='nav-playlist-image' key={songId} src={getImageUrl(songs[songId].artwork_url)} />
         );
     }
 
-    renderHeaderUser() {
+    renderNavUser() {
         const {authed, dispatch, navigator} = this.props;
         const {path} = navigator.route;
         const isActive = path[0] === 'me' ? true : false;
@@ -54,15 +54,15 @@ class Header extends Component {
 
         if (authed.user) {
             return (
-                <Popover className='header-user'>
-                    <div className='header-user-link'>
-                        <img className='header-authed-image' src={getImageUrl(authed.user.avatar_url)} />
+                <Popover className='nav-user'>
+                    <div className='nav-user-link'>
+                        <img className='nav-authed-image' src={getImageUrl(authed.user.avatar_url)} />
                         <i className='icon ion-chevron-down'></i>
                         <i className='icon ion-chevron-up'></i>
                     </div>
-                    <div className='header-user-panel popover-content'>
-                        <ul className='header-user-panel-list'>
-                            <li className='header-user-panel-item'>
+                    <div className='nav-user-panel popover-content'>
+                        <ul className='nav-user-panel-list'>
+                            <li className='nav-user-panel-item'>
                                 <a href='#' onClick={this.logout}>Log Out</a>
                             </li>
                         </ul>
@@ -72,15 +72,15 @@ class Header extends Component {
         }
 
         return (
-            <Popover className='header-user'>
-                <div className='header-user-link'>
+            <Popover className='nav-user'>
+                <div className='nav-user-link'>
                     <i className='icon ion-person'></i>
                     <i className='icon ion-chevron-down'></i>
                     <i className='icon ion-chevron-up'></i>
                 </div>
-                <div className='header-user-panel popover-content'>
-                    <ul className='header-user-panel-list'>
-                        <li className='header-user-panel-item'>
+                <div className='nav-user-panel popover-content'>
+                    <ul className='nav-user-panel-list'>
+                        <li className='nav-user-panel-item'>
                             <a href='#' className='button orange block' onClick={this.login}>Sign into SoundCloud</a>
                         </li>
                     </ul>
@@ -97,9 +97,9 @@ class Header extends Component {
         }
 
         return PATHS.map(path =>
-            <div className='header-nav-item' key={path}>
+            <div className='nav-nav-item' key={path}>
                 <Link
-                    className={'header-nav-user-link' + (path === route.path[1] ? ' active' : '')}
+                    className={'nav-nav-user-link' + (path === route.path[1] ? ' active' : '')}
                     dispatch={dispatch}
                     route={{path: ['me', path]}}>
                     {path}
@@ -114,14 +114,14 @@ class Header extends Component {
             const playlist = authedPlaylists[playlistId];
             return (
                 <Link
-                    className='header-playlist'
+                    className='nav-playlist'
                     dispatch={dispatch}
                     key={playlistId}
                     route={{path: ['me', 'playlists', playlistId]}}>
-                    <div className='header-playlist-title'>
+                    <div className='nav-playlist-title'>
                         {`${playlist.title} (${playlist.track_count})`}
                     </div>
-                    <div className='header-playlist-images'>
+                    <div className='nav-playlist-images'>
                         {this.renderArtworks(playlist)}
                     </div>
                 </Link>
@@ -139,15 +139,15 @@ class Header extends Component {
         }
 
         return (
-            <Popover className='header-nav-item header-playlists'>
-                <div className={'header-nav-user-link' + (path[1] === 'playlists' ? ' active' : '')}>
-                    <div className='header-nav-selected-playlist'>
+            <Popover className='nav-nav-item nav-playlists'>
+                <div className={'nav-nav-user-link' + (path[1] === 'playlists' ? ' active' : '')}>
+                    <div className='nav-nav-selected-playlist'>
                         {playlist}
                     </div>
                     <i className='icon ion-chevron-down'></i>
                     <i className='icon ion-chevron-up'></i>
                 </div>
-                <div className='header-playlists-popover popover-content'>
+                <div className='nav-playlists-popover popover-content'>
                     {this.renderPlaylists()}
                 </div>
             </Popover>
@@ -158,15 +158,15 @@ class Header extends Component {
         const {dispatch} = this.props;
 
         return (
-            <div className='header'>
+            <div className='nav'>
                 <div className='container clearfix'>
-                    <div className='header-logo'>
+                    <div className='nav-logo'>
                         <i className='icon ion-radio-waves' />
                     </div>
-                    <div className='header-nav float-left'>
-                        <div className='header-nav-item'>
+                    <div className='nav-nav float-left'>
+                        <div className='nav-nav-item'>
                             <Link
-                                className='header-nav-item-link active'
+                                className='nav-nav-item-link active'
                                 dispatch={dispatch}
                                 route={{path: ['songs']}}>
                                 SoundRedux
@@ -175,12 +175,12 @@ class Header extends Component {
                         {this.renderUserLinks()}
                         {this.renderPlaylistsPopover()}
                     </div>
-                    <div className='header-nav float-right'>
-                        <div className='header-nav-item'>
-                            <HeaderSearch dispatch={dispatch} />
+                    <div className='nav-nav float-right'>
+                        <div className='nav-nav-item'>
+                            <NavSearch dispatch={dispatch} />
                         </div>
-                        <div className='header-nav-item'>
-                            {this.renderHeaderUser()}
+                        <div className='nav-nav-item'>
+                            {this.renderNavUser()}
                         </div>
                     </div>
                 </div>
@@ -189,8 +189,8 @@ class Header extends Component {
     }
 }
 
-Header.propTypes = {
+Nav.propTypes = {
 
 };
 
-export default Header;
+export default Nav;

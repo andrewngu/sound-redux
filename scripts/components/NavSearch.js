@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react';
+import ReactDOM from 'react-dom';
 import {navigateTo} from '../actions/navigator';
 
-class HeaderSearch extends Component {
+class NavSearch extends Component {
     constructor(props) {
         super(props);
         this.handleOnKeyPress = this.handleOnKeyPress.bind(this);
@@ -30,18 +31,18 @@ class HeaderSearch extends Component {
         const isInsideInput = e.target.tagName.toLowerCase().match(/input|textarea/);
         if (keyCode === 47 && !isInsideInput) {
             e.preventDefault();
-            React.findDOMNode(this.refs.query).focus();
+            ReactDOM.findDOMNode(this.refs.query).focus();
         }
     }
 
     render() {
         return (
-            <div className='header-search'>
+            <div className='nav-search'>
                 <i className='icon ion-search'></i>
-                <input ref="query" className='header-search-input' placeholder='SEARCH' onKeyPress={this.handleOnKeyPress} type='text' />
+                <input ref="query" className='nav-search-input' placeholder='SEARCH' onKeyPress={this.handleOnKeyPress} type='text' />
             </div>
         );
     }
 }
 
-export default HeaderSearch;
+export default NavSearch;
