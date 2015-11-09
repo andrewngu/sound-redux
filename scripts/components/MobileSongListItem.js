@@ -3,11 +3,11 @@ import {getImageUrl} from '../utils/SongUtils';
 
 class MobileSongListItem extends Component {
     render() {
-        const {playSong, song, user} = this.props;
+        const {isActive, playSong, song, user} = this.props;
 
         return (
             <a
-                className='mobile-song-list-item'
+                className={'mobile-song-list-item' + (isActive ? ' active' : '')}
                 href='#'
                 onClick={playSong}>
                 <img

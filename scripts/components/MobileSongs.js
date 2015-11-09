@@ -29,7 +29,7 @@ class MobileSongs extends Component {
     }
 
     renderSongsListItems() {
-        const {playlist, playlists, songs, users} = this.props;
+        const {playingSongId, playlist, playlists, songs, users} = this.props;
         if (!(playlist in playlists)) {
             return;
         }
@@ -40,6 +40,7 @@ class MobileSongs extends Component {
             return (
                 <MobileSongListItem
                     key={songId + '-' + i}
+                    isActive={song.id === playingSongId}
                     playSong={this.playSong.bind(this, playlist, i)}
                     song={song}
                     user={user} />
