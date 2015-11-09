@@ -2,6 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import {fetchSongsIfNeeded} from '../actions/playlists';
 import {playSong} from '../actions/player';
 import MobileSongListItem from '../components/MobileSongListItem';
+import MobileInfiniteScroll from '../components/MobileInfiniteScroll';
+import Spinner from '../components/Spinner';
 
 class MobileSongs extends Component {
     componentWillMount() {
@@ -27,6 +29,10 @@ class MobileSongs extends Component {
 
     renderSongsListItems() {
         const {playlist, playlists, songs, users} = this.props;
+        if (!(playlist in playlists)) {
+            return;
+        }
+
         return playlists[playlist].items.map((songId, i) => {
             const song = songs[songId];
             const user = users[song.user_id];
@@ -40,11 +46,26 @@ class MobileSongs extends Component {
         });
     }
 
+    renderSpinner() {
+        const {playlist, playlists} = this.props;
+        if (!(playlist in playlists) || playlists[playlist].isFetching) {
+            return <Spinner />;
+        }
+
+        return;
+    }
+
     render() {
+        const {dispatch, playlist} = this.props;
+
         return (
-            <div className={'mobile-songs'}>
+            <MobileInfiniteScroll
+                className={'mobile-songs'}
+                dispatch={dispatch}
+                scrollFunc={fetchSongsIfNeeded.bind(null, playlist)}>
                 {this.renderSongsListItems()}
-            </div>
+                {this.renderSpinner()}
+            </MobileInfiniteScroll>
         );
     }
 }
