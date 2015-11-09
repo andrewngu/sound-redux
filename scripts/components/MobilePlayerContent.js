@@ -57,7 +57,11 @@ class MobilePlayerContent extends Component {
         audioElement.removeEventListener('timeupdate', this.handleTimeUpdate, false);
     }
 
-    changeSong(changeType) {
+    changeSong(changeType, e) {
+        if (e) {
+            e.preventDefault();
+        }
+
         const {dispatch} = this.props;
         dispatch(changeSong(changeType));
     }
@@ -107,7 +111,8 @@ class MobilePlayerContent extends Component {
         dispatch(changeCurrentTime(currentTime));
     }
 
-    togglePlay() {
+    togglePlay(e) {
+        e.preventDefault();
         const audioElement = ReactDOM.findDOMNode(this.refs.audio);
         if (this.state.isPlaying) {
             audioElement.pause();
@@ -143,7 +148,7 @@ class MobilePlayerContent extends Component {
                 <audio id='audio' ref='audio' src={formatStreamUrl(song.stream_url)}></audio>
                 <div className='mobile-player-bg'></div>
                 <div className='mobile-player-extras'></div>
-                <div className='mobile-player-content'>
+                <div className='mobile-player-content fade-in'>
                     <div className='mobile-player-info'>
                         <div className='mobile-player-title'>
                             {formatSongTitle(song.title)}
