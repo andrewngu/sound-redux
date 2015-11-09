@@ -22,7 +22,8 @@ class MobileSongs extends Component {
         }
     }
 
-    playSong(playlist, i) {
+    playSong(playlist, i, e) {
+        e.preventDefault();
         const {dispatch} = this.props;
         dispatch(playSong(playlist, i));
     }
