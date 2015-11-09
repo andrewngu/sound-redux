@@ -7,12 +7,12 @@ import {getPlayingSongId} from '../utils/PlayerUtils';
 class PlayerContainer extends Component {
     render() {
         const {isMobile, playingSongId} = this.props;
-        if (playingSongId === null) {
-            return <div/>;
-        }
-
         if (isMobile) {
             return <MobilePlayer {...this.props} />;
+        }
+
+        if (playingSongId === null) {
+            return <div/>;
         }
 
         return <Player {...this.props} />;

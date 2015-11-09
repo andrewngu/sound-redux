@@ -26,5 +26,6 @@ export const GENRES_MAP = (function(){
 
 
 export const IMAGE_SIZES = {
-    LARGE: 't300x300'
+    LARGE: 't300x300',
+    XLARGE: 't500x500'
 };

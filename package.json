@@ -45,6 +45,7 @@
     "sass-loader": "^2.0.1",
     "soundcloud": "^3.0.1",
     "style-loader": "^0.12.4",
+    "velocity-react": "^1.1.1",
     "webpack": "^1.12.2",
     "webpack-dev-server": "^1.11.0"
   }

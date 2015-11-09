@@ -32,6 +32,7 @@ class MobileSongs extends Component {
             const user = users[song.user_id];
             return (
                 <MobileSongListItem
+                    key={songId + '-' + i}
                     playSong={this.playSong.bind(this, playlist, i)}
                     song={song}
                     user={user} />
