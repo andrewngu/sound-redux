@@ -2,6 +2,7 @@ import {arrayOf, normalize} from 'normalizr';
 import SC from 'soundcloud';
 import Cookies from 'js-cookie';
 import {navigateTo} from '../actions/navigator';
+import {changePlayingSong} from '../actions/player';
 import {fetchSongs, receiveSongs} from '../actions/playlists';
 import * as types from '../constants/ActionTypes';
 import {CLIENT_ID} from '../constants/Config';
@@ -274,11 +275,15 @@ export function toggleFollow(userId) {
 
 export function toggleLike(songId) {
     return (dispatch, getState) => {
-        const {authed} = getState();
+        const {authed, player} = getState();
         const {likes} = authed;
+        const {selectedPlaylists, currentSongIndex} = player;
         const liked = songId in likes && likes[songId] === 1 ? 0 : 1;
         if (!(songId in likes)) {
             dispatch(appendLike(songId));
+            if (currentSongIndex !== null && selectedPlaylists[selectedPlaylists.length - 1] === 'likes' + AUTHED_PLAYLIST_SUFFIX) {
+                dispatch(changePlayingSong(currentSongIndex + 1));
+            }
         }
         dispatch(setLike(songId, liked));
         syncLike(authed.accessToken, songId, liked);
