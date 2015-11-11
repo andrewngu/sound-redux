@@ -10,6 +10,9 @@ const initialPlaylistState = {
     nextUrl: false
 };
 
+const LIKES_PLAYLIST_KEY = 'likes' + AUTHED_PLAYLIST_SUFFIX;
+const STREAM_PLAYLIST_KEY = 'stream' + AUTHED_PLAYLIST_SUFFIX;
+
 function playlist(state = initialPlaylistState, action) {
     switch(action.type) {
     case types.APPEND_LIKE:
@@ -47,15 +50,15 @@ function playlist(state = initialPlaylistState, action) {
 }
 
 const initialState = {
-    ['likes' + AUTHED_PLAYLIST_SUFFIX]: {isFetching: false, items: [], nextUrl: null},
-    ['stream' + AUTHED_PLAYLIST_SUFFIX]: {isFetching: false, items: [], nextUrl: null}
+    [LIKES_PLAYLIST_KEY]: {isFetching: false, items: [], nextUrl: null},
+    [STREAM_PLAYLIST_KEY]: {isFetching: false, items: [], nextUrl: null}
 };
 
 export default function playlists(state = initialState, action) {
     switch(action.type) {
     case types.APPEND_LIKE:
         return Object.assign({}, state, {
-            ['likes' + AUTHED_PLAYLIST_SUFFIX]: playlist(state['likes' + AUTHED_PLAYLIST_SUFFIX], action)
+            [LIKES_PLAYLIST_KEY]: playlist(state[LIKES_PLAYLIST_KEY], action)
         });
 
     case types.RECEIVE_SONGS:
@@ -65,7 +68,7 @@ export default function playlists(state = initialState, action) {
 
     case types.RECEIVE_NEW_STREAM_SONGS:
         return Object.assign({}, state, {
-            ['stream' + AUTHED_PLAYLIST_SUFFIX]: playlist(state['stream' + AUTHED_PLAYLIST_SUFFIX], action)
+            [STREAM_PLAYLIST_KEY]: playlist(state[STREAM_PLAYLIST_KEY], action)
         });
 
     case types.REQUEST_SONGS:
@@ -74,13 +77,13 @@ export default function playlists(state = initialState, action) {
         });
 
     case types.RESET_AUTHED:
-        const playlists = [...action.playlists, 'stream', 'likes'];
+        const playlists = [...action.playlists, STREAM_PLAYLIST_KEY, LIKES_PLAYLIST_KEY];
         const newState = playlists.reduce((obj, playlist) => merge({}, obj, {[playlist]: initialPlaylistState}), {});
         return Object.assign({}, state, newState);
 
     case types.UNSHIFT_NEW_STREAM_SONGS:
         return Object.assign({}, state, {
-            ['stream' + AUTHED_PLAYLIST_SUFFIX]: playlist(state['stream' + AUTHED_PLAYLIST_SUFFIX], action)
+            [STREAM_PLAYLIST_KEY]: playlist(state[STREAM_PLAYLIST_KEY], action)
         });
 
     default:
