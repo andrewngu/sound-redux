@@ -38,6 +38,13 @@ export function constructUserSongsUrl(userId) {
     return `//api.soundcloud.com/users/${userId}/tracks?client_id=${CLIENT_ID}`;
 }
 
+export function fetchWaveformData(waveformUrl) {
+    return fetch(waveformUrl)
+        .then(response => response.json())
+        .then(json => json.samples)
+        .catch(err => {throw err});
+}
+
 export function getImageUrl(str, size = null) {
     if (!str) {
         return '';
