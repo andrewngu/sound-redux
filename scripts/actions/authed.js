@@ -9,6 +9,14 @@ import {AUTHED_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
 import {playlistSchema, songSchema, userSchema} from '../constants/Schemas';
 
 const COOKIE_PATH = 'accessToken';
+let streamInterval;
+
+export function addNewStreamSongsToPlaylist() {
+    return (dispatch, getState) => {
+        const {authed} = getState();
+        dispatch(unshiftNewStreamSongs(authed.newStreamSongs.slice()));
+    };
+}
 
 function appendLike(songId) {
     return {
@@ -76,8 +84,30 @@ function fetchPlaylists(accessToken) {
     };
 }
 
+function fetchNewStreamSongs(url, accessToken) {
+    return (dispatch, getState) => {
+        const {playlists} = getState();
+        const streamSongsMap = playlists['stream' + AUTHED_PLAYLIST_SUFFIX].items.reduce((obj, songId) => Object.assign({}, obj, {[songId]: 1}), {});
+
+        return fetch(url)
+            .then(response => response.json())
+            .then(json => {
+                const collection = json.collection
+                    .map(song => song.origin)
+                    .filter(song => song.kind === 'track' && song.streamable && !(song.id in streamSongsMap));
+                return {futureUrl: json.future_href + `&oauth_token=${accessToken}`, collection: collection}
+            })
+            .then(data => {
+                const normalized = normalize(data.collection, arrayOf(songSchema))
+                dispatch(receiveNewStreamSongs(data.futureUrl, normalized.entities, normalized.result))
+            })
+            .catch(err => {throw err});
+    }
+}
+
 function fetchStream(accessToken) {
     return dispatch => {
+        dispatch(initInterval(accessToken));
         dispatch(fetchSongs(`//api.soundcloud.com/me/activities/tracks/affiliated?limit=50&oauth_token=${accessToken}`, 'stream' + AUTHED_PLAYLIST_SUFFIX));
     };
 }
@@ -90,6 +120,21 @@ export function initAuth() {
         }
         return null;
     }
+}
+
+function initInterval(accessToken) {
+    return (dispatch, getState) => {
+        streamInterval = setInterval(() => {
+            const playlistKey = 'stream' + AUTHED_PLAYLIST_SUFFIX;
+            const {playlists} = getState();
+            const streamPlaylist = playlists[playlistKey];
+            if (streamPlaylist.futureUrl) {
+                dispatch(fetchNewStreamSongs(streamPlaylist.futureUrl, accessToken));
+            } else {
+                clearInterval(streamInterval);
+            }
+        }, 600000);
+    };
 }
 
 export function loginUser(shouldShowStream = true) {
@@ -177,6 +222,15 @@ function receiveLikes(likes) {
     };
 }
 
+function receiveNewStreamSongs(futureUrl, entities, songs) {
+    return {
+        type: types.RECEIVE_NEW_STREAM_SONGS,
+        entities,
+        futureUrl,
+        songs
+    };
+}
+
 function resetAuthed(playlists) {
     return {
         type: types.RESET_AUTHED,
@@ -228,5 +282,13 @@ export function toggleLike(songId) {
         }
         dispatch(setLike(songId, liked));
         syncLike(authed.accessToken, songId, liked);
+    };
+}
+
+
+function unshiftNewStreamSongs(songs) {
+    return {
+        type: types.UNSHIFT_NEW_STREAM_SONGS,
+        songs
     };
 }

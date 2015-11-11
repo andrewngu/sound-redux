@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import {changeCurrentTime} from '../actions/player';
+import {offsetLeft} from '../utils/MouseUtils';
 
 class Waveform extends Component {
     constructor(props) {
@@ -36,7 +37,7 @@ class Waveform extends Component {
         if (!isActive) {
             return;
         }
-        const seekPercent = (e.clientX - e.currentTarget.offsetLeft) / e.currentTarget.offsetWidth;
+        const seekPercent = (e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth;
         this.setState({seekPercent: seekPercent});
     }
 

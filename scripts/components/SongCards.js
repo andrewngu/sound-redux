@@ -110,7 +110,7 @@ class SongCards extends Component {
                 const user = users[song.user_id];
                 const index = i + j;
                 return (
-                    <div className='col-1-5' key={index + '-' + song.id}>
+                    <div className='col-1-5 clearfix' key={index + '-' + song.id}>
                         <SongCard
                             authed={authed}
                             dispatch={dispatch}

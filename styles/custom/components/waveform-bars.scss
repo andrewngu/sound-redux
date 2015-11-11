@@ -5,9 +5,14 @@
     left: 0;
     bottom: 0;
     z-index: 0;
-    pointer-events: all;
+
+    .waveform-bars-canvas {
+        position: relative;
+    }
 
     canvas {
-        pointer-events: none;
+        &:hover {
+            cursor: pointer;
+        }
     }
 }

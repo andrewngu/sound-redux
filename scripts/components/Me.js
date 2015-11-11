@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {fetchSongsIfNeeded} from '../actions/playlists';
 import InfiniteScrollify from '../components/InfiniteScrollify';
-import MeToolbar from '../components/MeToolbar';
+import MePromptStream from '../components/MePromptStream';
 import SongCards from '../components/SongCards';
 import Stickify from '../components/Stickify';
 import {AUTHED_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
@@ -27,12 +27,23 @@ class Me extends Component {
         }
     }
 
+    renderPrompt() {
+        const {authed, dispatch} = this.props;
+        switch(this.getPlaylist()) {
+        case 'stream':
+            return <MePromptStream authed={authed} dispatch={dispatch} />;
+        default:
+            return;
+        }
+    }
+
     render() {
         const {authed, authedPlaylists, dispatch, height, playingSongId, playlists, route, songs, sticky, users} = this.props;
         const playlist = this.getPlaylist() + AUTHED_PLAYLIST_SUFFIX;
 
         return (
             <div className='me'>
+                {this.renderPrompt()}
                 <div className='container'>
                     <SongCards
                         authed={authed}

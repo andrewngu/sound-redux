@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {fetchSongsIfNeeded} from '../actions/playlists';
 import MobileSongs from '../components/MobileSongs';
 import Songs from '../components/Songs';
+import {getPlayingSongId} from '../utils/PlayerUtils';
 
 class SongsContainer extends Component {
     render() {
@@ -18,7 +19,7 @@ class SongsContainer extends Component {
 function mapStateToProps(state) {
     const {authed, entities, environment, navigator, player, playlists} = state;
 
-    const playingSongId = player.currentSongIndex !== null ? playlists[player.selectedPlaylists[player.selectedPlaylists.length - 1]].items[player.currentSongIndex] : null;
+    const playingSongId = getPlayingSongId(player, playlists);
 
     const {path, query} = navigator.route;
     const time = query && query.t ? query.t : null;

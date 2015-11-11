@@ -4,8 +4,8 @@
     &.active {
         border-color: #A6D2A5;
 
-        .song-card-image {
-            pointer-events: none;
+        .song-card-image:hover {
+            cursor: auto;
         }
 
         .song-card-playing {
