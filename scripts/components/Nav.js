@@ -89,24 +89,46 @@ class Nav extends Component {
         );
     }
 
-    renderUserLinks() {
+    renderLikesLink() {
         const {authed, dispatch, navigator} = this.props;
         const {route} = navigator;
         if (!authed.user) {
             return;
         }
 
-        return PATHS.map(path =>
-            <div className='nav-nav-item' key={path}>
+        return (
+            <div className='nav-nav-item'>
                 <Link
-                    className={'nav-nav-user-link' + (path === route.path[1] ? ' active' : '')}
+                    className={'nav-nav-user-link' + ('likes' === route.path[1] ? ' active' : '')}
                     dispatch={dispatch}
-                    route={{path: ['me', path]}}>
-                    {path}
+                    route={{path: ['me', 'likes']}}>
+                    likes
                 </Link>
             </div>
         );
     }
+
+    renderStreamLink() {
+        const {authed, dispatch, navigator} = this.props;
+        const {route} = navigator;
+        const hasNewStreamSongs = authed.newStreamSongs.length > 0;
+        if (!authed.user) {
+            return;
+        }
+
+        return (
+            <div className='nav-nav-item'>
+                <Link
+                    className={'nav-nav-user-link' + ('stream' === route.path[1] ? ' active' : '')}
+                    dispatch={dispatch}
+                    route={{path: ['me', 'stream']}}>
+                    {hasNewStreamSongs ? <div className='nav-nav-user-link-indicator'></div> : null}
+                    stream
+                </Link>
+            </div>
+        );
+    }
+
 
     renderPlaylists() {
         const {authed, authedPlaylists, dispatch} = this.props;
@@ -172,7 +194,8 @@ class Nav extends Component {
                                 SoundRedux
                             </Link>
                         </div>
-                        {this.renderUserLinks()}
+                        {this.renderStreamLink()}
+                        {this.renderLikesLink()}
                         {this.renderPlaylistsPopover()}
                     </div>
                     <div className='nav-nav float-right'>

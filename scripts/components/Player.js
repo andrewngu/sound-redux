@@ -6,6 +6,7 @@ import Popover from '../components/Popover';
 import SongDetails from '../components/SongDetails';
 import {CHANGE_TYPES} from '../constants/SongConstants';
 import {formatSeconds, formatStreamUrl} from '../utils/FormatUtils';
+import {offsetLeft} from '../utils/MouseUtils';
 import {getImageUrl} from '../utils/SongUtils';
 
 class Player extends Component {
@@ -98,7 +99,7 @@ class Player extends Component {
 
     changeVolume(e) {
         const audioElement = ReactDOM.findDOMNode(this.refs.audio);
-        const volume = (e.clientX - e.currentTarget.offsetLeft) / e.currentTarget.offsetWidth;
+        const volume = (e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth;
         audioElement.volume = volume;
     }
 
@@ -150,7 +151,7 @@ class Player extends Component {
     handleSeekMouseMove(e) {
         const {dispatch} = this.props;
         const seekBar = ReactDOM.findDOMNode(this.refs.seekBar);
-        const diff = e.clientX - seekBar.offsetLeft;
+        const diff = e.clientX - offsetLeft(seekBar);
         const pos = diff < 0 ? 0 : diff;
         let percent = pos / seekBar.offsetWidth;
         percent = percent > 1 ? 1 : percent;
@@ -209,7 +210,7 @@ class Player extends Component {
 
     handleVolumeMouseMove(e) {
         const volumeBar = ReactDOM.findDOMNode(this.refs.volumeBar);
-        const diff = e.clientX - volumeBar.offsetLeft;
+        const diff = e.clientX - offsetLeft(volumeBar);
         const pos = diff < 0 ? 0 : diff;
         let percent = pos / volumeBar.offsetWidth;
         percent = percent > 1 ? 1 : percent;
@@ -257,7 +258,7 @@ class Player extends Component {
     seek(e) {
         const {dispatch} = this.props;
         const audioElement = ReactDOM.findDOMNode(this.refs.audio);
-        const currentTime = Math.floor(((e.clientX - e.currentTarget.offsetLeft) / e.currentTarget.offsetWidth) * this.state.duration);
+        const currentTime = Math.floor(((e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth) * this.state.duration);
 
         dispatch(changeCurrentTime(currentTime));
         audioElement.currentTime = currentTime;

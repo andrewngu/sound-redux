@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import {changeCurrentTime} from '../actions/player';
+import {offsetLeft} from '../utils/MouseUtils';
 import {fetchWaveformData} from '../utils/SongUtils';
 
 class WaveformBars extends Component {
@@ -98,7 +99,7 @@ class WaveformBars extends Component {
     }
 
     handleMouseMove(e) {
-        const seekPercent = (e.clientX - e.currentTarget.offsetParent.offsetLeft) / e.currentTarget.offsetWidth;
+        const seekPercent = (e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth;
         this.setState({seekPercent: seekPercent}, this.drawBars);
     }
 
@@ -112,11 +113,15 @@ class WaveformBars extends Component {
         return (
             <div
                 className='waveform-bars'
-                onMouseDown={this.handleMouseDown}
-                onMouseLeave={this.handleMouseLeave}
-                onMouseMove={this.handleMouseMove}
                 ref='container'>
-                <canvas ref='canvas' width={width} height={height}></canvas>
+                <canvas
+                    height={height}
+                    onMouseDown={this.handleMouseDown}
+                    onMouseLeave={this.handleMouseLeave}
+                    onMouseMove={this.handleMouseMove}
+                    ref='canvas'
+                    width={width}>
+                </canvas>
             </div>
         );
     }

@@ -34,6 +34,21 @@
     }
 }
 
+.nav-nav-user-link {
+    position: relative;
+}
+
+.nav-nav-user-link-indicator {
+    position: absolute;
+    top: -2px;
+    right: -4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #3a3f41;
+    background-color: #3381b7;
+}
+
 .nav-playlists-popover {
     top: 50px;
     left: 0;

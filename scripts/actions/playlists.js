@@ -13,8 +13,13 @@ export function fetchSongs(url, playlist) {
             .then(response => response.json())
             .then(json => {
                 let nextUrl = null;
+                let futureUrl = null;
                 if (json.next_href) {
                     nextUrl = json.next_href + ( authed.accessToken ? `&oauth_token=${authed.accessToken}` : '');
+                }
+
+                if (json.future_href) {
+                    futureUrl = json.future_href + ( authed.accessToken ? `&oauth_token=${authed.accessToken}` : '');
                 }
 
                 const songs = json.collection
@@ -32,7 +37,7 @@ export function fetchSongs(url, playlist) {
                     }
                     return arr;
                 }, []);
-                dispatch(receiveSongs(normalized.entities, result, playlist, nextUrl));
+                dispatch(receiveSongs(normalized.entities, result, playlist, nextUrl, futureUrl));
             })
             .catch(error => {throw error});
     };
@@ -56,10 +61,11 @@ function getNextUrl(playlists, playlist) {
     return activePlaylist.nextUrl;
 }
 
-export function receiveSongs(entities, songs, playlist, nextUrl) {
+export function receiveSongs(entities, songs, playlist, nextUrl, futureUrl) {
     return {
         type: types.RECEIVE_SONGS,
         entities,
+        futureUrl,
         nextUrl,
         playlist,
         songs
