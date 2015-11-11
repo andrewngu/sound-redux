@@ -223,7 +223,7 @@ export function toggleLike(songId) {
         const {authed} = getState();
         const {likes} = authed;
         const liked = songId in likes && likes[songId] === 1 ? 0 : 1;
-        if (liked === 1) {
+        if (!(songId in likes)) {
             dispatch(appendLike(songId));
         }
         dispatch(setLike(songId, liked));
