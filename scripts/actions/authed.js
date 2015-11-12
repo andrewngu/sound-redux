@@ -87,15 +87,16 @@ function fetchPlaylists(accessToken) {
 
 function fetchNewStreamSongs(url, accessToken) {
     return (dispatch, getState) => {
-        const {playlists} = getState();
+        const {authed, playlists} = getState();
         const streamSongsMap = playlists['stream' + AUTHED_PLAYLIST_SUFFIX].items.reduce((obj, songId) => Object.assign({}, obj, {[songId]: 1}), {});
+        const newStreamSongsMap = authed.newStreamSongs.reduce((obj, songId) => Object.assign({}, obj, {[songId]: 1}), {});
 
         return fetch(url)
             .then(response => response.json())
             .then(json => {
                 const collection = json.collection
                     .map(song => song.origin)
-                    .filter(song => song.kind === 'track' && song.streamable && !(song.id in streamSongsMap));
+                    .filter(song => song.kind === 'track' && song.streamable && !(song.id in streamSongsMap) && !(song.id in newStreamSongsMap));
                 return {futureUrl: json.future_href + `&oauth_token=${accessToken}`, collection: collection}
             })
             .then(data => {
