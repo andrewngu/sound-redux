@@ -164,6 +164,8 @@ export function logoutUser() {
             return entities.playlists[playlistId].title + AUTHED_PLAYLIST_SUFFIX;
         });
 
+        clearInterval(streamInterval);
+
         if (path[0] === 'me') {
             dispatch(navigateTo({path: ['songs']}));
         }
