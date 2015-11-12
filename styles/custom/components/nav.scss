@@ -38,6 +38,20 @@
     display: flex;
     align-items: center;
     margin: 2px 40px 0;
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    &.active {
+        .nav-nav-user-link-text {
+            color: #fff;
+            border-bottom-color: #fff;
+        }
+    }
+}
+
+.nav-nav-user-link-text {
     color: rgba(255,255,255, 0.5);
     border-bottom: 1px dotted #3a3f41;
     text-transform: uppercase;
@@ -46,11 +60,10 @@
     letter-spacing: 2px;
 
     &:hover {
-        text-decoration: none;
         border-bottom-color: #fff;
     }
 
-    &.active {
+    .nav-nav-user-link-text {
         color: #fff;
         border-bottom-color: #fff;
     }

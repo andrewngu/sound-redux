@@ -102,7 +102,7 @@ class Nav extends Component {
                     className={'nav-nav-user-link' + ('likes' === route.path[1] ? ' active' : '')}
                     dispatch={dispatch}
                     route={{path: ['me', 'likes']}}>
-                    likes
+                    <span className='nav-nav-user-link-text'>likes</span>
                 </Link>
             </div>
         );
@@ -123,7 +123,7 @@ class Nav extends Component {
                     dispatch={dispatch}
                     route={{path: ['me', 'stream']}}>
                     {hasNewStreamSongs ? <div className='nav-nav-user-link-indicator'></div> : null}
-                    stream
+                    <span className='nav-nav-user-link-text'>stream</span>
                 </Link>
             </div>
         );
@@ -163,9 +163,7 @@ class Nav extends Component {
         return (
             <Popover className='nav-nav-item nav-playlists'>
                 <div className={'nav-nav-user-link' + (path[1] === 'playlists' ? ' active' : '')}>
-                    <div className='nav-nav-selected-playlist'>
-                        {playlist}
-                    </div>
+                    <span className='nav-nav-user-link-text'>{playlist}</span>
                     <i className='icon ion-chevron-down'></i>
                     <i className='icon ion-chevron-up'></i>
                 </div>
