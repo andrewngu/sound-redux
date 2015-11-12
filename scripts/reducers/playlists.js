@@ -33,6 +33,11 @@ function playlist(state = initialPlaylistState, action) {
             futureUrl: action.futureUrl
         });
 
+    case types.REMOVE_UNLIKED_SONGS:
+        return Object.assign({}, state, {
+            items: [...action.songs]
+        });
+
     case types.REQUEST_SONGS:
         return Object.assign({}, state, {
             isFetching: true,
@@ -69,6 +74,11 @@ export default function playlists(state = initialState, action) {
     case types.RECEIVE_NEW_STREAM_SONGS:
         return Object.assign({}, state, {
             [STREAM_PLAYLIST_KEY]: playlist(state[STREAM_PLAYLIST_KEY], action)
+        });
+
+    case types.REMOVE_UNLIKED_SONGS:
+        return Object.assign({}, state, {
+            [LIKES_PLAYLIST_KEY]: playlist(state[LIKES_PLAYLIST_KEY], action)
         });
 
     case types.REQUEST_SONGS:

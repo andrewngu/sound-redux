@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {fetchSongsIfNeeded} from '../actions/playlists';
 import InfiniteScrollify from '../components/InfiniteScrollify';
 import MePromptStream from '../components/MePromptStream';
+import MePromptLikes from '../components/MePromptLikes';
 import SongCards from '../components/SongCards';
 import Stickify from '../components/Stickify';
 import {AUTHED_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
@@ -28,10 +29,21 @@ class Me extends Component {
     }
 
     renderPrompt() {
-        const {authed, dispatch} = this.props;
+        const {authed, dispatch, playlists} = this.props;
         switch(this.getPlaylist()) {
         case 'stream':
-            return <MePromptStream authed={authed} dispatch={dispatch} />;
+            return (
+                <MePromptStream
+                    authed={authed}
+                    dispatch={dispatch} />
+            );
+        case 'likes':
+            return (
+                <MePromptLikes
+                    authed={authed}
+                    dispatch={dispatch}
+                    playlists={playlists} />
+            );
         default:
             return;
         }
