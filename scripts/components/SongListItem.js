@@ -5,10 +5,25 @@ import Waveform from '../components/Waveform';
 
 import {IMAGE_SIZES} from '../constants/SongConstants';
 
+import TogglePlayButtonContainer from '../containers/TogglePlayButtonContainer';
+
 import {addCommas} from '../utils/FormatUtils';
 import {getImageUrl} from '../utils/SongUtils';
 
 class SongListItem extends Component {
+    renderTogglePlayButton() {
+        const {isActive, playSong} = this.props;
+
+        if (isActive) {
+            return <TogglePlayButtonContainer />;
+        }
+
+        return (
+            <div className='toggle-play-button' onClick={playSong}>
+                <i className='toggle-play-button-icon ion-ios-play'></i>
+            </div>
+        );
+    }
     render() {
         const {authed, dispatch, isActive, player, playSong, song, user} = this.props;
         const image = getImageUrl(song.artwork_url, IMAGE_SIZES.LARGE);
@@ -20,9 +35,7 @@ class SongListItem extends Component {
                         className='song-list-item-image'
                         onClick={playSong}
                         style={{backgroundImage: `url(${image})`}}>
-                        <div className='song-card-playing'>
-                            <i className={'song-card-playing-icon icon ' + (isActive ? 'ion-radio-waves' : 'ion-ios-play')}></i>
-                        </div>
+                        {this.renderTogglePlayButton()}
                     </div>
                     <div className='song-list-item-info'>
                         <Link

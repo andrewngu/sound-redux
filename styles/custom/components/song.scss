@@ -1,18 +1,6 @@
 .song {
     &.active {
         border-color: #A6D2A5;
-
-        .song-image {
-            pointer-events: none;
-        }
-
-        .song-card-playing {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        .song-card-playing-icon {
-            opacity: 1;
-        }
     }
 }
 

@@ -16,18 +16,6 @@
         & + .song-list-item {
             border-top: none;
         }
-
-        .song-list-item-image {
-            pointer-events: none;
-        }
-
-        .song-card-playing {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        .song-card-playing-icon {
-            opacity: 1;
-        }
     }
 }
 
@@ -121,6 +109,7 @@
     height: 80px;
     border-left: 1px solid #e3e3e3;
 }
+
 .song-list-item-waveform .waveform {
     height: 100%;
 

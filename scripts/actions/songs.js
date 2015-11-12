@@ -26,8 +26,9 @@ export function fetchSongIfNeeded(songId) {
             dispatch(fetchSong(songId));
         } else {
             const song = songs[songId];
-            if (!(song.title in playlists)) {
-                dispatch(receiveSongs({}, [songId], song.title + SONG_PLAYLIST_SUFFIX, null));
+            const songPlaylistKey = song.title + SONG_PLAYLIST_SUFFIX;
+            if (!(songPlaylistKey in playlists)) {
+                dispatch(receiveSongs({}, [songId], songPlaylistKey, null));
             }
 
             if (!('comments' in songs[songId])) {

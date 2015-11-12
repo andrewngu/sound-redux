@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 
-import {changeCurrentTime, changeSong} from '../actions/player';
+import {changeCurrentTime, changeSong, toggleIsPlaying} from '../actions/player';
 import {CHANGE_TYPES, IMAGE_SIZES} from '../constants/SongConstants';
 import {formatSongTitle, formatStreamUrl} from '../utils/FormatUtils';
 import {getImageUrl} from '../utils/SongUtils';
@@ -22,7 +22,6 @@ class MobilePlayerContent extends Component {
 
         this.state = {
             duration: 0,
-            isPlaying: false,
             repeat: false,
             shuffle: false
         };
@@ -92,11 +91,13 @@ class MobilePlayerContent extends Component {
     }
 
     handlePause() {
-        this.setState({isPlaying: false});
+        const {dispatch} = this.props;
+        dispatch(toggleIsPlaying(false));
     }
 
     handlePlay() {
-        this.setState({isPlaying: true});
+        const {dispatch} = this.props;
+        dispatch(toggleIsPlaying(true));
     }
 
     handleTimeUpdate(e) {
@@ -113,8 +114,9 @@ class MobilePlayerContent extends Component {
 
     togglePlay(e) {
         e.preventDefault();
+        const {isPlaying} = this.props.player;
         const audioElement = ReactDOM.findDOMNode(this.refs.audio);
-        if (this.state.isPlaying) {
+        if (isPlaying) {
             audioElement.pause();
         } else {
             audioElement.play();
@@ -137,8 +139,8 @@ class MobilePlayerContent extends Component {
     }
 
     render() {
-        const {playingSongId, songs, users} = this.props;
-        const {isPlaying} = this.state;
+        const {player, playingSongId, songs, users} = this.props;
+        const {isPlaying} = player;
         const song = songs[playingSongId];
         const user = users[song.user_id];
         const image = getImageUrl(song.artwork_url, IMAGE_SIZES.XLARGE);

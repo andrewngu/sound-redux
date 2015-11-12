@@ -3,6 +3,7 @@ import * as types from '../constants/ActionTypes';
 const initialState = {
     currentSongIndex: null,
     currentTime: 0,
+    isPlaying: false,
     selectedPlaylists: []
 };
 
@@ -25,6 +26,11 @@ export default function player(state = initialState, action) {
 
     case types.RESET_AUTHED:
         return Object.assign({}, state, initialState);
+
+    case types.TOGGLE_IS_PLAYING:
+        return Object.assign({}, state, {
+            isPlaying: action.isPlaying
+        });
 
     default:
         return state;
