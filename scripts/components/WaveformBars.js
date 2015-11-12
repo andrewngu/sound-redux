@@ -21,7 +21,7 @@ class WaveformBars extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.waveformUrl === this.props.waveformUrl) {
+        if (nextProps.waveformUrl !== this.props.waveformUrl) {
             this.setState({
                 waveformData: null
             }, this.fetchWaveformData.bind(this, nextProps.waveformUrl));
