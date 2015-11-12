@@ -2,7 +2,6 @@ import React, {Component, PropTypes} from 'react';
 import Link from '../components/Link';
 import SongDetails from '../components/SongDetails';
 import SongHeart from '../components/SongHeart';
-import WaveformBars from '../components/WaveformBars';
 import {IMAGE_SIZES} from '../constants/SongConstants';
 import {formatSongTitle} from '../utils/FormatUtils';
 import {getImageUrl} from '../utils/SongUtils';
@@ -19,7 +18,6 @@ class SongCard extends Component {
                     style={{backgroundImage: `url(${image})`}}>
                     <div className='song-card-playing'>
                         <i className='song-card-playing-icon icon ion-radio-waves'></i>
-                        {this.renderWaveformBars()}
                     </div>
                 </div>
             );
@@ -36,13 +34,6 @@ class SongCard extends Component {
                 </div>
             </a>
         );
-    }
-
-    renderWaveformBars() {
-        const {song} = this.props;
-        const urlParts = song.waveform_url.split('/');
-        let waveformUrl = '//wis.sndcdn.com/' + urlParts[urlParts.length - 1];
-        return <WaveformBars duration={song.duration} waveformUrl={waveformUrl} />;
     }
 
     render() {
