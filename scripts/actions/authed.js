@@ -134,7 +134,7 @@ function initInterval(accessToken) {
             } else {
                 clearInterval(streamInterval);
             }
-        }, 600000);
+        }, 60000);
     };
 }
 
