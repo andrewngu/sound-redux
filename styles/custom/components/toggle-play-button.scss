@@ -1,0 +1,49 @@
+.toggle-play-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    transition: background-color 0.2s ease-in-out;
+
+    &.active {
+        background-color: rgba(0, 0, 0, 0.8);
+
+        .toggle-play-button-icon {
+            position: relative;
+            opacity: 1;
+            z-index: 2;
+        }
+    }
+
+    &.is-playing {
+        .ion-ios-play {
+            display: none;
+        }
+
+        .ion-radio-waves {
+            display: inline-block;
+        }
+    }
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+
+        .toggle-play-button-icon {
+            opacity: 1;
+        }
+    }
+
+    .ion-radio-waves {
+        display: none;
+    }
+}
+
+.toggle-play-button-icon {
+    color: #A6D2A5;
+    font-size: 28px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}

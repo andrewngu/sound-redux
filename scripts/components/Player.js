@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import {changeCurrentTime, changeSong} from '../actions/player';
+import {changeCurrentTime, changeSong, toggleIsPlaying} from '../actions/player';
 import Playlist from '../components/Playlist';
 import Popover from '../components/Popover';
 import SongDetails from '../components/SongDetails';
@@ -38,7 +38,6 @@ class Player extends Component {
             activePlaylistIndex: null,
             currentTime: 0,
             duration: 0,
-            isPlaying: false,
             isSeeking: false,
             muted: false,
             repeat: false,
@@ -134,11 +133,13 @@ class Player extends Component {
     }
 
     handlePause() {
-        this.setState({isPlaying: false});
+        const {dispatch} = this.props;
+        dispatch(toggleIsPlaying(false));
     }
 
     handlePlay() {
-        this.setState({isPlaying: true});
+        const {dispatch} = this.props;
+        dispatch(toggleIsPlaying(true));
     }
 
     handleSeekMouseDown(e) {
@@ -276,8 +277,9 @@ class Player extends Component {
     }
 
     togglePlay() {
+        const {isPlaying} = this.props.player;
         const audioElement = ReactDOM.findDOMNode(this.refs.audio);
-        if (this.state.isPlaying) {
+        if (isPlaying) {
             audioElement.pause();
         } else {
             audioElement.play();
@@ -368,10 +370,11 @@ class Player extends Component {
 
     render() {
         const {dispatch, player, playingSongId, songs, users} = this.props;
+        const {isPlaying} = player;
         const song = songs[playingSongId];
         const user = users[song.user_id];
         const {currentTime} = player;
-        const {duration, isPlaying} = this.state;
+        const {duration} = this.state;
 
         return (
             <div className='player'>

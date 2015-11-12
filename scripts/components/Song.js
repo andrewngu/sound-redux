@@ -11,6 +11,8 @@ import Spinner from '../components/Spinner';
 import Stickify from '../components/Stickify';
 import Waveform from '../components/Waveform';
 
+import TogglePlayButtonContainer from '../containers/TogglePlayButtonContainer';
+
 import {SONG_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
 import {IMAGE_SIZES} from '../constants/SongConstants';
 
@@ -89,6 +91,21 @@ class Song extends Component {
         );
     }
 
+    renderTogglePlayButton() {
+        const {playingSongId, songId} = this.props;
+        const isActive =  playingSongId && playingSongId === songId;
+
+        if (isActive) {
+            return <TogglePlayButtonContainer />;
+        }
+
+        return (
+            <div className='toggle-play-button' onClick={this.playSong.bind(this, 0)}>
+                <i className='toggle-play-button-icon ion-ios-play'></i>
+            </div>
+        );
+    }
+
     render() {
         const {authed, dispatch, playingSongId, player, songId, songs, sticky, users} = this.props;
         const song = songs[songId];
@@ -110,11 +127,8 @@ class Song extends Component {
                                     <div className='song-detail'>
                                         <div
                                             className='song-image'
-                                            onClick={this.playSong.bind(this, 0)}
                                             style={{backgroundImage: `url(${image})`}}>
-                                            <div className='song-card-playing'>
-                                                <i className={'song-card-playing-icon icon ' + (isActive ? 'ion-radio-waves' : 'ion-ios-play')}></i>
-                                            </div>
+                                            {this.renderTogglePlayButton()}
                                         </div>
                                         <div className='song-info'>
                                             <div className='song-title'>{song.title}</div>
