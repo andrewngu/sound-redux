@@ -42,7 +42,7 @@ export default function authed(state = initialState, action) {
         });
 
     case types.RESET_AUTHED:
-        return Object.assign({}, state, initialState);
+        return Object.assign({}, initialState);
 
     case types.SET_FOLLOWING:
         return Object.assign({}, state, {
