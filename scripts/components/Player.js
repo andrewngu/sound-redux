@@ -48,6 +48,7 @@ class Player extends Component {
 
     componentDidMount() {
         document.addEventListener('keypress', this.onKeyPress);
+        document.addEventListener('keydown', this.onKeyDown.bind(this));
 
         const audioElement = ReactDOM.findDOMNode(this.refs.audio);
         audioElement.addEventListener('ended', this.handleEnded, false);
@@ -70,6 +71,7 @@ class Player extends Component {
 
     componentWillUnmount() {
         document.removeEventListener('keypress', this.onKeyPress, false);
+        document.removeEventListener('keydown', this.onKeyDown, false);
 
         const audioElement = ReactDOM.findDOMNode(this.refs.audio);
         audioElement.removeEventListener('ended', this.handleEnded, false);
@@ -251,6 +253,22 @@ class Player extends Component {
             e.preventDefault();
             this.changeSong(CHANGE_TYPES.PREV);
         } else if (keyCode === 107) {
+            e.preventDefault();
+            this.changeSong(CHANGE_TYPES.NEXT);
+        }
+    }
+
+    onKeyDown(e) {
+        const keyCode = e.keyCode || e.which;
+        const isInsideInput = e.target.tagName.toLowerCase().match(/input|textarea/);
+        if (isInsideInput) {
+            return;
+        }
+
+        if (keyCode === 37) {
+            e.preventDefault();
+            this.changeSong(CHANGE_TYPES.PREV);
+        } else if (keyCode === 39) {
             e.preventDefault();
             this.changeSong(CHANGE_TYPES.NEXT);
         }
