@@ -27,7 +27,6 @@ class Player extends Component {
         this.handlePause = this.handlePause.bind(this);
         this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
         this.handleVolumeChange = this.handleVolumeChange.bind(this);
-        this.onKeyPress = this.onKeyPress.bind(this);
         this.seek = this.seek.bind(this);
         this.toggleMute = this.toggleMute.bind(this);
         this.togglePlay = this.togglePlay.bind(this);
@@ -47,8 +46,8 @@ class Player extends Component {
     }
 
     componentDidMount() {
-        document.addEventListener('keypress', this.onKeyPress);
-        document.addEventListener('keydown', this.onKeyDown.bind(this));
+        document.addEventListener('keypress', this.handleKey.bind(this, 'keypress'));
+        document.addEventListener('keydown', this.handleKey.bind(this, 'keydown'));
 
         const audioElement = ReactDOM.findDOMNode(this.refs.audio);
         audioElement.addEventListener('ended', this.handleEnded, false);
@@ -70,8 +69,8 @@ class Player extends Component {
     }
 
     componentWillUnmount() {
-        document.removeEventListener('keypress', this.onKeyPress, false);
-        document.removeEventListener('keydown', this.onKeyDown, false);
+        document.removeEventListener('keypress', this.handleKey, false);
+        document.removeEventListener('keydown', this.handleKey, false);
 
         const audioElement = ReactDOM.findDOMNode(this.refs.audio);
         audioElement.removeEventListener('ended', this.handleEnded, false);
@@ -239,38 +238,31 @@ class Player extends Component {
         });
     }
 
-    onKeyPress(e) {
+    handleKey(type, e) {
         const keyCode = e.keyCode || e.which;
         const isInsideInput = e.target.tagName.toLowerCase().match(/input|textarea/);
         if (isInsideInput) {
             return;
         }
-
-        if (keyCode === 32) {
-            e.preventDefault();
-            this.togglePlay();
-        } else if (keyCode === 106) {
-            e.preventDefault();
-            this.changeSong(CHANGE_TYPES.PREV);
-        } else if (keyCode === 107) {
-            e.preventDefault();
-            this.changeSong(CHANGE_TYPES.NEXT);
-        }
-    }
-
-    onKeyDown(e) {
-        const keyCode = e.keyCode || e.which;
-        const isInsideInput = e.target.tagName.toLowerCase().match(/input|textarea/);
-        if (isInsideInput) {
-            return;
-        }
-
-        if (keyCode === 37) {
-            e.preventDefault();
-            this.changeSong(CHANGE_TYPES.PREV);
-        } else if (keyCode === 39) {
-            e.preventDefault();
-            this.changeSong(CHANGE_TYPES.NEXT);
+        if(type === 'keypress'){
+            if (keyCode === 32) {
+                e.preventDefault();
+                this.togglePlay();
+            } else if (keyCode === 106) {
+                e.preventDefault();
+                this.changeSong(CHANGE_TYPES.PREV);
+            } else if (keyCode === 107) {
+                e.preventDefault();
+                this.changeSong(CHANGE_TYPES.NEXT);
+            }
+        }else if(type === 'keydown'){
+            if (keyCode === 37) {
+                e.preventDefault();
+                this.changeSong(CHANGE_TYPES.PREV);
+            } else if (keyCode === 39) {
+                e.preventDefault();
+                this.changeSong(CHANGE_TYPES.NEXT);
+            }
         }
     }
 
