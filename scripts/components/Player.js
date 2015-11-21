@@ -27,7 +27,7 @@ class Player extends Component {
         this.handlePause = this.handlePause.bind(this);
         this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
         this.handleVolumeChange = this.handleVolumeChange.bind(this);
-        this.onKeyPress = this.onKeyPress.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
         this.seek = this.seek.bind(this);
         this.toggleMute = this.toggleMute.bind(this);
         this.togglePlay = this.togglePlay.bind(this);
@@ -47,7 +47,7 @@ class Player extends Component {
     }
 
     componentDidMount() {
-        document.addEventListener('keypress', this.onKeyPress);
+        document.addEventListener('keydown', this.onKeyDown);
 
         const audioElement = ReactDOM.findDOMNode(this.refs.audio);
         audioElement.addEventListener('ended', this.handleEnded, false);
@@ -69,7 +69,7 @@ class Player extends Component {
     }
 
     componentWillUnmount() {
-        document.removeEventListener('keypress', this.onKeyPress, false);
+        document.removeEventListener('keydown', this.onKeyDown, false);
 
         const audioElement = ReactDOM.findDOMNode(this.refs.audio);
         audioElement.removeEventListener('ended', this.handleEnded, false);
@@ -237,7 +237,7 @@ class Player extends Component {
         });
     }
 
-    onKeyPress(e) {
+    onKeyDown(e) {
         const keyCode = e.keyCode || e.which;
         const isInsideInput = e.target.tagName.toLowerCase().match(/input|textarea/);
         if (isInsideInput) {
@@ -247,10 +247,10 @@ class Player extends Component {
         if (keyCode === 32) {
             e.preventDefault();
             this.togglePlay();
-        } else if (keyCode === 106) {
+        }else if (keyCode === 37 || keyCode === 74) {
             e.preventDefault();
             this.changeSong(CHANGE_TYPES.PREV);
-        } else if (keyCode === 107) {
+        } else if (keyCode === 39 || keyCode === 75) {
             e.preventDefault();
             this.changeSong(CHANGE_TYPES.NEXT);
         }
