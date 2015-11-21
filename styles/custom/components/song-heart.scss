@@ -12,20 +12,20 @@
     }
 }
 
-.song-heart-panel {
+.song-heart-popover {
     top: 20px;
     right: -10px;
     width: 200px;
 }
 
-.song-heart-panel:before {
+.song-heart-popover:before {
     top: -7px;
     right: 8px;
     border-width: 7px;
     border-bottom: 7px solid #999;
 }
 
-.song-heart-panel:after {
+.song-heart-popover:after {
     top: -6px;
     right: 8px;
     border-width: 7px;

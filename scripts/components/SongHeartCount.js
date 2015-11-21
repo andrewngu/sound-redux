@@ -31,9 +31,9 @@ class SongHeartCount extends Component {
                         <i className='icon ion-ios-heart'></i>
                         <span>{addCommas(count + (isLiked ? 1 : 0))}</span>
                     </div>
-                    <div className='song-heart-count-panel popover-content'>
-                        <ul className='nav-user-panel-list'>
-                            <li className='nav-user-panel-item'>
+                    <div className='song-heart-count-popover popover-content'>
+                        <ul className='nav-user-popover-list'>
+                            <li className='nav-user-popover-item'>
                                 <a className='button orange block' onClick={this.login}>Sign into SoundCloud</a>
                             </li>
                         </ul>

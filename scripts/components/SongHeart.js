@@ -27,9 +27,9 @@ class SongHeart extends Component {
             return (
                 <Popover className={'song-heart ' + this.props.className}>
                     <i className='icon ion-ios-heart'></i>
-                    <div className='song-heart-panel popover-content'>
-                        <ul className='nav-user-panel-list'>
-                            <li className='nav-user-panel-item'>
+                    <div className='song-heart-popover popover-content'>
+                        <ul className='nav-user-popover-list'>
+                            <li className='nav-user-popover-item'>
                                 <a href='#' className='button orange block' onClick={this.login}>Sign into SoundCloud</a>
                             </li>
                         </ul>

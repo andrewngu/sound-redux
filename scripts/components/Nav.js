@@ -60,9 +60,9 @@ class Nav extends Component {
                         <i className='icon ion-chevron-down'></i>
                         <i className='icon ion-chevron-up'></i>
                     </div>
-                    <div className='nav-user-panel popover-content'>
-                        <ul className='nav-user-panel-list'>
-                            <li className='nav-user-panel-item'>
+                    <div className='nav-user-popover popover-content'>
+                        <ul className='nav-user-popover-list'>
+                            <li className='nav-user-popover-item'>
                                 <a href='#' onClick={this.logout}>Log Out</a>
                             </li>
                         </ul>
@@ -78,9 +78,9 @@ class Nav extends Component {
                     <i className='icon ion-chevron-down'></i>
                     <i className='icon ion-chevron-up'></i>
                 </div>
-                <div className='nav-user-panel popover-content'>
-                    <ul className='nav-user-panel-list'>
-                        <li className='nav-user-panel-item'>
+                <div className='nav-user-popover popover-content'>
+                    <ul className='nav-user-popover-list'>
+                        <li className='nav-user-popover-item'>
                             <a href='#' className='button orange block' onClick={this.login}>Sign into SoundCloud</a>
                         </li>
                     </ul>

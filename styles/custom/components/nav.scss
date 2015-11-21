@@ -106,31 +106,31 @@
     }
 }
 
-.nav-user-panel {
+.nav-user-popover {
     top: 40px;
     right: 2px;
     width: 200px;
 }
 
-.nav-user-panel.popover-content:before {
+.nav-user-popover.popover-content:before {
     top: -7px ;
     right: 14px ;
     border-width: 7px;
     border-bottom: 7px solid #999;
 }
 
-.nav-user-panel.popover-content:after {
+.nav-user-popover.popover-content:after {
     top: -6px;
     right: 14px;
     border-width: 7px;
     border-bottom: 7px solid #fff;
 }
 
-.nav-user-panel-list {
+.nav-user-popover-list {
     list-style: none;
 }
 
-.nav-user-panel-item {
+.nav-user-popover-item {
     padding: 10px;
     font-size: 11px;
 }
