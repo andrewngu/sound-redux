@@ -32,8 +32,8 @@ class SongHeartCount extends Component {
                         <span>{addCommas(count + (isLiked ? 1 : 0))}</span>
                     </div>
                     <div className='song-heart-count-panel popover-content'>
-                        <ul className='header-user-panel-list'>
-                            <li className='header-user-panel-item'>
+                        <ul className='nav-user-panel-list'>
+                            <li className='nav-user-panel-item'>
                                 <a className='button orange block' onClick={this.login}>Sign into SoundCloud</a>
                             </li>
                         </ul>
