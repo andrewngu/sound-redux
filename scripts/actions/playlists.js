@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-fetch';
 import {arrayOf, normalize} from 'normalizr';
 import {changePlayingSong} from '../actions/player';
 import * as types from '../constants/ActionTypes';
