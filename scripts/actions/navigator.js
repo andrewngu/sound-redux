@@ -1,5 +1,3 @@
-import {changeActiveSong} from '../actions/songs';
-import {changeActiveUser} from '../actions/users';
 import * as types from '../constants/ActionTypes';
 import {constructUrl, parseUrl} from '../utils/RouteUtils';
 
