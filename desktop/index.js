@@ -24,7 +24,7 @@ app.on('ready', () => {
   mainWindow.maximize();
 
   // Load app from webpack dev server.
-  mainWindow.loadUrl('http://localhost:8080');
+  mainWindow.loadURL('http://localhost:8080');
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
