@@ -1,4 +1,5 @@
 import 'babel-core/polyfill';
+import fetch from 'isomorphic-fetch';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
