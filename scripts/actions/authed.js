@@ -45,7 +45,7 @@ function fetchFollowings(accessToken) {
     return dispatch => {
         return fetch(`//api.soundcloud.com/me/followings?oauth_token=${accessToken}`)
             .then(response => response.json())
-            .then(json => normalize(json, arrayOf(userSchema)))
+            .then(json => normalize(json.collection, arrayOf(userSchema)))
             .then(normalized => {
                 const users = normalized.result.reduce((obj, userId) => Object.assign({}, obj, {[userId]: 1}), {});
                 dispatch(receiveAuthedFollowings(users, normalized.entities));
