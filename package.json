@@ -27,6 +27,7 @@
     "css-loader": "^0.18.0",
     "expect": "^1.12.2",
     "extract-text-webpack-plugin": "^0.8.2",
+    "fastclick": "^1.0.6",
     "isomorphic-fetch": "^2.1.1",
     "js-cookie": "^2.0.4",
     "jsx-loader": "^0.13.2",
