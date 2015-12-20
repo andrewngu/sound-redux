@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {VelocityComponent} from 'velocity-react';
+import {Motion, presets, spring} from 'react-motion';
 import {GENRES} from '../constants/SongConstants';
 import Link from '../components/Link';
 
@@ -45,11 +45,16 @@ class MobileNav extends Component {
         const {isGenreMenuOpen} = this.state;
         return (
             <div className='mobile-nav'>
-                <VelocityComponent animation={{height: isGenreMenuOpen ? (GENRES.length - 1) * 50 : 0}} duration={200}>
-                    <div className='mobile-nav-genres' onClick={this.toggleGenreMenuOpen}>
-                        {this.renderGenres(playlist)}
-                    </div>
-                </VelocityComponent>
+                <Motion style={{height: spring(isGenreMenuOpen ? (GENRES.length - 1) * 50 : 0, presets.stiff)}}>
+                    {({height}) =>
+                        <div
+                            className='mobile-nav-genres'
+                            onClick={this.toggleGenreMenuOpen}
+                            style={{height: height}}>
+                            {this.renderGenres(playlist)}
+                        </div>
+                    }
+                </Motion>
                 <div className='mobile-nav-items'>
                     <a
                         className='mobile-nav-item'
