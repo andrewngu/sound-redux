@@ -1,0 +1,8 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "indent": [2, 4],
+    "jsx-quotes": [2, "prefer-single"],
+    "object-curly-spacing": [2, "never"],
+  }
+}
