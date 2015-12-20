@@ -41,7 +41,7 @@ function fetchUser(userId) {
                 const normalized = normalize(json, userSchema);
                 dispatch(receiveUserPre(userId, normalized.entities));
             })
-            .catch(error => console.log(error));
+            .catch(err => { throw err; });
     };
 }
 
@@ -61,7 +61,7 @@ function fetchUserFollowings(userId) {
                 });
                 dispatch(receiveUserFollowings(entities));
             })
-            .catch(error => console.log(error));
+            .catch(err => { throw err; });
     };
 }
 
@@ -73,7 +73,7 @@ function fetchUserProfiles(userId) {
                 const entities = {users: {[userId]: {profiles: json}}};
                 dispatch(receiveUserProfiles(entities))
             })
-            .catch(error => console.log(error));
+            .catch(err => { throw err; });
     };
 }
 
@@ -85,7 +85,7 @@ function fetchUserTracks(userId, username) {
                 const normalized = normalize(json, arrayOf(songSchema))
                 dispatch(receiveSongs(normalized.entities, normalized.result, username + USER_PLAYLIST_SUFFIX, null))
             })
-            .catch(error => console.log(error));
+            .catch(err => { throw err; });
     };
 }
 

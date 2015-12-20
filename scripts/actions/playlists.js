@@ -42,7 +42,7 @@ export function fetchSongs(url, playlist) {
                 }, []);
                 dispatch(receiveSongs(normalized.entities, result, playlist, nextUrl, futureUrl));
             })
-            .catch(error => {throw error});
+            .catch(err => { throw err; });
     };
 }
 

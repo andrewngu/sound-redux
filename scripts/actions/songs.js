@@ -14,7 +14,7 @@ function fetchRelatedSongs(userId, songTitle) {
                 const normalized = normalize(songs, arrayOf(songSchema));
                 dispatch(receiveSongs(normalized.entities, normalized.result, songTitle + SONG_PLAYLIST_SUFFIX, null));
             })
-            .catch(error => { throw error; });
+            .catch(err => { throw err; });
     };
 }
 
@@ -47,7 +47,7 @@ function fetchSong(songId) {
                 const normalized = normalize(json, songSchema);
                 dispatch(receiveSongPre(songId, normalized.entities));
             })
-            .catch(error => console.log(error));
+            .catch(err => { throw err; });
     };
 }
 
@@ -56,7 +56,7 @@ function fetchSongComments(songId) {
         return fetch(constructSongCommentsUrl(songId))
             .then(response => response.json())
             .then(json => dispatch(receiveSongComments(songId, json)))
-            .catch(error => console.log(error));
+            .catch(err => { throw err; });
     };
 }
 

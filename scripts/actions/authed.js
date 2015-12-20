@@ -37,7 +37,7 @@ function fetchAuthedUser(accessToken, shouldShowStream) {
         return fetch(`//api.soundcloud.com/me?oauth_token=${accessToken}`)
             .then(response => response.json())
             .then(json => dispatch(receiveAuthedUserPre(accessToken, json, shouldShowStream)))
-            .catch(error => {throw error});
+            .catch(err => { throw err; });
     };
 }
 
@@ -50,7 +50,7 @@ function fetchFollowings(accessToken) {
                 const users = normalized.result.reduce((obj, userId) => Object.assign({}, obj, {[userId]: 1}), {});
                 dispatch(receiveAuthedFollowings(users, normalized.entities));
             })
-            .catch(error => {throw error});
+            .catch(err => {throw err; });
   }
 }
 
@@ -65,7 +65,7 @@ function fetchLikes(accessToken) {
                 dispatch(receiveLikes(likes));
                 dispatch(receiveSongs(normalized.entities, normalized.result, 'likes' + AUTHED_PLAYLIST_SUFFIX, null));
             })
-            .catch(error => {throw error});
+            .catch(err => { throw err; });
     };
 }
 
@@ -81,7 +81,7 @@ function fetchPlaylists(accessToken) {
                     dispatch(receiveSongs({}, playlist.tracks, playlist.title + AUTHED_PLAYLIST_SUFFIX, null));
                 });
             })
-            .catch(error => { throw error; });
+            .catch(err => { throw err; });
     };
 }
 
@@ -150,9 +150,7 @@ export function loginUser(shouldShowStream = true) {
             Cookies.set(COOKIE_PATH, authObj.oauth_token);
             dispatch(authUser(authObj.oauth_token, shouldShowStream));
         })
-        .catch(error => {
-            throw error;
-        });
+        .catch(err => { throw err; });
     };
 }
 
