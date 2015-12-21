@@ -1,9 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {loginUser, logoutUser} from '../actions/authed';
+import {toggleStats} from '../actions/toggleStats';
 import Link from '../components/Link';
 import NavSearch from '../components/NavSearch';
 import Popover from '../components/Popover';
 import {getImageUrl} from '../utils/SongUtils';
+import Switch from '../components/Switch';
 
 const PATHS = ['stream', 'likes'];
 
@@ -12,6 +14,7 @@ class Nav extends Component {
         super(props);
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
+        this.toggleStats = this.toggleStats.bind(this);
     }
 
     getPlaylist() {
@@ -36,7 +39,13 @@ class Nav extends Component {
     logout(e) {
         e.preventDefault();
         const {dispatch} = this.props;
-        dispatch(logoutUser())
+        dispatch(logoutUser());
+    }
+
+    toggleStats(e) {
+        e.preventDefault();
+        const {dispatch} = this.props;
+        dispatch(toggleStats());
     }
 
     renderArtworks(playlist) {
@@ -82,6 +91,27 @@ class Nav extends Component {
                     <ul className='nav-user-popover-list'>
                         <li className='nav-user-popover-item'>
                             <a href='#' className='button orange block' onClick={this.login}>Sign into SoundCloud</a>
+                        </li>
+                    </ul>
+                </div>
+            </Popover>
+        );
+    }
+
+    renderSettingsPanel() {
+        const {dispatch, toggleStats} = this.props;
+
+        return (
+            <Popover className='nav-settings'>
+                <div className='nav-settings-link'>
+                    <i className='icon ion-gear-a'></i>
+                    <i className='icon ion-chevron-down'></i>
+                    <i className='icon ion-chevron-up'></i>
+                </div>
+                <div className='nav-settings-popover popover-content'>
+                    <ul className='nav-settings-popover-list'>
+                        <li className='nav-settings-popover-item'>
+                            Toggle stats <Switch isOn={toggleStats.showStats} toggleFunc={this.toggleStats} />
                         </li>
                     </ul>
                 </div>
@@ -175,7 +205,7 @@ class Nav extends Component {
     }
 
     render() {
-        const {dispatch} = this.props;
+        const {dispatch, toggleStats} = this.props;
 
         return (
             <div className='nav'>
@@ -202,6 +232,9 @@ class Nav extends Component {
                         </div>
                         <div className='nav-nav-item'>
                             {this.renderNavUser()}
+                        </div>
+                        <div className='nav-nav-item'>
+                            {this.renderSettingsPanel()}
                         </div>
                     </div>
                 </div>

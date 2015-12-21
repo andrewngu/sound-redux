@@ -101,7 +101,7 @@ class SongCards extends Component {
 
     renderSongs(start, end) {
         const chunk = 5;
-        const {authed, dispatch, playlist, playlists, playingSongId, songs, users} = this.props;
+        const {authed, dispatch, playlist, playlists, playingSongId, songs, users, toggleStats} = this.props;
         const items = playlist in playlists ? playlists[playlist].items : [];
         let result = [];
         for (let i = start; i < end; i += chunk) {
@@ -118,7 +118,8 @@ class SongCards extends Component {
                             playSong={this.playSong.bind(this, index)}
                             scrollFunc={fetchSongsIfNeeded.bind(null, playlist)}
                             song={song}
-                            user={user} />
+                            user={user}
+                            toggleStats={toggleStats} />
                     </div>
                 );
             }, this);
