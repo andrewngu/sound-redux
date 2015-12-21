@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {loginUser, logoutUser} from '../actions/authed';
+import {toggleStats} from '../actions/toggleStats';
 import Link from '../components/Link';
 import NavSearch from '../components/NavSearch';
 import Popover from '../components/Popover';
@@ -12,6 +13,7 @@ class Nav extends Component {
         super(props);
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
+        this.toggleStats = this.toggleStats.bind(this);
     }
 
     getPlaylist() {
@@ -36,7 +38,13 @@ class Nav extends Component {
     logout(e) {
         e.preventDefault();
         const {dispatch} = this.props;
-        dispatch(logoutUser())
+        dispatch(logoutUser());
+    }
+
+    toggleStats(e) {
+        e.preventDefault();
+        const {dispatch} = this.props;
+        dispatch(toggleStats());
     }
 
     renderArtworks(playlist) {
@@ -175,7 +183,7 @@ class Nav extends Component {
     }
 
     render() {
-        const {dispatch} = this.props;
+        const {dispatch, toggleStats} = this.props;
 
         return (
             <div className='nav'>
@@ -192,6 +200,9 @@ class Nav extends Component {
                                 SoundRedux
                             </Link>
                         </div>
+                        <button className={'nav-toggleStats' + (toggleStats.showStats ? ' shown' : '')} onClick={this.toggleStats}>
+                            Toggle stats
+                        </button>
                         {this.renderStreamLink()}
                         {this.renderLikesLink()}
                         {this.renderPlaylistsPopover()}

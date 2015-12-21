@@ -158,3 +158,19 @@
     margin-left: 17px;
     border-radius: 100%;
 }
+
+.nav-toggleStats {
+    padding: 5px;
+    border: 1px solid #fff;
+    background: none;
+    box-shadow: none;
+    color: #fff;
+    text-transform: uppercase;
+    margin-top: 12px;
+    outline: 0;
+
+    &.shown {
+        background-color: #fff;
+        color: #3A3F41;
+    }
+}

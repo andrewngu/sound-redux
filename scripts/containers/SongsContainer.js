@@ -17,7 +17,7 @@ class SongsContainer extends Component {
 }
 
 function mapStateToProps(state) {
-    const {authed, entities, environment, navigator, player, playlists} = state;
+    const {authed, entities, environment, navigator, player, playlists, toggleStats} = state;
 
     const playingSongId = getPlayingSongId(player, playlists);
 
@@ -38,7 +38,8 @@ function mapStateToProps(state) {
         scrollFunc: fetchSongsIfNeeded.bind(null, playlist),
         songs: entities.songs,
         time,
-        users: entities.users
+        users: entities.users,
+        toggleStats,
     };
 }
 

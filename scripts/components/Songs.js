@@ -25,7 +25,7 @@ class Songs extends Component {
     }
 
     render() {
-        const {authed, dispatch, height, playingSongId, playlist, playlists, sticky, songs, time, users} = this.props;
+        const {authed, dispatch, height, playingSongId, playlist, playlists, sticky, songs, time, users, toggleStats} = this.props;
 
         return (
             <div className={'songs' + (sticky ? ' sticky' : '')}>
@@ -40,7 +40,8 @@ class Songs extends Component {
                         playlists={playlists}
                         scrollFunc={fetchSongsIfNeeded.bind(null, playlist)}
                         songs={songs}
-                        users={users} />
+                        users={users}
+                        toggleStats={toggleStats} />
                 </div>
             </div>
         );
