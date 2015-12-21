@@ -85,7 +85,8 @@
     float: left;
 }
 
-.nav-user-link {
+.nav-user-link,
+.nav-settings-link {
     display: flex;
     align-items: center;
     color: #fff;
@@ -94,7 +95,8 @@
         cursor: pointer;
     }
 
-    .ion-person {
+    .ion-person,
+    .ion-gear-a {
         margin-left: 30px;
         font-size: 20px;
     }
@@ -106,33 +108,48 @@
     }
 }
 
-.nav-user-popover {
+.nav-user-popover,
+.nav-settings-popover {
     top: 40px;
     right: 2px;
     width: 200px;
 }
 
-.nav-user-popover.popover-content:before {
+.nav-user-popover.popover-content:before,
+.nav-settings-popover.popover-content:before {
     top: -7px ;
     right: 14px ;
     border-width: 7px;
     border-bottom: 7px solid #999;
 }
 
-.nav-user-popover.popover-content:after {
+.nav-user-popover.popover-content:after,
+.nav-settings-popover.popover-content:after {
     top: -6px;
     right: 14px;
     border-width: 7px;
     border-bottom: 7px solid #fff;
 }
 
-.nav-user-popover-list {
+.nav-user-popover-list,
+.nav-settings-popover-list {
     list-style: none;
 }
 
-.nav-user-popover-item {
+.nav-user-popover-item,
+.nav-settings-popover-item {
     padding: 10px;
     font-size: 11px;
+}
+
+.nav-settings-popover-item {
+    background-color: #3A3F41;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+    text-transform: uppercase;
 }
 
 .nav-authed {
@@ -157,20 +174,4 @@
     height: 29px;
     margin-left: 17px;
     border-radius: 100%;
-}
-
-.nav-toggleStats {
-    padding: 5px;
-    border: 1px solid #fff;
-    background: none;
-    box-shadow: none;
-    color: #fff;
-    text-transform: uppercase;
-    margin-top: 12px;
-    outline: 0;
-
-    &.shown {
-        background-color: #fff;
-        color: #3A3F41;
-    }
 }
