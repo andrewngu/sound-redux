@@ -22,7 +22,7 @@ class SongCard extends Component {
         );
     }
     render() {
-        const {toggleStatus, authed, dispatch, isActive, playSong, song, user, toggleStats} = this.props;
+        const {authed, dispatch, isActive, playSong, song, user, toggleStats} = this.props;
         const isLiked = song.id in authed.likes && authed.likes[song.id] == 1;
         const image = getImageUrl(song.artwork_url, IMAGE_SIZES.LARGE);
 
