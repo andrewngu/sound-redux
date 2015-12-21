@@ -34,7 +34,8 @@ class SongListItem extends Component {
                     <div
                         className='song-list-item-image'
                         onClick={playSong}
-                        style={{backgroundImage: `url(${image})`}}>
+                        style={{backgroundImage: `url(${image})`}}
+                    >
                         {this.renderTogglePlayButton()}
                     </div>
                     <div className='song-list-item-info'>

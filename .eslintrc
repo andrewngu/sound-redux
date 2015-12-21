@@ -1,8 +1,11 @@
 {
   "extends": "airbnb",
   "rules": {
+    "comma-dangle": [2, "never"],
     "indent": [2, 4],
     "jsx-quotes": [2, "prefer-single"],
+    "no-use-before-define": [2, "nofunc"],
     "object-curly-spacing": [2, "never"],
+    "react/jsx-indent-props": [2, 4]
   }
 }
