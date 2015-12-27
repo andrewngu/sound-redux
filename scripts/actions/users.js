@@ -1,29 +1,33 @@
+import {arrayOf, normalize} from 'normalizr';
+import merge from 'lodash/object/merge';
+import {receiveSongs} from '../actions/playlists';
 import * as types from '../constants/ActionTypes';
+import {USER_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
+import {songSchema, userSchema} from '../constants/Schemas';
+
 import {
     constructUserFollowingsUrl,
     constructUserTracksUrl,
     constructUserUrl,
-    constructUserProfilesUrl} from '../helpers/UsersHelper';
+    constructUserProfilesUrl
+} from '../utils/UserUtils';
 
-export function changeActiveUser(userId) {
+function fetchUserData(userId, username) {
     return dispatch => {
-        dispatch(fetchUserIfNeeded(userId));
-        dispatch(changeActiveUserId(userId));
-    };
-}
-
-export function changeActiveUserId(userId) {
-    return {
-        type: types.CHANGE_ACTIVE_USER_ID,
-        userId
-    };
+        dispatch(fetchUserTracks(userId, username));
+        dispatch(fetchUserFollowings(userId));
+        dispatch(fetchUserProfiles(userId));
+    }
 }
 
 export function fetchUserIfNeeded(userId) {
     return (dispatch, getState) => {
-        const {users} = getState();
-        if (!(userId in users)) {
+        const {entities} = getState();
+        const {users} = entities;
+        if (!(userId in users) || !users[userId].description) {
             return dispatch(fetchUser(userId));
+        } else if (!('followings' in users[userId])) {
+            return dispatch(fetchUserData(userId, users[userId].username));
         }
     };
 }
@@ -33,8 +37,11 @@ function fetchUser(userId) {
         dispatch(requestUser(userId));
         return fetch(constructUserUrl(userId))
             .then(response => response.json())
-            .then(json => dispatch(receiveUserPre(userId, json)))
-            .catch(error => console.log(error));
+            .then(json => {
+                const normalized = normalize(json, userSchema);
+                dispatch(receiveUserPre(userId, normalized.entities));
+            })
+            .catch(err => { throw err; });
     };
 }
 
@@ -42,8 +49,19 @@ function fetchUserFollowings(userId) {
     return dispatch => {
         return fetch(constructUserFollowingsUrl(userId))
             .then(response => response.json())
-            .then(json => dispatch(receiveUserFollowings(userId, json)))
-            .catch(error => console.log(error));
+            .then(json => {
+                const users = json.sort((a, b) => b.followers_count - a.followers_count);
+                const normalized = normalize(users, arrayOf(userSchema));
+                const entities = merge({}, normalized.entities, {
+                    users: {
+                        [userId]: {
+                            followings: normalized.result
+                        }
+                    }
+                });
+                dispatch(receiveUserFollowings(entities));
+            })
+            .catch(err => { throw err; });
     };
 }
 
@@ -51,8 +69,11 @@ function fetchUserProfiles(userId) {
     return dispatch => {
         return fetch(constructUserProfilesUrl(userId))
             .then(response => response.json())
-            .then(json => dispatch(receiveUserProfiles(userId, json)))
-            .catch(error => console.log(error));
+            .then(json => {
+                const entities = {users: {[userId]: {profiles: json}}};
+                dispatch(receiveUserProfiles(entities))
+            })
+            .catch(err => { throw err; });
     };
 }
 
@@ -60,50 +81,39 @@ function fetchUserTracks(userId, username) {
     return dispatch => {
         return fetch(constructUserTracksUrl(userId))
             .then(response => response.json())
-            .then(json => dispatch(receiveSongs(json, username)))
-            .catch(error => console.log(error));
+            .then(json => {
+                const normalized = normalize(json, arrayOf(songSchema))
+                dispatch(receiveSongs(normalized.entities, normalized.result, username + USER_PLAYLIST_SUFFIX, null))
+            })
+            .catch(err => { throw err; });
     };
 }
 
-export function receiveSongs(songs, playlist) {
-    return {
-        type: types.RECEIVE_SONGS,
-        nextUrl: null,
-        playlist,
-        songs
-    };
-}
-
-export function receiveUserFollowings(userId, users) {
+export function receiveUserFollowings(entities) {
     return {
         type: types.RECEIVE_USER_FOLLOWINGS,
-        userId,
-        users,
+        entities
     };
 }
 
-function receiveUserPre(userId, user) {
+function receiveUserPre(userId, entities) {
     return dispatch => {
-        dispatch(receiveUser(user));
-        dispatch(fetchUserTracks(userId, user.username));
-        dispatch(fetchUserFollowings(userId));
-        dispatch(fetchUserProfiles(userId));
+        dispatch(receiveUser(entities));
+        dispatch(fetchUserData(userId, entities.users[userId].username));
     };
 }
 
-export function receiveUser(user) {
+export function receiveUser(entities) {
     return {
         type: types.RECEIVE_USER,
-        user: user,
-        userId: user.id
+        entities
     };
 }
 
-export function receiveUserProfiles(userId, profiles) {
+export function receiveUserProfiles(entities) {
     return {
         type: types.RECEIVE_USER_PROFILES,
-        userId: userId,
-        profiles: profiles
+        entities
     };
 }
 

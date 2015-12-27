@@ -1,24 +1,48 @@
-import fetch from 'isomorphic-fetch';
+import {arrayOf, normalize} from 'normalizr';
+import {changePlayingSong} from '../actions/player';
 import * as types from '../constants/ActionTypes';
-import {constructUrl} from '../helpers/SongsHelper';
+import {AUTHED_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
+import {songSchema} from '../constants/Schemas';
+import {GENRES_MAP} from '../constants/SongConstants';
 
-export function changeActivePlaylist(playlist) {
-    return (dispatch, getState) => {
-        const {playlists} = getState();
-        dispatch(setActivePlaylist(playlist));
-        if (!(playlist in playlists) || playlists[playlist].items.length === 0) {
-            dispatch(fetchSongsIfNeeded(playlist));
-        }
-    }
-}
+import {getPlayingPlaylist} from '../utils/PlayerUtils';
+import {constructUrl} from '../utils/SongUtils';
 
-function fetchSongs(url, playlist) {
+export function fetchSongs(url, playlist) {
     return (dispatch, getState) => {
+        const {authed} = getState();
         dispatch(requestSongs(playlist));
         return fetch(url)
             .then(response => response.json())
-            .then(json => dispatch(receiveSongs(json, playlist)))
-            .catch(error => console.log(error));
+            .then(json => {
+                let nextUrl = null;
+                let futureUrl = null;
+                if (json.next_href) {
+                    nextUrl = json.next_href + ( authed.accessToken ? `&oauth_token=${authed.accessToken}` : '');
+                }
+
+                if (json.future_href) {
+                    futureUrl = json.future_href + ( authed.accessToken ? `&oauth_token=${authed.accessToken}` : '');
+                }
+
+                const songs = json.collection
+                    .map(song => song.origin ? song.origin : song)
+                    .filter(song => {
+                        if (playlist in GENRES_MAP) {
+                            return song.streamable && song.kind === 'track' && song.duration < 600000;
+                        }
+                        return song.streamable && song.kind === 'track';
+                    });
+                const normalized = normalize(songs, arrayOf(songSchema));
+                const result = normalized.result.reduce((arr, songId) => {
+                    if (arr.indexOf(songId) === -1) {
+                        arr.push(songId);
+                    }
+                    return arr;
+                }, []);
+                dispatch(receiveSongs(normalized.entities, result, playlist, nextUrl, futureUrl));
+            })
+            .catch(err => { throw err; });
     };
 }
 
@@ -40,12 +64,40 @@ function getNextUrl(playlists, playlist) {
     return activePlaylist.nextUrl;
 }
 
-function receiveSongs(json, playlist) {
+export function receiveSongs(entities, songs, playlist, nextUrl, futureUrl) {
     return {
         type: types.RECEIVE_SONGS,
-        nextUrl: json.next_href,
-        playlist: playlist,
-        songs: json.collection.filter(song => song.streamable && song.duration < 600000 )
+        entities,
+        futureUrl,
+        nextUrl,
+        playlist,
+        songs
+    };
+}
+
+export function removeUnlikedSongsPre() {
+    return (dispatch, getState) => {
+        const LIKES_PLAYLIST_KEY = 'likes' + AUTHED_PLAYLIST_SUFFIX;
+        const {authed, player, playlists} = getState();
+        const {currentSongIndex} = player;
+        const playingPlaylist = getPlayingPlaylist(player);
+
+        const likedSongs = playlists[LIKES_PLAYLIST_KEY].items
+            .filter(songId => songId in authed.likes && authed.likes[songId] === 1);
+
+        if (playingPlaylist === LIKES_PLAYLIST_KEY
+        && currentSongIndex >= likedSongs.length) {
+            dispatch(changePlayingSong(null));
+        }
+
+        dispatch(removeUnlikedSongs(likedSongs));
+    };
+}
+
+function removeUnlikedSongs(songs) {
+    return {
+        type: types.REMOVE_UNLIKED_SONGS,
+        songs
     };
 }
 
@@ -53,13 +105,6 @@ function requestSongs(playlist) {
     return {
         type: types.REQUEST_SONGS,
         playlist: playlist
-    };
-}
-
-function setActivePlaylist(playlist) {
-    return {
-        type: types.CHANGE_ACTIVE_PLAYLIST,
-        playlist
     };
 }
 

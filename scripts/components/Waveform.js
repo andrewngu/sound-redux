@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
+import ReactDOM from 'react-dom';
 import {changeCurrentTime} from '../actions/player';
+import {offsetLeft} from '../utils/MouseUtils';
 
 class Waveform extends Component {
     constructor(props) {
@@ -11,39 +13,6 @@ class Waveform extends Component {
             isCanvas: false,
             seekPercent: 0
         };
-    }
-
-    componentDidMount() {
-        // const canvas = React.findDOMNode(this.refs.canvas);
-        // const context = canvas.getContext('2d');
-        // let img = new Image();
-        // img.onload = () => {
-        //     canvas.width = img.width;
-        //     canvas.height = img.height / 2;
-        //     context.drawImage(img, 0, 0);
-        //     const data = context.getImageData(0, 0, canvas.width, canvas.height).data;
-        //
-        //     let result = [];
-        //     let done = {};
-        //     for (let i = 0; i < data.length; i += 4) {
-        //         const x = (i / 4) % canvas.width;
-        //         if (x in done) {
-        //             continue;
-        //         }
-        //
-        //         if (data[i + 3] === 255) {
-        //             if (!(x < result.length)) {
-        //                 result.push(1);
-        //             } else {
-        //                 result[x]++;
-        //             }
-        //         } else {
-        //             done[x] = 1;
-        //         }
-        //     }
-        // };
-        // img.crossOrigin = '';
-        // img.src = this.props.waveformUrl;
     }
 
     handleMouseDown(e) {
@@ -68,7 +37,7 @@ class Waveform extends Component {
         if (!isActive) {
             return;
         }
-        const seekPercent = (e.clientX - e.currentTarget.offsetLeft) / e.currentTarget.offsetWidth;
+        const seekPercent = (e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth;
         this.setState({seekPercent: seekPercent});
     }
 
@@ -102,6 +71,15 @@ class Waveform extends Component {
         }
     }
 
+    renderImage() {
+        const {waveformUrl} = this.props;
+        if (waveformUrl.indexOf('json') > -1) {
+            return;
+        }
+
+        return <img className='waveform-image' src={waveformUrl.replace('http:', '')} />;
+    }
+
     renderWaveform() {
         const {currentTime, duration, isActive} = this.props;
         const width = isActive ? currentTime / (duration / 1000) * 100 : 0;
@@ -111,7 +89,7 @@ class Waveform extends Component {
                 onMouseDown={this.handleMouseDown}
                 onMouseLeave={this.handleMouseLeave}
                 onMouseMove={this.handleMouseMove}>
-                <img className='waveform-image' src={this.props.waveformUrl} />
+                {this.renderImage()}
                 <div className='waveform-image-bg' style={{width : `${width}%`}} />
                 {this.renderClickable()}
             </div>

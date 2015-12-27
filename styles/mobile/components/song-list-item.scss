@@ -1,0 +1,45 @@
+.mobile-song-list-item {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    border-top: 1px solid #e3e3e3;
+
+    &:first-child {
+        border-top: none;
+    }
+
+    &.active {
+        border-color: #a6d2a5;
+        background-color: #fff;
+
+        & + .mobile-song-list-item {
+            border-color: #a6d2a5;
+        }
+    }
+}
+
+.mobile-song-list-item-image {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.mobile-song-list-item-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    justify-content: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mobile-song-list-item-title {
+    margin-bottom: 4px;
+    color: #333;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.mobile-song-list-item-user {
+    color: #999;
+}

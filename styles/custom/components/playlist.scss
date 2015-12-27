@@ -1,0 +1,131 @@
+.playlist {
+    width: 260px;
+    bottom: 50px;
+    right: -12px;
+}
+
+.player-button.popover:hover > i, .player-button.popover.open > i {
+    color: #A6D2A5;
+}
+
+.playlist.popover-content:after {
+    bottom: -13px;
+    right: 14px;
+    border-width: 7px;
+    border-top: 7px solid #f4f4f4;
+}
+
+.playlist.popover-content:before {
+    bottom: -14px ;
+    right: 14px ;
+    border-width: 7px;
+    border-top: 7px solid #999;
+}
+
+.playlist-header {
+    display: flex;
+    flex-direction: row;
+    padding: 12px 0;
+    border-bottom: 1px solid #e3e3e3;
+    background-color: #3a3f41;
+    color: #fff;
+    font-size: 11px;
+}
+
+.playlist-header-button {
+    padding: 0 10px;
+    color: #ccc;
+
+    &:hover {
+        color: #fff;
+        cursor: pointer;
+    }
+
+    &.disabled {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+.playlist-header-title {
+    flex: 1;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.playlist-body {
+    height: 400px;
+    overflow: scroll;
+}
+
+.playlist-songs {
+    list-style: none;
+}
+
+.playlist-song {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px;
+    border-bottom: 1px solid #e3e3e3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &.active {
+        &:hover {
+            cursor: default;
+        }
+
+        .playlist-song-image {
+            opacity: 1;
+        };
+
+        .playlist-song-title {
+            color: #222;
+        }
+    }
+
+    &:hover {
+        background-color: #fafafa;
+        cursor: pointer;
+
+        .playlist-song-image {
+            opacity: 1;
+        }
+
+        .playlist-song-title {
+            color: #222;
+        }
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.playlist-song-title {
+    flex: 1;
+    margin-left: 10px;
+    color: #ccc;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.playlist-song-image {
+    width: 30px;
+    height: 30px;
+    opacity: 0.2;
+}
+
+.playlist-footer {
+    padding: 12px 0;
+    background-color: #f4f4f4;
+    border-top: 1px solid #e3e3e3;
+    font-size: 11px;
+    text-align: center;
+}

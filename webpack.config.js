@@ -1,34 +1,18 @@
 var webpack = require('webpack');
-
-function getEntrySources(sources) {
-    if (process.env.NODE_ENV !== 'production') {
-        sources.push('webpack-dev-server/client?http://localhost:8080');
-        sources.push('webpack/hot/only-dev-server');
-    }
-
-    return sources;
-}
-
-function getOutputFilename() {
-    if (process.env.NODE_ENV === 'production') {
-        return './server/public/js/[name].js';
-    }
-
-    return '/js/[name].js';
-}
-
 var ignore = new webpack.IgnorePlugin(/\.svg$/)
 
 module.exports = {
     devtool: 'source-map',
     entry: {
-        main: getEntrySources([
-            './scripts/main.js'
-        ])
+        main: [
+            './scripts/main.js',
+            'webpack-dev-server/client?http://localhost:8080',
+            'webpack/hot/only-dev-server'
+        ]
     },
     output: {
         publicPath: 'http://localhost:8080/',
-        filename: getOutputFilename()
+        filename: '/js/[name].js'
     },
     module: {
         loaders: [
@@ -36,5 +20,11 @@ module.exports = {
             { test: /\.scss$/, loaders: ['style', 'css', 'autoprefixer', 'sass'] }
         ]
     },
-    plugins: [ignore]
+    plugins: [ignore],
+    devServer: {
+        host: '0.0.0.0',
+        proxy: {
+            '/api/*': 'http://localhost:8081',
+        }
+    }
 };

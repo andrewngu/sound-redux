@@ -1,0 +1,39 @@
+input[type="text"] {
+    display: inline-block;
+    padding: 0 0.875rem;
+    border: none;
+    color: #222;
+    text-align: left;
+    font-family: 'Open Sans';
+    font-size: 12px;
+    outline: 0;
+    border-radius: 3px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+::-webkit-input-placeholder {
+    color: #6B6B6B;
+    font-weight: 300;
+    font-family: 'Open Sans';
+}
+
+:-moz-placeholder {
+    color: #6B6B6B;
+    font-weight: 300;
+    font-family: 'Open Sans';
+}
+
+::-moz-placeholder {
+    color: #6B6B6B;
+    font-weight: 300;
+    font-family: 'Open Sans';
+}
+
+:-ms-input-placeholder {
+    color: #6B6B6B;
+    font-weight: 300;
+    font-family: 'Open Sans';
+}

@@ -1,0 +1,79 @@
+.user {
+    position: relative;
+    display: flex;
+    padding: 10px;
+}
+
+.user-detail {
+    display: flex;
+    flex-direction: row;
+}
+
+.user-image {
+    width: 120px;
+    height: 120px;
+    margin-right: 20px;
+    border-radius: 50%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.user-info {
+    flex: 1;
+}
+
+.user-follow-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.user-username {
+    display: block;
+    font-size: 20px;
+    font-weight: 300;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-location {
+    color: #ccc;
+    font-size: 18px;
+
+    i {
+        margin-right: 10px;
+    }
+}
+
+.user-profiles {
+    margin-top: 10px;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.user-profile {
+    display: inline-block;
+
+    & + .user-profile {
+        margin-left: 20px;
+    }
+
+    i {
+        margin-right: 6px;
+        color: #ccc;
+    }
+}
+
+.user-description {
+    margin-top: 10px;
+    font-size: 11px;
+    max-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

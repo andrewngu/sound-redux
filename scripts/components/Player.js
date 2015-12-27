@@ -1,10 +1,13 @@
 import React, {Component, PropTypes} from 'react';
-import {changeCurrentTime, changeSong} from '../actions/player';
+import ReactDOM from 'react-dom';
+import {changeCurrentTime, changeSong, toggleIsPlaying} from '../actions/player';
 import Playlist from '../components/Playlist';
 import Popover from '../components/Popover';
 import SongDetails from '../components/SongDetails';
 import {CHANGE_TYPES} from '../constants/SongConstants';
-import {formatSeconds, formatStreamUrl} from '../helpers/Formatter';
+import {formatSeconds, formatStreamUrl} from '../utils/FormatUtils';
+import {offsetLeft} from '../utils/MouseUtils';
+import {getImageUrl} from '../utils/SongUtils';
 
 class Player extends Component {
     constructor(props) {
@@ -24,6 +27,7 @@ class Player extends Component {
         this.handlePause = this.handlePause.bind(this);
         this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
         this.handleVolumeChange = this.handleVolumeChange.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
         this.seek = this.seek.bind(this);
         this.toggleMute = this.toggleMute.bind(this);
         this.togglePlay = this.togglePlay.bind(this);
@@ -34,7 +38,6 @@ class Player extends Component {
             activePlaylistIndex: null,
             currentTime: 0,
             duration: 0,
-            isPlaying: false,
             isSeeking: false,
             muted: false,
             repeat: false,
@@ -44,7 +47,9 @@ class Player extends Component {
     }
 
     componentDidMount() {
-        const audioElement = React.findDOMNode(this.refs.audio);
+        document.addEventListener('keydown', this.onKeyDown);
+
+        const audioElement = ReactDOM.findDOMNode(this.refs.audio);
         audioElement.addEventListener('ended', this.handleEnded, false);
         audioElement.addEventListener('loadedmetadata', this.handleLoadedMetadata, false);
         audioElement.addEventListener('loadstart', this.handleLoadStart, false);
@@ -56,15 +61,17 @@ class Player extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.song && prevProps.song.id === this.props.song.id) {
+        if (prevProps.playingSongId && prevProps.playingSongId === this.props.playingSongId) {
             return;
         }
 
-        React.findDOMNode(this.refs.audio).play();
+        ReactDOM.findDOMNode(this.refs.audio).play();
     }
 
     componentWillUnmount() {
-        const audioElement = React.findDOMNode(this.refs.audio);
+        document.removeEventListener('keydown', this.onKeyDown, false);
+
+        const audioElement = ReactDOM.findDOMNode(this.refs.audio);
         audioElement.removeEventListener('ended', this.handleEnded, false);
         audioElement.removeEventListener('loadedmetadata', this.handleLoadedMetadata, false);
         audioElement.removeEventListener('loadstart', this.handleLoadStart, false);
@@ -90,14 +97,14 @@ class Player extends Component {
     }
 
     changeVolume(e) {
-        const audioElement = React.findDOMNode(this.refs.audio);
-        const volume = (e.clientX - e.currentTarget.offsetLeft) / e.currentTarget.offsetWidth;
+        const audioElement = ReactDOM.findDOMNode(this.refs.audio);
+        const volume = (e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth;
         audioElement.volume = volume;
     }
 
     handleEnded() {
         if (this.state.repeat) {
-            React.findDOMNode(this.refs.audio).play();
+            ReactDOM.findDOMNode(this.refs.audio).play();
         } else if (this.state.shuffle) {
             this.changeSong(CHANGE_TYPES.SHUFFLE);
         } else {
@@ -106,7 +113,7 @@ class Player extends Component {
     }
 
     handleLoadedMetadata() {
-        const audioElement = React.findDOMNode(this.refs.audio);
+        const audioElement = ReactDOM.findDOMNode(this.refs.audio);
         this.setState({
             duration: Math.floor(audioElement.duration)
         });
@@ -126,11 +133,13 @@ class Player extends Component {
     }
 
     handlePause() {
-        this.setState({isPlaying: false});
+        const {dispatch} = this.props;
+        dispatch(toggleIsPlaying(false));
     }
 
     handlePlay() {
-        this.setState({isPlaying: true});
+        const {dispatch} = this.props;
+        dispatch(toggleIsPlaying(true));
     }
 
     handleSeekMouseDown(e) {
@@ -142,8 +151,8 @@ class Player extends Component {
 
     handleSeekMouseMove(e) {
         const {dispatch} = this.props;
-        const seekBar = React.findDOMNode(this.refs.seekBar);
-        const diff = e.clientX - seekBar.offsetLeft;
+        const seekBar = ReactDOM.findDOMNode(this.refs.seekBar);
+        const diff = e.clientX - offsetLeft(seekBar);
         const pos = diff < 0 ? 0 : diff;
         let percent = pos / seekBar.offsetWidth;
         percent = percent > 1 ? 1 : percent;
@@ -163,7 +172,7 @@ class Player extends Component {
         this.setState({
             isSeeking: false,
         }, function() {
-            React.findDOMNode(this.refs.audio).currentTime = currentTime;
+            ReactDOM.findDOMNode(this.refs.audio).currentTime = currentTime;
         });
     }
 
@@ -201,8 +210,8 @@ class Player extends Component {
     }
 
     handleVolumeMouseMove(e) {
-        const volumeBar = React.findDOMNode(this.refs.volumeBar);
-        const diff = e.clientX - volumeBar.offsetLeft;
+        const volumeBar = ReactDOM.findDOMNode(this.refs.volumeBar);
+        const diff = e.clientX - offsetLeft(volumeBar);
         const pos = diff < 0 ? 0 : diff;
         let percent = pos / volumeBar.offsetWidth;
         percent = percent > 1 ? 1 : percent;
@@ -210,7 +219,7 @@ class Player extends Component {
         this.setState({
             volume: percent
         });
-        React.findDOMNode(this.refs.audio).volume = percent;
+        ReactDOM.findDOMNode(this.refs.audio).volume = percent;
     }
 
     handleVolumeMouseUp(e) {
@@ -224,21 +233,40 @@ class Player extends Component {
         this.setState({
             isSeeking: false,
         }, function() {
-            React.findDOMNode(this.refs.audio).volume = this.state.volume;
+            ReactDOM.findDOMNode(this.refs.audio).volume = this.state.volume;
         });
+    }
+
+    onKeyDown(e) {
+        const keyCode = e.keyCode || e.which;
+        const isInsideInput = e.target.tagName.toLowerCase().match(/input|textarea/);
+        if (isInsideInput) {
+            return;
+        }
+
+        if (keyCode === 32) {
+            e.preventDefault();
+            this.togglePlay();
+        }else if (keyCode === 37 || keyCode === 74) {
+            e.preventDefault();
+            this.changeSong(CHANGE_TYPES.PREV);
+        } else if (keyCode === 39 || keyCode === 75) {
+            e.preventDefault();
+            this.changeSong(CHANGE_TYPES.NEXT);
+        }
     }
 
     seek(e) {
         const {dispatch} = this.props;
-        const audioElement = React.findDOMNode(this.refs.audio);
-        const currentTime = Math.floor(((e.clientX - e.currentTarget.offsetLeft) / e.currentTarget.offsetWidth) * this.state.duration);
+        const audioElement = ReactDOM.findDOMNode(this.refs.audio);
+        const currentTime = Math.floor(((e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth) * this.state.duration);
 
         dispatch(changeCurrentTime(currentTime));
         audioElement.currentTime = currentTime;
     }
 
     toggleMute() {
-        const audioElement = React.findDOMNode(this.refs.audio);
+        const audioElement = ReactDOM.findDOMNode(this.refs.audio);
         if (this.state.muted) {
             audioElement.muted = false;
         } else {
@@ -249,8 +277,9 @@ class Player extends Component {
     }
 
     togglePlay() {
-        const audioElement = React.findDOMNode(this.refs.audio);
-        if (this.state.isPlaying) {
+        const {isPlaying} = this.props.player;
+        const audioElement = ReactDOM.findDOMNode(this.refs.audio);
+        if (isPlaying) {
             audioElement.pause();
         } else {
             audioElement.play();
@@ -286,13 +315,14 @@ class Player extends Component {
     }
 
     renderPlaylist() {
-        const {dispatch, player, playlists} = this.props;
+        const {dispatch, player, playlists, songs} = this.props;
 
         return (
             <Playlist
                 dispatch={dispatch}
                 player={player}
-                playlists={playlists} />
+                playlists={playlists}
+                songs={songs} />
         );
     }
 
@@ -339,9 +369,12 @@ class Player extends Component {
     }
 
     render() {
-        const {dispatch, player, song} = this.props;
+        const {dispatch, player, playingSongId, songs, users} = this.props;
+        const {isPlaying} = player;
+        const song = songs[playingSongId];
+        const user = users[song.user_id];
         const {currentTime} = player;
-        const {duration, isPlaying} = this.state;
+        const {duration} = this.state;
 
         return (
             <div className='player'>
@@ -349,13 +382,13 @@ class Player extends Component {
                 <div className='container'>
                     <div className='player-main'>
                         <div className='player-section player-info'>
-                            <img className='player-image' src={song.artwork_url} />
+                            <img className='player-image' src={getImageUrl(song.artwork_url)} />
                             <SongDetails
                                 dispatch={dispatch}
                                 songId={song.id}
                                 title={song.title}
-                                userId={song.user.id}
-                                username={song.user.username} />
+                                userId={user.id}
+                                username={user.username} />
                         </div>
                         <div className='player-section'>
                             <div
@@ -397,7 +430,7 @@ class Player extends Component {
                                 onClick={this.toggleShuffle}>
                                 <i className='icon ion-shuffle'></i>
                             </div>
-                            <Popover className={'player-button'}>
+                            <Popover className={'player-button top-right'}>
                                 <i className='icon ion-android-list'></i>
                                 {this.renderPlaylist()}
                             </Popover>

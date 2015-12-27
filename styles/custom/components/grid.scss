@@ -1,0 +1,35 @@
+.grid {
+    width: 100%;
+}
+
+.grid:before,
+.grid:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.col-1-5 {
+    width: 20%;
+}
+
+.col-3-10 {
+    width: 30%;
+}
+
+.col-7-10 {
+    width: 70%;
+}
+
+[class*='col-'] {
+    float: left;
+    min-height: 1px;
+}
+
+[class*='col-'] {
+    padding-right: 20px;
+}
+
+[class*='col-']:last-of-type {
+    padding-right: 0;
+}

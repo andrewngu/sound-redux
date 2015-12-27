@@ -1,0 +1,21 @@
+.nav-search {
+    position: relative;
+    background-color: #2B2B2B;
+    border-radius: 3px;
+
+    i {
+        position: absolute;
+        top: 5px;
+        left: 10px;
+        color: #808080;
+        pointer-events: none;
+    }
+}
+
+input[type="text"].nav-search-input {
+    width: 290px;
+    padding: 6px 10px 6px 30px;
+    color: #e3e3e3;
+    font-weight: 300;
+    background-color: transparent;
+}

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import Link from '../components/Link';
-import {formatSongTitle} from '../helpers/Formatter';
+import {formatSongTitle} from '../utils/FormatUtils';
 
 class SongDetails extends Component {
     constructor(props) {
@@ -9,19 +9,20 @@ class SongDetails extends Component {
 
     render() {
         const {dispatch, songId, title, userId, username} = this.props;
-
         return (
-            <div className='songs-card-details'>
+            <div className='song-card-details'>
                 <Link
-                    className='songs-card-title'
+                    className='song-card-title'
                     dispatch={dispatch}
-                    path={['songs', songId]}>
+                    route={{path: ['songs', songId]}}
+                    title={title}>
                     {formatSongTitle(title)}
                 </Link>
                 <Link
-                    className='songs-card-user-username'
+                    className='song-card-user-username'
                     dispatch={dispatch}
-                    path={['users', userId]}>
+                    route={{path: ['users', userId]}}
+                    title={username}>
                     {username}
                 </Link>
             </div>

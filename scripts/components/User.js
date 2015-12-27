@@ -1,45 +1,102 @@
 import React, {Component, PropTypes} from 'react';
+import {toggleFollow} from '../actions/authed';
 import {playSong} from '../actions/player';
+import {fetchUserIfNeeded} from '../actions/users';
 
 import Followings from '../components/Followings';
-import SongCard from '../components/SongCard';
+import SongListItem from '../components/SongListItem';
 import Spinner from '../components/Spinner';
 import Stickify from '../components/Stickify';
 
-import {addCommas, getSocialIcon} from '../helpers/Formatter';
-import {getImageUrl} from '../helpers/SongsHelper';
-import {getUserLocation} from '../helpers/UsersHelper';
+import {USER_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
+import {IMAGE_SIZES} from '../constants/SongConstants';
+
+import {addCommas, getSocialIcon} from '../utils/FormatUtils';
+import {getImageUrl} from '../utils/SongUtils';
+import {getUserLocation} from '../utils/UserUtils';
 
 class User extends Component {
+    constructor() {
+        super();
+        this.toggleFollow = this.toggleFollow.bind(this);
+    }
+
+    componentWillMount() {
+        const {dispatch, userId} = this.props;
+        dispatch(fetchUserIfNeeded(userId));
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const {dispatch, userId} = this.props;
+        if (nextProps.userId !== userId) {
+            dispatch(fetchUserIfNeeded(nextProps.userId));
+        }
+    }
+
     playSong(i) {
-        const {dispatch, user} = this.props;
-        dispatch(playSong(user.username, i));
+        const {dispatch, userId, users} = this.props;
+        const user = users[userId];
+        if (!user) {
+            return;
+        }
+
+        dispatch(playSong(user.username + USER_PLAYLIST_SUFFIX, i));
+    }
+
+    toggleFollow() {
+        const {dispatch, userId} = this.props;
+        dispatch(toggleFollow(userId));
+    }
+
+    renderFollowButton() {
+        const {authed, userId} = this.props;
+        if (!authed.user) {
+            return;
+        }
+
+        const isFollowing = userId in authed.followings && authed.followings[userId] === 1;
+        return (
+            <a
+                className={'user-follow-button button red-white small' + (isFollowing ? ' active' : '')}
+                onClick={this.toggleFollow}>
+                {isFollowing ? 'following' : 'follow'}
+            </a>
+        );
     }
 
     renderFollowings() {
-        const {dispatch, height, user} = this.props;
-        if (!user.followings) {
+        const {dispatch, height, userId, users} = this.props;
+        const user = users[userId];
+        if (!user || !user.followings) {
             return;
         }
 
-        return <Followings dispatch={dispatch} height={height} users={user.followings} />;
+        const followings = user.followings.map(followingId => users[followingId]);
+        return <Followings dispatch={dispatch} height={height} users={followings} />;
     }
 
     renderSongs() {
-        const {dispatch, player, playingSong, songs} = this.props;
-        if (!songs.items) {
+        const {authed, dispatch, player, playingSongId, playlists, songs, userId, users} = this.props;
+        const user = users[userId];
+        const playlist = user.username + USER_PLAYLIST_SUFFIX;
+        const userSongs = playlist in playlists ? playlists[playlist] : {}
+        if (!userSongs.items) {
             return;
         }
 
-        const items = songs.items.map((song, i) => {
+        const items = userSongs.items.map((songId, i) => {
+            const song = songs[songId];
+            const user = users[song.user_id];
             return (
-                <SongCard
+                <SongListItem
+                    authed={authed}
                     dispatch={dispatch}
-                    isActive={playingSong.id === song.id}
-                    key={song.id}
+                    isActive={playingSongId === song.id}
+                    key={song.id + '-' + i}
                     player={player}
                     playSong={this.playSong.bind(this, i)}
-                    song={song} />
+                    song={song}
+                    user={user} />
             );
         });
 
@@ -51,29 +108,30 @@ class User extends Component {
     }
 
     renderUserProfiles() {
-        const {profiles} = this.props.user;
-        if (!profiles) {
+        const {userId, users} = this.props;
+        const user = users[userId];
+        if (!user || !user.profiles) {
             return;
         }
 
-        return profiles.slice(0,6).map(profile => {
+        return user.profiles.slice(0,6).map(profile => {
             return (
                 <div className='user-profile' key={profile.id}>
                     <i className={'icon ' + getSocialIcon(profile.service)}></i>
-                    <a href={profile.url} target='_blank'>{profile.title}</a>
+                    <a href={profile.url} target='_blank'>{profile.title ? profile.title : profile.service}</a>
                 </div>
             );
         });
     }
 
     render() {
-        const {sticky, user} = this.props;
-
-        if (user.isFetching) {
+        const {sticky, userId, users} = this.props;
+        const user = users[userId];
+        if (!user || !user.hasOwnProperty('description')) {
             return <Spinner />;
         }
 
-        const image = user.avatar_url ? getImageUrl(user.avatar_url) : null;
+        const image = user.avatar_url ? getImageUrl(user.avatar_url, IMAGE_SIZES.LARGE) : null;
         return (
             <div className='container'>
                 <div className='content'>
@@ -84,6 +142,7 @@ class User extends Component {
                                     <img className='user-image' src={image} />
                                 </div>
                                 <div className='user-info'>
+                                    {this.renderFollowButton()}
                                     <div className='user-username'>{user.username}</div>
                                     <div className='user-location'>
                                         <i className='icon ion-location'></i>
@@ -111,7 +170,6 @@ class User extends Component {
 }
 
 User.propTypes = {
-    user: PropTypes.object.isRequired
 };
 
 export default Stickify(User, 50);

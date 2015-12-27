@@ -1,0 +1,40 @@
+.popover {
+    position: relative;
+
+    .ion-chevron-up {
+        display: none;
+    }
+
+    &.open {
+        .ion-chevron-up {
+            display: inline-block;
+        }
+
+        .ion-chevron-down {
+            display: none;
+        }
+    }
+}
+
+.popover-content {
+    display: block;
+    position: absolute;
+    margin-top: 10px;
+    border-radius: 1px;
+    border: 1px solid #999;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.20);
+    background-color: #fff;
+    z-index: 3;
+    cursor: auto;
+}
+
+.popover-content:before, .popover-content:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent;
+    border-top: 0;
+    box-sizing: border-box;
+ }

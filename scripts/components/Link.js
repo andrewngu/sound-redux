@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {navigateTo} from '../actions/navigator';
+import {constructUrl} from '../utils/RouteUtils';
 
 class Link extends Component {
     constructor(props) {
@@ -9,15 +10,21 @@ class Link extends Component {
 
     handleClick(e) {
         e.preventDefault();
-        const {dispatch, path} = this.props;
-        dispatch(navigateTo(path));
+        const {dispatch, route} = this.props;
+        dispatch(navigateTo(route));
     }
 
     render() {
-        const {children, className} = this.props;
+        const {children, className, route, title} = this.props;
 
         return (
-            <a className={className} onClick={this.handleClick}>{children}</a>
+            <a
+                className={className}
+                href={`/#/${constructUrl(route)}`}
+                onClick={this.handleClick}
+                title={title ? title : ''}>
+                {children}
+            </a>
         );
     }
 }
@@ -25,7 +32,8 @@ class Link extends Component {
 Link.propTypes = {
     className: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
-    path: PropTypes.array.isRequired
+    route: PropTypes.object.isRequired,
+    title: PropTypes.string
 };
 
 export default Link;

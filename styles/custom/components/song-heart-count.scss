@@ -1,0 +1,39 @@
+.song-heart-count {
+    &:hover {
+        color: #333;
+        cursor: pointer;
+
+        i {
+            color: #F9C5C5;
+        }
+    }
+
+
+    &.liked i {
+        color: #e17d74;
+    }
+
+    i {
+        transition: color 0.2s ease-in-out;
+    }
+}
+
+.song-heart-count-popover {
+    width: 200px;
+    top: 14px;
+    left: -17px;
+}
+
+.song-heart-count-popover.popover-content:before {
+    top: -7px;
+    left: 14px;
+    border-width: 7px;
+    border-bottom: 7px solid #999;
+}
+
+.song-heart-count-popover.popover-content:after {
+    top: -6px;
+    left: 14px;
+    border-width: 7px;
+    border-bottom: 7px solid #fff;
+}

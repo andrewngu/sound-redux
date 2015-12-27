@@ -64,3 +64,10 @@ export function playSong(playlist, songIndex) {
         dispatch(changePlayingSong(songIndex));
     };
 }
+
+export function toggleIsPlaying(isPlaying) {
+    return {
+        type: types.TOGGLE_IS_PLAYING,
+        isPlaying
+    };
+}

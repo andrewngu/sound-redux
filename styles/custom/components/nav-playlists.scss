@@ -1,0 +1,126 @@
+.nav-playlists {
+    .nav-nav-user-link {
+        margin-right: 0;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    i {
+        margin-left: 6px;
+        font-size: 10px;
+        color: #6B6B6B;
+
+        &.ion-chevron-up {
+            display: none;
+        }
+    }
+
+    &.open {
+        i {
+            &.ion-chevron-up {
+                display: inline-block;
+            }
+
+            &.ion-chevron-down {
+                display: none;
+            }
+        }
+
+        .nav-nav-user-link {
+            border-bottom-color: #3a3f41 !important;
+        }
+    }
+}
+
+.nav-nav-user-link {
+    position: relative;
+}
+
+.nav-nav-user-link-indicator {
+    position: absolute;
+    top: -2px;
+    right: -4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #3a3f41;
+    background-color: #3381b7;
+}
+
+.nav-playlists-popover {
+    top: 50px;
+    left: 0;
+    width: 400px;
+}
+
+.nav-playlist {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #e3e3e3;
+    font-weight: 400;
+    text-transform: none;
+
+    &:hover {
+        background-color: #fafafa;
+        cursor: pointer;
+        text-decoration: none !important;
+
+        .nav-playlist-title {
+            color: #333;
+        }
+
+        .nav-playlist-image {
+            opacity: 1;
+        }
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.nav-playlist-title {
+    flex: 1;
+    color: #333;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nav-playlist-images {
+    width: 200px;
+    white-space: nowrap;
+    overflow: scroll;
+    text-align: right;
+    min-height: 30px;
+}
+
+.nav-playlist-image {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    opacity: 0.2;
+
+    & + .nav-playlist-image {
+        margin-left: 6px;
+    }
+}
+
+.nav-playlists-popover.popover-content:before {
+    top: -7px ;
+    left: 14px ;
+    border-width: 7px;
+    border-bottom: 7px solid #999;
+}
+
+.nav-playlists-popover.popover-content:after {
+    top: -6px;
+    left: 14px;
+    border-width: 7px;
+    border-bottom: 7px solid #fff;
+}

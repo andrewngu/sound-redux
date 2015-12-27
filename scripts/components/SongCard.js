@@ -1,72 +1,60 @@
 import React, {Component, PropTypes} from 'react';
 import Link from '../components/Link';
-import Waveform from '../components/Waveform';
-
-import {addCommas} from '../helpers/Formatter';
-import {getImageUrl} from '../helpers/SongsHelper';
+import SongDetails from '../components/SongDetails';
+import SongHeart from '../components/SongHeart';
+import {IMAGE_SIZES} from '../constants/SongConstants';
+import TogglePlayButtonContainer from '../containers/TogglePlayButtonContainer';
+import {formatSongTitle} from '../utils/FormatUtils';
+import {getImageUrl} from '../utils/SongUtils';
 
 class SongCard extends Component {
-    render() {
-        const {dispatch, isActive, player, playSong, song} = this.props;
-        const {user} = song;
-        const image = getImageUrl(song.artwork_url);
+    renderTogglePlayButton() {
+        const {isActive, playSong} = this.props;
+
+        if (isActive) {
+            return <TogglePlayButtonContainer />;
+        }
 
         return (
-            <div className={'song-card' + (isActive ? ' active' : '')}>
-                <div className='song-card-detail'>
-                    <div
-                        className='song-card-image'
-                        onClick={playSong}
-                        style={{backgroundImage: `url(${image})`}}>
-                        <div className='songs-card-playing'>
-                            <i className={'songs-card-playing-icon icon ' + (isActive ? 'ion-radio-waves' : 'ion-ios-play')}></i>
-                        </div>
-                    </div>
-                    <div className='song-card-info'>
+            <div className='toggle-play-button' onClick={playSong}>
+                <i className='toggle-play-button-icon ion-ios-play'></i>
+            </div>
+        );
+    }
+    render() {
+        const {authed, dispatch, isActive, playSong, song, user} = this.props;
+        const isLiked = song.id in authed.likes && authed.likes[song.id] == 1;
+        const image = getImageUrl(song.artwork_url, IMAGE_SIZES.LARGE);
+
+        return (
+            <div className={'card song-card' + (isActive ? ' active' : '')}>
+                <div className='song-card-image' style={{backgroundImage: `url(${image})`}}>
+                    {this.renderTogglePlayButton()}
+                </div>
+                <div className='song-card-user clearfix'>
+                    <img
+                        className='song-card-user-image'
+                        src={getImageUrl(user.avatar_url)} />
+                    <div className='song-card-details'>
                         <Link
                             className='song-card-title'
                             dispatch={dispatch}
-                            path={['songs', song.id]}>
-                            {song.title}
+                            route={{path: ['songs', song.id]}}>
+                            {formatSongTitle(song.title)}
                         </Link>
-                        <div className='song-card-info-extra'>
-                            <div className='song-card-user'>
-                                <div
-                                    className='song-card-user-image'
-                                    style={{backgroundImage: `url(${user.avatar_url})`}}>
-                                </div>
-                                <Link
-                                    className='song-card-username'
-                                    dispatch={dispatch}
-                                    path={['users', song.user_id]}>
-                                    {user.username}
-                                </Link>
-                            </div>
-                            <div className='song-card-stats'>
-                                <div className='song-card-stat'>
-                                    <i className='icon ion-play'></i>
-                                    <span>{addCommas(song.playback_count)}</span>
-                                </div>
-                                <div className='song-card-stat'>
-                                    <i className='icon ion-ios-heart'></i>
-                                    <span>{addCommas(song.favoritings_count)}</span>
-                                </div>
-                                <div className='song-card-stat'>
-                                    <i className='icon ion-chatbubble'></i>
-                                    <span>{addCommas(song.comment_count)}</span>
-                                </div>
-                            </div>
-                        </div>
+                        <Link
+                            className='song-card-user-username'
+                            dispatch={dispatch}
+                            route={{path: ['users', user.id]}}>
+                            {user.username}
+                        </Link>
+                        <SongHeart
+                            authed={authed}
+                            className='song-card-heart'
+                            dispatch={dispatch}
+                            isLiked={isLiked}
+                            songId={song.id} />
                     </div>
-                </div>
-                <div className='song-card-waveform'>
-                    <Waveform
-                        currentTime={player.currentTime}
-                        dispatch={dispatch}
-                        duration={song.duration}
-                        isActive={isActive}
-                        playSong={playSong}
-                        waveformUrl={song.waveform_url.replace('https', 'http')} />
                 </div>
             </div>
         );
@@ -74,6 +62,8 @@ class SongCard extends Component {
 }
 
 SongCard.propTypes = {
+    isActive: PropTypes.bool.isRequired,
+    playSong: PropTypes.func.isRequired,
     song: PropTypes.object.isRequired
 };
 
