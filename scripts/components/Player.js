@@ -8,6 +8,7 @@ import {CHANGE_TYPES} from '../constants/SongConstants';
 import {formatSeconds, formatStreamUrl} from '../utils/FormatUtils';
 import {offsetLeft} from '../utils/MouseUtils';
 import {getImageUrl} from '../utils/SongUtils';
+import LocalStorageUtils from '../utils/LocalStorageUtils';
 
 class Player extends Component {
     constructor(props) {
@@ -34,6 +35,7 @@ class Player extends Component {
         this.toggleRepeat = this.toggleRepeat.bind(this);
         this.toggleShuffle = this.toggleShuffle.bind(this);
 
+        let previousVolumeLevel = Number.parseFloat(LocalStorageUtils.get('volume'));
         this.state = {
             activePlaylistIndex: null,
             currentTime: 0,
@@ -42,7 +44,7 @@ class Player extends Component {
             muted: false,
             repeat: false,
             shuffle: false,
-            volume: 1,
+            volume: previousVolumeLevel || 1,
         };
     }
 
@@ -197,8 +199,10 @@ class Player extends Component {
             return;
         }
 
+        let volume = e.currentTarget.volume;
+        LocalStorageUtils.set('volume', volume);
         this.setState({
-            volume: e.currentTarget.volume
+            volume
         });
     }
 
