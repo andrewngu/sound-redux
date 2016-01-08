@@ -23,15 +23,6 @@ describe('users actions', () => {
         });
     });
 
-    describe('receiveSongs', () => {
-        it('should create RECEIVE_SONGS action', () => {
-            const entities = {users: {1: {name: 'Ain\'t Nobody'}, 2: {name: 'Firestone'}}}
-            const songs = [1, 2];
-            const playlist = 'kygo';
-            expect(actions.receiveSongs(songs, entities, playlist)).toEqual({type: types.RECEIVE_SONGS, entities, nextUrl: null, songs, playlist});
-        });
-    });
-
     describe('receiveUserFollowings', () => {
         it('should create RECEIVE_USER_FOLLOWINGS action', () => {
             const entities = {
