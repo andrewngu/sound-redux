@@ -7,7 +7,7 @@
     "build": "NODE_ENV=production webpack -p --config ./webpack.prod.config.js",
     "lint": "eslint scripts",
     "start": "webpack-dev-server --progress --colors --hot --content-base ./server/public --config ./webpack.config.js",
-    "test": "mocha --compilers js:babel-core/register --recursive",
+    "test": "mocha --compilers js:babel-core/register --recursive -r mock-local-storage",
     "prebuild": "sed -i.bak \"s/'.*'/'${SOUND_REDUX_PROD:-f4323c6f7c0cd73d2d786a2b1cdae80c}'/\" ./scripts/constants/Config.js",
     "postbuild": "sed -i.bak \"s/'.*'/'${SOUND_REDUX_DEV:-f4323c6f7c0cd73d2d786a2b1cdae80c}'/\" ./scripts/constants/Config.js && rm ./scripts/constants/Config.js.bak"
   },
@@ -38,6 +38,7 @@
     "jsx-loader": "^0.13.2",
     "lodash": "^3.10.1",
     "mocha": "^2.3.3",
+    "mock-local-storage": "^1.0.2",
     "moment": "^2.10.6",
     "nock": "^2.15.0",
     "node-sass": "^3.3.3",
