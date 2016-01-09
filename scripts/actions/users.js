@@ -50,7 +50,7 @@ function fetchUserFollowings(userId) {
         return fetch(constructUserFollowingsUrl(userId))
             .then(response => response.json())
             .then(json => {
-                const users = json.sort((a, b) => b.followers_count - a.followers_count);
+                const users = json.collection.sort((a, b) => b.followers_count - a.followers_count);
                 const normalized = normalize(users, arrayOf(userSchema));
                 const entities = merge({}, normalized.entities, {
                     users: {
