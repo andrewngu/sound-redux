@@ -1,4 +1,4 @@
-import React, {PropTypes, Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 
 class Popover extends Component {
@@ -23,62 +23,44 @@ class Popover extends Component {
         document.removeEventListener('mousedown', this.onOutsideClick);
     }
 
-    onOutsideClick(e) {
-        if (!this.state.isOpen) {
-            return;
-        }
-
-        e.stopPropagation();
-
-        const localNode = ReactDOM.findDOMNode(this);
-        const source = e.target;
-
-        if (!localNode.contains(source)) {
-            this.handleOutsideClick();
-        }
-    }
-
     handleOutsideClick() {
         this.setState({
             isOpen: false
         });
     }
 
-    toggleIsOpen(e) {
+    onOutsideClick(e) {
+        if (!this.state.isOpen) {
+            return;
+        }
+
         e.stopPropagation();
+        const localNode = ReactDOM.findDOMNode(this);
         let source = e.target;
 
-        while (source.parentNode) {
-            if (source.getAttribute('class') &&
-                source.getAttribute('class').indexOf('handleToggle') > -1) {
-                this.setState({isOpen: !this.state.isOpen});
-                source = null;
+        while(source.parentNode) {
+            if (source === localNode) {
                 return;
             }
             source = source.parentNode;
         }
+        this.handleOutsideClick();
+    }
+
+    toggleIsOpen() {
+        this.setState({isOpen: !this.state.isOpen});
     }
 
     render() {
         return (
             <div
                 className={this.props.className + ' popover' + (this.state.isOpen ? ' open' : '')}
-                onClick={this.toggleIsOpen}
-            >
-                <div className='handleToggle'>
-                  {this.props.children[0]}
-                </div>
-                <div>
-                  {this.state.isOpen ? this.props.children[1] : null}
-                </div>
+                onClick={this.toggleIsOpen}>
+                {this.props.children[0]}
+                {this.state.isOpen ? this.props.children[1] : null}
             </div>
-        );
+        )
     }
 }
-
-Popover.propTypes = {
-    children: PropTypes.any,
-    className: PropTypes.string
-};
 
 export default Popover;

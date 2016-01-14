@@ -7,7 +7,7 @@ function changeIsMobile(isMobile) {
     };
 }
 
-function changeWidthAndHeight(height, width) {
+export function changeWidthAndHeight(height, width) {
     return {
         type: types.CHANGE_WIDTH_AND_HEIGHT,
         height,

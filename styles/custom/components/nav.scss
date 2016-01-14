@@ -52,12 +52,17 @@
 }
 
 .nav-nav-user-link-text {
+    display: inline-block;
     color: rgba(255,255,255, 0.5);
     border-bottom: 1px dotted #3a3f41;
     text-transform: uppercase;
     font-weight: 400;
     font-size: 12px;
     letter-spacing: 2px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     &:hover {
         border-bottom-color: #fff;
