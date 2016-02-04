@@ -30,7 +30,10 @@ class Toolbar extends Component {
                         key={g}
                         route={route}>
                         {g}
+
                     </Link>
+                    
+
                     </li>
 
             );
@@ -59,6 +62,7 @@ class Toolbar extends Component {
                     route={route}>
                     {`${t} days`}
                 </Link>
+                                    
                 </li>
             );
         });
