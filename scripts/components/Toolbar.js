@@ -73,8 +73,9 @@ class Toolbar extends Component {
             <div className='toolbar'>
                 <div className='container'>
                     <div className='toolbar-items'>
-                        <Popover className='toolbar-menus'>
+                        <Popover >
                             <div className='toolbar-item toolbar-button'>
+                                <i className='toolbar-item ion-android-search'> </i>
                                 <span>Search Genres</span>
                              </div>
                              <div className='nav-user-popover popover-content toolbar-menu'>
@@ -83,8 +84,9 @@ class Toolbar extends Component {
                                 </ul>
                             </div>
                         </Popover>
-                        <Popover className='toolbar-menus'>
+                        <Popover >
                             <div className='toolbar-item toolbar-button'>
+                                <i className='toolbar-item ion-android-time'> </i>
                                 <span>Since</span>
                              </div>
                              <div className='nav-user-popover popover-content toolbar-menu'>
