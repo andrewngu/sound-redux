@@ -26,8 +26,9 @@
 }
 
 .mobile-nav-genres {
+    max-height:250px;
     transform: translate3d(0, 0, 0);
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .mobile-nav-genre {

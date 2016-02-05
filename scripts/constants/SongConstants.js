@@ -5,15 +5,41 @@ export const CHANGE_TYPES = {
 };
 
 export const GENRES = [
+    'alternative rock',
+    'ambient',
+    'classical',
     'chill',
+    'country',
+    'dance edm',
+    'dancehall',
     'deep',
+    'deep house',
+    'disco',
+    'drum bass',
     'dubstep',
+    'electronic',
+    'folk singer songwriter',
+    'hip hop rap',
     'house',
+    'indie',
+    'jazz blues',
+    'latin',
+    'metal',
+    'piano',
+    'pop',
+    'reggae',
+    'reggaeton',
+    'rock',
+    'soundtrack',
     'progressive',
     'tech',
+    'triphop',
     'trance',
-    'tropical'
+    'trap',
+    'tropical',
+    'world'
 ];
+
 
 export const GENRES_MAP = (function(){
     let result = {};
