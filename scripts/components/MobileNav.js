@@ -6,8 +6,8 @@ import {getImageUrl} from '../utils/SongUtils';
 import {loginUser, logoutUser} from '../actions/authed';
 
 class MobileNav extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.toggleGenreMenuOpen = this.toggleGenreMenuOpen.bind(this);
         this.toggleUserMenuOpen = this.toggleUserMenuOpen.bind(this);
         this.state = {isGenreMenuOpen: false, isUserMenuOpen: false};
@@ -183,7 +183,6 @@ class MobileNav extends Component {
 
         return playlistDetails   
     }
-
 
     render() {
         const playlist = this.renderPlaylist();

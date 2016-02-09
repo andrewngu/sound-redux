@@ -2,11 +2,9 @@ import React, {Component, PropTypes} from 'react';
 import {fetchSongsIfNeeded} from '../actions/playlists';
 import MobileSongList from '../components/MobileSongList';
 
-
 class MobileSongs extends Component {
     componentWillMount() {
         const {dispatch, playlist, playlists} = this.props;
-
         if (!(playlist in playlists) || playlists[playlist].items.length === 0) {
             dispatch(fetchSongsIfNeeded(playlist));
         }
@@ -23,7 +21,7 @@ class MobileSongs extends Component {
 
     render() {
         const {dispatch, playlist, playlists, songs, users, playingSongId} = this.props;
-        
+
         return (
             <MobileSongList
             playlist={playlist}
@@ -36,6 +34,5 @@ class MobileSongs extends Component {
         );
     }
 }
-
 
 export default MobileSongs;

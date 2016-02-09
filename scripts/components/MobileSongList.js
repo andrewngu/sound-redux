@@ -7,8 +7,8 @@ import Spinner from '../components/Spinner';
 
 
 class MobileSongList extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
     }
     
     playSong(playlist, i, e) {
