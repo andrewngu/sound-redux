@@ -1,28 +1,34 @@
 import React, {Component, PropTypes} from 'react';
 import {fetchSongsIfNeeded} from '../actions/playlists';
+import InfiniteScrollify from '../components/InfiniteScrollify';
 import {playSong} from '../actions/player';
 import MobileSongListItem from '../components/MobileSongListItem';
+import MobileSongs from '../components/MobileSongs';
 import MobileInfiniteScroll from '../components/MobileInfiniteScroll';
+import {AUTHED_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
 import Spinner from '../components/Spinner';
 
-class MobileSongs extends Component {
+class MobileMe extends Component {
 
-    componentWillMount() {
-        const {dispatch, playlist, playlists} = this.props;
 
-        if (!(playlist in playlists) || playlists[playlist].items.length === 0) {
-            dispatch(fetchSongsIfNeeded(playlist));
+    getPlaylist() {
+        const {authedPlaylists, route} = this.props;
+        const {path} = route;
+
+        if (path[1].indexOf('PLAYLIST:') >= 0) {
+            return path[1].slice(10);
+        }
+
+        switch(path[1]) {
+        case 'stream':
+            return 'stream';
+        case 'likes':
+            return 'likes';
+        default:
+            return 'stream';
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        const {dispatch, playlist, playlists} = this.props;
-        if (playlist !== nextProps.playlist) {
-            if (!(nextProps.playlist in playlists) || playlists[nextProps.playlist].items.length === 0) {
-                dispatch(fetchSongsIfNeeded(nextProps.playlist));
-            }
-        }
-    }
 
     playSong(playlist, i, e) {
         e.preventDefault();
@@ -31,7 +37,9 @@ class MobileSongs extends Component {
     }
 
     renderSongsListItems() {
-        const {playingSongId, playlist, playlists, songs, users} = this.props;
+        const {playingSongId, playlists, songs, users} = this.props;
+        const playlist = this.getPlaylist() + AUTHED_PLAYLIST_SUFFIX;
+
         if (!(playlist in playlists)) {
             return;
         }
@@ -60,8 +68,9 @@ class MobileSongs extends Component {
     }
 
     render() {
-        const {dispatch, playlist} = this.props;
+        const {dispatch, users, playlists, songs, playlist} = this.props;
         return (
+            
             <MobileInfiniteScroll
                 className={'mobile-songs'}
                 dispatch={dispatch}
@@ -73,5 +82,4 @@ class MobileSongs extends Component {
     }
 }
 
-
-export default MobileSongs;
+export default MobileMe;

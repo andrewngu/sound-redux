@@ -25,12 +25,14 @@
     }
 }
 
-.mobile-nav-genres {
+.mobile-nav-menu {
     transform: translate3d(0, 0, 0);
     overflow: hidden;
 }
 
-.mobile-nav-genre {
+
+
+.mobile-nav-tab {
     display: flex;
     width: 100%;
     height: 50px;
@@ -45,4 +47,29 @@
     &:active {
         color: #333;
     }
+}
+
+.mobile-nav-auth {
+        color: #fff;
+    background-color: #f85d0f;
+    
+    &:hover {
+        background-color: #F77838;
+    }
+
+    &:active {
+        background-color: #F55A0D;
+    }
+}
+
+
+.mobile-nav-authed-image {
+    width: 29px;
+    height: 29px;
+    border-radius: 100%;
+    margin-right:17px;
+}
+
+.mobile-scrollable {
+    overflow: scroll;
 }
