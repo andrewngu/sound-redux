@@ -16,13 +16,18 @@ class MobileNav extends Component {
     }
 
     toggleGenreMenuOpen(e) {
+        if(!this.state.isUserMenuOpen){
         e.preventDefault();
         this.setState({isGenreMenuOpen : !this.state.isGenreMenuOpen});
     }
+    }
 
     toggleUserMenuOpen(e) {
+
         e.preventDefault();
+        if(!this.state.isGenreMenuOpen){
         this.setState({isUserMenuOpen : !this.state.isUserMenuOpen});
+        }
     }
 
 
