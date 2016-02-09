@@ -38,8 +38,6 @@ class MobileNav extends Component {
         dispatch(logoutUser())
     }
 
-
-
     renderUserOptions() {
         const {authed, dispatch, navigator} = this.props;
 
@@ -91,8 +89,6 @@ class MobileNav extends Component {
                 );
     }
 
-
-
     renderUserMenu(isUserMenuOpen, playlist , getPlaylistDetails){
         const playlistNames = getPlaylistDetails.playlistNames;
         const tabs = ['stream' , 'likes' , ...playlistNames];
@@ -139,8 +135,7 @@ class MobileNav extends Component {
             );
     }
 
-    renderUserTabs(tabs , playlistIds) {
-            
+    renderUserTabs(tabs , playlistIds) {  
         return tabs
             .map(tab =>
                 <Link
@@ -191,7 +186,6 @@ class MobileNav extends Component {
 
 
     render() {
-
         const playlist = this.renderPlaylist();
         const {isGenreMenuOpen, isUserMenuOpen} = this.state;
         const {dispatch} = this.props;
