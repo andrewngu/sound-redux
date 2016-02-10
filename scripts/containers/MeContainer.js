@@ -1,10 +1,15 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Me from '../components/Me';
+import MobileMe from '../components/MobileMe';
 import {getPlayingSongId} from '../utils/PlayerUtils';
 
 class MeContainer extends Component {
     render() {
+        const {isMobile} = this.props;
+        if (isMobile) {
+            return <MobileMe {...this.props} />;
+        }
         return <Me {...this.props} />;
     }
 }
@@ -22,7 +27,8 @@ function mapStateToProps(state) {
         playlists,
         route: navigator.route,
         songs: entities.songs,
-        users: entities.users
+        users: entities.users,
+        isMobile: environment.isMobile
     };
 }
 
