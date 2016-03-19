@@ -16,8 +16,8 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.js$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/ },
-            { test: /\.scss$/, loaders: ['style', 'css', 'autoprefixer', 'sass'] }
+          { test: /\.js$/, loaders: ['react-hot', 'babel?' + JSON.stringify({presets: ['react', 'es2015', 'stage-0']})], exclude: /node_modules/ },
+          { test: /\.scss$/, loaders: ['style', 'css', 'autoprefixer', 'sass'] }
         ]
     },
     plugins: [ignore],

@@ -1,6 +1,6 @@
 import * as types from '../constants/ActionTypes';
 import {AUTHED_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
-import merge from 'lodash/object/merge';
+import merge from 'lodash/merge';
 import {constructUrl} from '../utils/SongUtils';
 
 const initialPlaylistState = {

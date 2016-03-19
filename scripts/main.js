@@ -1,4 +1,4 @@
-import 'babel-core/polyfill';
+import 'babel-polyfill';
 import 'fastclick';
 import fetch from 'isomorphic-fetch';
 import React from 'react';

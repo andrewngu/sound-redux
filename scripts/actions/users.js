@@ -1,5 +1,5 @@
 import {arrayOf, normalize} from 'normalizr';
-import merge from 'lodash/object/merge';
+import merge from 'lodash/merge';
 import {receiveSongs} from '../actions/playlists';
 import * as types from '../constants/ActionTypes';
 import {USER_PLAYLIST_SUFFIX} from '../constants/PlaylistConstants';
