@@ -1,34 +1,36 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 
-export default function(InnerComponent) {
-    class InfiniteScrollComponent extends Component {
-        constructor(props) {
-            super(props);
-            this.onScroll = this.onScroll.bind(this);
-        }
+export default function (InnerComponent) {
+  class InfiniteScrollComponent extends Component {
+    constructor(props) {
+      super(props);
+      this.onScroll = this.onScroll.bind(this);
+    }
 
-        componentDidMount() {
-            window.addEventListener('scroll', this.onScroll, false);
-        }
+    componentDidMount() {
+      window.addEventListener('scroll', this.onScroll, false);
+    }
 
-        componentWillUnmount() {
-            window.removeEventListener('scroll', this.onScroll, false);
-        }
+    componentWillUnmount() {
+      window.removeEventListener('scroll', this.onScroll, false);
+    }
 
-        onScroll() {
-            if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 200)) {
-                this.props.dispatch(this.props.scrollFunc());
-            }
-        }
+    onScroll() {
+      if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 200)) {
+        const { dispatch, scrollFunc } = this.props;
+        dispatch(scrollFunc());
+      }
+    }
 
-        render() {
-            return <InnerComponent {...this.props} />;
-        }
-    };
+    render() {
+      return <InnerComponent {...this.props} />;
+    }
+  }
 
-    InfiniteScrollComponent.propTypes = {
-        scrollFunc: PropTypes.func.isRequired
-    };
+  InfiniteScrollComponent.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    scrollFunc: PropTypes.func.isRequired,
+  };
 
-    return InfiniteScrollComponent;
+  return InfiniteScrollComponent;
 }
