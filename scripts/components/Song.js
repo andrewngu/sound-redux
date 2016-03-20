@@ -167,7 +167,7 @@ class Song extends Component {
                       <div className="song-stats">
                         <SongHeartCount
                           authed={authed}
-                          count={song.likes_count ? song.likes_count : 0}
+                          count={song.likes_count ? song.likes_count : song.favoritings_count}
                           dispatch={dispatch}
                           songId={song.id}
                         />
