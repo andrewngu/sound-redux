@@ -5,8 +5,8 @@ import { GENRES } from '../constants/SongConstants';
 const DAYS = [7, 30, 90];
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
-  playlist: PropTypes.object.isRequired,
-  time: PropTypes.string,
+  playlist: PropTypes.string.isRequired,
+  time: PropTypes.number,
 };
 
 class Toolbar extends Component {

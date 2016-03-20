@@ -21,7 +21,6 @@ const propTypes = {
   height: PropTypes.number,
   player: PropTypes.object.isRequired,
   playingSongId: PropTypes.number,
-  playlist: PropTypes.object.isRequired,
   playlists: PropTypes.object.isRequired,
   songs: PropTypes.object.isRequired,
   sticky: PropTypes.bool.isRequired,

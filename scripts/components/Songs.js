@@ -11,11 +11,11 @@ const propTypes = {
   dispatch: PropTypes.func.isRequired,
   height: PropTypes.number,
   playingSongId: PropTypes.number,
-  playlist: PropTypes.object,
+  playlist: PropTypes.string,
   playlists: PropTypes.object.isRequired,
   sticky: PropTypes.bool,
   songs: PropTypes.object.isRequired,
-  time: PropTypes.string,
+  time: PropTypes.number,
   users: PropTypes.object.isRequired,
 };
 

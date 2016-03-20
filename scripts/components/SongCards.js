@@ -10,7 +10,7 @@ const propTypes = {
   dispatch: PropTypes.func.isRequired,
   height: PropTypes.number,
   playingSongId: PropTypes.number,
-  playlist: PropTypes.object.isRequired,
+  playlist: PropTypes.string.isRequired,
   playlists: PropTypes.object.isRequired,
   songs: PropTypes.object.isRequired,
   users: PropTypes.object.isRequired,
@@ -124,10 +124,11 @@ class SongCards extends Component {
     for (let i = start; i < end; i += chunk) {
       const songCards = items.slice(i, i + chunk).map((songId, j) => {
         const song = songs[songId];
-        const playSongFunc = this.playSong.bind(this, index);
         const scrollFunc = fetchSongsIfNeeded.bind(null, playlist);
         const user = users[song.user_id];
         const index = i + j;
+        const playSongFunc = this.playSong.bind(this, index);
+
         return (
           <div className="col-1-5 clearfix" key={`${index}-${song.id}`}>
             <SongCard

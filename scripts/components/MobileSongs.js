@@ -5,7 +5,7 @@ import MobileSongList from '../components/MobileSongList';
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
   playingSongId: PropTypes.number,
-  playlist: PropTypes.object.isRequired,
+  playlist: PropTypes.string.isRequired,
   playlists: PropTypes.object.isRequired,
   songs: PropTypes.object.isRequired,
   users: PropTypes.object.isRequired,
