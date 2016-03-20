@@ -1,20 +1,20 @@
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import TogglePlayButton from '../components/TogglePlayButton';
 
 class TogglePlayButtonContainer extends Component {
-    render() {
-        return <TogglePlayButton {...this.props} />;
-    }
+  render() {
+    return <TogglePlayButton {...this.props} />;
+  }
 }
 
 function mapStateToProps(state) {
-    const {player} = state;
-    const {isPlaying} = player;
+  const { player } = state;
+  const { isPlaying } = player;
 
-    return {
-        isPlaying
-    };
+  return {
+    isPlaying,
+  };
 }
 
 export default connect(mapStateToProps)(TogglePlayButtonContainer);

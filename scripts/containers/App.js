@@ -1,11 +1,9 @@
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 
-import {initAuth} from '../actions/authed';
-import {initEnvironment} from '../actions/environment';
-import {initNavigator} from '../actions/navigator';
-
-import MobileFooter from '../components/MobileFooter';
+import { initAuth } from '../actions/authed';
+import { initEnvironment } from '../actions/environment';
+import { initNavigator } from '../actions/navigator';
 
 import NavContainer from '../containers/NavContainer';
 import MeContainer from '../containers/MeContainer';
@@ -15,70 +13,79 @@ import SongContainer from '../containers/SongContainer';
 import SongsContainer from '../containers/SongsContainer';
 import UserContainer from '../containers/UserContainer';
 
-class App extends Component {
-    componentDidMount () {
-        const {dispatch} = this.props;
-        dispatch(initEnvironment());
-        dispatch(initAuth());
-        dispatch(initNavigator());
-    }
-
-    renderContent() {
-        const {path} = this.props;
-        switch(path[0]) {
-        case 'songs':
-            switch(path.length) {
-            case 1:
-                return <SongsContainer />;
-            case 2:
-                return <SongContainer />;
-            }
-        case 'users':
-            return <UserContainer />;
-        case 'me':
-            return <MeContainer />;
-        default:
-            return;
-        }
-    }
-
-    render() {
-        const {height, isMobile, width} = this.props;
-        if (isMobile) {
-            return (
-                <div className='mobile' style={{height: `${height}px`, width: `${width}px`}}>
-                    <PlayerContainer />
-                    {this.renderContent()}
-                    <NavContainer />
-                </div>
-            );
-        }
-
-        return (
-            <div>
-                <NavContainer />
-                {this.renderContent()}
-                <PlayerContainer />
-                <ModalContainer />
-            </div>
-        );
-    }
-}
-
-App.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    path: PropTypes.array.isRequired
+const propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  height: PropTypes.number,
+  isMobile: PropTypes.bool,
+  path: PropTypes.array.isRequired,
+  width: PropTypes.number,
 };
 
-function mapStateToProps(state) {
-    const {environment, navigator} = state;
+class App extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(initEnvironment());
+    dispatch(initAuth());
+    dispatch(initNavigator());
+  }
 
-    return {
-        height: environment.height,
-        isMobile: environment.isMobile,
-        path: navigator.route.path,
-        width: environment.width
-    };
+  renderContent() {
+    const { path } = this.props;
+    switch (path[0]) {
+      case 'songs':
+        switch (path.length) {
+          case 1:
+            return <SongsContainer />;
+          case 2:
+            return <SongContainer />;
+          default:
+            return null;
+        }
+      case 'users':
+        return <UserContainer />;
+      case 'me':
+        return <MeContainer />;
+      default:
+        return null;
+    }
+  }
+
+  render() {
+    const { height, isMobile, width } = this.props;
+    if (isMobile) {
+      return (
+        <div className="mobile" style={{ height: `${height}px`, width: `${width}px` }}>
+          <PlayerContainer />
+          {this.renderContent()}
+          <NavContainer />
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        <NavContainer />
+        {this.renderContent()}
+        <PlayerContainer />
+        <ModalContainer />
+      </div>
+    );
+  }
+}
+
+App.propTypes = propTypes;
+
+function mapStateToProps(state) {
+  const { environment, navigator } = state;
+  const { height, isMobile, width } = environment;
+  const { path } = navigator.route;
+
+  return {
+    height,
+    isMobile,
+    path,
+    width,
+  };
 }
 
 
