@@ -9,8 +9,8 @@ const initialPlaylistState = {
   nextUrl: false,
 };
 
-const LIKES_PLAYLIST_KEY = `likes ${AUTHED_PLAYLIST_SUFFIX}`;
-const STREAM_PLAYLIST_KEY = `stream ${AUTHED_PLAYLIST_SUFFIX}`;
+const LIKES_PLAYLIST_KEY = `likes${AUTHED_PLAYLIST_SUFFIX}`;
+const STREAM_PLAYLIST_KEY = `stream${AUTHED_PLAYLIST_SUFFIX}`;
 
 function playlist(state = initialPlaylistState, action) {
   switch (action.type) {

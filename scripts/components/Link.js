@@ -30,7 +30,7 @@ class Link extends Component {
         className={className}
         href={`/#/${constructUrl(route)}`}
         onClick={this.handleClick}
-        title={String(title)}
+        title={title ? String(title) : ''}
       >
         {children}
       </a>

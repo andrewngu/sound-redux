@@ -41,6 +41,7 @@ class SongCard extends Component {
               className="song-card-title"
               dispatch={dispatch}
               route={{ path: ['songs', song.id] }}
+              title={song.title}
             >
               {formatSongTitle(song.title)}
             </Link>
@@ -48,6 +49,7 @@ class SongCard extends Component {
               className="song-card-user-username"
               dispatch={dispatch}
               route={{ path: ['users', user.id] }}
+              title={user.username}
             >
               {user.username}
             </Link>
