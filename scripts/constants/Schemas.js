@@ -1,15 +1,15 @@
-import { normalize, Schema, arrayOf } from 'normalizr';
+import { Schema, arrayOf } from 'normalizr';
 
-let song = new Schema('songs');
-let user = new Schema('users');
-let playlist = new Schema('playlists');
+const song = new Schema('songs');
+const user = new Schema('users');
+const playlist = new Schema('playlists');
 
 song.define({
-    user: user
+  user,
 });
 
 playlist.define({
-    tracks: arrayOf(song)
+  tracks: arrayOf(song),
 });
 
 export const songSchema = song;
