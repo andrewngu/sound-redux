@@ -248,9 +248,8 @@ class Player extends Component {
 
     this.setState({
       isSeeking: false,
-    }, () => {
-      ReactDOM.findDOMNode(this.refs.audio).volume = this.state.volume;
     });
+    LocalStorageUtils.set('volume', this.state.volume);
   }
 
   handleKeyDown(e) {
