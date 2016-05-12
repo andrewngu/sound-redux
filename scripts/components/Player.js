@@ -70,6 +70,7 @@ class Player extends Component {
     audioElement.addEventListener('play', this.handlePlay, false);
     audioElement.addEventListener('timeupdate', this.handleTimeUpdate, false);
     audioElement.addEventListener('volumechange', this.handleVolumeChange, false);
+    audioElement.volume = this.state.volume
     audioElement.play();
   }
 
@@ -247,9 +248,8 @@ class Player extends Component {
 
     this.setState({
       isSeeking: false,
-    }, () => {
-      ReactDOM.findDOMNode(this.refs.audio).volume = this.state.volume;
     });
+    LocalStorageUtils.set('volume', this.state.volume);
   }
 
   handleKeyDown(e) {
