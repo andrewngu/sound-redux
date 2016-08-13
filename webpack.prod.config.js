@@ -28,7 +28,11 @@ module.exports = {
     },
     plugins: [
         ignore,
+        new webpack.DefinePlugin({
+          'process.env.NODE_ENV': JSON.stringify('production')
+        }),
         new ExtractTextPlugin('./server/public/css/main.css'),
-        new webpack.optimize.CommonsChunkPlugin('vendor', './server/public/js/vendor.js')
+        new webpack.optimize.CommonsChunkPlugin('vendor', './server/public/js/vendor.js'),
+        new webpack.optimize.OccurenceOrderPlugin(true),
     ]
 };
