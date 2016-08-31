@@ -18,7 +18,7 @@ class NavSearch extends Component {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keyCode', this.handleSlashPress, false);
+    document.removeEventListener('keypress', this.handleSlashPress, false);
   }
 
   handleOnKeyPress(e) {
