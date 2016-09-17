@@ -29,7 +29,7 @@ export function fetchSongs(url, playlist) {
         }
 
         const songs = json.collection
-          .map(song => song.origin ? song.origin : song)
+          .map(song => song.origin || song)
           .filter(song => {
             if (playlist in GENRES_MAP) {
               return song.streamable && song.kind === 'track' && song.duration < 600000;

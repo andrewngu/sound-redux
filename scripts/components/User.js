@@ -155,7 +155,11 @@ class User extends Component {
             <div className="col-7-10">
               <div className="user card">
                 <div className="user-detail">
-                  <img className="user-image" src={image} />
+                  <img
+                    alt="user avatar"
+                    className="user-image"
+                    src={image}
+                  />
                 </div>
                 <div className="user-info">
                   {this.renderFollowButton()}

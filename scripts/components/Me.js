@@ -27,12 +27,13 @@ class Me extends Component {
         return 'stream';
       case 'likes':
         return 'likes';
-      case 'playlists':
+      case 'playlists': {
         if (path.length < 3 || !(path[2] in authedPlaylists)) {
           return 'playlists';
         }
         const playlist = authedPlaylists[path[2]];
         return playlist.title;
+      }
       default:
         return 'stream';
     }
@@ -72,24 +73,23 @@ class Me extends Component {
       users,
     } = this.props;
     const playlist = this.getPlaylist() + AUTHED_PLAYLIST_SUFFIX;
-    const scrollFunc = fetchSongsIfNeeded.bind(null, playlist);
     return (
-    <div className="me">
-      {this.renderPrompt()}
-      <div className="container">
-        <SongCards
-          authed={authed}
-          dispatch={dispatch}
-          height={height}
-          playingSongId={playingSongId}
-          playlist={playlist}
-          playlists={playlists}
-          scrollFunc={scrollFunc}
-          songs={songs}
-          users={users}
-        />
+      <div className="me">
+        {this.renderPrompt()}
+        <div className="container">
+          <SongCards
+            authed={authed}
+            dispatch={dispatch}
+            height={height}
+            playingSongId={playingSongId}
+            playlist={playlist}
+            playlists={playlists}
+            scrollFunc={fetchSongsIfNeeded.bind(null, playlist)}
+            songs={songs}
+            users={users}
+          />
+        </div>
       </div>
-    </div>
     );
   }
 }

@@ -19,6 +19,7 @@ class MobileSongListItem extends Component {
         onClick={playSong}
       >
         <img
+          alt="song artwork"
           className="mobile-song-list-item-image"
           src={getImageUrl(song.artwork_url)}
         />

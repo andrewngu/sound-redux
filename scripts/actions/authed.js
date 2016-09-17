@@ -49,7 +49,7 @@ function fetchFollowings(accessToken) {
           .reduce((obj, userId) => Object.assign({}, obj, { [userId]: 1 }), {});
         dispatch(receiveAuthedFollowings(users, normalized.entities));
       })
-      .catch(err => {throw err; });
+      .catch(err => { throw err; });
 }
 
 function fetchLikes(accessToken) {

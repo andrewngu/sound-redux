@@ -54,12 +54,11 @@ class MobileSongList extends Component {
 
   render() {
     const { dispatch, playlist } = this.props;
-    const scrollFunc = fetchSongsIfNeeded.bind(null, playlist);
     return (
       <MobileInfiniteScroll
         className="mobile-songs"
         dispatch={dispatch}
-        scrollFunc={scrollFunc}
+        scrollFunc={fetchSongsIfNeeded.bind(null, playlist)}
       >
         {this.renderSongsListItems()}
         {this.renderSpinner()}

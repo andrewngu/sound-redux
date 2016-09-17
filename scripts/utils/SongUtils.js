@@ -5,7 +5,9 @@ import { GENRES_MAP, IMAGE_SIZES } from '../constants/SongConstants';
 export function constructUrl(cat) {
   const catArr = cat.split(' - ');
   let category = catArr[0];
-  let result = `//api.soundcloud.com/tracks?linked_partitioning=1&client_id=${CLIENT_ID}&limit=50&offset=0`;
+  let result = '//api.soundcloud.com/tracks?linked_partitioning=1&client_id=' +
+    `${CLIENT_ID}&limit=50&offset=0`;
+
   if (category in GENRES_MAP) {
     if (category !== 'house'
     && category !== 'trance'

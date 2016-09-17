@@ -70,7 +70,7 @@ class Player extends Component {
     audioElement.addEventListener('play', this.handlePlay, false);
     audioElement.addEventListener('timeupdate', this.handleTimeUpdate, false);
     audioElement.addEventListener('volumechange', this.handleVolumeChange, false);
-    audioElement.volume = this.state.volume
+    audioElement.volume = this.state.volume;
     audioElement.play();
   }
 
@@ -407,7 +407,11 @@ class Player extends Component {
         <div className="container">
           <div className="player-main">
             <div className="player-section player-info">
-              <img className="player-image" src={getImageUrl(song.artwork_url)} />
+              <img
+                alt="song artwork"
+                className="player-image"
+                src={getImageUrl(song.artwork_url)}
+              />
               <SongDetails
                 dispatch={dispatch}
                 songId={song.id}

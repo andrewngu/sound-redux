@@ -31,7 +31,7 @@ class Comment extends Component {
         <div className="comment-time">
           {formatSeconds(Math.floor(comment.timestamp / 1000))}
         </div>
-    </div>
+      </div>
     );
   }
 }

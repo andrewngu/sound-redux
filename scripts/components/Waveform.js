@@ -88,7 +88,13 @@ class Waveform extends Component {
       return null;
     }
 
-    return <img className="waveform-image" src={waveformUrl.replace('http:', '')} />;
+    return (
+      <img
+        alt="song waveform"
+        className="waveform-image"
+        src={waveformUrl.replace('http:', '')}
+      />
+    );
   }
 
   renderWaveform() {

@@ -3,7 +3,7 @@ import SidebarContent from '../components/SidebarContent';
 import UserCard from '../components/UserCard';
 
 const propTypes = {
-  dispatch: PropTypes.isRequired,
+  dispatch: PropTypes.func.isRequired,
   height: PropTypes.number.isRequired,
   users: PropTypes.array.isRequired,
 };

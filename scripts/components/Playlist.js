@@ -87,7 +87,11 @@ class Playlist extends Component {
           key={`${song.id}-${i}`}
           onClick={playSongFunc}
         >
-          <img className="playlist-song-image" src={getImageUrl(song.artwork_url)} />
+          <img
+            alt="song artwork"
+            className="playlist-song-image"
+            src={getImageUrl(song.artwork_url)}
+          />
           <div className="playlist-song-title">{song.title}</div>
         </li>
       );

@@ -48,11 +48,12 @@ class Nav extends Component {
   renderArtworks(playlist) {
     const { songs } = this.props;
     return playlist.tracks.slice(0, 10).map(songId =>
-        <img
-          className="nav-playlist-image"
-          key={songId}
-          src={getImageUrl(songs[songId].artwork_url)}
-        />
+      <img
+        alt="song artwork"
+        className="nav-playlist-image"
+        key={songId}
+        src={getImageUrl(songs[songId].artwork_url)}
+      />
     );
   }
 
@@ -63,7 +64,11 @@ class Nav extends Component {
       return (
         <Popover className="nav-user">
           <div className="nav-user-link">
-            <img className="nav-authed-image" src={getImageUrl(authed.user.avatar_url)} />
+            <img
+              alt="user avatar"
+              className="nav-authed-image"
+              src={getImageUrl(authed.user.avatar_url)}
+            />
             <i className="icon ion-chevron-down"></i>
             <i className="icon ion-chevron-up"></i>
           </div>

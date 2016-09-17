@@ -49,7 +49,7 @@ class Songs extends Component {
       time,
       users,
     } = this.props;
-    const scrollFunc = fetchSongsIfNeeded.bind(null, playlist);
+
     return (
       <div className={`songs ${(sticky ? 'sticky' : '')}`}>
         <Toolbar dispatch={dispatch} playlist={playlist} sticky={sticky} time={time} />
@@ -61,7 +61,7 @@ class Songs extends Component {
             playingSongId={playingSongId}
             playlist={playlist}
             playlists={playlists}
-            scrollFunc={scrollFunc}
+            scrollFunc={fetchSongsIfNeeded.bind(null, playlist)}
             songs={songs}
             users={users}
           />

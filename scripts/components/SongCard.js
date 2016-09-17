@@ -16,7 +16,7 @@ class SongCard extends Component {
 
     return (
       <div className="toggle-play-button" onClick={playSong}>
-          <i className="toggle-play-button-icon ion-ios-play" />
+        <i className="toggle-play-button-icon ion-ios-play" />
       </div>
     );
   }
@@ -33,6 +33,7 @@ class SongCard extends Component {
         </div>
         <div className="song-card-user clearfix">
           <img
+            alt="user avatar"
             className="song-card-user-image"
             src={getImageUrl(user.avatar_url)}
           />
