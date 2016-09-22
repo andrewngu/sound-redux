@@ -1,18 +1,11 @@
 .comments-header {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #e3e3e3;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #e3e3e3;
 }
 
 .comments-header-title {
-    flex: 1;
-}
-
-.comments-body {
-    overflow: scroll;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
+  flex: 1;
 }
