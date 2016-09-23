@@ -1,108 +1,103 @@
 .song {
-    &.active {
-        border-color: #A6D2A5;
-    }
+  &.active {
+    border-color: #A6D2A5;
+  }
 }
 
 .song-main {
-    display: flex;
+  display: flex;
 }
 
 .song-detail {
-    display: flex;
-    flex: 1;
-    padding: 10px;
+  display: flex;
+  flex: 1;
+  padding: 10px;
 }
 
 .song-image {
-    width: 120px;
-    height: 120px;
-    margin-right: 20px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+  width: 120px;
+  height: 120px;
+  margin-right: 20px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 
-    &:hover {
-        cursor: pointer;
-    }
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .song-info {
-    flex: 1;
+  flex: 1;
 }
 
 .song-title {
-    display: block;
-    font-size: 20px;
-    font-weight: 300;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  display: block;
+  font-size: 20px;
+  font-weight: 300;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .song-user {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .song-user-image {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    margin-right: 10px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 10px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .song-username {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .song-stats {
-    margin-top: 10px;
-    font-size: 11px;
-    color: #ccc;
+  margin-top: 10px;
+  font-size: 11px;
+  color: #ccc;
 }
 
 .song-stat {
-    display: inline-block;
-    width: 80px;
+  display: inline-block;
+  width: 80px;
 
-    & + .song-stat {
-        margin-left: 20px;
-    }
+  & + .song-stat {
+    margin-left: 20px;
+  }
 
-    i {
-        margin-right: 10px;
-    }
+  i {
+    margin-right: 10px;
+  }
 }
 
 .song-description {
-    margin-top: 10px;
-    font-size: 11px;
-    max-height: 30px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  margin-top: 10px;
+  font-size: 11px;
+  max-height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .song-waveform {
-    width: 200px;
-    height: 142px;
-    border-left: 1px solid #e3e3e3;
+  width: 200px;
+  height: 142px;
+  border-left: 1px solid #e3e3e3;
+  flex-shrink: 0;
 
-    .waveform {
-        height: 100%;
+  .waveform {
+    height: 100%;
 
-        .waveform-image-container {
-            height: 100%;
-        }
+    .waveform-image-container {
+      height: 100%;
     }
+  }
 }
