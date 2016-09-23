@@ -67,6 +67,7 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  flex-shrink: 0;
 }
 
 .song-list-item-info-extra {
