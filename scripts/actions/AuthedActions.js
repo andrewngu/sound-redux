@@ -1,9 +1,9 @@
 import { arrayOf, normalize } from 'normalizr';
 import SC from 'soundcloud';
 import Cookies from 'js-cookie';
-import { navigateTo } from '../actions/navigator';
-import { changePlayingSong } from '../actions/player';
-import { fetchSongs, receiveSongs } from '../actions/playlists';
+import { navigateTo } from '../actions/NavigatorActions';
+import { changePlayingSong } from '../actions/PlayerActions';
+import { fetchSongs, receiveSongs } from '../actions/PlaylistsActions';
 import * as types from '../constants/ActionTypes';
 import { CLIENT_ID } from '../constants/Config';
 import { AUTHED_PLAYLIST_SUFFIX } from '../constants/PlaylistConstants';

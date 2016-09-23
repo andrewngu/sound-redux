@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { fetchSongsIfNeeded } from '../actions/playlists';
+import { fetchSongsIfNeeded } from '../actions/PlaylistsActions';
 import MobileSongList from '../components/MobileSongList';
 
 const propTypes = {

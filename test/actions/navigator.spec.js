@@ -1,5 +1,5 @@
 import expect from 'expect';
-import * as actions from '../../scripts/actions/navigator';
+import * as actions from '../../scripts/actions/NavigatorActions';
 import * as types from '../../scripts/constants/ActionTypes';
 import {mockStore} from '../TestUtils';
 

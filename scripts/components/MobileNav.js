@@ -3,7 +3,7 @@ import { Motion, presets, spring } from 'react-motion';
 import { GENRES } from '../constants/SongConstants';
 import Link from '../components/Link';
 import { getImageUrl } from '../utils/SongUtils';
-import { loginUser, logoutUser } from '../actions/authed';
+import { loginUser, logoutUser } from '../actions/AuthedActions';
 
 const propTypes = {
   authed: PropTypes.object.isRequired,

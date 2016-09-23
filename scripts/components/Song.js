@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { playSong } from '../actions/player';
-import { fetchSongIfNeeded } from '../actions/songs';
+import { playSong } from '../actions/PlayerActions';
+import { fetchSongIfNeeded } from '../actions/SongsActions';
 
 import Comments from '../components/Comments';
 import Link from '../components/Link';

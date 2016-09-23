@@ -1,5 +1,5 @@
 import expect from 'expect';
-import * as actions from '../../scripts/actions/environment';
+import * as actions from '../../scripts/actions/EnvironmentActions';
 import * as types from '../../scripts/constants/ActionTypes';
 
 describe('size actions', () => {

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchSongsIfNeeded } from '../actions/playlists';
+import { fetchSongsIfNeeded } from '../actions/PlaylistsActions';
 import MobileSongs from '../components/MobileSongs';
 import Songs from '../components/Songs';
 import { getPlayingSongId } from '../utils/PlayerUtils';

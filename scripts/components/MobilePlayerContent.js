@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { changeCurrentTime, changeSong, toggleIsPlaying } from '../actions/player';
+import { changeCurrentTime, changeSong, toggleIsPlaying } from '../actions/PlayerActions';
 import { CHANGE_TYPES, IMAGE_SIZES } from '../constants/SongConstants';
 import { formatSongTitle, formatStreamUrl } from '../utils/FormatUtils';
 import { getImageUrl } from '../utils/SongUtils';

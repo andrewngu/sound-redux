@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { changeModal } from '../actions/modal';
+import { changeModal } from '../actions/ModalActions';
 import ModalLogin from '../components/ModalLogin';
 
 const propTypes = {

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { changeCurrentTime } from '../actions/player';
+import { changeCurrentTime } from '../actions/PlayerActions';
 import { offsetLeft } from '../utils/MouseUtils';
 
 const propTypes = {

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { playSong } from '../actions/player';
+import { playSong } from '../actions/PlayerActions';
 import { getImageUrl } from '../utils/SongUtils';
 
 const propTypes = {

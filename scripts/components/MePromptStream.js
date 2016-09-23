@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { addNewStreamSongsToPlaylist } from '../actions/authed';
+import { addNewStreamSongsToPlaylist } from '../actions/AuthedActions';
 
 const propTypes = {
   authed: PropTypes.object.isRequired,

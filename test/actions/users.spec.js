@@ -3,7 +3,7 @@ import nock from 'nock';
 import fetch from 'isomorphic-fetch';
 import {arrayOf, normalize} from 'normalizr';
 import merge from 'lodash/merge';
-import * as actions from '../../scripts/actions/users';
+import * as actions from '../../scripts/actions/UsersActions';
 import * as types from '../../scripts/constants/ActionTypes';
 import {CLIENT_ID} from '../../scripts/constants/Config';
 import {songSchema, userSchema} from '../../scripts/constants/Schemas';

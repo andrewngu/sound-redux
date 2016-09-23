@@ -1,5 +1,5 @@
 import { arrayOf, normalize } from 'normalizr';
-import { receiveSongs } from '../actions/playlists';
+import { receiveSongs } from '../actions/PlaylistsActions';
 import * as types from '../constants/ActionTypes';
 import { SONG_PLAYLIST_SUFFIX } from '../constants/PlaylistConstants';
 import { songSchema } from '../constants/Schemas';

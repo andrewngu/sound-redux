@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { fetchSongsIfNeeded } from '../actions/playlists';
+import { fetchSongsIfNeeded } from '../actions/PlaylistsActions';
 import MePromptStream from '../components/MePromptStream';
 import MePromptLikes from '../components/MePromptLikes';
 import SongCards from '../components/SongCards';

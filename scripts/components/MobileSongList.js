@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { fetchSongsIfNeeded } from '../actions/playlists';
-import { playSong } from '../actions/player';
+import { fetchSongsIfNeeded } from '../actions/PlaylistsActions';
+import { playSong } from '../actions/PlayerActions';
 import MobileSongListItem from '../components/MobileSongListItem';
 import MobileInfiniteScroll from '../components/MobileInfiniteScroll';
 import Spinner from '../components/Spinner';

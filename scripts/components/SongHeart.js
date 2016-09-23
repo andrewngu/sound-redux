@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { loginUser, toggleLike } from '../actions/authed';
+import { loginUser, toggleLike } from '../actions/AuthedActions';
 import Popover from '../components/Popover';
 
 const propTypes = {

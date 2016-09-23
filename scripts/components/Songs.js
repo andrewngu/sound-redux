@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import { fetchSongsIfNeeded } from '../actions/playlists';
+import { fetchSongsIfNeeded } from '../actions/PlaylistsActions';
 
 import SongCards from '../components/SongCards';
 import stickify from '../components/Stickify';

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { navigateTo } from '../actions/navigator';
+import { navigateTo } from '../actions/NavigatorActions';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,

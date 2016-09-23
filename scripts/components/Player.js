@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { changeCurrentTime, changeSong, toggleIsPlaying } from '../actions/player';
+import { changeCurrentTime, changeSong, toggleIsPlaying } from '../actions/PlayerActions';
 import Playlist from '../components/Playlist';
 import Popover from '../components/Popover';
 import SongDetails from '../components/SongDetails';

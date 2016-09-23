@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { removeUnlikedSongsPre } from '../actions/playlists';
+import { removeUnlikedSongsPre } from '../actions/PlaylistsActions';
 import { AUTHED_PLAYLIST_SUFFIX } from '../constants/PlaylistConstants';
 
 const LIKES_PLAYLIST_KEY = `likes${AUTHED_PLAYLIST_SUFFIX}`;

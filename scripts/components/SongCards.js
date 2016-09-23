@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { playSong } from '../actions/player';
-import { fetchSongsIfNeeded } from '../actions/playlists';
+import { playSong } from '../actions/PlayerActions';
+import { fetchSongsIfNeeded } from '../actions/PlaylistsActions';
 import infiniteScrollify from '../components/InfiniteScrollify';
 import SongCard from '../components/SongCard';
 import Spinner from '../components/Spinner';

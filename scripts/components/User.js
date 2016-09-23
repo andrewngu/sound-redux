@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { toggleFollow } from '../actions/authed';
-import { playSong } from '../actions/player';
-import { fetchUserIfNeeded } from '../actions/users';
+import { toggleFollow } from '../actions/AuthedActions';
+import { playSong } from '../actions/PlayerActions';
+import { fetchUserIfNeeded } from '../actions/UsersActions';
 
 import Followings from '../components/Followings';
 import SongListItem from '../components/SongListItem';

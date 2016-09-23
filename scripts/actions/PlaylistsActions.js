@@ -1,5 +1,5 @@
 import { arrayOf, normalize } from 'normalizr';
-import { changePlayingSong } from '../actions/player';
+import { changePlayingSong } from '../actions/PlayerActions';
 import * as types from '../constants/ActionTypes';
 import { AUTHED_PLAYLIST_SUFFIX } from '../constants/PlaylistConstants';
 import { songSchema } from '../constants/Schemas';
