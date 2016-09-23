@@ -140,14 +140,14 @@ class Song extends Component {
             <div className="col-7-10">
               <div className={`song card ${(isActive ? ' active' : '')}`}>
                 <div className="song-main">
-                  <div className="song-detail">
-                    <div
-                      className="song-image"
-                      style={{ backgroundImage: `url(${image})` }}
-                    >
-                      {this.renderTogglePlayButton()}
-                    </div>
-                    <div className="song-info">
+                  <div
+                    className="song__image"
+                    style={{ backgroundImage: `url(${image})` }}
+                  >
+                    {this.renderTogglePlayButton()}
+                  </div>
+                  <div className="song__info__wrap">
+                    <div className="song__info">
                       <div className="song-title">
                         {song.title}
                       </div>

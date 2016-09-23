@@ -1,4 +1,6 @@
 .song {
+  width: 100%;
+
   &.active {
     border-color: #A6D2A5;
   }
@@ -8,36 +10,39 @@
   display: flex;
 }
 
-.song-detail {
-  display: flex;
-  flex: 1;
-  padding: 10px;
-}
-
-.song-image {
+.song__image {
   width: 120px;
   height: 120px;
-  margin-right: 20px;
+  margin: 10px 20px 10px 10px;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  flex-shrink: 0;
 
   &:hover {
     cursor: pointer;
   }
 }
 
-.song-info {
+.song__info__wrap {
+  margin: 10px 20px 0 0;
   flex: 1;
+  overflow: hidden;
+}
+
+.song__info {
+  width: 100%;
+  overflow: hidden;
 }
 
 .song-title {
   display: block;
   font-size: 20px;
   font-weight: 300;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-grow: 0;
 }
 
 .song-user {
