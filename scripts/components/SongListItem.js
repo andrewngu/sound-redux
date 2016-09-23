@@ -41,15 +41,15 @@ class SongListItem extends Component {
 
     return (
       <div className={`song-list-item ${(isActive ? ' active' : '')}`}>
-        <div className="song-list-item-detail">
-          <div
-            className="song-list-item-image"
-            onClick={playSong}
-            style={{ backgroundImage: `url(${image})` }}
-          >
-            {this.renderTogglePlayButton()}
-          </div>
-          <div className="song-list-item-info">
+        <div
+          className="song-list-item__image"
+          onClick={playSong}
+          style={{ backgroundImage: `url(${image})` }}
+        >
+          {this.renderTogglePlayButton()}
+        </div>
+        <div className="song-list-item__info__wrap">
+          <div className="song-list-item__info">
             <Link
               className="song-list-item-title"
               dispatch={dispatch}
@@ -58,7 +58,7 @@ class SongListItem extends Component {
               {song.title}
             </Link>
             <div className="song-list-item-info-extra">
-              <div className="song-list-item-user">
+              <div className="song-list-item__user">
                 <div
                   className="song-list-item-user-image"
                   style={{ backgroundImage: `url(${getImageUrl(user.avatar_url)})` }}

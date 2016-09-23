@@ -26,17 +26,24 @@
   padding: 10px;
 }
 
-.song-list-item-info {
+.song-list-item__info__wrap {
+  margin: 10px 20px 0 0;
   flex: 1;
+  overflow: hidden;
 }
 
-.song-list-item-image {
+.song-list-item__info {
+  width: 100%;
+}
+
+.song-list-item__image {
   width: 60px;
   height: 60px;
-  margin-right: 20px;
+  margin: 10px 20px 10px 10px;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  flex-shrink: 0;
 
   &:hover {
     cursor: pointer;
@@ -51,9 +58,10 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  flex-shrink: 0;
 }
 
-.song-list-item-user {
+.song-list-item__user {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -100,6 +108,7 @@
 .song-list-item-waveform {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   width: 200px;
   height: 80px;
   border-left: 1px solid #e3e3e3;
