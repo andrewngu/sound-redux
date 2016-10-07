@@ -50,8 +50,8 @@ class MobileNav extends Component {
   }
 
   toggleGenreMenuOpen(e) {
+    e.preventDefault();
     if (!this.state.isUserMenuOpen) {
-      e.preventDefault();
       this.setState({ isGenreMenuOpen: !this.state.isGenreMenuOpen });
     }
   }
