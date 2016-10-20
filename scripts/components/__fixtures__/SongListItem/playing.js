@@ -5,4 +5,6 @@ export default {
   ...stopped,
   isActive: true,
   player,
+  // TogglePlayButtonContainer will be rendered and it needs the Redux context created
+  reduxState: {},
 };
