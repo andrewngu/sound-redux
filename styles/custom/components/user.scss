@@ -53,8 +53,9 @@
 .user-profiles {
     margin-top: 10px;
     font-size: 11px;
-    white-space: nowrap;
+    white-space: normal;
     overflow: hidden;
+    display: block;
 }
 
 .user-profile {
@@ -76,4 +77,6 @@
     max-height: 30px;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: normal;
+    display: inline;
 }
