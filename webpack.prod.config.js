@@ -22,7 +22,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, loader: 'babel', exclude: [nodeModulesDir] },
+      { test: /\.js$/, loader: 'babel?' + JSON.stringify({presets: ['react', 'es2015', 'stage-0']}), exclude: [nodeModulesDir] },
       { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css!postcss!sass') },
     ],
   },
