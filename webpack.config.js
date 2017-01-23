@@ -1,5 +1,9 @@
 var webpack = require('webpack');
-var ignore = new webpack.IgnorePlugin(/\.svg$/)
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ignore = new webpack.IgnorePlugin(/\.svg$/);
+var html = new HtmlWebpackPlugin({
+  template: 'server/public/index.html',
+});
 
 module.exports = {
   devtool: 'source-map',
@@ -12,15 +16,15 @@ module.exports = {
   },
   output: {
     publicPath: 'http://localhost:8080/',
-    filename: '/js/[name].js',
+    filename: 'js/[name].js',
   },
   module: {
     loaders: [
-      { test: /\.js$/, loaders: ['react-hot', 'babel?' + JSON.stringify({presets: ['react', 'es2015', 'stage-0']})], exclude: /node_modules/ },
+      { test: /\.js$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/ },
       { test: /\.scss$/, loaders: ['style', 'css', 'postcss', 'sass'] },
     ],
   },
-  plugins: [ignore],
+  plugins: [ignore, html],
   devServer: {
     host: '0.0.0.0',
     proxy: {

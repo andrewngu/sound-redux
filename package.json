@@ -9,7 +9,8 @@
     "start": "webpack-dev-server --progress --colors --hot --content-base ./server/public --config ./webpack.config.js",
     "test": "mocha --compilers js:babel-core/register --recursive -r mock-local-storage",
     "prebuild": "sed -i.bak \"s/'.*'/'${SOUND_REDUX_PROD:-f4323c6f7c0cd73d2d786a2b1cdae80c}'/\" ./scripts/constants/Config.js",
-    "postbuild": "sed -i.bak \"s/'.*'/'${SOUND_REDUX_DEV:-f4323c6f7c0cd73d2d786a2b1cdae80c}'/\" ./scripts/constants/Config.js && rm ./scripts/constants/Config.js.bak"
+    "postbuild": "sed -i.bak \"s/'.*'/'${SOUND_REDUX_DEV:-f4323c6f7c0cd73d2d786a2b1cdae80c}'/\" ./scripts/constants/Config.js && rm ./scripts/constants/Config.js.bak",
+    "cosmos": "cosmos"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     "expect": "^1.12.2",
     "extract-text-webpack-plugin": "^1.0.1",
     "fastclick": "^1.0.6",
+    "html-webpack-plugin": "^2.22.0",
     "isomorphic-fetch": "^2.1.1",
     "jsx-loader": "^0.13.2",
     "mocha": "^2.3.3",
@@ -46,6 +48,8 @@
     "node-sass": "^3.3.3",
     "normalizr": "^2.0.0",
     "postcss-loader": "^0.13.0",
+    "react-cosmos-redux-proxy": "^1.0.0-beta.7",
+    "react-cosmos-webpack": "^1.0.0-beta.5",
     "react-hot-loader": "^1.3.0",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.0",
