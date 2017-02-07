@@ -40,6 +40,7 @@ class Player extends Component {
     this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
     this.handleVolumeChange = this.handleVolumeChange.bind(this);
 
+    this.copySongUrlToClipboard = this.copySongUrlToClipboard.bind(this);
     this.seek = this.seek.bind(this);
     this.toggleMute = this.toggleMute.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
@@ -93,6 +94,15 @@ class Player extends Component {
     audioElement.removeEventListener('play', this.handlePlay, false);
     audioElement.removeEventListener('timeupdate', this.handleTimeUpdate, false);
     audioElement.removeEventListener('volumechange', this.handleVolumeChange, false);
+  }
+
+  copySongUrlToClipboard() {
+    var aux = document.createElement("input");
+    aux.setAttribute("value", this.props.songs[this.props.playingSongId].permalink_url);
+    document.body.appendChild(aux);
+    aux.select();
+    document.execCommand("copy");
+    document.body.removeChild(aux);
   }
 
   bindSeekMouseEvents() {
@@ -411,6 +421,7 @@ class Player extends Component {
                 alt="song artwork"
                 className="player-image"
                 src={getImageUrl(song.artwork_url)}
+                onClick={this.copySongUrlToClipboard}
               />
               <SongDetails
                 dispatch={dispatch}

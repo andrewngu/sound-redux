@@ -36,11 +36,16 @@
 }
 
 .player-image {
+    border-bottom: solid #fff 1px;
     width: 30px;
     height: 30px;
     float: left;
     margin-right: 8px;
     flex-shrink: 0;
+}
+.player-image:hover {
+    border-bottom: solid #222 1px;
+    cursor: pointer;
 }
 
 .player-button {
