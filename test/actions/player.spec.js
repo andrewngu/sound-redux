@@ -5,10 +5,9 @@ jest.mock('global', () => ({
   },
 }));
 
-import expect from 'expect';
-import * as actions from '../../scripts/actions/PlayerActions';
-import * as types from '../../scripts/constants/ActionTypes';
-import {CHANGE_TYPES} from '../../scripts/constants/SongConstants';
+import * as actions from '../../client/actions/PlayerActions';
+import * as types from '../../client/constants/ActionTypes';
+import {CHANGE_TYPES} from '../../client/constants/SongConstants';
 import {mockStore} from '../TestUtils';
 
 describe('player actions', () => {

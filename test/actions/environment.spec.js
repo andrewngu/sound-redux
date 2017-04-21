@@ -1,6 +1,5 @@
-import expect from 'expect';
-import * as actions from '../../scripts/actions/EnvironmentActions';
-import * as types from '../../scripts/constants/ActionTypes';
+import * as actions from '../../client/actions/EnvironmentActions';
+import * as types from '../../client/constants/ActionTypes';
 
 describe('size actions', () => {
     describe('changeWidthAndHeight', () => {

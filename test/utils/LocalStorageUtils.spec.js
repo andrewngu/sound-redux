@@ -7,7 +7,7 @@ jest.mock('global', () => ({
 }));
 
 import { localStorage } from 'global';
-import LocalStorageUtils from '../../scripts/utils/LocalStorageUtils';
+import LocalStorageUtils from '../../client/utils/LocalStorageUtils';
 
 describe('local storage', () => {
   it('can save key - value', () => {

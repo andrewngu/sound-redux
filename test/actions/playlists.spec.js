@@ -1,6 +1,5 @@
-import expect from 'expect';
-import * as actions from '../../scripts/actions/PlaylistsActions';
-import * as types from '../../scripts/constants/ActionTypes';
+import * as actions from '../../client/actions/PlaylistsActions';
+import * as types from '../../client/constants/ActionTypes';
 
 describe('receiveSongs', () => {
     it('should create RECEIVE_SONGS action', () => {

@@ -1,5 +1,4 @@
-import expect from 'expect';
-import * as RouteUtils from '../../scripts/utils/RouteUtils';
+import * as RouteUtils from '../../client/utils/RouteUtils';
 
 describe('RouteUtils', () => {
     describe('constructUrl', () => {
