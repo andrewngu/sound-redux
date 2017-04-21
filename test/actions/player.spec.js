@@ -1,3 +1,10 @@
+jest.mock('global', () => ({
+  localStorage: {
+    get: jest.fn(),
+    set: jest.fn(),
+  },
+}));
+
 import expect from 'expect';
 import * as actions from '../../scripts/actions/PlayerActions';
 import * as types from '../../scripts/constants/ActionTypes';

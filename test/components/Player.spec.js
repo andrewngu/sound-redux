@@ -1,4 +1,12 @@
-import expect from 'expect';
+jest.mock('global', () => ({
+  localStorage: {
+    removeItem: jest.fn(),
+    setItem: jest.fn(),
+    getItem: jest.fn(),
+  },
+}));
+
+import { localStorage } from 'global';
 import Player from '../../scripts/components/Player';
 
 describe('volume', () => {
@@ -8,22 +16,20 @@ describe('volume', () => {
   });
 
   it('can restore previous value from local storage', () => {
-    localStorage.setItem('volume', 0.65);
+    localStorage.getItem.mockReturnValue(0.65)
     let player = new Player();
     expect(player.state.volume).toEqual(0.65);
   });
 });
 
 describe('handleVolumeChange', () => {
-  let player = new Player();
-  const event = {
-    currentTarget: {
-      volume: 0.56
-    }
-  };
-
   it('saves new value to localStorage', () => {
-    player.handleVolumeChange(event);
-    expect(localStorage.getItem('volume')).toEqual('0.56');
+    const player = new Player();
+    player.handleVolumeChange({
+      currentTarget: {
+        volume: 0.56
+      }
+    });
+    expect(localStorage.setItem).toHaveBeenCalledWith('volume', 0.56);
   });
 });
