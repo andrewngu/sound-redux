@@ -9,7 +9,9 @@
     "start": "webpack-dev-server --progress --colors --hot --content-base ./server/public --config ./webpack.config.js",
     "test": "mocha --compilers js:babel-core/register --recursive -r mock-local-storage",
     "prebuild": "sed -i.bak \"s/'.*'/'${SOUND_REDUX_PROD:-f4323c6f7c0cd73d2d786a2b1cdae80c}'/\" ./scripts/constants/Config.js",
-    "postbuild": "sed -i.bak \"s/'.*'/'${SOUND_REDUX_DEV:-f4323c6f7c0cd73d2d786a2b1cdae80c}'/\" ./scripts/constants/Config.js && rm ./scripts/constants/Config.js.bak"
+    "postbuild": "sed -i.bak \"s/'.*'/'${SOUND_REDUX_DEV:-f4323c6f7c0cd73d2d786a2b1cdae80c}'/\" ./scripts/constants/Config.js && rm ./scripts/constants/Config.js.bak",
+    "storybook": "start-storybook -p 6006 -s ./server/public",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,7 @@
   },
   "homepage": "https://github.com/andrewngu/sound-redux",
   "devDependencies": {
+    "@kadira/storybook": "^2.21.0",
     "babel-core": "^6.7.2",
     "babel-eslint": "^6.0.4",
     "babel-loader": "^6.2.4",
@@ -37,6 +40,7 @@
     "eslint-plugin-react": "^5.2.2",
     "expect": "^1.12.2",
     "extract-text-webpack-plugin": "^1.0.1",
+    "faker": "^4.1.0",
     "fastclick": "^1.0.6",
     "isomorphic-fetch": "^2.1.1",
     "jsx-loader": "^0.13.2",
