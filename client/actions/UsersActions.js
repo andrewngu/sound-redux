@@ -1,3 +1,4 @@
+import { fetch } from 'global';
 import { arrayOf, normalize } from 'normalizr';
 import merge from 'lodash/merge';
 import { receiveSongs } from '../actions/PlaylistsActions';

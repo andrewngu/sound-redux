@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`users actions fetchUserIfNeeded should not fetch if user is already loaded 1`] = `
+Array [
+  "//api.soundcloud.com/users/100/tracks?client_id=f4323c6f7c0cd73d2d786a2b1cdae80c",
+  "//api.soundcloud.com/users/100/followings?client_id=f4323c6f7c0cd73d2d786a2b1cdae80c",
+  "//api.soundcloud.com/users/100/web-profiles?client_id=f4323c6f7c0cd73d2d786a2b1cdae80c",
+]
+`;

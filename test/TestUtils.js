@@ -1,4 +1,3 @@
-import expect from 'expect';
 import {applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 

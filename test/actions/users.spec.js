@@ -1,25 +1,55 @@
-import expect from 'expect';
-import nock from 'nock';
-import fetch from 'isomorphic-fetch';
-import {arrayOf, normalize} from 'normalizr';
-import merge from 'lodash/merge';
-import * as actions from '../../scripts/actions/UsersActions';
-import * as types from '../../scripts/constants/ActionTypes';
-import {CLIENT_ID} from '../../scripts/constants/Config';
-import {songSchema, userSchema} from '../../scripts/constants/Schemas';
-import {mockStore} from '../TestUtils';
+jest.mock('global', () => ({
+  fetch: jest.fn(url => Promise.resolve({
+    json: () => {
+      const tracks = [];
+      const followings = {collection: []};
+      const profiles =  [];
+
+      const calls = {
+        tracks: new RegExp('/users/100/tracks'),
+        followings: new RegExp('/users/100/followings'),
+        profiles: new RegExp('/users/100/web-profiles'),
+      };
+      const responses = { tracks, followings, profiles };
+
+      if (url.match(calls.tracks)) {
+        return Promise.resolve(responses.tracks);
+      }
+      if (url.match(calls.followings)) {
+        return Promise.resolve(responses.followings);
+      }
+      if (url.match(calls.profiles)) {
+        return Promise.resolve(responses.profiles);
+      }
+      return Promise.reject(new Error('unexpected fetch'));
+    },
+  })),
+}));
+
+import { fetch } from 'global';
+import * as actions from '../../client/actions/UsersActions';
+import * as types from '../../client/constants/ActionTypes';
+import { mockStore } from '../TestUtils';
 
 describe('users actions', () => {
     describe('fetchUserIfNeeded', () => {
-        afterEach(() => {
-            nock.cleanAll();
+        it('should not fetch if user is already loaded', async () => {
+            const store = mockStore({entities: {users: {100: {id: 100, description: 'foo', followings: [2, 3, 4]}}}}, []);
+            await store.dispatch(actions.fetchUserIfNeeded(100));
+            expect(fetch).not.toHaveBeenCalled();
         });
 
-        it('should not fetch if user is already loaded', (done) => {
-            const expectedActions = [];
-            const store = mockStore({entities: {users: {100: {id: 100, description: 'foo'}}}}, []);
-            store.dispatch(actions.fetchUserIfNeeded(100));
-            done();
+        it('should not fetch if user is already loaded', async () => {
+            const store = mockStore(
+              { entities: { users: { 100: { id: 100, description: 'foo' }}}},
+              [
+                { entities: {}, futureUrl: undefined, nextUrl: null, playlist: 'undefined|user', songs: [], type: 'RECEIVE_SONGS' },
+                { entities: { users: { 100: { followings: [] } } }, type: 'RECEIVE_USER_FOLLOWINGS' },
+                { entities: { users: { 100: { profiles: [] } } }, type: 'RECEIVE_USER_PROFILES' }
+              ]
+            );
+            await store.dispatch(actions.fetchUserIfNeeded(100));
+            expect(fetch.mock.calls.map(i => i.join(','))).toMatchSnapshot();
         });
     });
 

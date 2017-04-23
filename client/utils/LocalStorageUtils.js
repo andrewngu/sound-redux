@@ -1,3 +1,5 @@
+import { localStorage } from 'global';
+
 const isAvailable = (function isAvailableIffe() {
   const test = 'test';
   try {
