@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import Component from '../../client/components/Comment';
+import Component from '../../scripts/components/Comment';
 import getComment from '../data/comment';
 
 storiesOf('Comment', module)

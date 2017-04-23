@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import Component from '../../client/components/SongCard';
+import Component from '../../scripts/components/SongCard';
 import getSong from '../data/song';
 import getUser from '../data/user';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import Component from '../../client/components/SongListItem';
+import Component from '../../scripts/components/SongListItem';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import getSong from '../data/song';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import Component from '../../client/components/Toolbar';
+import Component from '../../scripts/components/Toolbar';
 
 storiesOf('Toolbar', module)
   .add('basic', () => {
