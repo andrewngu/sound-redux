@@ -458,12 +458,14 @@ class Player extends Component {
                 onClick={this.toggleRepeat}
               >
                 <i className="icon ion-loop" />
+                <span className="player-button-tooltip">Repeat</span>
               </div>
               <div
                 className={`player-button ${(this.state.shuffle ? ' active' : '')}`}
                 onClick={this.toggleShuffle}
               >
                 <i className="icon ion-shuffle" />
+                <span className="player-button-tooltip">Shuffle</span>
               </div>
               <Popover className="player-button top-right">
                 <i className="icon ion-android-list" />
