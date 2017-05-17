@@ -39,7 +39,7 @@ class SongHeart extends Component {
             <ul className="nav-user-popover-list">
               <li className="nav-user-popover-item">
                 <a href="#" className="button orange block" onClick={this.login}>
-                  Sign into SoundCloud
+                  Sign In to SoundCloud
                 </a>
               </li>
             </ul>

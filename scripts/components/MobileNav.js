@@ -111,7 +111,7 @@ class MobileNav extends Component {
           href="#"
           onClick={this.login}
         >
-          {"Sign into SoundCloud"}
+          {"Sign In to SoundCloud"}
           <i className="icon ion-person" />
         </a>
       </div>

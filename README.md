@@ -1,6 +1,6 @@
 # SoundRedux
 
-In an effort to learn es6 and [redux](https://github.com/rackt/redux), this is SoundRedux, a simple [Soundcloud](http://soundcloud.com) client
+In an effort to learn ES6 and [Redux](https://github.com/rackt/redux), this is SoundRedux, a simple [SoundCloud](http://soundcloud.com) client
 
 See it in action at https://soundredux.io
 
