@@ -53,8 +53,10 @@
 .user-profiles {
     margin-top: 10px;
     font-size: 11px;
-    white-space: nowrap;
+    white-space: wrap;
     overflow: hidden;
+    display: flex;
+    flex-flow: row nowrap;
 }
 
 .user-profile {
