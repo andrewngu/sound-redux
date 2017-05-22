@@ -1,4 +1,5 @@
 import { arrayOf, normalize } from 'normalizr';
+import uniq from 'lodash/uniq';
 import { changePlayingSong } from '../actions/PlayerActions';
 import * as types from '../constants/ActionTypes';
 import { AUTHED_PLAYLIST_SUFFIX } from '../constants/PlaylistConstants';
@@ -18,6 +19,7 @@ export function fetchSongs(url, playlist) {
       .then(json => {
         let nextUrl = null;
         let futureUrl = null;
+
         if (json.next_href) {
           nextUrl = json.next_href;
           nextUrl += (authed.accessToken ? `&oauth_token=${authed.accessToken}` : '');
@@ -38,14 +40,10 @@ export function fetchSongs(url, playlist) {
             return song.streamable && song.kind === 'track';
           });
 
-        const normalized = normalize(songs, arrayOf(songSchema));
-        const result = normalized.result.reduce((arr, songId) => {
-          if (arr.indexOf(songId) === -1) {
-            arr.push(songId);
-          }
 
-          return arr;
-        }, []);
+        const normalized = normalize(songs, arrayOf(songSchema));
+
+        const result = uniq(normalized.result);
 
         dispatch(receiveSongs(normalized.entities, result, playlist, nextUrl, futureUrl));
       })
