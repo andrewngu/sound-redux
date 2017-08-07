@@ -117,7 +117,7 @@ class Waveform extends Component {
   render() {
     return (
       <div className="waveform">
-        <canvas className="waveform-canvas" ref="canvas"></canvas>
+        <canvas className="waveform-canvas"></canvas>
         {this.renderWaveform()}
       </div>
     );
