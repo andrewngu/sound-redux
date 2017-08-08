@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import { changeCurrentTime, changeSong, toggleIsPlaying } from '../actions/PlayerActions';
 import { CHANGE_TYPES, IMAGE_SIZES } from '../constants/SongConstants';
 import { formatSongTitle, formatStreamUrl } from '../utils/FormatUtils';
@@ -34,7 +33,7 @@ class MobilePlayerContent extends Component {
   }
 
   componentDidMount() {
-    const audioElement = ReactDOM.findDOMNode(this.refs.audio);
+    const audioElement = this.audio;
     audioElement.addEventListener('ended', this.handleEnded, false);
     audioElement.addEventListener('loadedmetadata', this.handleLoadedMetadata, false);
     audioElement.addEventListener('loadstart', this.handleLoadStart, false);
@@ -49,11 +48,11 @@ class MobilePlayerContent extends Component {
       return;
     }
 
-    ReactDOM.findDOMNode(this.refs.audio).play();
+    this.audio.play();
   }
 
   componentWillUnmount() {
-    const audioElement = ReactDOM.findDOMNode(this.refs.audio);
+    const audioElement = this.audio;
     audioElement.removeEventListener('ended', this.handleEnded, false);
     audioElement.removeEventListener('loadedmetadata', this.handleLoadedMetadata, false);
     audioElement.removeEventListener('loadstart', this.handleLoadStart, false);
@@ -73,7 +72,7 @@ class MobilePlayerContent extends Component {
 
   handleEnded() {
     if (this.state.repeat) {
-      ReactDOM.findDOMNode(this.refs.audio).play();
+      this.audio.play();
     } else if (this.state.shuffle) {
       this.changeSong(CHANGE_TYPES.SHUFFLE);
     } else {
@@ -82,7 +81,7 @@ class MobilePlayerContent extends Component {
   }
 
   handleLoadedMetadata() {
-    const audioElement = ReactDOM.findDOMNode(this.refs.audio);
+    const audioElement = this.audio;
     this.setState({
       duration: Math.floor(audioElement.duration),
     });
@@ -121,7 +120,7 @@ class MobilePlayerContent extends Component {
   togglePlay(e) {
     e.preventDefault();
     const { isPlaying } = this.props.player;
-    const audioElement = ReactDOM.findDOMNode(this.refs.audio);
+    const audioElement = this.audio;
     if (isPlaying) {
       audioElement.pause();
     } else {
@@ -157,7 +156,12 @@ class MobilePlayerContent extends Component {
 
     return (
       <div className="mobile-player" style={{ backgroundImage: `url(${image})` }}>
-        <audio id="audio" ref="audio" src={formatStreamUrl(song.stream_url)}></audio>
+        <audio
+          id="audio"
+          ref={(node) => { this.audio = node; }}
+          src={formatStreamUrl(song.stream_url)}
+        >
+        </audio>
         <div className="mobile-player-bg" />
         <div className="mobile-player-extras" />
         <div className="mobile-player-content fade-in">

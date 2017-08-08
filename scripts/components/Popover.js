@@ -32,14 +32,13 @@ class Popover extends Component {
       return;
     }
 
-    const node = ReactDOM.findDOMNode(this.refs.popover);
+    const node = this.popover;
 
     if (!node.contains(e.target)) {
       this.setState({
-         isOpen: false
-      })
+        isOpen: false,
+      });
     }
-
   }
 
   toggleIsOpen() {
@@ -52,7 +51,7 @@ class Popover extends Component {
 
     return (
       <div
-        ref="popover"
+        ref={(node) => { this.popover = node; }}
         className={`${className} popover ${(isOpen ? ' open' : '')}`}
         onClick={this.toggleIsOpen}
       >

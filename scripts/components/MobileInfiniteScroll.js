@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 
 const propTypes = {
   children: PropTypes.node,
@@ -15,17 +14,17 @@ class MobileInfiniteScroll extends Component {
   }
 
   componentDidMount() {
-    const el = ReactDOM.findDOMNode(this.refs.scroll);
+    const el = this.scroll;
     el.addEventListener('scroll', this.onScroll, false);
   }
 
   componentWillUnmount() {
-    const el = ReactDOM.findDOMNode(this.refs.scroll);
+    const el = this.scroll;
     el.removeEventListener('scroll', this.onScroll, false);
   }
 
   onScroll() {
-    const el = ReactDOM.findDOMNode(this.refs.scroll);
+    const el = this.scroll;
     if (el.scrollTop >= (el.scrollHeight - el.offsetHeight - 200)) {
       this.props.dispatch(this.props.scrollFunc());
     }
@@ -33,7 +32,10 @@ class MobileInfiniteScroll extends Component {
 
   render() {
     return (
-      <div className={this.props.className} ref="scroll">
+      <div
+        className={this.props.className}
+        ref={(node) => { this.scroll = node; }}
+      >
         {this.props.children}
       </div>
     );

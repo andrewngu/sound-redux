@@ -36,7 +36,7 @@ class NavSearch extends Component {
     const isInsideInput = e.target.tagName.toLowerCase().match(/input|textarea/);
     if (keyCode === 47 && !isInsideInput) {
       e.preventDefault();
-      ReactDOM.findDOMNode(this.refs.query).focus();
+      this.query.focus();
     }
   }
 
@@ -45,7 +45,7 @@ class NavSearch extends Component {
       <div className="nav-search">
         <i className="icon ion-search" />
         <input
-          ref="query"
+          ref={(node) => { this.query = node; }}
           className="nav-search-input"
           placeholder="SEARCH"
           onKeyPress={this.handleOnKeyPress}
