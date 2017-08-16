@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { toggleFollow } from '../actions/AuthedActions';
 import { playSong } from '../actions/PlayerActions';
 import { fetchUserIfNeeded } from '../actions/UsersActions';

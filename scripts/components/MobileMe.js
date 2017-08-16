@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { AUTHED_PLAYLIST_SUFFIX } from '../constants/PlaylistConstants';
 import MobileSongList from '../components/MobileSongList';
 

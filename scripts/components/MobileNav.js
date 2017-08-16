@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { Motion, presets, spring } from 'react-motion';
 import { GENRES } from '../constants/SongConstants';
 import Link from '../components/Link';
