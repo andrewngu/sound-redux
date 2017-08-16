@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { fetchSongsIfNeeded } from '../actions/PlaylistsActions';
 import MePromptStream from '../components/MePromptStream';
 import MePromptLikes from '../components/MePromptLikes';

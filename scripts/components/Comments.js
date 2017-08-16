@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import Comment from '../components/Comment';
 import SidebarContent from '../components/SidebarContent';
 import Switch from '../components/Switch';

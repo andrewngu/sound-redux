@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import Link from '../components/Link';
 import SongHeart from '../components/SongHeart';
 import { IMAGE_SIZES } from '../constants/SongConstants';
