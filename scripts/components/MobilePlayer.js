@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { Motion, spring } from 'react-motion';
 import MobilePlayerContent from '../components/MobilePlayerContent';
 

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { loginUser, logoutUser } from '../actions/AuthedActions';
 import Link from '../components/Link';
 import NavSearch from '../components/NavSearch';

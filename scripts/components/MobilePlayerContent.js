@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { changeCurrentTime, changeSong, toggleIsPlaying } from '../actions/PlayerActions';
 import { CHANGE_TYPES, IMAGE_SIZES } from '../constants/SongConstants';
 import { formatSongTitle, formatStreamUrl } from '../utils/FormatUtils';
