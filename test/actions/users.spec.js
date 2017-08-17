@@ -1,12 +1,8 @@
 import expect from 'expect';
 import nock from 'nock';
 import fetch from 'isomorphic-fetch';
-import {arrayOf, normalize} from 'normalizr';
-import merge from 'lodash/merge';
 import * as actions from '../../scripts/actions/UsersActions';
 import * as types from '../../scripts/constants/ActionTypes';
-import {CLIENT_ID} from '../../scripts/constants/Config';
-import {songSchema, userSchema} from '../../scripts/constants/Schemas';
 import {mockStore} from '../TestUtils';
 
 describe('users actions', () => {
@@ -16,7 +12,6 @@ describe('users actions', () => {
         });
 
         it('should not fetch if user is already loaded', (done) => {
-            const expectedActions = [];
             const store = mockStore({entities: {users: {100: {id: 100, description: 'foo'}}}}, []);
             store.dispatch(actions.fetchUserIfNeeded(100));
             done();

@@ -120,9 +120,5 @@ function requestSongs(playlist) {
 
 function shouldFetchSongs(playlists, playlist) {
   const activePlaylist = playlists[playlist];
-  if (!activePlaylist || !activePlaylist.isFetching && (activePlaylist.nextUrl !== null)) {
-    return true;
-  }
-
-  return false;
+  return !activePlaylist || !activePlaylist.isFetching && (activePlaylist.nextUrl !== null);
 }

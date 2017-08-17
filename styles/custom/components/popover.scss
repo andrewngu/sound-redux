@@ -33,8 +33,7 @@
     position: absolute;
     width: 0;
     height: 0;
-    border-style: solid;
-    border-color: transparent;
-    border-top: 0;
+    border: solid transparent;
+    border-top-width: 0;
     box-sizing: border-box;
  }
