@@ -16,10 +16,9 @@ export function constructUrl(route) {
 }
 
 export function parseUrl(windowHash) {
-  let path = [];
   const query = {};
   const hashArr = windowHash.replace('#/', '').split('?');
-  path = hashArr[0].split('/');
+  const path = hashArr[0].split('/');
 
   if (hashArr.length > 1) {
     hashArr[1].split('&').forEach(str => {

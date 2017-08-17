@@ -40,8 +40,7 @@
   width: 60px;
   height: 60px;
   margin: 10px 20px 10px 10px;
-  background-position: center center;
-  background-repeat: no-repeat;
+  background: no-repeat center center;
   background-size: cover;
   flex-shrink: 0;
 
@@ -72,8 +71,7 @@
   height: 24px;
   margin-right: 10px;
   border-radius: 50%;
-  background-position: center center;
-  background-repeat: no-repeat;
+  background: no-repeat center center;
   background-size: cover;
   flex-shrink: 0;
 }

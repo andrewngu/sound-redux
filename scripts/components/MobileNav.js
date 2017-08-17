@@ -30,7 +30,6 @@ class MobileNav extends Component {
     const { authed, authedPlaylists } = this.props;
     const playlistNames = [];
     let playlistIds = [];
-    let playlistDetails = {};
 
     if (authed.playlists) {
       playlistIds = authed.playlists;
@@ -42,7 +41,7 @@ class MobileNav extends Component {
       }
     }
 
-    playlistDetails = {
+    const playlistDetails = {
       playlistNames,
       playlistIds,
     };
@@ -137,7 +136,7 @@ class MobileNav extends Component {
     );
   }
 
-  renderUserMenu(isUserMenuOpen, playlist, getPlaylistDetails) {
+  renderUserMenu(isUserMenuOpen, getPlaylistDetails) {
     const playlistNames = getPlaylistDetails.playlistNames;
     const tabs = ['stream', 'likes', ...playlistNames];
 

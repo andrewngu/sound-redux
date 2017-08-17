@@ -1,5 +1,5 @@
-var webpack = require('webpack');
-var ignore = new webpack.IgnorePlugin(/\.svg$/)
+const webpack = require('webpack');
+const ignore = new webpack.IgnorePlugin(/\.svg$/)
 
 module.exports = {
   devtool: 'source-map',

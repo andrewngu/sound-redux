@@ -1,6 +1,5 @@
 import expect from 'expect';
 import LocalStorageUtils from '../../scripts/utils/LocalStorageUtils';
-import mockLocalStorage from 'mock-local-storage';
 
 describe('local storage', () => {
   it('can save key - value', () => {

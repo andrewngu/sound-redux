@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { changeCurrentTime, changeSong, toggleIsPlaying } from '../actions/PlayerActions';
 import Playlist from '../components/Playlist';
 import Popover from '../components/Popover';
@@ -113,8 +112,7 @@ class Player extends Component {
 
   changeVolume(e) {
     const audioElement = this.audio;
-    const volume = (e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth;
-    audioElement.volume = volume;
+    audioElement.volume = (e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth;
   }
 
   handleEnded() {
@@ -284,11 +282,7 @@ class Player extends Component {
 
   toggleMute() {
     const audioElement = this.audio;
-    if (this.state.muted) {
-      audioElement.muted = false;
-    } else {
-      audioElement.muted = true;
-    }
+    audioElement.muted = !this.state.muted;
 
     this.setState({ muted: !this.state.muted });
   }

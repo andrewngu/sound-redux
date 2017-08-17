@@ -1,8 +1,8 @@
-var path = require('path');
-var webpack = require('webpack');
-var ignore = new webpack.IgnorePlugin(/\.svg$/);
-var nodeModulesDir = path.resolve(__dirname, 'node_modules');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const ignore = new webpack.IgnorePlugin(/\.svg$/);
+const nodeModulesDir = path.resolve(__dirname, 'node_modules');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
