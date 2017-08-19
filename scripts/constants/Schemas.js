@@ -5,11 +5,11 @@ const user = new Schema('users');
 const playlist = new Schema('playlists');
 
 song.define({
-  user,
+  user
 });
 
 playlist.define({
-  tracks: arrayOf(song),
+  tracks: arrayOf(song)
 });
 
 export const songSchema = song;

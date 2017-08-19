@@ -19,7 +19,7 @@ const propTypes = {
   height: PropTypes.number,
   isMobile: PropTypes.bool,
   path: PropTypes.array.isRequired,
-  width: PropTypes.number,
+  width: PropTypes.number
 };
 
 class App extends Component {
@@ -88,7 +88,7 @@ function mapStateToProps(state) {
     height,
     isMobile,
     path,
-    width,
+    width
   };
 }
 

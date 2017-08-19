@@ -9,7 +9,7 @@ import {
   constructUserFollowingsUrl,
   constructUserTracksUrl,
   constructUserUrl,
-  constructUserProfilesUrl,
+  constructUserProfilesUrl
 } from '../utils/UserUtils';
 
 function fetchUserData(userId, username) {
@@ -60,8 +60,8 @@ function fetchUserFollowings(userId) {
         const normalized = normalize(users, arrayOf(userSchema));
         const entities = merge({}, normalized.entities, {
           users: {
-            [userId]: { followings: normalized.result },
-          },
+            [userId]: { followings: normalized.result }
+          }
         });
 
         dispatch(receiveUserFollowings(entities));
@@ -107,7 +107,7 @@ function fetchUserTracks(userId, username) {
 export function receiveUserFollowings(entities) {
   return {
     type: types.RECEIVE_USER_FOLLOWINGS,
-    entities,
+    entities
   };
 }
 
@@ -121,20 +121,20 @@ function receiveUserPre(userId, entities) {
 export function receiveUser(entities) {
   return {
     type: types.RECEIVE_USER,
-    entities,
+    entities
   };
 }
 
 export function receiveUserProfiles(entities) {
   return {
     type: types.RECEIVE_USER_PROFILES,
-    entities,
+    entities
   };
 }
 
 export function requestUser(userId) {
   return {
     type: types.REQUEST_USER,
-    userId,
+    userId
   };
 }

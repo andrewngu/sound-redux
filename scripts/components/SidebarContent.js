@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 const propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  height: PropTypes.number,
+  height: PropTypes.number
 };
 
 class SidebarContent extends Component {

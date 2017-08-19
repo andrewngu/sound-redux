@@ -4,7 +4,7 @@ import { constructUrl, parseUrl } from '../utils/RouteUtils';
 export function changePath(route) {
   return {
     type: types.CHANGE_PATH,
-    route,
+    route
   };
 }
 

@@ -5,7 +5,7 @@ const propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   dispatch: PropTypes.func.isRequired,
-  scrollFunc: PropTypes.func.isRequired,
+  scrollFunc: PropTypes.func.isRequired
 };
 
 class MobileInfiniteScroll extends Component {

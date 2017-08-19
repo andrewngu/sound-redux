@@ -14,7 +14,7 @@ const propTypes = {
   playlist: PropTypes.string.isRequired,
   playlists: PropTypes.object.isRequired,
   songs: PropTypes.object.isRequired,
-  users: PropTypes.object.isRequired,
+  users: PropTypes.object.isRequired
 };
 
 class SongCards extends Component {
@@ -29,7 +29,7 @@ class SongCards extends Component {
       end: items.length,
       paddingBottom: 0,
       paddingTop: 0,
-      start: 0,
+      start: 0
     };
   }
 
@@ -51,7 +51,7 @@ class SongCards extends Component {
         end,
         paddingBottom,
         paddingTop,
-        start,
+        start
       });
     }
   }
@@ -74,7 +74,7 @@ class SongCards extends Component {
         end,
         paddingBottom,
         paddingTop,
-        start,
+        start
       });
     }
   }
@@ -113,7 +113,7 @@ class SongCards extends Component {
       end,
       paddingBottom,
       paddingTop,
-      start,
+      start
     };
   }
 
@@ -132,7 +132,7 @@ class SongCards extends Component {
       playlists,
       playingSongId,
       songs,
-      users,
+      users
     } = this.props;
     const items = playlist in playlists ? playlists[playlist].items : [];
     const result = [];

@@ -11,7 +11,7 @@ const propTypes = {
   authedPlaylists: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   navigator: PropTypes.object.isRequired,
-  songs: PropTypes.object.isRequired,
+  songs: PropTypes.object.isRequired
 };
 
 class Nav extends Component {

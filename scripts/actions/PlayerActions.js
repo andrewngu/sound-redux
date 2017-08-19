@@ -4,14 +4,14 @@ import { CHANGE_TYPES } from '../constants/SongConstants';
 export function changeCurrentTime(time) {
   return {
     type: types.CHANGE_CURRENT_TIME,
-    time,
+    time
   };
 }
 
 export function changePlayingSong(songIndex) {
   return {
     type: types.CHANGE_PLAYING_SONG,
-    songIndex,
+    songIndex
   };
 }
 
@@ -24,7 +24,7 @@ export function changeSelectedPlaylists(playlists, playlist) {
 
   return {
     type: types.CHANGE_SELECTED_PLAYLISTS,
-    playlists,
+    playlists
   };
 }
 
@@ -74,6 +74,6 @@ export function playSong(playlist, songIndex) {
 export function toggleIsPlaying(isPlaying) {
   return {
     type: types.TOGGLE_IS_PLAYING,
-    isPlaying,
+    isPlaying
   };
 }

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 const propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 class Popover extends Component {
@@ -36,7 +36,7 @@ class Popover extends Component {
 
     if (!node.contains(e.target)) {
       this.setState({
-        isOpen: false,
+        isOpen: false
       });
     }
   }

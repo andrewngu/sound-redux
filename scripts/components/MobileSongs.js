@@ -9,7 +9,7 @@ const propTypes = {
   playlist: PropTypes.string.isRequired,
   playlists: PropTypes.object.isRequired,
   songs: PropTypes.object.isRequired,
-  users: PropTypes.object.isRequired,
+  users: PropTypes.object.isRequired
 };
 
 class MobileSongs extends Component {
@@ -39,7 +39,7 @@ class MobileSongs extends Component {
       playlist,
       playlists,
       songs,
-      users,
+      users
     } = this.props;
 
     return (

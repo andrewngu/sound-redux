@@ -8,7 +8,7 @@ const propTypes = {
   className: PropTypes.string,
   dispatch: PropTypes.func.isRequired,
   route: PropTypes.object.isRequired,
-  title: PropTypes.string,
+  title: PropTypes.string
 };
 
 class Link extends Component {

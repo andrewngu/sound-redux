@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {
   changeCurrentTime,
   changeSong,
-  toggleIsPlaying,
+  toggleIsPlaying
 } from '../actions/PlayerActions';
 import { CHANGE_TYPES, IMAGE_SIZES } from '../constants/SongConstants';
 import { formatSongTitle, formatStreamUrl } from '../utils/FormatUtils';
@@ -14,7 +14,7 @@ const propTypes = {
   playingSongId: PropTypes.number,
   player: PropTypes.object.isRequired,
   songs: PropTypes.object.isRequired,
-  users: PropTypes.object.isRequired,
+  users: PropTypes.object.isRequired
 };
 
 class MobilePlayerContent extends Component {
@@ -33,7 +33,7 @@ class MobilePlayerContent extends Component {
     this.state = {
       duration: 0,
       repeat: false,
-      shuffle: false,
+      shuffle: false
     };
   }
 
@@ -103,7 +103,7 @@ class MobilePlayerContent extends Component {
   handleLoadedMetadata() {
     const audioElement = this.audio;
     this.setState({
-      duration: Math.floor(audioElement.duration),
+      duration: Math.floor(audioElement.duration)
     });
   }
 
@@ -111,7 +111,7 @@ class MobilePlayerContent extends Component {
     const { dispatch } = this.props;
     dispatch(changeCurrentTime(0));
     this.setState({
-      duration: 0,
+      duration: 0
     });
   }
 

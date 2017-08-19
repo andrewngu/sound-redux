@@ -6,7 +6,7 @@ import { songSchema } from '../constants/Schemas';
 import {
   constructSongUrl,
   constructSongCommentsUrl,
-  constructUserSongsUrl,
+  constructUserSongsUrl
 } from '../utils/SongUtils';
 
 function fetchRelatedSongs(userId, songTitle) {
@@ -85,7 +85,7 @@ function fetchSongData(songId, userId, songTitle) {
 export function receiveSong(entities) {
   return {
     type: types.RECEIVE_SONG,
-    entities,
+    entities
   };
 }
 
@@ -95,10 +95,10 @@ function receiveSongComments(songId, comments) {
     entities: {
       songs: {
         [songId]: {
-          comments,
-        },
-      },
-    },
+          comments
+        }
+      }
+    }
   };
 }
 
@@ -117,6 +117,6 @@ function receiveSongPre(songId, entities) {
 function requestSong(songId) {
   return {
     type: types.REQUEST_SONG,
-    songId,
+    songId
   };
 }

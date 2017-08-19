@@ -26,7 +26,7 @@ function mapStateToProps(state) {
     playlists,
     songId,
     songs,
-    users,
+    users
   };
 }
 

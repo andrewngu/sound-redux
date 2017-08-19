@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   modal,
   navigator,
   player,
-  playlists,
+  playlists
 });
 
 export default rootReducer;

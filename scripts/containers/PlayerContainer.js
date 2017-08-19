@@ -7,7 +7,7 @@ import { getPlayingSongId } from '../utils/PlayerUtils';
 
 const propTypes = {
   isMobile: PropTypes.bool,
-  playingSongId: PropTypes.number,
+  playingSongId: PropTypes.number
 };
 
 class PlayerContainer extends Component {
@@ -39,7 +39,7 @@ function mapStateToProps(state) {
     playingSongId,
     playlists,
     songs,
-    users,
+    users
   };
 }
 

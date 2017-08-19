@@ -9,7 +9,7 @@ const propTypes = {
   className: PropTypes.string,
   count: PropTypes.number,
   dispatch: PropTypes.func.isRequired,
-  songId: PropTypes.number,
+  songId: PropTypes.number
 };
 
 class SongHeartCount extends Component {

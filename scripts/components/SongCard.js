@@ -80,7 +80,7 @@ SongCard.propTypes = {
   isActive: PropTypes.bool.isRequired,
   playSong: PropTypes.func.isRequired,
   song: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
 };
 
 export default SongCard;

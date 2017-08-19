@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Modal from '../components/Modal';
 
 const propTypes = {
-  modal: PropTypes.string,
+  modal: PropTypes.string
 };
 
 class ModalContainer extends Component {

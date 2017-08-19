@@ -4,7 +4,7 @@ import { addNewStreamSongsToPlaylist } from '../actions/AuthedActions';
 
 const propTypes = {
   authed: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired
 };
 
 class MePromptStream extends Component {

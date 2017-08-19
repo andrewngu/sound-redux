@@ -6,7 +6,7 @@ import { getImageUrl } from '../utils/SongUtils';
 
 const propTypes = {
   comment: PropTypes.object.isRequired,
-  i: PropTypes.number.isRequired,
+  i: PropTypes.number.isRequired
 };
 
 class Comment extends Component {

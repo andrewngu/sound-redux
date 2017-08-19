@@ -10,7 +10,7 @@ const propTypes = {
   authed: PropTypes.object.isRequired,
   authedPlaylists: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  navigator: PropTypes.object.isRequired,
+  navigator: PropTypes.object.isRequired
 };
 
 class MobileNav extends Component {
@@ -22,7 +22,7 @@ class MobileNav extends Component {
     this.logout = this.logout.bind(this);
     this.state = {
       isGenreMenuOpen: false,
-      isUserMenuOpen: false,
+      isUserMenuOpen: false
     };
   }
 
@@ -43,7 +43,7 @@ class MobileNav extends Component {
 
     const playlistDetails = {
       playlistNames,
-      playlistIds,
+      playlistIds
     };
 
     return playlistDetails;
@@ -125,7 +125,7 @@ class MobileNav extends Component {
           height: spring(
             isGenreMenuOpen ? (GENRES.length - 1) * 50 : 0,
             presets.stiff
-          ),
+          )
         }}
       >
         {({ height }) =>

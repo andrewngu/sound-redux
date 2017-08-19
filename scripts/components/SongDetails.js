@@ -8,7 +8,7 @@ const propTypes = {
   songId: PropTypes.number,
   title: PropTypes.string.isRequired,
   userId: PropTypes.number,
-  username: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired
 };
 
 class SongDetails extends Component {

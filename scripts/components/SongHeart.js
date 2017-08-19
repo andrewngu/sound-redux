@@ -8,7 +8,7 @@ const propTypes = {
   className: PropTypes.string,
   dispatch: PropTypes.func.isRequired,
   isLiked: PropTypes.bool,
-  songId: PropTypes.number,
+  songId: PropTypes.number
 };
 
 class SongHeart extends Component {

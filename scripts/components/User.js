@@ -26,7 +26,7 @@ const propTypes = {
   songs: PropTypes.object.isRequired,
   sticky: PropTypes.bool.isRequired,
   userId: PropTypes.number,
-  users: PropTypes.object.isRequired,
+  users: PropTypes.object.isRequired
 };
 
 class User extends Component {
@@ -104,7 +104,7 @@ class User extends Component {
       playlists,
       songs,
       userId,
-      users,
+      users
     } = this.props;
     const user = users[userId];
     const playlist = user.username + USER_PLAYLIST_SUFFIX;

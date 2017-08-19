@@ -9,7 +9,7 @@ const COMMENTS_REFRESH_RATE = 10;
 const propTypes = {
   comments: PropTypes.array.isRequired,
   height: PropTypes.number.isRequired,
-  isActive: PropTypes.bool.isRequired,
+  isActive: PropTypes.bool.isRequired
 };
 
 class Comments extends Component {
@@ -19,7 +19,7 @@ class Comments extends Component {
     this.state = {
       className: null,
       currentTime: 0,
-      timedComments: false,
+      timedComments: false
     };
   }
 
@@ -36,14 +36,14 @@ class Comments extends Component {
     ) {
       this.setState(
         {
-          className: 'animate-out',
+          className: 'animate-out'
         },
         () => {
           setTimeout(
             () =>
               this.setState({
                 className: null,
-                currentTime: nextProps.currentTime,
+                currentTime: nextProps.currentTime
               }),
             200
           );
@@ -62,7 +62,7 @@ class Comments extends Component {
 
   toggleTimedComments() {
     this.setState({
-      timedComments: !this.state.timedComments,
+      timedComments: !this.state.timedComments
     });
   }
 

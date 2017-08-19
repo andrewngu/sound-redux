@@ -7,7 +7,7 @@ import Songs from '../components/Songs';
 import { getPlayingSongId } from '../utils/PlayerUtils';
 
 const propTypes = {
-  isMobile: PropTypes.bool,
+  isMobile: PropTypes.bool
 };
 
 class SongsContainer extends Component {
@@ -46,7 +46,7 @@ function mapStateToProps(state) {
     scrollFunc: fetchSongsIfNeeded.bind(null, playlist),
     songs,
     time,
-    users,
+    users
   };
 }
 
