@@ -28,7 +28,9 @@ class MePromptStream extends Component {
 
     return (
       <a className="me-prompt-link" href="#" onClick={this.handleClick}>
-        {`Load ${newStreamSongsLen} new song${(newStreamSongsLen !== 1 ? 's' : '')}`}
+        {`Load ${newStreamSongsLen} new song${newStreamSongsLen !== 1
+          ? 's'
+          : ''}`}
       </a>
     );
   }

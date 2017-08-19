@@ -73,7 +73,16 @@ class Song extends Component {
   }
 
   renderSongs() {
-    const { authed, dispatch, player, playingSongId, playlists, songId, songs, users } = this.props;
+    const {
+      authed,
+      dispatch,
+      player,
+      playingSongId,
+      playlists,
+      songId,
+      songs,
+      users,
+    } = this.props;
     const song = songs[songId];
     const playlist = song.title + SONG_PLAYLIST_SUFFIX;
     const relatedSongs = playlist in playlists ? playlists[playlist] : {};
@@ -123,7 +132,16 @@ class Song extends Component {
   }
 
   render() {
-    const { authed, dispatch, playingSongId, player, songId, songs, sticky, users } = this.props;
+    const {
+      authed,
+      dispatch,
+      playingSongId,
+      player,
+      songId,
+      songs,
+      sticky,
+      users,
+    } = this.props;
     const song = songs[songId];
     if (!song) {
       return <Spinner />;
@@ -139,7 +157,7 @@ class Song extends Component {
         <div className="content">
           <div className="grid">
             <div className="col-7-10">
-              <div className={`song card ${(isActive ? ' active' : '')}`}>
+              <div className={`song card ${isActive ? ' active' : ''}`}>
                 <div className="song-main">
                   <div
                     className="song__image"
@@ -155,7 +173,11 @@ class Song extends Component {
                       <div className="song-user">
                         <div
                           className="song-user-image"
-                          style={{ backgroundImage: `url(${getImageUrl(user.avatar_url)})` }}
+                          style={{
+                            backgroundImage: `url(${getImageUrl(
+                              user.avatar_url
+                            )})`,
+                          }}
                         />
                         <Link
                           className="song-username"
@@ -168,17 +190,25 @@ class Song extends Component {
                       <div className="song-stats">
                         <SongHeartCount
                           authed={authed}
-                          count={song.likes_count ? song.likes_count : song.favoritings_count}
+                          count={
+                            song.likes_count
+                              ? song.likes_count
+                              : song.favoritings_count
+                          }
                           dispatch={dispatch}
                           songId={song.id}
                         />
                         <div className="song-stat">
                           <i className="icon ion-play" />
-                          <span>{addCommas(song.playback_count)}</span>
+                          <span>
+                            {addCommas(song.playback_count)}
+                          </span>
                         </div>
                         <div className="song-stat">
                           <i className="icon ion-chatbubble" />
-                          <span>{addCommas(song.comment_count)}</span>
+                          <span>
+                            {addCommas(song.comment_count)}
+                          </span>
                         </div>
                       </div>
                       <div className="song-description">
@@ -201,7 +231,7 @@ class Song extends Component {
               {this.renderSongs()}
             </div>
             <div className="col-3-10">
-              <div className={`sidebar ${(sticky ? ' sticky' : '')}`}>
+              <div className={`sidebar ${sticky ? ' sticky' : ''}`}>
                 {this.renderComments()}
               </div>
             </div>

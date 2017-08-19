@@ -31,7 +31,10 @@ class Songs extends Component {
   componentWillReceiveProps(nextProps) {
     const { dispatch, playlist, playlists } = this.props;
     if (playlist !== nextProps.playlist) {
-      if (!(nextProps.playlist in playlists) || playlists[nextProps.playlist].items.length === 0) {
+      if (
+        !(nextProps.playlist in playlists) ||
+        playlists[nextProps.playlist].items.length === 0
+      ) {
         dispatch(fetchSongsIfNeeded(nextProps.playlist));
       }
     }
@@ -52,8 +55,13 @@ class Songs extends Component {
     } = this.props;
 
     return (
-      <div className={`songs ${(sticky ? 'sticky' : '')}`}>
-        <Toolbar dispatch={dispatch} playlist={playlist} sticky={sticky} time={time} />
+      <div className={`songs ${sticky ? 'sticky' : ''}`}>
+        <Toolbar
+          dispatch={dispatch}
+          playlist={playlist}
+          sticky={sticky}
+          time={time}
+        />
         <div className="container">
           <SongCards
             authed={authed}

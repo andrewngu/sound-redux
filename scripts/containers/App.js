@@ -55,7 +55,10 @@ class App extends Component {
     const { height, isMobile, width } = this.props;
     if (isMobile) {
       return (
-        <div className="mobile" style={{ height: `${height}px`, width: `${width}px` }}>
+        <div
+          className="mobile"
+          style={{ height: `${height}px`, width: `${width}px` }}
+        >
           <PlayerContainer />
           {this.renderContent()}
           <NavContainer />
@@ -88,6 +91,5 @@ function mapStateToProps(state) {
     width,
   };
 }
-
 
 export default connect(mapStateToProps)(App);

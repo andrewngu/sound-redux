@@ -5,13 +5,16 @@ import { GENRES_MAP, IMAGE_SIZES } from '../constants/SongConstants';
 export function constructUrl(cat) {
   const catArr = cat.split(' - ');
   let category = catArr[0];
-  let result = '//api.soundcloud.com/tracks?linked_partitioning=1&client_id=' +
+  let result =
+    '//api.soundcloud.com/tracks?linked_partitioning=1&client_id=' +
     `${CLIENT_ID}&limit=50&offset=0`;
 
   if (category in GENRES_MAP) {
-    if (category !== 'house'
-    && category !== 'trance'
-    && category !== 'dubstep') {
+    if (
+      category !== 'house' &&
+      category !== 'trance' &&
+      category !== 'dubstep'
+    ) {
       category = `${category} house`;
     }
 
@@ -21,7 +24,9 @@ export function constructUrl(cat) {
   }
 
   if (catArr.length > 1) {
-    const formattedTime = moment().subtract(catArr[1], 'days').format('YYYY-MM-DD%2012:00:00');
+    const formattedTime = moment()
+      .subtract(catArr[1], 'days')
+      .format('YYYY-MM-DD%2012:00:00');
     result += `&created_at[from]=${formattedTime}`;
   }
 
@@ -44,7 +49,9 @@ export function fetchWaveformData(waveformUrl) {
   return fetch(waveformUrl)
     .then(response => response.json())
     .then(json => json.samples)
-    .catch(err => { throw err; });
+    .catch(err => {
+      throw err;
+    });
 }
 
 export function getImageUrl(s, size = null) {

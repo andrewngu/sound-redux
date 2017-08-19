@@ -40,10 +40,15 @@ export function changeSong(changeType) {
     } else if (changeType === CHANGE_TYPES.PREV) {
       newSongIndex = currentSongIndex - 1;
     } else if (changeType === CHANGE_TYPES.SHUFFLE) {
-      newSongIndex = Math.floor((Math.random() * playlists[currentPlaylist].items.length - 1) + 0);
+      newSongIndex = Math.floor(
+        Math.random() * playlists[currentPlaylist].items.length - 1 + 0
+      );
     }
 
-    if (newSongIndex >= playlists[currentPlaylist].items.length || newSongIndex < 0) {
+    if (
+      newSongIndex >= playlists[currentPlaylist].items.length ||
+      newSongIndex < 0
+    ) {
       return null;
     }
 

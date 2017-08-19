@@ -71,20 +71,33 @@ class Playlist extends Component {
     const currentPlaylist = selectedPlaylists[selectedPlaylists.length - 1];
     const shownPlaylistIndex = this.getShownPlaylistIndex();
     const shownPlaylist = this.getShownPlaylist(shownPlaylistIndex);
-    const stopPropagationFunc = e => { e.stopPropagation(); };
+    const stopPropagationFunc = e => {
+      e.stopPropagation();
+    };
 
-    const prevPlaylistFunc = this.changeShownPlaylistIndex.bind(this, shownPlaylistIndex - 1);
+    const prevPlaylistFunc = this.changeShownPlaylistIndex.bind(
+      this,
+      shownPlaylistIndex - 1
+    );
     const isFirstPlaylist = shownPlaylistIndex === 0;
     const isLastPlaylist = shownPlaylistIndex === selectedPlaylists.length - 1;
-    const nextPlaylistFunc = this.changeShownPlaylistIndex.bind(this, shownPlaylistIndex + 1);
+    const nextPlaylistFunc = this.changeShownPlaylistIndex.bind(
+      this,
+      shownPlaylistIndex + 1
+    );
 
     const items = playlists[shownPlaylist].items.map((songId, i) => {
       const song = songs[songId];
-      const isActiveSong = this.isActiveSong(currentPlaylist, currentSongIndex, i, shownPlaylist);
+      const isActiveSong = this.isActiveSong(
+        currentPlaylist,
+        currentSongIndex,
+        i,
+        shownPlaylist
+      );
       const playSongFunc = this.playSong.bind(this, shownPlaylist, i);
       return (
         <li
-          className={`playlist-song ${(isActiveSong ? ' active' : '')}`}
+          className={`playlist-song ${isActiveSong ? ' active' : ''}`}
           key={`${song.id}-${i}`}
           onClick={playSongFunc}
         >
@@ -93,7 +106,9 @@ class Playlist extends Component {
             className="playlist-song-image"
             src={getImageUrl(song.artwork_url)}
           />
-          <div className="playlist-song-title">{song.title}</div>
+          <div className="playlist-song-title">
+            {song.title}
+          </div>
         </li>
       );
     });
@@ -107,7 +122,9 @@ class Playlist extends Component {
       >
         <div className="playlist-header">
           <a
-            className={`playlist-header-button ${(isFirstPlaylist ? ' disabled' : '')}`}
+            className={`playlist-header-button ${isFirstPlaylist
+              ? ' disabled'
+              : ''}`}
             href="#"
             onClick={prevPlaylistFunc}
           >
@@ -117,7 +134,9 @@ class Playlist extends Component {
             {shownPlaylist.split('|')[0]}
           </div>
           <a
-            className={`playlist-header-button ${(isLastPlaylist ? ' disabled' : '')}`}
+            className={`playlist-header-button ${isLastPlaylist
+              ? ' disabled'
+              : ''}`}
             href="#"
             onClick={nextPlaylistFunc}
           >

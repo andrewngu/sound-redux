@@ -30,16 +30,25 @@ class Comments extends Component {
       return;
     }
 
-    if (nextProps.currentTime % COMMENTS_REFRESH_RATE === 0
-    || Math.abs(nextProps.currentTime - currentTime) > COMMENTS_REFRESH_RATE) {
-      this.setState({
-        className: 'animate-out',
-      }, () => {
-        setTimeout(() => this.setState({
-          className: null,
-          currentTime: nextProps.currentTime,
-        }), 200);
-      });
+    if (
+      nextProps.currentTime % COMMENTS_REFRESH_RATE === 0 ||
+      Math.abs(nextProps.currentTime - currentTime) > COMMENTS_REFRESH_RATE
+    ) {
+      this.setState(
+        {
+          className: 'animate-out',
+        },
+        () => {
+          setTimeout(
+            () =>
+              this.setState({
+                className: null,
+                currentTime: nextProps.currentTime,
+              }),
+            200
+          );
+        }
+      );
     }
   }
 
@@ -66,16 +75,23 @@ class Comments extends Component {
         .slice()
         .filter(song => {
           const songTime = song.timestamp / 1000;
-          return songTime >= currentTime && songTime < (currentTime + COMMENTS_REFRESH_RATE);
+          return (
+            songTime >= currentTime &&
+            songTime < currentTime + COMMENTS_REFRESH_RATE
+          );
         })
         .sort((a, b) => a.timestamp - b.timestamp)
-        .map((comment, i) => <Comment comment={comment} i={i} key={comment.id} />);
+        .map((comment, i) =>
+          <Comment comment={comment} i={i} key={comment.id} />
+        );
     }
 
     return comments
       .slice()
       .sort((a, b) => a.timestamp - b.timestamp)
-      .map((comment, i) => <Comment comment={comment} i={i} key={comment.id} />);
+      .map((comment, i) =>
+        <Comment comment={comment} i={i} key={comment.id} />
+      );
   }
 
   render() {
@@ -83,20 +99,12 @@ class Comments extends Component {
     const { className, timedComments } = this.state;
 
     return (
-      <div className={`comments${(isActive && timedComments ? ' timed' : '')}`}>
+      <div className={`comments${isActive && timedComments ? ' timed' : ''}`}>
         <div className="comments-header">
-          <div className="comments-header-title">
-            Comments
-          </div>
-          <Switch
-            isOn={timedComments}
-            toggleFunc={this.toggleTimedComments}
-          />
+          <div className="comments-header-title">Comments</div>
+          <Switch isOn={timedComments} toggleFunc={this.toggleTimedComments} />
         </div>
-        <SidebarContent
-          className={className}
-          height={height - 220}
-        >
+        <SidebarContent className={className} height={height - 220}>
           {this.renderComments()}
         </SidebarContent>
       </div>

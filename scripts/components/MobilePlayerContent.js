@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { changeCurrentTime, changeSong, toggleIsPlaying } from '../actions/PlayerActions';
+import {
+  changeCurrentTime,
+  changeSong,
+  toggleIsPlaying,
+} from '../actions/PlayerActions';
 import { CHANGE_TYPES, IMAGE_SIZES } from '../constants/SongConstants';
 import { formatSongTitle, formatStreamUrl } from '../utils/FormatUtils';
 import { getImageUrl } from '../utils/SongUtils';
@@ -36,7 +40,11 @@ class MobilePlayerContent extends Component {
   componentDidMount() {
     const audioElement = this.audio;
     audioElement.addEventListener('ended', this.handleEnded, false);
-    audioElement.addEventListener('loadedmetadata', this.handleLoadedMetadata, false);
+    audioElement.addEventListener(
+      'loadedmetadata',
+      this.handleLoadedMetadata,
+      false
+    );
     audioElement.addEventListener('loadstart', this.handleLoadStart, false);
     audioElement.addEventListener('pause', this.handlePause, false);
     audioElement.addEventListener('play', this.handlePlay, false);
@@ -45,7 +53,10 @@ class MobilePlayerContent extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.playingSongId && prevProps.playingSongId === this.props.playingSongId) {
+    if (
+      prevProps.playingSongId &&
+      prevProps.playingSongId === this.props.playingSongId
+    ) {
       return;
     }
 
@@ -55,11 +66,19 @@ class MobilePlayerContent extends Component {
   componentWillUnmount() {
     const audioElement = this.audio;
     audioElement.removeEventListener('ended', this.handleEnded, false);
-    audioElement.removeEventListener('loadedmetadata', this.handleLoadedMetadata, false);
+    audioElement.removeEventListener(
+      'loadedmetadata',
+      this.handleLoadedMetadata,
+      false
+    );
     audioElement.removeEventListener('loadstart', this.handleLoadStart, false);
     audioElement.removeEventListener('pause', this.handlePause, false);
     audioElement.removeEventListener('play', this.handlePlay, false);
-    audioElement.removeEventListener('timeupdate', this.handleTimeUpdate, false);
+    audioElement.removeEventListener(
+      'timeupdate',
+      this.handleTimeUpdate,
+      false
+    );
   }
 
   changeSong(changeType, e) {
@@ -156,13 +175,17 @@ class MobilePlayerContent extends Component {
     const nextFunc = this.changeSong.bind(this, CHANGE_TYPES.NEXT);
 
     return (
-      <div className="mobile-player" style={{ backgroundImage: `url(${image})` }}>
+      <div
+        className="mobile-player"
+        style={{ backgroundImage: `url(${image})` }}
+      >
         <audio
           id="audio"
-          ref={(node) => { this.audio = node; }}
+          ref={node => {
+            this.audio = node;
+          }}
           src={formatStreamUrl(song.stream_url)}
-        >
-        </audio>
+        />
         <div className="mobile-player-bg" />
         <div className="mobile-player-extras" />
         <div className="mobile-player-content fade-in">
@@ -175,12 +198,8 @@ class MobilePlayerContent extends Component {
             </div>
           </div>
           <div className="mobile-player-controls">
-            <a
-              className="mobile-player-button"
-              href="#"
-              onClick={prevFunc}
-            >
-              <i className="icon ion-ios-rewind"></i>
+            <a className="mobile-player-button" href="#" onClick={prevFunc}>
+              <i className="icon ion-ios-rewind" />
             </a>
             <a
               className="mobile-player-button"
@@ -189,11 +208,7 @@ class MobilePlayerContent extends Component {
             >
               <i className={isPlaying ? 'ion-ios-pause' : 'ion-ios-play'} />
             </a>
-            <a
-              className="mobile-player-button"
-              href="#"
-              onClick={nextFunc}
-            >
+            <a className="mobile-player-button" href="#" onClick={nextFunc}>
               <i className="ion-ios-fastforward" />
             </a>
           </div>

@@ -31,7 +31,6 @@ class MobileMe extends Component {
     }
   }
 
-
   render() {
     const { dispatch, playlists, songs, users, playingSongId } = this.props;
     const playlist = this.getPlaylist() + AUTHED_PLAYLIST_SUFFIX;

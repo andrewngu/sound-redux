@@ -23,14 +23,24 @@ class MobileSongs extends Component {
   componentWillReceiveProps(nextProps) {
     const { dispatch, playlist, playlists } = this.props;
     if (playlist !== nextProps.playlist) {
-      if (!(nextProps.playlist in playlists) || playlists[nextProps.playlist].items.length === 0) {
+      if (
+        !(nextProps.playlist in playlists) ||
+        playlists[nextProps.playlist].items.length === 0
+      ) {
         dispatch(fetchSongsIfNeeded(nextProps.playlist));
       }
     }
   }
 
   render() {
-    const { dispatch, playingSongId, playlist, playlists, songs, users } = this.props;
+    const {
+      dispatch,
+      playingSongId,
+      playlist,
+      playlists,
+      songs,
+      users,
+    } = this.props;
 
     return (
       <MobileSongList

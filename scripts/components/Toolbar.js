@@ -26,7 +26,9 @@ class Toolbar extends Component {
 
       return (
         <Link
-          className={`toolbar-item toolbar-genre ${(g === genre ? 'active' : '')}`}
+          className={`toolbar-item toolbar-genre ${g === genre
+            ? 'active'
+            : ''}`}
           dispatch={dispatch}
           key={g}
           route={route}
@@ -46,13 +48,13 @@ class Toolbar extends Component {
         path: ['songs'],
         query: {
           q: genre,
-          t: (t === time ? null : t),
+          t: t === time ? null : t,
         },
       };
 
       return (
         <Link
-          className={`toolbar-time ${(t === time ? 'active' : '')}`}
+          className={`toolbar-time ${t === time ? 'active' : ''}`}
           dispatch={dispatch}
           key={t}
           route={route}

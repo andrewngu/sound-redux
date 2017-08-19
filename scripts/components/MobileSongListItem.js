@@ -15,7 +15,7 @@ class MobileSongListItem extends Component {
 
     return (
       <a
-        className={`mobile-song-list-item ${(isActive ? ' active' : '')}`}
+        className={`mobile-song-list-item ${isActive ? ' active' : ''}`}
         href="#"
         onClick={playSong}
       >

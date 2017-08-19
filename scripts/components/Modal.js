@@ -25,7 +25,7 @@ class Modal extends Component {
       case 'login':
         return <ModalLogin />;
       default:
-        return <div></div>;
+        return <div />;
     }
   }
 

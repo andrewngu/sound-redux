@@ -25,9 +25,11 @@ class Nav extends Component {
     const { authedPlaylists, navigator } = this.props;
     const { path } = navigator.route;
 
-    if (path[0] === 'me'
-    && path[1] === 'playlists'
-    && path[2] in authedPlaylists) {
+    if (
+      path[0] === 'me' &&
+      path[1] === 'playlists' &&
+      path[2] in authedPlaylists
+    ) {
       return authedPlaylists[path[2]].title;
     }
 
@@ -48,14 +50,16 @@ class Nav extends Component {
 
   renderArtworks(playlist) {
     const { songs } = this.props;
-    return playlist.tracks.slice(0, 10).map(songId =>
-      <img
-        alt="song artwork"
-        className="nav-playlist-image"
-        key={songId}
-        src={getImageUrl(songs[songId].artwork_url)}
-      />
-    );
+    return playlist.tracks
+      .slice(0, 10)
+      .map(songId =>
+        <img
+          alt="song artwork"
+          className="nav-playlist-image"
+          key={songId}
+          src={getImageUrl(songs[songId].artwork_url)}
+        />
+      );
   }
 
   renderNavUser() {
@@ -70,13 +74,15 @@ class Nav extends Component {
               className="nav-authed-image"
               src={getImageUrl(authed.user.avatar_url)}
             />
-            <i className="icon ion-chevron-down"></i>
-            <i className="icon ion-chevron-up"></i>
+            <i className="icon ion-chevron-down" />
+            <i className="icon ion-chevron-up" />
           </div>
           <div className="nav-user-popover popover-content">
             <ul className="nav-user-popover-list">
               <li className="nav-user-popover-item">
-                <a href="#" onClick={this.logout}>Log Out</a>
+                <a href="#" onClick={this.logout}>
+                  Log Out
+                </a>
               </li>
             </ul>
           </div>
@@ -87,9 +93,9 @@ class Nav extends Component {
     return (
       <Popover className="nav-user">
         <div className="nav-user-link">
-          <i className="icon ion-person"></i>
-          <i className="icon ion-chevron-down"></i>
-          <i className="icon ion-chevron-up"></i>
+          <i className="icon ion-person" />
+          <i className="icon ion-chevron-down" />
+          <i className="icon ion-chevron-up" />
         </div>
         <div className="nav-user-popover popover-content">
           <ul className="nav-user-popover-list">
@@ -114,7 +120,9 @@ class Nav extends Component {
     return (
       <div className="nav-nav-item">
         <Link
-          className={`nav-nav-user-link ${(route.path[1] === 'likes' ? 'active' : '')}`}
+          className={`nav-nav-user-link ${route.path[1] === 'likes'
+            ? 'active'
+            : ''}`}
           dispatch={dispatch}
           route={{ path: ['me', 'likes'] }}
         >
@@ -135,17 +143,20 @@ class Nav extends Component {
     return (
       <div className="nav-nav-item">
         <Link
-          className={`nav-nav-user-link ${(route.path[1] === 'stream' ? 'active' : '')}`}
+          className={`nav-nav-user-link ${route.path[1] === 'stream'
+            ? 'active'
+            : ''}`}
           dispatch={dispatch}
           route={{ path: ['me', 'stream'] }}
         >
-          {hasNewStreamSongs ? <div className="nav-nav-user-link-indicator" /> : null}
+          {hasNewStreamSongs
+            ? <div className="nav-nav-user-link-indicator" />
+            : null}
           <span className="nav-nav-user-link-text">stream</span>
         </Link>
       </div>
     );
   }
-
 
   renderPlaylists() {
     const { authed, authedPlaylists, dispatch } = this.props;
@@ -180,10 +191,16 @@ class Nav extends Component {
 
     return (
       <Popover className="nav-nav-item nav-playlists">
-        <div className={`nav-nav-user-link ${(path[1] === 'playlists' ? 'active' : '')}`}>
-          <span className="nav-nav-user-link-text">{playlist}</span>
-          <i className="icon ion-chevron-down"></i>
-          <i className="icon ion-chevron-up"></i>
+        <div
+          className={`nav-nav-user-link ${path[1] === 'playlists'
+            ? 'active'
+            : ''}`}
+        >
+          <span className="nav-nav-user-link-text">
+            {playlist}
+          </span>
+          <i className="icon ion-chevron-down" />
+          <i className="icon ion-chevron-up" />
         </div>
         <div className="nav-playlists-popover popover-content">
           {this.renderPlaylists()}

@@ -38,9 +38,7 @@ class UserCard extends Component {
           <div className="user-card-followers-count">
             {addCommas(user.followers_count)}
           </div>
-          <div className="user-card-subtitle">
-            Followers
-          </div>
+          <div className="user-card-subtitle">Followers</div>
         </div>
       </div>
     );

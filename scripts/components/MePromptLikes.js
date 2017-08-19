@@ -25,8 +25,9 @@ class MePromptLikes extends Component {
   renderLikesPrompt() {
     const { authed, playlists } = this.props;
     const { items } = playlists[LIKES_PLAYLIST_KEY];
-    const likedItems = Object.keys(authed.likes)
-      .filter(songId => authed.likes[songId] === 1);
+    const likedItems = Object.keys(authed.likes).filter(
+      songId => authed.likes[songId] === 1
+    );
 
     const countDiff = items.length - likedItems.length;
     if (countDiff === 0) {
@@ -35,7 +36,7 @@ class MePromptLikes extends Component {
 
     return (
       <a className="me-prompt-link" href="#" onClick={this.handleClick}>
-        {`Remove ${countDiff} unliked song${(countDiff === 1 ? '' : 's')}`}
+        {`Remove ${countDiff} unliked song${countDiff === 1 ? '' : 's'}`}
       </a>
     );
   }

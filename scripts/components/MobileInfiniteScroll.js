@@ -26,7 +26,7 @@ class MobileInfiniteScroll extends Component {
 
   onScroll() {
     const el = this.scroll;
-    if (el.scrollTop >= (el.scrollHeight - el.offsetHeight - 200)) {
+    if (el.scrollTop >= el.scrollHeight - el.offsetHeight - 200) {
       this.props.dispatch(this.props.scrollFunc());
     }
   }
@@ -35,7 +35,9 @@ class MobileInfiniteScroll extends Component {
     return (
       <div
         className={this.props.className}
-        ref={(node) => { this.scroll = node; }}
+        ref={node => {
+          this.scroll = node;
+        }}
       >
         {this.props.children}
       </div>

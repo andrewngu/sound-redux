@@ -51,8 +51,10 @@ class Popover extends Component {
 
     return (
       <div
-        ref={(node) => { this.popover = node; }}
-        className={`${className} popover ${(isOpen ? ' open' : '')}`}
+        ref={node => {
+          this.popover = node;
+        }}
+        className={`${className} popover ${isOpen ? ' open' : ''}`}
         onClick={this.toggleIsOpen}
       >
         {children[0]}

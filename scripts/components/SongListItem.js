@@ -37,11 +37,19 @@ class SongListItem extends Component {
   }
 
   render() {
-    const { authed, dispatch, isActive, player, playSong, song, user } = this.props;
+    const {
+      authed,
+      dispatch,
+      isActive,
+      player,
+      playSong,
+      song,
+      user,
+    } = this.props;
     const image = getImageUrl(song.artwork_url, IMAGE_SIZES.LARGE);
 
     return (
-      <div className={`song-list-item ${(isActive ? ' active' : '')}`}>
+      <div className={`song-list-item ${isActive ? ' active' : ''}`}>
         <div
           className="song-list-item__image"
           onClick={playSong}
@@ -62,7 +70,9 @@ class SongListItem extends Component {
               <div className="song-list-item__user">
                 <div
                   className="song-list-item-user-image"
-                  style={{ backgroundImage: `url(${getImageUrl(user.avatar_url)})` }}
+                  style={{
+                    backgroundImage: `url(${getImageUrl(user.avatar_url)})`,
+                  }}
                 />
                 <Link
                   className="song-list-item-username"
@@ -81,11 +91,15 @@ class SongListItem extends Component {
                 />
                 <div className="song-list-item-stat">
                   <i className="icon ion-play" />
-                  <span>{addCommas(song.playback_count)}</span>
+                  <span>
+                    {addCommas(song.playback_count)}
+                  </span>
                 </div>
                 <div className="song-list-item-stat">
                   <i className="icon ion-chatbubble" />
-                  <span>{addCommas(song.comment_count)}</span>
+                  <span>
+                    {addCommas(song.comment_count)}
+                  </span>
                 </div>
               </div>
             </div>

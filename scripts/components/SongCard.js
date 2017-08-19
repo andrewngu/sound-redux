@@ -24,12 +24,17 @@ class SongCard extends Component {
 
   render() {
     const { authed, dispatch, isActive, song, user } = this.props;
-    const isLiked = Boolean(song.id in authed.likes && authed.likes[song.id] === 1);
+    const isLiked = Boolean(
+      song.id in authed.likes && authed.likes[song.id] === 1
+    );
     const image = getImageUrl(song.artwork_url, IMAGE_SIZES.LARGE);
 
     return (
-      <div className={`card song-card ${(isActive ? ' active' : '')}`}>
-        <div className="song-card-image" style={{ backgroundImage: `url(${image})` }}>
+      <div className={`card song-card ${isActive ? ' active' : ''}`}>
+        <div
+          className="song-card-image"
+          style={{ backgroundImage: `url(${image})` }}
+        >
           {this.renderTogglePlayButton()}
         </div>
         <div className="song-card-user clearfix">

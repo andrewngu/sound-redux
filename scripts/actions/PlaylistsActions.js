@@ -20,19 +20,27 @@ export function fetchSongs(url, playlist) {
         let futureUrl = null;
         if (json.next_href) {
           nextUrl = json.next_href;
-          nextUrl += (authed.accessToken ? `&oauth_token=${authed.accessToken}` : '');
+          nextUrl += authed.accessToken
+            ? `&oauth_token=${authed.accessToken}`
+            : '';
         }
 
         if (json.future_href) {
           futureUrl = json.future_href;
-          futureUrl += (authed.accessToken ? `&oauth_token=${authed.accessToken}` : '');
+          futureUrl += authed.accessToken
+            ? `&oauth_token=${authed.accessToken}`
+            : '';
         }
 
         const songs = json.collection
           .map(song => song.origin || song)
           .filter(song => {
             if (playlist in GENRES_MAP) {
-              return song.streamable && song.kind === 'track' && song.duration < 600000;
+              return (
+                song.streamable &&
+                song.kind === 'track' &&
+                song.duration < 600000
+              );
             }
 
             return song.streamable && song.kind === 'track';
@@ -47,9 +55,19 @@ export function fetchSongs(url, playlist) {
           return arr;
         }, []);
 
-        dispatch(receiveSongs(normalized.entities, result, playlist, nextUrl, futureUrl));
+        dispatch(
+          receiveSongs(
+            normalized.entities,
+            result,
+            playlist,
+            nextUrl,
+            futureUrl
+          )
+        );
       })
-      .catch(err => { throw err; });
+      .catch(err => {
+        throw err;
+      });
   };
 }
 
@@ -92,11 +110,14 @@ export function removeUnlikedSongsPre() {
     const { currentSongIndex } = player;
     const playingPlaylist = getPlayingPlaylist(player);
 
-    const likedSongs = playlists[LIKES_PLAYLIST_KEY].items
-      .filter(songId => songId in authed.likes && authed.likes[songId] === 1);
+    const likedSongs = playlists[LIKES_PLAYLIST_KEY].items.filter(
+      songId => songId in authed.likes && authed.likes[songId] === 1
+    );
 
-    if (playingPlaylist === LIKES_PLAYLIST_KEY
-    && currentSongIndex >= likedSongs.length) {
+    if (
+      playingPlaylist === LIKES_PLAYLIST_KEY &&
+      currentSongIndex >= likedSongs.length
+    ) {
       dispatch(changePlayingSong(null));
     }
 
@@ -120,5 +141,8 @@ function requestSongs(playlist) {
 
 function shouldFetchSongs(playlists, playlist) {
   const activePlaylist = playlists[playlist];
-  return !activePlaylist || !activePlaylist.isFetching && (activePlaylist.nextUrl !== null);
+  return (
+    !activePlaylist ||
+    (!activePlaylist.isFetching && activePlaylist.nextUrl !== null)
+  );
 }

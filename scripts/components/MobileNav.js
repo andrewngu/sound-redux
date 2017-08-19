@@ -98,7 +98,7 @@ class MobileNav extends Component {
             href="#"
             onClick={this.logout}
           >
-            {"Log Out"}
+            {'Log Out'}
           </a>
         </div>
       );
@@ -111,7 +111,7 @@ class MobileNav extends Component {
           href="#"
           onClick={this.login}
         >
-          {"Sign into SoundCloud"}
+          {'Sign into SoundCloud'}
           <i className="icon ion-person" />
         </a>
       </div>
@@ -121,7 +121,12 @@ class MobileNav extends Component {
   renderGenreMenu(isGenreMenuOpen, playlist) {
     return (
       <Motion
-        style={{ height: spring(isGenreMenuOpen ? (GENRES.length - 1) * 50 : 0, presets.stiff) }}
+        style={{
+          height: spring(
+            isGenreMenuOpen ? (GENRES.length - 1) * 50 : 0,
+            presets.stiff
+          ),
+        }}
       >
         {({ height }) =>
           <div
@@ -130,8 +135,7 @@ class MobileNav extends Component {
             style={{ height }}
           >
             {this.renderGenresTabs(playlist)}
-          </div>
-        }
+          </div>}
       </Motion>
     );
   }
@@ -141,7 +145,9 @@ class MobileNav extends Component {
     const tabs = ['stream', 'likes', ...playlistNames];
 
     return (
-      <Motion style={{ height: spring(isUserMenuOpen ? (4) * 50 : 0, presets.stiff) }}>
+      <Motion
+        style={{ height: spring(isUserMenuOpen ? 4 * 50 : 0, presets.stiff) }}
+      >
         {({ height }) =>
           <div
             className="mobile-nav-menu mobile-scrollable"
@@ -149,8 +155,7 @@ class MobileNav extends Component {
             style={{ height }}
           >
             {this.renderUserTabs(tabs)}
-          </div>
-        }
+          </div>}
       </Motion>
     );
   }
@@ -164,39 +169,38 @@ class MobileNav extends Component {
           onClick={this.toggleGenreMenuOpen}
         >
           {playlist}
-          <i className={isGenreMenuOpen ? 'ion-chevron-down' : 'ion-chevron-up'} />
+          <i
+            className={isGenreMenuOpen ? 'ion-chevron-down' : 'ion-chevron-up'}
+          />
         </a>
       </div>
     );
   }
 
   renderGenresTabs(playlist) {
-    return GENRES
-      .filter(genre => genre !== playlist)
-      .map(genre =>
-        <Link
-          className="mobile-nav-tab"
-          dispatch={this.props.dispatch}
-          key={genre}
-          route={{ path: ['songs'], query: { q: genre } }}
-        >
-          {genre}
-        </Link>
-      );
+    return GENRES.filter(genre => genre !== playlist).map(genre =>
+      <Link
+        className="mobile-nav-tab"
+        dispatch={this.props.dispatch}
+        key={genre}
+        route={{ path: ['songs'], query: { q: genre } }}
+      >
+        {genre}
+      </Link>
+    );
   }
 
   renderUserTabs(tabs) {
-    return tabs
-      .map(tab =>
-        <Link
-          className="mobile-nav-tab"
-          dispatch={this.props.dispatch}
-          key={tab}
-          route={{ path: ['me', tab] }}
-        >
-          {tab}
-        </Link>
-      );
+    return tabs.map(tab =>
+      <Link
+        className="mobile-nav-tab"
+        dispatch={this.props.dispatch}
+        key={tab}
+        route={{ path: ['me', tab] }}
+      >
+        {tab}
+      </Link>
+    );
   }
 
   renderPlaylist() {

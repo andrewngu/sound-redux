@@ -11,10 +11,7 @@ class Switch extends Component {
     const { isOn, toggleFunc } = this.props;
 
     return (
-      <div
-        className={`switch ${(isOn ? 'on' : '')}`}
-        onClick={toggleFunc}
-      >
+      <div className={`switch ${isOn ? 'on' : ''}`} onClick={toggleFunc}>
         <div className="switch-button" />
       </div>
     );

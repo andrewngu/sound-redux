@@ -12,7 +12,9 @@ const propTypes = {
 class Followings extends Component {
   renderFollowings() {
     const { dispatch, users } = this.props;
-    return users.map(user => <UserCard dispatch={dispatch} key={user.id} user={user} />);
+    return users.map(user =>
+      <UserCard dispatch={dispatch} key={user.id} user={user} />
+    );
   }
 
   render() {
@@ -29,7 +31,7 @@ class Followings extends Component {
           {this.renderFollowings()}
         </SidebarContent>
       </div>
-      );
+    );
   }
 }
 

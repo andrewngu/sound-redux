@@ -39,7 +39,11 @@ class SongHeart extends Component {
           <div className="song-heart-popover popover-content">
             <ul className="nav-user-popover-list">
               <li className="nav-user-popover-item">
-                <a href="#" className="button orange block" onClick={this.login}>
+                <a
+                  href="#"
+                  className="button orange block"
+                  onClick={this.login}
+                >
                   Sign into SoundCloud
                 </a>
               </li>
@@ -51,7 +55,7 @@ class SongHeart extends Component {
 
     return (
       <a
-        className={`song-heart ${className} ${(isLiked ? ' liked' : '')}`}
+        className={`song-heart ${className} ${isLiked ? ' liked' : ''}`}
         href="#"
         onClick={this.toggleLike}
       >

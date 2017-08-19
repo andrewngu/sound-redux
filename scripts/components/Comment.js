@@ -16,7 +16,7 @@ class Comment extends Component {
     const image = getImageUrl(user.avatar_url, IMAGE_SIZES.LARGE);
 
     return (
-      <div className="comment" style={{ animationDelay: `${(i * 50)}ms` }}>
+      <div className="comment" style={{ animationDelay: `${i * 50}ms` }}>
         <div
           className="comment-image"
           style={{ backgroundImage: `url(${image})` }}

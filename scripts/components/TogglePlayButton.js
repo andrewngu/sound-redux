@@ -29,7 +29,7 @@ class TogglePlayButton extends Component {
     const { isPlaying } = this.props;
     return (
       <div
-        className={`toggle-play-button active ${(isPlaying ? 'is-playing' : '')}`}
+        className={`toggle-play-button active ${isPlaying ? 'is-playing' : ''}`}
         onClick={this.togglePlay}
       >
         <i className="toggle-play-button-icon ion-radio-waves" />

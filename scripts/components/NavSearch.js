@@ -33,7 +33,9 @@ class NavSearch extends Component {
 
   handleSlashPress(e) {
     const keyCode = e.keyCode || e.which;
-    const isInsideInput = e.target.tagName.toLowerCase().match(/input|textarea/);
+    const isInsideInput = e.target.tagName
+      .toLowerCase()
+      .match(/input|textarea/);
     if (keyCode === 47 && !isInsideInput) {
       e.preventDefault();
       this.query.focus();
@@ -45,7 +47,9 @@ class NavSearch extends Component {
       <div className="nav-search">
         <i className="icon ion-search" />
         <input
-          ref={(node) => { this.query = node; }}
+          ref={node => {
+            this.query = node;
+          }}
           className="nav-search-input"
           placeholder="SEARCH"
           onKeyPress={this.handleOnKeyPress}

@@ -46,7 +46,8 @@ class Waveform extends Component {
     if (!isActive) {
       return;
     }
-    const seekPercent = (e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth;
+    const seekPercent =
+      (e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth;
     this.setState({ seekPercent });
   }
 
@@ -61,10 +62,7 @@ class Waveform extends Component {
       return (
         <div>
           <div className="waveform-play-highlight" />
-          <div
-            className="waveform-play-highlight-icon"
-            onClick={playSong}
-          >
+          <div className="waveform-play-highlight-icon" onClick={playSong}>
             <i className="icon ion-ios-play" />
           </div>
         </div>
@@ -74,8 +72,14 @@ class Waveform extends Component {
     if (seekPercent) {
       return (
         <div>
-          <div className="waveform-seek-line" style={{ width: `${seekPercent}%` }} />
-          <div className="waveform-seek-bar" style={{ width: `${seekPercent}%` }} />
+          <div
+            className="waveform-seek-line"
+            style={{ width: `${seekPercent}%` }}
+          />
+          <div
+            className="waveform-seek-bar"
+            style={{ width: `${seekPercent}%` }}
+          />
         </div>
       );
     }
@@ -118,7 +122,7 @@ class Waveform extends Component {
   render() {
     return (
       <div className="waveform">
-        <canvas className="waveform-canvas"></canvas>
+        <canvas className="waveform-canvas" />
         {this.renderWaveform()}
       </div>
     );

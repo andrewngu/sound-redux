@@ -68,10 +68,13 @@ class User extends Component {
       return null;
     }
 
-    const isFollowing = userId in authed.followings && authed.followings[userId] === 1;
+    const isFollowing =
+      userId in authed.followings && authed.followings[userId] === 1;
     return (
       <a
-        className={`user-follow-button button red-white small ${(isFollowing ? 'active' : '')}`}
+        className={`user-follow-button button red-white small ${isFollowing
+          ? 'active'
+          : ''}`}
         onClick={this.toggleFollow}
       >
         {isFollowing ? 'following' : 'follow'}
@@ -87,11 +90,22 @@ class User extends Component {
     }
 
     const followings = user.followings.map(followingId => users[followingId]);
-    return <Followings dispatch={dispatch} height={height} users={followings} />;
+    return (
+      <Followings dispatch={dispatch} height={height} users={followings} />
+    );
   }
 
   renderSongs() {
-    const { authed, dispatch, player, playingSongId, playlists, songs, userId, users } = this.props;
+    const {
+      authed,
+      dispatch,
+      player,
+      playingSongId,
+      playlists,
+      songs,
+      userId,
+      users,
+    } = this.props;
     const user = users[userId];
     const playlist = user.username + USER_PLAYLIST_SUFFIX;
     const userSongs = playlist in playlists ? playlists[playlist] : {};
@@ -148,7 +162,9 @@ class User extends Component {
       return <Spinner />;
     }
 
-    const image = user.avatar_url ? getImageUrl(user.avatar_url, IMAGE_SIZES.LARGE) : null;
+    const image = user.avatar_url
+      ? getImageUrl(user.avatar_url, IMAGE_SIZES.LARGE)
+      : null;
     return (
       <div className="container">
         <div className="content">
@@ -156,11 +172,7 @@ class User extends Component {
             <div className="col-7-10">
               <div className="user card">
                 <div className="user-detail">
-                  <img
-                    alt="user avatar"
-                    className="user-image"
-                    src={image}
-                  />
+                  <img alt="user avatar" className="user-image" src={image} />
                 </div>
                 <div className="user-info">
                   {this.renderFollowButton()}
@@ -186,7 +198,7 @@ class User extends Component {
               {this.renderSongs()}
             </div>
             <div className="col-3-10">
-              <div className={`sidebar ${(sticky ? 'sticky' : '')}`}>
+              <div className={`sidebar ${sticky ? 'sticky' : ''}`}>
                 {this.renderFollowings()}
               </div>
             </div>

@@ -43,7 +43,9 @@ function fetchUser(userId) {
         const normalized = normalize(json, userSchema);
         dispatch(receiveUserPre(userId, normalized.entities));
       })
-      .catch(err => { throw err; });
+      .catch(err => {
+        throw err;
+      });
   };
 }
 
@@ -52,7 +54,9 @@ function fetchUserFollowings(userId) {
     fetch(constructUserFollowingsUrl(userId))
       .then(response => response.json())
       .then(json => {
-        const users = json.collection.sort((a, b) => b.followers_count - a.followers_count);
+        const users = json.collection.sort(
+          (a, b) => b.followers_count - a.followers_count
+        );
         const normalized = normalize(users, arrayOf(userSchema));
         const entities = merge({}, normalized.entities, {
           users: {
@@ -62,7 +66,9 @@ function fetchUserFollowings(userId) {
 
         dispatch(receiveUserFollowings(entities));
       })
-      .catch(err => { throw err; });
+      .catch(err => {
+        throw err;
+      });
 }
 
 function fetchUserProfiles(userId) {
@@ -73,7 +79,9 @@ function fetchUserProfiles(userId) {
         const entities = { users: { [userId]: { profiles: json } } };
         dispatch(receiveUserProfiles(entities));
       })
-      .catch(err => { throw err; });
+      .catch(err => {
+        throw err;
+      });
 }
 
 function fetchUserTracks(userId, username) {
@@ -82,13 +90,18 @@ function fetchUserTracks(userId, username) {
       .then(response => response.json())
       .then(json => {
         const normalized = normalize(json, arrayOf(songSchema));
-        dispatch(receiveSongs(
-          normalized.entities,
-          normalized.result,
-          username + USER_PLAYLIST_SUFFIX, null
-        ));
+        dispatch(
+          receiveSongs(
+            normalized.entities,
+            normalized.result,
+            username + USER_PLAYLIST_SUFFIX,
+            null
+          )
+        );
       })
-      .catch(err => { throw err; });
+      .catch(err => {
+        throw err;
+      });
 }
 
 export function receiveUserFollowings(entities) {

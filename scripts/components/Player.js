@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { changeCurrentTime, changeSong, toggleIsPlaying } from '../actions/PlayerActions';
+import {
+  changeCurrentTime,
+  changeSong,
+  toggleIsPlaying,
+} from '../actions/PlayerActions';
 import Playlist from '../components/Playlist';
 import Popover from '../components/Popover';
 import SongDetails from '../components/SongDetails';
@@ -46,7 +50,9 @@ class Player extends Component {
     this.toggleRepeat = this.toggleRepeat.bind(this);
     this.toggleShuffle = this.toggleShuffle.bind(this);
 
-    const previousVolumeLevel = Number.parseFloat(LocalStorageUtils.get('volume'));
+    const previousVolumeLevel = Number.parseFloat(
+      LocalStorageUtils.get('volume')
+    );
     this.state = {
       activePlaylistIndex: null,
       currentTime: 0,
@@ -64,18 +70,29 @@ class Player extends Component {
 
     const audioElement = this.audio;
     audioElement.addEventListener('ended', this.handleEnded, false);
-    audioElement.addEventListener('loadedmetadata', this.handleLoadedMetadata, false);
+    audioElement.addEventListener(
+      'loadedmetadata',
+      this.handleLoadedMetadata,
+      false
+    );
     audioElement.addEventListener('loadstart', this.handleLoadStart, false);
     audioElement.addEventListener('pause', this.handlePause, false);
     audioElement.addEventListener('play', this.handlePlay, false);
     audioElement.addEventListener('timeupdate', this.handleTimeUpdate, false);
-    audioElement.addEventListener('volumechange', this.handleVolumeChange, false);
+    audioElement.addEventListener(
+      'volumechange',
+      this.handleVolumeChange,
+      false
+    );
     audioElement.volume = this.state.volume;
     audioElement.play();
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.playingSongId && prevProps.playingSongId === this.props.playingSongId) {
+    if (
+      prevProps.playingSongId &&
+      prevProps.playingSongId === this.props.playingSongId
+    ) {
       return;
     }
 
@@ -87,12 +104,24 @@ class Player extends Component {
 
     const audioElement = this.audio;
     audioElement.removeEventListener('ended', this.handleEnded, false);
-    audioElement.removeEventListener('loadedmetadata', this.handleLoadedMetadata, false);
+    audioElement.removeEventListener(
+      'loadedmetadata',
+      this.handleLoadedMetadata,
+      false
+    );
     audioElement.removeEventListener('loadstart', this.handleLoadStart, false);
     audioElement.removeEventListener('pause', this.handlePause, false);
     audioElement.removeEventListener('play', this.handlePlay, false);
-    audioElement.removeEventListener('timeupdate', this.handleTimeUpdate, false);
-    audioElement.removeEventListener('volumechange', this.handleVolumeChange, false);
+    audioElement.removeEventListener(
+      'timeupdate',
+      this.handleTimeUpdate,
+      false
+    );
+    audioElement.removeEventListener(
+      'volumechange',
+      this.handleVolumeChange,
+      false
+    );
   }
 
   bindSeekMouseEvents() {
@@ -112,7 +141,8 @@ class Player extends Component {
 
   changeVolume(e) {
     const audioElement = this.audio;
-    audioElement.volume = (e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth;
+    audioElement.volume =
+      (e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth;
   }
 
   handleEnded() {
@@ -182,11 +212,14 @@ class Player extends Component {
     document.removeEventListener('mouseup', this.handleSeekMouseUp);
     const { currentTime } = this.props.player;
 
-    this.setState({
-      isSeeking: false,
-    }, () => {
-      this.audio.currentTime = currentTime;
-    });
+    this.setState(
+      {
+        isSeeking: false,
+      },
+      () => {
+        this.audio.currentTime = currentTime;
+      }
+    );
   }
 
   handleTimeUpdate(e) {
@@ -253,7 +286,9 @@ class Player extends Component {
 
   handleKeyDown(e) {
     const keyCode = e.keyCode || e.which;
-    const isInsideInput = e.target.tagName.toLowerCase().match(/input|textarea/);
+    const isInsideInput = e.target.tagName
+      .toLowerCase()
+      .match(/input|textarea/);
     if (isInsideInput) {
       return;
     }
@@ -273,7 +308,8 @@ class Player extends Component {
   seek(e) {
     const { dispatch } = this.props;
     const audioElement = this.audio;
-    const percent = (e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth;
+    const percent =
+      (e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth;
     const currentTime = Math.floor(percent * this.state.duration);
 
     dispatch(changeCurrentTime(currentTime));
@@ -344,10 +380,7 @@ class Player extends Component {
     const { muted, volume } = this.state;
     const width = muted ? 0 : volume * 100;
     return (
-      <div
-        className="player-seek-duration-bar"
-        style={{ width: `${width}%` }}
-      >
+      <div className="player-seek-duration-bar" style={{ width: `${width}%` }}>
         <div
           className="player-seek-handle"
           onClick={this.handleMouseClick}
@@ -400,7 +433,9 @@ class Player extends Component {
       <div className="player">
         <audio
           id="audio"
-          ref={(node) => { this.audio = node; }}
+          ref={node => {
+            this.audio = node;
+          }}
           src={formatStreamUrl(song.stream_url)}
         />
         <div className="container">
@@ -420,47 +455,55 @@ class Player extends Component {
               />
             </div>
             <div className="player-section">
-              <div
-                className="player-button"
-                onClick={prevFunc}
-              >
+              <div className="player-button" onClick={prevFunc}>
                 <i className="icon ion-ios-rewind" />
               </div>
-              <div
-                className="player-button"
-                onClick={this.togglePlay}
-              >
-                <i className={`icon ${(isPlaying ? 'ion-ios-pause' : 'ion-ios-play')}`} />
+              <div className="player-button" onClick={this.togglePlay}>
+                <i
+                  className={`icon ${isPlaying
+                    ? 'ion-ios-pause'
+                    : 'ion-ios-play'}`}
+                />
               </div>
-              <div
-                className="player-button"
-                onClick={nextFunc}
-              >
+              <div className="player-button" onClick={nextFunc}>
                 <i className="icon ion-ios-fastforward" />
               </div>
             </div>
             <div className="player-section player-seek">
               <div className="player-seek-bar-wrap" onClick={this.seek}>
-                <div className="player-seek-bar" ref={(node) => { this.seekBar = node; }}>
+                <div
+                  className="player-seek-bar"
+                  ref={node => {
+                    this.seekBar = node;
+                  }}
+                >
                   {this.renderDurationBar()}
                 </div>
               </div>
               <div className="player-time">
-                <span>{formatSeconds(currentTime)}</span>
+                <span>
+                  {formatSeconds(currentTime)}
+                </span>
                 <span className="player-time-divider">/</span>
-                <span>{formatSeconds(duration)}</span>
+                <span>
+                  {formatSeconds(duration)}
+                </span>
               </div>
             </div>
             <div className="player-section">
               <div
-                className={`player-button ${(this.state.repeat ? ' active' : '')}`}
+                className={`player-button ${this.state.repeat
+                  ? ' active'
+                  : ''}`}
                 onClick={this.toggleRepeat}
               >
                 <i className="icon ion-loop" />
                 <span className="player-button-tooltip">Repeat</span>
               </div>
               <div
-                className={`player-button ${(this.state.shuffle ? ' active' : '')}`}
+                className={`player-button ${this.state.shuffle
+                  ? ' active'
+                  : ''}`}
                 onClick={this.toggleShuffle}
               >
                 <i className="icon ion-shuffle" />
@@ -477,8 +520,16 @@ class Player extends Component {
                 {this.renderVolumeIcon()}
               </div>
               <div className="player-volume">
-                <div className="player-seek-bar-wrap" onClick={this.changeVolume}>
-                  <div className="player-seek-bar" ref={(node) => { this.volumeBar = node; }}>
+                <div
+                  className="player-seek-bar-wrap"
+                  onClick={this.changeVolume}
+                >
+                  <div
+                    className="player-seek-bar"
+                    ref={node => {
+                      this.volumeBar = node;
+                    }}
+                  >
                     {this.renderVolumeBar()}
                   </div>
                 </div>

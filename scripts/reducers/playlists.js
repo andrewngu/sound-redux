@@ -86,9 +86,15 @@ export default function playlists(state = initialState, action) {
       });
 
     case types.RESET_AUTHED: {
-      const resetedPlaylists = [...action.playlists, STREAM_PLAYLIST_KEY, LIKES_PLAYLIST_KEY];
-      const newState = resetedPlaylists
-        .reduce((obj, p) => merge({}, obj, { [p]: initialPlaylistState }), {});
+      const resetedPlaylists = [
+        ...action.playlists,
+        STREAM_PLAYLIST_KEY,
+        LIKES_PLAYLIST_KEY,
+      ];
+      const newState = resetedPlaylists.reduce(
+        (obj, p) => merge({}, obj, { [p]: initialPlaylistState }),
+        {}
+      );
       return Object.assign({}, state, newState);
     }
 

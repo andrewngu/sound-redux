@@ -16,14 +16,18 @@ function fetchRelatedSongs(userId, songTitle) {
       .then(json => {
         const songs = json.filter(song => songTitle !== song.title);
         const normalized = normalize(songs, arrayOf(songSchema));
-        dispatch(receiveSongs(
-          normalized.entities,
-          normalized.result,
-          songTitle + SONG_PLAYLIST_SUFFIX,
-          null
-        ));
+        dispatch(
+          receiveSongs(
+            normalized.entities,
+            normalized.result,
+            songTitle + SONG_PLAYLIST_SUFFIX,
+            null
+          )
+        );
       })
-      .catch(err => { throw err; });
+      .catch(err => {
+        throw err;
+      });
 }
 
 export function fetchSongIfNeeded(songId) {
@@ -55,7 +59,9 @@ function fetchSong(songId) {
         const normalized = normalize(json, songSchema);
         dispatch(receiveSongPre(songId, normalized.entities));
       })
-      .catch(err => { throw err; });
+      .catch(err => {
+        throw err;
+      });
   };
 }
 
@@ -64,7 +70,9 @@ function fetchSongComments(songId) {
     fetch(constructSongCommentsUrl(songId))
       .then(response => response.json())
       .then(json => dispatch(receiveSongComments(songId, json)))
-      .catch(err => { throw err; });
+      .catch(err => {
+        throw err;
+      });
 }
 
 function fetchSongData(songId, userId, songTitle) {
@@ -99,7 +107,9 @@ function receiveSongPre(songId, entities) {
     const songTitle = entities.songs[songId].title;
     const userId = entities.songs[songId].user_id;
     dispatch(receiveSong(entities));
-    dispatch(receiveSongs(entities, [songId], songTitle + SONG_PLAYLIST_SUFFIX, null));
+    dispatch(
+      receiveSongs(entities, [songId], songTitle + SONG_PLAYLIST_SUFFIX, null)
+    );
     dispatch(fetchSongData(songId, userId, songTitle));
   };
 }

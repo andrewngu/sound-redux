@@ -38,11 +38,15 @@ class SongCards extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { end, paddingBottom, paddingTop, start } = this.getScrollState(nextProps);
-    if (paddingTop !== this.state.paddingTop
-    || paddingBottom !== this.state.paddingBottom
-    || start !== this.state.start
-    || end !== this.state.end) {
+    const { end, paddingBottom, paddingTop, start } = this.getScrollState(
+      nextProps
+    );
+    if (
+      paddingTop !== this.state.paddingTop ||
+      paddingBottom !== this.state.paddingBottom ||
+      start !== this.state.start ||
+      end !== this.state.end
+    ) {
       this.setState({
         end,
         paddingBottom,
@@ -57,11 +61,15 @@ class SongCards extends Component {
   }
 
   onScroll() {
-    const { end, paddingBottom, paddingTop, start } = this.getScrollState(this.props);
-    if (paddingTop !== this.state.paddingTop
-    || paddingBottom !== this.state.paddingBottom
-    || end !== this.state.end
-    || start !== this.state.start) {
+    const { end, paddingBottom, paddingTop, start } = this.getScrollState(
+      this.props
+    );
+    if (
+      paddingTop !== this.state.paddingTop ||
+      paddingBottom !== this.state.paddingBottom ||
+      end !== this.state.end ||
+      start !== this.state.start
+    ) {
       this.setState({
         end,
         paddingBottom,
@@ -85,9 +93,9 @@ class SongCards extends Component {
     let start = 0;
     let end = items.length;
 
-    if ((scrollY - ((ROW_HEIGHT * 3) + (MARGIN_TOP * 2))) > 0) {
+    if (scrollY - (ROW_HEIGHT * 3 + MARGIN_TOP * 2) > 0) {
       const rowsToPad = Math.floor(
-        (scrollY - ((ROW_HEIGHT * 2) + (MARGIN_TOP))) / (ROW_HEIGHT + MARGIN_TOP)
+        (scrollY - (ROW_HEIGHT * 2 + MARGIN_TOP)) / (ROW_HEIGHT + MARGIN_TOP)
       );
       paddingTop = rowsToPad * (ROW_HEIGHT + MARGIN_TOP);
       start = rowsToPad * ITEMS_PER_ROW;
@@ -95,7 +103,7 @@ class SongCards extends Component {
 
     const rowsOnScreen = Math.ceil(height / (ROW_HEIGHT + MARGIN_TOP));
     const itemsToShow = (rowsOnScreen + 5) * ITEMS_PER_ROW;
-    if (items.length > (start + itemsToShow)) {
+    if (items.length > start + itemsToShow) {
       end = start + itemsToShow;
       const rowsToPad = Math.ceil((items.length - end) / ITEMS_PER_ROW);
       paddingBottom = rowsToPad * (ROW_HEIGHT + MARGIN_TOP);
@@ -109,7 +117,6 @@ class SongCards extends Component {
     };
   }
 
-
   playSong(i, e) {
     e.preventDefault();
     const { playlist, dispatch } = this.props;
@@ -118,7 +125,15 @@ class SongCards extends Component {
 
   renderSongs(start, end) {
     const chunk = 5;
-    const { authed, dispatch, playlist, playlists, playingSongId, songs, users } = this.props;
+    const {
+      authed,
+      dispatch,
+      playlist,
+      playlists,
+      playingSongId,
+      songs,
+      users,
+    } = this.props;
     const items = playlist in playlists ? playlists[playlist].items : [];
     const result = [];
 
@@ -147,7 +162,9 @@ class SongCards extends Component {
 
       if (songCards.length < chunk) {
         for (let j = 0; j < chunk - songCards.length + 1; j++) {
-          songCards.push(<div className="col-1-5" key={`song-placeholder-${(i + j)}`} />);
+          songCards.push(
+            <div className="col-1-5" key={`song-placeholder-${i + j}`} />
+          );
         }
       }
 
@@ -164,7 +181,8 @@ class SongCards extends Component {
   render() {
     const { playlist, playlists } = this.props;
     const { end, paddingBottom, paddingTop, start } = this.state;
-    const isFetching = playlist in playlists ? playlists[playlist].isFetching : false;
+    const isFetching =
+      playlist in playlists ? playlists[playlist].isFetching : false;
 
     return (
       <div className="content">

@@ -25,8 +25,7 @@ class MobilePlayer extends Component {
         {({ height }) =>
           <div className="mobile-player-container" style={{ height }}>
             {this.renderPlayerContent()}
-          </div>
-        }
+          </div>}
       </Motion>
     );
   }
