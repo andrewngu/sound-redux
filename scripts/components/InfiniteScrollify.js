@@ -33,7 +33,7 @@ export default function (InnerComponent) {
 
   InfiniteScrollComponent.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    scrollFunc: PropTypes.func.isRequired
+    scrollFunc: PropTypes.func.isRequired,
   };
 
   return InfiniteScrollComponent;

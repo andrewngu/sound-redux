@@ -6,7 +6,7 @@ import MobileMe from '../components/MobileMe';
 import { getPlayingSongId } from '../utils/PlayerUtils';
 
 const propTypes = {
-  isMobile: PropTypes.bool
+  isMobile: PropTypes.bool,
 };
 
 class MeContainer extends Component {
@@ -39,7 +39,7 @@ function mapStateToProps(state) {
     playlists,
     route,
     songs,
-    users
+    users,
   };
 }
 

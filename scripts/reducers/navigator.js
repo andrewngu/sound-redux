@@ -7,7 +7,7 @@ export default function navigator(state = initialState, action) {
   switch (action.type) {
     case types.CHANGE_PATH:
       return Object.assign({}, state, {
-        route: action.route
+        route: action.route,
       });
     default:
       return state;

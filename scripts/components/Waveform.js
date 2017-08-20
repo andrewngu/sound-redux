@@ -9,7 +9,7 @@ const propTypes = {
   duration: PropTypes.number,
   isActive: PropTypes.bool,
   playSong: PropTypes.func,
-  waveformUrl: PropTypes.string
+  waveformUrl: PropTypes.string,
 };
 
 class Waveform extends Component {
@@ -20,7 +20,7 @@ class Waveform extends Component {
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.state = {
       isCanvas: false,
-      seekPercent: 0
+      seekPercent: 0,
     };
   }
 

@@ -17,7 +17,7 @@ const propTypes = {
   sticky: PropTypes.bool,
   songs: PropTypes.object.isRequired,
   time: PropTypes.number,
-  users: PropTypes.object.isRequired
+  users: PropTypes.object.isRequired,
 };
 
 class Songs extends Component {
@@ -51,7 +51,7 @@ class Songs extends Component {
       sticky,
       songs,
       time,
-      users
+      users,
     } = this.props;
 
     return (

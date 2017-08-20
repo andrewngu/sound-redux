@@ -5,7 +5,7 @@ import MobileNav from '../components/MobileNav';
 import Nav from '../components/Nav';
 
 const propTypes = {
-  isMobile: PropTypes.bool
+  isMobile: PropTypes.bool,
 };
 
 class NavContainer extends Component {
@@ -29,7 +29,7 @@ function mapStateToProps(state) {
     authedPlaylists: playlists,
     isMobile,
     navigator,
-    songs
+    songs,
   };
 }
 

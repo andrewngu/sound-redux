@@ -18,7 +18,7 @@ const propTypes = {
   player: PropTypes.object.isRequired,
   playSong: PropTypes.func.isRequired,
   song: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
 };
 
 class SongListItem extends Component {
@@ -44,7 +44,7 @@ class SongListItem extends Component {
       player,
       playSong,
       song,
-      user
+      user,
     } = this.props;
     const image = getImageUrl(song.artwork_url, IMAGE_SIZES.LARGE);
 
@@ -71,7 +71,7 @@ class SongListItem extends Component {
                 <div
                   className="song-list-item-user-image"
                   style={{
-                    backgroundImage: `url(${getImageUrl(user.avatar_url)})`
+                    backgroundImage: `url(${getImageUrl(user.avatar_url)})`,
                   }}
                 />
                 <Link

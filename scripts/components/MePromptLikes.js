@@ -7,7 +7,7 @@ const LIKES_PLAYLIST_KEY = `likes${AUTHED_PLAYLIST_SUFFIX}`;
 const propTypes = {
   authed: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  playlists: PropTypes.object.isRequired
+  playlists: PropTypes.object.isRequired,
 };
 
 class MePromptLikes extends Component {

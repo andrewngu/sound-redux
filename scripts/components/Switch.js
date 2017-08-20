@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 const propTypes = {
   isOn: PropTypes.bool.isRequired,
-  toggleFunc: PropTypes.func.isRequired
+  toggleFunc: PropTypes.func.isRequired,
 };
 
 class Switch extends Component {

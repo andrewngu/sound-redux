@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "NODE_ENV=production webpack -p --config ./webpack.prod.config.js",
+    "lint": "eslint scripts",
+    "lint:watch": "npm run lint -- --watch",
     "start": "webpack-dev-server --progress --colors --hot --content-base ./server/public --config ./webpack.config.js",
     "test": "mocha --compilers js:babel-core/register --recursive -r mock-local-storage",
+    "test:watch": "npm run test -- --watch",
     "format": "find scripts -name '*.js' | xargs prettier --write --single-quote && eslint scripts --fix",
     "prebuild": "sed -i.bak \"s/'.*'/'${SOUND_REDUX_PROD:-f4323c6f7c0cd73d2d786a2b1cdae80c}'/\" ./scripts/constants/Config.js",
     "postbuild": "sed -i.bak \"s/'.*'/'${SOUND_REDUX_DEV:-f4323c6f7c0cd73d2d786a2b1cdae80c}'/\" ./scripts/constants/Config.js && rm ./scripts/constants/Config.js.bak"

@@ -3,7 +3,7 @@ import * as types from '../constants/ActionTypes';
 function changeIsMobile(isMobile) {
   return {
     type: types.CHANGE_IS_MOBILE,
-    isMobile
+    isMobile,
   };
 }
 
@@ -11,7 +11,7 @@ export function changeWidthAndHeight(height, width) {
   return {
     type: types.CHANGE_WIDTH_AND_HEIGHT,
     height,
-    width
+    width,
   };
 }
 

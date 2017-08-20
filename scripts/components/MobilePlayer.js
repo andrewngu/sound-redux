@@ -4,7 +4,7 @@ import { Motion, spring } from 'react-motion';
 import MobilePlayerContent from '../components/MobilePlayerContent';
 
 const propTypes = {
-  playingSongId: PropTypes.number
+  playingSongId: PropTypes.number,
 };
 
 class MobilePlayer extends Component {

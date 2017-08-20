@@ -29,7 +29,7 @@ const propTypes = {
   songId: PropTypes.number,
   songs: PropTypes.object.isRequired,
   sticky: PropTypes.bool.isRequired,
-  users: PropTypes.object.isRequired
+  users: PropTypes.object.isRequired,
 };
 
 class Song extends Component {
@@ -81,7 +81,7 @@ class Song extends Component {
       playlists,
       songId,
       songs,
-      users
+      users,
     } = this.props;
     const song = songs[songId];
     const playlist = song.title + SONG_PLAYLIST_SUFFIX;
@@ -140,7 +140,7 @@ class Song extends Component {
       songId,
       songs,
       sticky,
-      users
+      users,
     } = this.props;
     const song = songs[songId];
     if (!song) {
@@ -176,7 +176,7 @@ class Song extends Component {
                           style={{
                             backgroundImage: `url(${getImageUrl(
                               user.avatar_url
-                            )})`
+                            )})`,
                           }}
                         />
                         <Link

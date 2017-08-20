@@ -9,7 +9,7 @@ const propTypes = {
   playlists: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
   songs: PropTypes.object.isRequired,
-  users: PropTypes.object.isRequired
+  users: PropTypes.object.isRequired,
 };
 
 class MobileMe extends Component {

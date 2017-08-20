@@ -15,7 +15,7 @@ const propTypes = {
   playlists: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
   songs: PropTypes.object.isRequired,
-  users: PropTypes.object.isRequired
+  users: PropTypes.object.isRequired,
 };
 
 class Me extends Component {
@@ -66,7 +66,7 @@ class Me extends Component {
       playingSongId,
       playlists,
       songs,
-      users
+      users,
     } = this.props;
     const playlist = this.getPlaylist() + AUTHED_PLAYLIST_SUFFIX;
     return (

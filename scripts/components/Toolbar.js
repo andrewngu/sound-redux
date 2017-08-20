@@ -7,7 +7,7 @@ const DAYS = [7, 30, 90];
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
   playlist: PropTypes.string.isRequired,
-  time: PropTypes.number
+  time: PropTypes.number,
 };
 
 class Toolbar extends Component {
@@ -20,8 +20,8 @@ class Toolbar extends Component {
         path: ['songs'],
         query: {
           q: g,
-          t: time
-        }
+          t: time,
+        },
       };
 
       return (
@@ -48,8 +48,8 @@ class Toolbar extends Component {
         path: ['songs'],
         query: {
           q: genre,
-          t: t === time ? null : t
-        }
+          t: t === time ? null : t,
+        },
       };
 
       return (

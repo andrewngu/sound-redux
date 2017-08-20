@@ -6,7 +6,7 @@ import UserCard from '../components/UserCard';
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
   height: PropTypes.number.isRequired,
-  users: PropTypes.array.isRequired
+  users: PropTypes.array.isRequired,
 };
 
 class Followings extends Component {

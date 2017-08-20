@@ -7,7 +7,7 @@ const propTypes = {
   dispatch: PropTypes.func.isRequired,
   player: PropTypes.object.isRequired,
   playlists: PropTypes.object.isRequired,
-  songs: PropTypes.object.isRequired
+  songs: PropTypes.object.isRequired,
 };
 
 class Playlist extends Component {

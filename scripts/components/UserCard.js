@@ -7,7 +7,7 @@ import { getUserLocation } from '../utils/UserUtils';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
 };
 
 class UserCard extends Component {

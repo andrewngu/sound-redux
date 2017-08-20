@@ -13,7 +13,7 @@ function mapStateToProps(state) {
   const { isPlaying } = player;
 
   return {
-    isPlaying
+    isPlaying,
   };
 }
 

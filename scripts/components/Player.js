@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {
   changeCurrentTime,
   changeSong,
-  toggleIsPlaying
+  toggleIsPlaying,
 } from '../actions/PlayerActions';
 import Playlist from '../components/Playlist';
 import Popover from '../components/Popover';
@@ -21,7 +21,7 @@ const propTypes = {
   playlists: PropTypes.object.isRequired,
   song: PropTypes.object,
   songs: PropTypes.object.isRequired,
-  users: PropTypes.object.isRequired
+  users: PropTypes.object.isRequired,
 };
 
 class Player extends Component {
@@ -61,7 +61,7 @@ class Player extends Component {
       muted: false,
       repeat: false,
       shuffle: false,
-      volume: previousVolumeLevel || 1
+      volume: previousVolumeLevel || 1,
     };
   }
 
@@ -158,7 +158,7 @@ class Player extends Component {
   handleLoadedMetadata() {
     const audioElement = this.audio;
     this.setState({
-      duration: Math.floor(audioElement.duration)
+      duration: Math.floor(audioElement.duration),
     });
   }
 
@@ -166,7 +166,7 @@ class Player extends Component {
     const { dispatch } = this.props;
     dispatch(changeCurrentTime(0));
     this.setState({
-      duration: 0
+      duration: 0,
     });
   }
 
@@ -188,7 +188,7 @@ class Player extends Component {
   handleSeekMouseDown() {
     this.bindSeekMouseEvents();
     this.setState({
-      isSeeking: true
+      isSeeking: true,
     });
   }
 
@@ -214,7 +214,7 @@ class Player extends Component {
 
     this.setState(
       {
-        isSeeking: false
+        isSeeking: false,
       },
       () => {
         this.audio.currentTime = currentTime;
@@ -246,14 +246,14 @@ class Player extends Component {
     const volume = e.currentTarget.volume;
     LocalStorageUtils.set('volume', volume);
     this.setState({
-      volume
+      volume,
     });
   }
 
   handleVolumeMouseDown() {
     this.bindVolumeMouseEvents();
     this.setState({
-      isSeeking: true
+      isSeeking: true,
     });
   }
 
@@ -265,7 +265,7 @@ class Player extends Component {
     percent = percent > 1 ? 1 : percent;
 
     this.setState({
-      volume: percent
+      volume: percent,
     });
     this.audio.volume = percent;
   }
@@ -279,7 +279,7 @@ class Player extends Component {
     document.removeEventListener('mouseup', this.handleVolumeMouseUp);
 
     this.setState({
-      isSeeking: false
+      isSeeking: false,
     });
     LocalStorageUtils.set('volume', this.state.volume);
   }

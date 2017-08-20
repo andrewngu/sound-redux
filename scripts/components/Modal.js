@@ -5,7 +5,7 @@ import ModalLogin from '../components/ModalLogin';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
-  modal: PropTypes.string.isRequired
+  modal: PropTypes.string.isRequired,
 };
 
 class Modal extends Component {

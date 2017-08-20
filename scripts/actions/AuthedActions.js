@@ -22,7 +22,7 @@ export function addNewStreamSongsToPlaylist() {
 function appendLike(songId) {
   return {
     type: types.APPEND_LIKE,
-    songId
+    songId,
   };
 }
 
@@ -139,7 +139,7 @@ function fetchNewStreamSongs(url, accessToken) {
           );
         return {
           futureUrl: `${json.future_href}&oauth_token=${accessToken}`,
-          collection
+          collection,
         };
       })
       .then(data => {
@@ -201,7 +201,7 @@ export function loginUser(shouldShowStream = true) {
     SC.initialize({
       client_id: CLIENT_ID,
       redirect_uri: `${window.location.protocol}//${window.location
-        .host}/api/callback`
+        .host}/api/callback`,
     });
 
     SC.connect()
@@ -238,7 +238,7 @@ export function logoutUser() {
 function receiveAccessToken(accessToken) {
   return {
     type: types.RECEIVE_ACCESS_TOKEN,
-    accessToken
+    accessToken,
   };
 }
 
@@ -260,7 +260,7 @@ function receiveAuthedFollowings(users, entities) {
   return {
     type: types.RECEIVE_AUTHED_FOLLOWINGS,
     entities,
-    users
+    users,
   };
 }
 
@@ -268,21 +268,21 @@ function receiveAuthedPlaylists(playlists, entities) {
   return {
     type: types.RECEIVE_AUTHED_PLAYLISTS,
     entities,
-    playlists
+    playlists,
   };
 }
 
 function receiveAuthedUser(user) {
   return {
     type: types.RECEIVE_AUTHED_USER,
-    user
+    user,
   };
 }
 
 function receiveLikes(likes) {
   return {
     type: types.RECEIVE_LIKES,
-    likes
+    likes,
   };
 }
 
@@ -291,14 +291,14 @@ function receiveNewStreamSongs(futureUrl, entities, songs) {
     type: types.RECEIVE_NEW_STREAM_SONGS,
     entities,
     futureUrl,
-    songs
+    songs,
   };
 }
 
 function resetAuthed(playlists) {
   return {
     type: types.RESET_AUTHED,
-    playlists
+    playlists,
   };
 }
 
@@ -306,7 +306,7 @@ function setFollowing(userId, following) {
   return {
     type: types.SET_FOLLOWING,
     following,
-    userId
+    userId,
   };
 }
 
@@ -314,7 +314,7 @@ function setLike(songId, liked) {
   return {
     type: types.SET_LIKE,
     liked,
-    songId
+    songId,
   };
 }
 
@@ -367,6 +367,6 @@ export function toggleLike(songId) {
 function unshiftNewStreamSongs(songs) {
   return {
     type: types.UNSHIFT_NEW_STREAM_SONGS,
-    songs
+    songs,
   };
 }

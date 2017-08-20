@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { navigateTo } from '../actions/NavigatorActions';
 
 const propTypes = {
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
 };
 
 class NavSearch extends Component {

@@ -23,7 +23,7 @@ const util = {
     }
 
     return null;
-  }
+  },
 };
 
 export default util;

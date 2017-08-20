@@ -99,7 +99,7 @@ export function receiveSongs(entities, songs, playlist, nextUrl, futureUrl) {
     futureUrl,
     nextUrl,
     playlist,
-    songs
+    songs,
   };
 }
 
@@ -128,14 +128,14 @@ export function removeUnlikedSongsPre() {
 function removeUnlikedSongs(songs) {
   return {
     type: types.REMOVE_UNLIKED_SONGS,
-    songs
+    songs,
   };
 }
 
 function requestSongs(playlist) {
   return {
     type: types.REQUEST_SONGS,
-    playlist
+    playlist,
   };
 }
 
