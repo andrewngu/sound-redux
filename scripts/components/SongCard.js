@@ -10,16 +10,7 @@ import { getImageUrl } from '../utils/SongUtils';
 class SongCard extends Component {
   renderTogglePlayButton() {
     const { isActive, playSong } = this.props;
-
-    if (isActive) {
-      return <TogglePlayButtonContainer />;
-    }
-
-    return (
-      <div className="toggle-play-button" onClick={playSong}>
-        <i className="toggle-play-button-icon ion-ios-play" />
-      </div>
-    );
+    return <TogglePlayButtonContainer isActive={isActive} playSong={playSong} />;
   }
 
   render() {
