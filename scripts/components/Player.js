@@ -74,6 +74,17 @@ class Player extends Component {
     audioElement.play();
   }
 
+  componentWillReceiveProps(nextProps) {
+    const audioElement = this.audio;
+    if (nextProps.player.isPlaying !== this.props.player.isPlaying) {
+      if (nextProps.player.isPlaying) {
+        audioElement.play();
+      } else {
+        audioElement.pause();
+      }
+    }
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.playingSongId && prevProps.playingSongId === this.props.playingSongId) {
       return;
