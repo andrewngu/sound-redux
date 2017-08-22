@@ -1,13 +1,6 @@
-import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Song from '../components/Song';
 import { getPlayingSongId } from '../utils/PlayerUtils';
-
-class SongContainer extends Component {
-  render() {
-    return <Song {...this.props} />;
-  }
-}
 
 function mapStateToProps(state) {
   const { authed, entities, environment, navigator, player, playlists } = state;
@@ -30,4 +23,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(SongContainer);
+export default connect(mapStateToProps)(Song);
