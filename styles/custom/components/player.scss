@@ -51,23 +51,13 @@
     }
 
     &.active {
-        &:hover {
-            & i {
-                color: #86AB85;
-            }
-        }
-
         & > i {
-            color: #A6D2A5;
+            color: #090F09;
         }
     }
 
     &:hover {
         cursor: pointer;
-
-        & > i {
-            color: #222;
-        }
 
         .ion-ios-pause {
             color: #86AB85;
