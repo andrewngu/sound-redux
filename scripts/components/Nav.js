@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { loginUser, logoutUser } from '../actions/AuthedActions';
+import { connectLastFM, logoutLastfm } from '../actions/LastfmActions';
 import Link from '../components/Link';
 import NavSearch from '../components/NavSearch';
 import Popover from '../components/Popover';
+import NavUser from '../components/NavUser';
 import { getImageUrl } from '../utils/SongUtils';
 
 const propTypes = {
+  lastfm: PropTypes.object.isRequired,
   authed: PropTypes.object.isRequired,
   authedPlaylists: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
@@ -19,6 +22,8 @@ class Nav extends Component {
     super(props);
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
+    this.connectLastFM = this.connectLastFM.bind(this);
+    this.logoutLastfm = this.logoutLastfm.bind(this);
   }
 
   getPlaylist() {
@@ -46,6 +51,18 @@ class Nav extends Component {
     dispatch(logoutUser());
   }
 
+  connectLastFM(e) {
+    e.preventDefault();
+    const { dispatch } = this.props;
+    dispatch(connectLastFM());
+  }
+
+  logoutLastfm(e) {
+    const { dispatch } = this.props;
+    e.preventDefault();
+    dispatch(logoutLastfm());
+  }
+
   renderArtworks(playlist) {
     const { songs } = this.props;
     return playlist.tracks.slice(0, 10).map(songId =>
@@ -55,52 +72,6 @@ class Nav extends Component {
         key={songId}
         src={getImageUrl(songs[songId].artwork_url)}
       />
-    );
-  }
-
-  renderNavUser() {
-    const { authed } = this.props;
-
-    if (authed.user) {
-      return (
-        <Popover className="nav-user">
-          <div className="nav-user-link">
-            <img
-              alt="user avatar"
-              className="nav-authed-image"
-              src={getImageUrl(authed.user.avatar_url)}
-            />
-            <i className="icon ion-chevron-down"></i>
-            <i className="icon ion-chevron-up"></i>
-          </div>
-          <div className="nav-user-popover popover-content">
-            <ul className="nav-user-popover-list">
-              <li className="nav-user-popover-item">
-                <a href="#" onClick={this.logout}>Log Out</a>
-              </li>
-            </ul>
-          </div>
-        </Popover>
-      );
-    }
-
-    return (
-      <Popover className="nav-user">
-        <div className="nav-user-link">
-          <i className="icon ion-person"></i>
-          <i className="icon ion-chevron-down"></i>
-          <i className="icon ion-chevron-up"></i>
-        </div>
-        <div className="nav-user-popover popover-content">
-          <ul className="nav-user-popover-list">
-            <li className="nav-user-popover-item">
-              <a href="#" className="button orange block" onClick={this.login}>
-                Sign into SoundCloud
-              </a>
-            </li>
-          </ul>
-        </div>
-      </Popover>
     );
   }
 
@@ -193,7 +164,7 @@ class Nav extends Component {
   }
 
   render() {
-    const { dispatch } = this.props;
+    const { dispatch, authed, lastfm } = this.props;
 
     return (
       <div className="nav">
@@ -220,7 +191,14 @@ class Nav extends Component {
               <NavSearch dispatch={dispatch} />
             </div>
             <div className="nav-nav-item">
-              {this.renderNavUser()}
+              <NavUser
+                authed={authed}
+                lastfm={lastfm}
+                onLogin={this.login}
+                onLogout={this.logout}
+                onLastfmLogin={this.connectLastFM}
+                onLastfmLogout={this.logoutLastfm}
+              />
             </div>
           </div>
         </div>

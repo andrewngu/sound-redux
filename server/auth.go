@@ -13,3 +13,12 @@ func authCallback(rw http.ResponseWriter, r *http.Request) error {
 	t.Execute(rw, nil)
 	return nil
 }
+
+func lastfmCallback(rw http.ResponseWriter, r *http.Request) error {
+	t, err := template.ParseFiles("html/lastfm_callback.html")
+	if err != nil {
+		return err
+	}
+	t.Execute(rw, nil)
+	return nil
+}

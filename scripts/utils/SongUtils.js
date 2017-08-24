@@ -64,3 +64,8 @@ export function getImageUrl(s, size = null) {
       return str;
   }
 }
+
+export function getArtistAndSongname(songTitle) {
+  const [artist, ...rest] = songTitle.split(' - ');
+  return [artist, rest.join(' - ')];
+}

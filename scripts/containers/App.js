@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { initAuth } from '../actions/AuthedActions';
+import { initLastFMAuth } from '../actions/LastfmActions';
 import { initEnvironment } from '../actions/EnvironmentActions';
 import { initNavigator } from '../actions/NavigatorActions';
 
@@ -28,6 +29,7 @@ class App extends Component {
     dispatch(initEnvironment());
     dispatch(initAuth());
     dispatch(initNavigator());
+    dispatch(initLastFMAuth())
   }
 
   renderContent() {

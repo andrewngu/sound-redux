@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Last.FM callback</title>
+  <script>
+    window.onload = function() {
+      setTimeout(function() {
+        opener.LASTFM_AUTH.handleCallback(window.location.search);
+      }, 1);
+    };
+  </script>
+</head>
+<body>
+  <p>This page should close soon</p>
+</body>
+</html>

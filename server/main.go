@@ -17,6 +17,7 @@ func main() {
 	r.Handle("/", http.FileServer(http.Dir("public"))).Methods("GET")
 	r.HandleFunc("/api/status", status).Methods("GET")
 	r.HandleFunc("/api/callback", action(authCallback))
+	r.HandleFunc("/api/lastfm_callback", action(lastfmCallback))
 
 	n := negroni.Classic()
 	n.UseHandler(r)
