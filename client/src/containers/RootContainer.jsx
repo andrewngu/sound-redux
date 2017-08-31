@@ -4,69 +4,55 @@ import { connect } from 'react-redux';
 
 import { initAuth } from '../actions/AuthedActions';
 import { initEnvironment } from '../actions/EnvironmentActions';
-import { initNavigator } from '../actions/NavigatorActions';
+import { initRouter } from '../actions/RouterActions';
+
+import Router from '../components/Router';
 
 import NavContainer from '../containers/NavContainer';
-import MeContainer from '../containers/MeContainer';
 import ModalContainer from '../containers/ModalContainer';
 import PlayerContainer from '../containers/PlayerContainer';
 import SongContainer from '../containers/SongContainer';
 import SongsContainer from '../containers/SongsContainer';
 import UserContainer from '../containers/UserContainer';
 
+import {
+  SONG_PATH,
+  SONGS_PATH,
+  USER_PATH,
+} from '../constants/RouterConstants';
+
 const propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  height: PropTypes.number.isRequired,
-  isMobile: PropTypes.bool.isRequired,
-  path: PropTypes.arrayOf(PropTypes.string).isRequired,
-  width: PropTypes.number.isRequired,
+  initAuth: PropTypes.func.isRequired,
+  initEnvironment: PropTypes.func.isRequired,
+  initRouter: PropTypes.func.isRequired,
+  paths: PropTypes.arrayOf(PropTypes.string).isRequired,
+  router: PropTypes.shape({
+    keys: PropTypes.shape({}),
+    options: PropTypes.shape({}),
+    path: PropTypes.string,
+  }).isRequired,
+  routes: PropTypes.shape({}).isRequired,
 };
 
 class RootContainer extends Component {
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(initEnvironment());
-    dispatch(initAuth());
-    dispatch(initNavigator());
-  }
+    const { paths } = this.props;
 
-  renderContent() {
-    const { path } = this.props;
-    switch (path[0]) {
-      case 'songs':
-        switch (path.length) {
-          case 1:
-            return <SongsContainer />;
-          case 2:
-            return <SongContainer />;
-          default:
-            return null;
-        }
-      case 'users':
-        return <UserContainer />;
-      case 'me':
-        return <MeContainer />;
-      default:
-        return null;
-    }
+    this.props.initAuth();
+    this.props.initEnvironment();
+    this.props.initRouter(paths);
   }
 
   render() {
-    const { height, isMobile, width } = this.props;
-    if (isMobile) {
-      return (
-        <div className="mobile" style={{ height: `${height}px`, width: `${width}px` }}>
-          <PlayerContainer />
-          {this.renderContent()}
-          <NavContainer />
-        </div>
-      );
-    }
+    const { router, routes } = this.props;
 
     return (
       <div>
         <NavContainer />
-        {this.renderContent()}
+        <Router
+          router={router}
+          routes={routes}
+        />
         <PlayerContainer />
         <ModalContainer />
       </div>
@@ -77,17 +63,22 @@ class RootContainer extends Component {
 RootContainer.propTypes = propTypes;
 
 function mapStateToProps(state) {
-  const { environment, navigator } = state;
-  const { height, isMobile, width } = environment;
-  const { path } = navigator.route;
+  const { router } = state;
 
   return {
-    height,
-    isMobile,
-    path,
-    width,
+    paths: [SONG_PATH, SONGS_PATH, USER_PATH],
+    router,
+    routes: {
+      [SONG_PATH]: SongContainer,
+      [SONGS_PATH]: SongsContainer,
+      [USER_PATH]: UserContainer,
+    },
   };
 }
 
 
-export default connect(mapStateToProps)(RootContainer);
+export default connect(mapStateToProps, {
+  initAuth,
+  initEnvironment,
+  initRouter,
+})(RootContainer);
