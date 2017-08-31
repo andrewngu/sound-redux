@@ -1,25 +1,22 @@
 import * as types from '../constants/ActionTypes';
 
 const initialState = {
-  isMobile: false,
-  height: null,
-  width: null,
+  height: 0,
+  width: 0,
 };
 
-export default function environment(state = initialState, action) {
+const environment = (state = initialState, action) => {
   switch (action.type) {
-    case types.CHANGE_IS_MOBILE:
-      return Object.assign({}, state, {
-        isMobile: action.isMobile,
-      });
-
-    case types.CHANGE_WIDTH_AND_HEIGHT:
-      return Object.assign({}, state, {
+    case types.WINDOW_RESIZE:
+      return {
+        ...state,
         height: action.height,
         width: action.width,
-      });
+      };
 
     default:
       return state;
   }
-}
+};
+
+export default environment;
