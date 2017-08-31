@@ -16,13 +16,13 @@ import UserContainer from '../containers/UserContainer';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
-  height: PropTypes.number,
-  isMobile: PropTypes.bool,
-  path: PropTypes.array.isRequired,
-  width: PropTypes.number,
+  height: PropTypes.number.isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  path: PropTypes.arrayOf(PropTypes.string).isRequired,
+  width: PropTypes.number.isRequired,
 };
 
-class App extends Component {
+class RootContainer extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(initEnvironment());
@@ -74,7 +74,7 @@ class App extends Component {
   }
 }
 
-App.propTypes = propTypes;
+RootContainer.propTypes = propTypes;
 
 function mapStateToProps(state) {
   const { environment, navigator } = state;
@@ -90,4 +90,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(RootContainer);
