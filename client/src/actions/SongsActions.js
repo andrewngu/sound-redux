@@ -1,4 +1,4 @@
-import { arrayOf, normalize } from 'normalizr';
+import { normalize } from 'normalizr';
 import { receiveSongs } from '../actions/PlaylistsActions';
 import * as types from '../constants/ActionTypes';
 import { SONG_PLAYLIST_SUFFIX } from '../constants/PlaylistConstants';
@@ -15,7 +15,7 @@ function fetchRelatedSongs(userId, songTitle) {
       .then(response => response.json())
       .then(json => {
         const songs = json.filter(song => songTitle !== song.title);
-        const normalized = normalize(songs, arrayOf(songSchema));
+        const normalized = normalize(songs, [songSchema]);
         dispatch(receiveSongs(
           normalized.entities,
           normalized.result,
