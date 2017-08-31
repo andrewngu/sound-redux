@@ -1,4 +1,4 @@
-import { arrayOf, normalize } from 'normalizr';
+import { normalize } from 'normalizr';
 import SC from 'soundcloud';
 import Cookies from 'js-cookie';
 import { navigateTo } from '../actions/NavigatorActions';
@@ -43,7 +43,7 @@ function fetchFollowings(accessToken) {
   return dispatch =>
     fetch(`//api.soundcloud.com/me/followings?oauth_token=${accessToken}`)
       .then(response => response.json())
-      .then(json => normalize(json.collection, arrayOf(userSchema)))
+      .then(json => normalize(json.collection, [userSchema]))
       .then(normalized => {
         const users = normalized.result
           .reduce((obj, userId) => Object.assign({}, obj, { [userId]: 1 }), {});
@@ -58,7 +58,7 @@ function fetchLikes(accessToken) {
       .then(response => response.json())
       .then(json => {
         const songs = json.filter(song => song.streamable);
-        const normalized = normalize(songs, arrayOf(songSchema));
+        const normalized = normalize(songs, [songSchema]);
         const likes = normalized.result
           .reduce((obj, songId) => Object.assign({}, obj, { [songId]: 1 }), {});
         dispatch(receiveLikes(likes));
@@ -77,7 +77,7 @@ function fetchPlaylists(accessToken) {
     fetch(`//api.soundcloud.com/me/playlists?oauth_token=${accessToken}`)
       .then(response => response.json())
       .then(json => {
-        const normalized = normalize(json, arrayOf(playlistSchema));
+        const normalized = normalize(json, [playlistSchema]);
         dispatch(receiveAuthedPlaylists(normalized.result, normalized.entities));
         normalized.result.forEach(playlistId => {
           const playlist = normalized.entities.playlists[playlistId];
@@ -112,7 +112,7 @@ function fetchNewStreamSongs(url, accessToken) {
         return { futureUrl: `${json.future_href}&oauth_token=${accessToken}`, collection };
       })
       .then(data => {
-        const normalized = normalize(data.collection, arrayOf(songSchema));
+        const normalized = normalize(data.collection, [songSchema]);
         dispatch(receiveNewStreamSongs(data.futureUrl, normalized.entities, normalized.result));
       })
       .catch(err => { throw err; });

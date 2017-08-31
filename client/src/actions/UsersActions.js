@@ -1,4 +1,4 @@
-import { arrayOf, normalize } from 'normalizr';
+import { normalize } from 'normalizr';
 import merge from 'lodash/merge';
 import { receiveSongs } from '../actions/PlaylistsActions';
 import * as types from '../constants/ActionTypes';
@@ -53,7 +53,7 @@ function fetchUserFollowings(userId) {
       .then(response => response.json())
       .then(json => {
         const users = json.collection.sort((a, b) => b.followers_count - a.followers_count);
-        const normalized = normalize(users, arrayOf(userSchema));
+        const normalized = normalize(users, [userSchema]);
         const entities = merge({}, normalized.entities, {
           users: {
             [userId]: { followings: normalized.result },
@@ -81,7 +81,7 @@ function fetchUserTracks(userId, username) {
     fetch(constructUserTracksUrl(userId))
       .then(response => response.json())
       .then(json => {
-        const normalized = normalize(json, arrayOf(songSchema));
+        const normalized = normalize(json, [songSchema]);
         dispatch(receiveSongs(
           normalized.entities,
           normalized.result,

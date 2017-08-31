@@ -1,4 +1,4 @@
-import { arrayOf, normalize } from 'normalizr';
+import { normalize } from 'normalizr';
 import { changePlayingSong } from '../actions/PlayerActions';
 import * as types from '../constants/ActionTypes';
 import { AUTHED_PLAYLIST_SUFFIX } from '../constants/PlaylistConstants';
@@ -38,7 +38,7 @@ export function fetchSongs(url, playlist) {
             return song.streamable && song.kind === 'track';
           });
 
-        const normalized = normalize(songs, arrayOf(songSchema));
+        const normalized = normalize(songs, [songSchema]);
         const result = normalized.result.reduce((arr, songId) => {
           if (arr.indexOf(songId) === -1) {
             arr.push(songId);
