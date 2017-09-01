@@ -2,7 +2,6 @@
 
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { playSong } from '../actions/PlayerActions';
 import infiniteScroll from '../components/infiniteScroll';
 import SongCard from '../components/SongCard';
 import Spinner from '../components/Spinner';
@@ -14,11 +13,11 @@ const defaultProps = {
 
 const propTypes = {
   authed: PropTypes.shape({}).isRequired,
-  dispatch: PropTypes.func.isRequired,
   height: PropTypes.number.isRequired,
   isFetching: PropTypes.bool.isRequired,
   playingSongId: PropTypes.number,
   playlist: PropTypes.string.isRequired,
+  playSong: PropTypes.func.isRequired,
   songs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
@@ -76,29 +75,23 @@ class SongCards extends Component {
     }
   }
 
-  playSong(i, e) {
-    e.preventDefault();
-    const { playlist, dispatch } = this.props;
-    dispatch(playSong(playlist, i));
-  }
-
   renderSongs(start, end) {
     const chunk = 5;
-    const { authed, dispatch, playingSongId, songs } = this.props;
+    const { authed, playingSongId, playlist, playSong, songs } = this.props;
     const result = [];
 
     for (let i = start; i < end; i += chunk) {
       const songCards = songs.slice(i, i + chunk).map((song, j) => {
         const index = i + j;
-        const playSongFunc = this.playSong.bind(this, index);
 
         return (
           <div className="col-1-5 clearfix" key={`${index}-${song.id}`}>
             <SongCard
               authed={authed}
-              dispatch={dispatch}
+              index={index}
               isActive={song.id === playingSongId}
-              playSong={playSongFunc}
+              playlist={playlist}
+              playSong={playSong}
               song={song}
             />
           </div>
