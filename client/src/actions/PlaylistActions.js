@@ -31,8 +31,8 @@ export const fetchSongs = (playlist, url) => async (dispatch, getState) => {
   const { collection, nextHref, futureHref } = json;
   const { result, entities } = normalize(collection, [songSchema]);
 
-  const nextUrl = `${nextHref}${accessTokenUriSegment}`;
-  const futureUrl = `${futureHref}${accessTokenUriSegment}`;
+  const nextUrl = nextHref ? `${nextHref}${accessTokenUriSegment}` : null;
+  const futureUrl = futureHref ? `${futureHref}${accessTokenUriSegment}` : null;
 
   dispatch(fetchSongSuccess(playlist, result, entities, nextUrl, futureUrl));
 };
