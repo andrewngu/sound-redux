@@ -5,17 +5,22 @@ import SongCards from '../components/SongCards';
 import stickify from '../components/Stickify';
 import Toolbar from '../components/Toolbar';
 
+const defaultProps = {
+  playingSongId: null,
+  time: null,
+};
+
 const propTypes = {
-  authed: PropTypes.object,
+  authed: PropTypes.shape({}).isRequired,
   dispatch: PropTypes.func.isRequired,
-  height: PropTypes.number,
+  fetchSongsIfNeeded: PropTypes.func.isRequired,
+  height: PropTypes.number.isRequired,
   playingSongId: PropTypes.number,
-  playlist: PropTypes.string,
-  playlists: PropTypes.object.isRequired,
-  sticky: PropTypes.bool,
+  playlist: PropTypes.string.isRequired,
+  playlists: PropTypes.shape({}).isRequired,
+  sticky: PropTypes.bool.isRequired,
   songs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   time: PropTypes.number,
-  users: PropTypes.object.isRequired,
 };
 
 class Songs extends Component {
@@ -43,7 +48,6 @@ class Songs extends Component {
       sticky,
       songs,
       time,
-      users,
     } = this.props;
 
     return (
@@ -59,7 +63,6 @@ class Songs extends Component {
             playlists={playlists}
             onScroll={() => { fetchSongsIfNeeded(playlist); }}
             songs={songs}
-            users={users}
           />
         </div>
       </div>
@@ -67,6 +70,7 @@ class Songs extends Component {
   }
 }
 
+Songs.defaultProps = defaultProps;
 Songs.propTypes = propTypes;
 
 export default stickify(Songs, 50);
