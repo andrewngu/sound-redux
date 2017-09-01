@@ -57,7 +57,7 @@ class Songs extends Component {
             playingSongId={playingSongId}
             playlist={playlist}
             playlists={playlists}
-            scrollFunc={() => { fetchSongsIfNeeded(playlist); }}
+            onScroll={() => { fetchSongsIfNeeded(playlist); }}
             songs={songs}
             users={users}
           />
