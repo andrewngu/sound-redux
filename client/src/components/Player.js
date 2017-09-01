@@ -412,13 +412,6 @@ class Player extends Component {
                 className="player-image"
                 src={getImageUrl(song.artwork_url)}
               />
-              <SongDetails
-                dispatch={dispatch}
-                songId={song.id}
-                title={song.title}
-                userId={user.id}
-                username={user.username}
-              />
             </div>
             <div className="player-section">
               <div

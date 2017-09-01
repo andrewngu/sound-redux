@@ -7,7 +7,7 @@ const initialState = {
   playlistHistory: [],
 };
 
-export default function player(state = initialState, action) {
+const player = (state = initialState, action) => {
   switch (action.type) {
     case types.CHANGE_CURRENT_TIME:
       return Object.assign({}, state, {
@@ -27,6 +27,19 @@ export default function player(state = initialState, action) {
     case types.RESET_AUTHED:
       return Object.assign({}, state, initialState);
 
+    case types.PLAY_SONG:
+      return {
+        ...state,
+        currentTime: 0,
+        playingIndex: action.playingIndex,
+        playlistHistory: [
+          ...state.playlistHistory,
+          ...state.playlistHistory[state.playlistHistory.length - 1] === action.playlist
+            ? []
+            : [action.playlist],
+        ],
+      };
+
     case types.TOGGLE_IS_PLAYING:
       return Object.assign({}, state, {
         isPlaying: action.isPlaying,
@@ -35,4 +48,6 @@ export default function player(state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+export default player;

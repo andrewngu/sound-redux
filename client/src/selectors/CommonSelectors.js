@@ -10,7 +10,7 @@ export const getEntities = state => state.entities;
 export const getPlaylists = state => state.playlists;
 
 // player selectors
-export const getPlaylistHistory = state => state.playlistHistory;
+export const getPlaylistHistory = state => state.player.playlistHistory;
 export const getPlayingIndex = state => state.player.playingIndex;
 export const getPlayingSongId = createSelector(
   getPlaylistHistory,
