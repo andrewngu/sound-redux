@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "camelize": "^1.0.0",
     "isomorphic-fetch": "^2.2.1",
     "js-cookie": "^2.1.4",
     "moment": "^2.18.1",
@@ -59,6 +60,7 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1",
     "soundcloud": "^3.2.1"
   }
 }
