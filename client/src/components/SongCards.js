@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { playSong } from '../actions/PlayerActions';
-import infiniteScrollify from '../components/InfiniteScrollify';
+import infiniteScroll from '../components/infiniteScroll';
 import SongCard from '../components/SongCard';
 import Spinner from '../components/Spinner';
 
@@ -172,4 +172,4 @@ class SongCards extends Component {
 
 SongCards.propTypes = propTypes;
 
-export default infiniteScrollify(SongCards);
+export default infiniteScroll(SongCards);

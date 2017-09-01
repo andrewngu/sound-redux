@@ -1,7 +1,13 @@
+/* global document */
+/* global window */
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-export default function (InnerComponent) {
+const infiniteScroll = (InnerComponent) => {
+  const propTypes = {
+    onScroll: PropTypes.func.isRequired,
+  };
+
   class InfiniteScrollComponent extends Component {
     constructor(props) {
       super(props);
@@ -18,8 +24,8 @@ export default function (InnerComponent) {
 
     onScroll() {
       if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 200)) {
-        const { dispatch, scrollFunc } = this.props;
-        dispatch(scrollFunc());
+        const { onScroll } = this.props;
+        onScroll();
       }
     }
 
@@ -28,10 +34,9 @@ export default function (InnerComponent) {
     }
   }
 
-  InfiniteScrollComponent.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    scrollFunc: PropTypes.func.isRequired,
-  };
+  InfiniteScrollComponent.propTypes = propTypes;
 
   return InfiniteScrollComponent;
-}
+};
+
+export default infiniteScroll;
