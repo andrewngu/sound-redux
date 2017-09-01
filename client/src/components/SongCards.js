@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { playSong } from '../actions/PlayerActions';
-import { fetchSongsIfNeeded } from '../actions/PlaylistsActions';
 import infiniteScrollify from '../components/InfiniteScrollify';
 import SongCard from '../components/SongCard';
 import Spinner from '../components/Spinner';
@@ -13,7 +12,7 @@ const propTypes = {
   playingSongId: PropTypes.number,
   playlist: PropTypes.string.isRequired,
   playlists: PropTypes.object.isRequired,
-  songs: PropTypes.object.isRequired,
+  songs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   users: PropTypes.object.isRequired,
 };
 
@@ -23,10 +22,8 @@ class SongCards extends Component {
     this.getScrollState = this.getScrollState.bind(this);
     this.onScroll = this.onScroll.bind(this);
 
-    const { playlist, playlists } = props;
-    const items = playlist in playlists ? playlists[playlist].items : [];
     this.state = {
-      end: items.length,
+      end: props.songs.length,
       paddingBottom: 0,
       paddingTop: 0,
       start: 0,
@@ -72,8 +69,8 @@ class SongCards extends Component {
   }
 
   getScrollState(props) {
-    const { height, playlists, playlist } = props;
-    const items = playlist in playlists ? playlists[playlist].items : [];
+    const { height, songs } = props;
+    const count = songs.length;
 
     const MARGIN_TOP = 20;
     const ROW_HEIGHT = 132;
@@ -83,7 +80,7 @@ class SongCards extends Component {
     let paddingTop = 0;
     let paddingBottom = 0;
     let start = 0;
-    let end = items.length;
+    let end = count;
 
     if ((scrollY - ((ROW_HEIGHT * 3) + (MARGIN_TOP * 2))) > 0) {
       const rowsToPad = Math.floor(
@@ -95,9 +92,9 @@ class SongCards extends Component {
 
     const rowsOnScreen = Math.ceil(height / (ROW_HEIGHT + MARGIN_TOP));
     const itemsToShow = (rowsOnScreen + 5) * ITEMS_PER_ROW;
-    if (items.length > (start + itemsToShow)) {
+    if (count > (start + itemsToShow)) {
       end = start + itemsToShow;
-      const rowsToPad = Math.ceil((items.length - end) / ITEMS_PER_ROW);
+      const rowsToPad = Math.ceil((count - end) / ITEMS_PER_ROW);
       paddingBottom = rowsToPad * (ROW_HEIGHT + MARGIN_TOP);
     }
 
@@ -118,14 +115,11 @@ class SongCards extends Component {
 
   renderSongs(start, end) {
     const chunk = 5;
-    const { authed, dispatch, playlist, playlists, playingSongId, songs, users } = this.props;
-    const items = playlist in playlists ? playlists[playlist].items : [];
+    const { authed, dispatch, playingSongId, songs, users } = this.props;
     const result = [];
 
     for (let i = start; i < end; i += chunk) {
-      const songCards = items.slice(i, i + chunk).map((songId, j) => {
-        const song = songs[songId];
-        const scrollFunc = fetchSongsIfNeeded.bind(null, playlist);
+      const songCards = songs.slice(i, i + chunk).map((song, j) => {
         const user = users[song.user_id];
         const index = i + j;
         const playSongFunc = this.playSong.bind(this, index);
@@ -137,7 +131,6 @@ class SongCards extends Component {
               dispatch={dispatch}
               isActive={song.id === playingSongId}
               playSong={playSongFunc}
-              scrollFunc={scrollFunc}
               song={song}
               user={user}
             />
@@ -154,7 +147,7 @@ class SongCards extends Component {
       result.push(
         <div className="songs-row grid" key={`songs-row-${i}`}>
           {songCards}
-        </div>
+        </div>,
       );
     }
 

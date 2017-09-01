@@ -21,7 +21,7 @@ const fetchSongSuccess = (playlist, items, entities, nextUrl, futureUrl) => ({
 });
 
 export const fetchSongs = (playlist, url) => async (dispatch, getState) => {
-  dispatch(fetchSongsRequest());
+  dispatch(fetchSongsRequest(playlist));
 
   const state = getState();
   const accessToken = getAccessToken(state);

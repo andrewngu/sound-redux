@@ -13,7 +13,7 @@ const propTypes = {
   playlist: PropTypes.string,
   playlists: PropTypes.object.isRequired,
   sticky: PropTypes.bool,
-  songs: PropTypes.object.isRequired,
+  songs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   time: PropTypes.number,
   users: PropTypes.object.isRequired,
 };
