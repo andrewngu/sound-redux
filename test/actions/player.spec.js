@@ -19,11 +19,11 @@ describe('player actions', () => {
         });
     });
 
-    describe('changeSelectedPlaylists', () => {
+    describe('changeplaylistHistory', () => {
         it('should add playlist if playlists are empty', () => {
             const playlists = [];
             const playlist = 'house';
-            expect(actions.changeSelectedPlaylists(playlists, playlist)).toEqual({
+            expect(actions.changeplaylistHistory(playlists, playlist)).toEqual({
                 type: types.CHANGE_SELECTED_PLAYLISTS,
                 playlists: ['house']
             });
@@ -32,7 +32,7 @@ describe('player actions', () => {
         it('should add playlist if playlists are not empty', () => {
             const playlists = ['trance', 'dubstep'];
             const playlist = 'house';
-            expect(actions.changeSelectedPlaylists(playlists, playlist)).toEqual({
+            expect(actions.changeplaylistHistory(playlists, playlist)).toEqual({
                 type: types.CHANGE_SELECTED_PLAYLISTS,
                 playlists: ['trance', 'dubstep', 'house']
             });
@@ -41,7 +41,7 @@ describe('player actions', () => {
         it('should move playlist to end if already in playlists', () => {
             const playlists = ['house', 'trance', 'dubstep'];
             const playlist = 'house';
-            expect(actions.changeSelectedPlaylists(playlists, playlist)).toEqual({
+            expect(actions.changeplaylistHistory(playlists, playlist)).toEqual({
                 type: types.CHANGE_SELECTED_PLAYLISTS,
                 playlists: ['trance', 'dubstep', 'house']
             });
@@ -51,7 +51,7 @@ describe('player actions', () => {
     describe('changeSong', () => {
         it('should go to the next song if the change type is NEXT there are enough songs in the current playlist', (done) => {
             const prevStore = {
-                player: {currentSongIndex: 0, selectedPlaylists: ['house']},
+                player: {playingIndex: 0, playlistHistory: ['house']},
                 playlists: {house: {items: [{id: 1}, {id: 2}, {id: 3}, {id: 4}]}}
             };
             const expectedActions = [
@@ -63,7 +63,7 @@ describe('player actions', () => {
 
         it('should not go to the next song if the change type is NEXT there are not enough songs in the current playlist', (done) => {
             const prevStore = {
-                player: {currentSongIndex: 3, selectedPlaylists: ['house']},
+                player: {playingIndex: 3, playlistHistory: ['house']},
                 playlists: {house: {items: [{id: 1}, {id: 2}, {id: 3}, {id: 4}]}}
             };
             const expectedActions = [];
@@ -74,7 +74,7 @@ describe('player actions', () => {
 
         it('should go to the previous song if the change type is PREV and the first song is not playing', (done) => {
             const prevStore = {
-                player: {currentSongIndex: 3, selectedPlaylists: ['house']},
+                player: {playingIndex: 3, playlistHistory: ['house']},
                 playlists: {house: {items: [{id: 1}, {id: 2}, {id: 3}, {id: 4}]}}
             };
             const expectedActions = [
@@ -86,7 +86,7 @@ describe('player actions', () => {
 
         it('should not go to the previous song if the change type is PREV and the first song is  playing', (done) => {
             const prevStore = {
-                player: {currentSongIndex: 0, selectedPlaylists: ['house']},
+                player: {playingIndex: 0, playlistHistory: ['house']},
                 playlists: {house: {items: [{id: 1}, {id: 2}, {id: 3}, {id: 4}]}}
             };
             const expectedActions = [];
@@ -99,8 +99,8 @@ describe('player actions', () => {
     describe('playSong', () => {
         const prevStore = {
             player: {
-                currentSongIndex: null,
-                selectedPlaylists: ['trance', 'dubstep']
+                playingIndex: null,
+                playlistHistory: ['trance', 'dubstep']
             }
         };
 

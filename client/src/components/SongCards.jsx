@@ -16,9 +16,9 @@ const propTypes = {
   authed: PropTypes.shape({}).isRequired,
   dispatch: PropTypes.func.isRequired,
   height: PropTypes.number.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   playingSongId: PropTypes.number,
   playlist: PropTypes.string.isRequired,
-  playlists: PropTypes.shape({}).isRequired,
   songs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
@@ -122,9 +122,8 @@ class SongCards extends Component {
   }
 
   render() {
-    const { playlist, playlists } = this.props;
+    const { isFetching } = this.props;
     const { end, paddingBottom, paddingTop, start } = this.state;
-    const isFetching = playlist in playlists ? playlists[playlist].isFetching : false;
 
     return (
       <div className="content">

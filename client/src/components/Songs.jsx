@@ -15,9 +15,9 @@ const propTypes = {
   dispatch: PropTypes.func.isRequired,
   fetchSongsIfNeeded: PropTypes.func.isRequired,
   height: PropTypes.number.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   playingSongId: PropTypes.number,
   playlist: PropTypes.string.isRequired,
-  playlists: PropTypes.shape({}).isRequired,
   sticky: PropTypes.bool.isRequired,
   songs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   time: PropTypes.number,
@@ -42,9 +42,9 @@ class Songs extends Component {
       dispatch,
       fetchSongsIfNeeded,
       height,
+      isFetching,
       playingSongId,
       playlist,
-      playlists,
       sticky,
       songs,
       time,
@@ -57,10 +57,10 @@ class Songs extends Component {
           <SongCards
             authed={authed}
             dispatch={dispatch}
+            isFetching={isFetching}
             height={height}
             playingSongId={playingSongId}
             playlist={playlist}
-            playlists={playlists}
             onScroll={() => { fetchSongsIfNeeded(playlist); }}
             songs={songs}
           />

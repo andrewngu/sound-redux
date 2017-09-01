@@ -300,13 +300,13 @@ export function toggleLike(songId) {
   return (dispatch, getState) => {
     const { authed, player } = getState();
     const { likes } = authed;
-    const { selectedPlaylists, currentSongIndex } = player;
+    const { playlistHistory, playingIndex } = player;
     const liked = songId in likes && likes[songId] === 1 ? 0 : 1;
     if (!(songId in likes)) {
       dispatch(appendLike(songId));
-      if (currentSongIndex !== null
-      && selectedPlaylists[selectedPlaylists.length - 1] === `likes${AUTHED_PLAYLIST_SUFFIX}`) {
-        dispatch(changePlayingSong(currentSongIndex + 1));
+      if (playingIndex !== null
+      && playlistHistory[playlistHistory.length - 1] === `likes${AUTHED_PLAYLIST_SUFFIX}`) {
+        dispatch(changePlayingSong(playingIndex + 1));
       }
     }
 

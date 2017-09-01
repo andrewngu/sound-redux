@@ -17,6 +17,12 @@ export const getPlaylist = createSelector(
   },
 );
 
+export const getIsFetching = createSelector(
+  getPlaylist,
+  getPlaylists,
+  (playlist, playlists) => (playlist in playlists ? playlists[playlist].isFetching : false),
+);
+
 export const getSongs = createSelector(
   getPlaylist,
   getPlaylists,
