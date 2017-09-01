@@ -89,14 +89,14 @@ export function removeUnlikedSongsPre() {
   return (dispatch, getState) => {
     const LIKES_PLAYLIST_KEY = `likes${AUTHED_PLAYLIST_SUFFIX}`;
     const { authed, player, playlists } = getState();
-    const { currentSongIndex } = player;
+    const { playingIndex } = player;
     const playingPlaylist = getPlayingPlaylist(player);
 
     const likedSongs = playlists[LIKES_PLAYLIST_KEY].items
       .filter(songId => songId in authed.likes && authed.likes[songId] === 1);
 
     if (playingPlaylist === LIKES_PLAYLIST_KEY
-    && currentSongIndex >= likedSongs.length) {
+    && playingIndex >= likedSongs.length) {
       dispatch(changePlayingSong(null));
     }
 

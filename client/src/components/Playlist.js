@@ -21,9 +21,9 @@ class Playlist extends Component {
   }
 
   getShownPlaylistIndex() {
-    const { selectedPlaylists } = this.props.player;
+    const { playlistHistory } = this.props.player;
     const { shownPlaylistIndex } = this.state;
-    const lastPlaylistIndex = selectedPlaylists.length - 1;
+    const lastPlaylistIndex = playlistHistory.length - 1;
     if (shownPlaylistIndex === null) {
       return lastPlaylistIndex;
     }
@@ -32,19 +32,19 @@ class Playlist extends Component {
   }
 
   getShownPlaylist(shownPlaylistIndex) {
-    const { selectedPlaylists } = this.props.player;
-    return selectedPlaylists[shownPlaylistIndex];
+    const { playlistHistory } = this.props.player;
+    return playlistHistory[shownPlaylistIndex];
   }
 
-  isActiveSong(currentPlaylist, currentSongIndex, i, shownPlaylist) {
-    return currentPlaylist === shownPlaylist && i === currentSongIndex;
+  isActiveSong(currentPlaylist, playingIndex, i, shownPlaylist) {
+    return currentPlaylist === shownPlaylist && i === playingIndex;
   }
 
   changeShownPlaylistIndex(i, e) {
     e.preventDefault();
     const { player } = this.props;
-    const { selectedPlaylists } = player;
-    if (i < 0 || i >= selectedPlaylists.length) {
+    const { playlistHistory } = player;
+    if (i < 0 || i >= playlistHistory.length) {
       return;
     }
 
@@ -67,20 +67,20 @@ class Playlist extends Component {
 
   render() {
     const { playlists, player, songs } = this.props;
-    const { currentSongIndex, selectedPlaylists } = player;
-    const currentPlaylist = selectedPlaylists[selectedPlaylists.length - 1];
+    const { playingIndex, playlistHistory } = player;
+    const currentPlaylist = playlistHistory[playlistHistory.length - 1];
     const shownPlaylistIndex = this.getShownPlaylistIndex();
     const shownPlaylist = this.getShownPlaylist(shownPlaylistIndex);
     const stopPropagationFunc = e => { e.stopPropagation(); };
 
     const prevPlaylistFunc = this.changeShownPlaylistIndex.bind(this, shownPlaylistIndex - 1);
     const isFirstPlaylist = shownPlaylistIndex === 0;
-    const isLastPlaylist = shownPlaylistIndex === selectedPlaylists.length - 1;
+    const isLastPlaylist = shownPlaylistIndex === playlistHistory.length - 1;
     const nextPlaylistFunc = this.changeShownPlaylistIndex.bind(this, shownPlaylistIndex + 1);
 
     const items = playlists[shownPlaylist].items.map((songId, i) => {
       const song = songs[songId];
-      const isActiveSong = this.isActiveSong(currentPlaylist, currentSongIndex, i, shownPlaylist);
+      const isActiveSong = this.isActiveSong(currentPlaylist, playingIndex, i, shownPlaylist);
       const playSongFunc = this.playSong.bind(this, shownPlaylist, i);
       return (
         <li

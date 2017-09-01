@@ -15,7 +15,7 @@ export function changePlayingSong(songIndex) {
   };
 }
 
-export function changeSelectedPlaylists(playlists, playlist) {
+export function changeplaylistHistory(playlists, playlist) {
   const index = playlists.indexOf(playlist);
   if (index > -1) {
     playlists.splice(index, 1);
@@ -31,14 +31,14 @@ export function changeSelectedPlaylists(playlists, playlist) {
 export function changeSong(changeType) {
   return (dispatch, getState) => {
     const { player, playlists } = getState();
-    const { currentSongIndex, selectedPlaylists } = player;
-    const currentPlaylist = selectedPlaylists[selectedPlaylists.length - 1];
+    const { playingIndex, playlistHistory } = player;
+    const currentPlaylist = playlistHistory[playlistHistory.length - 1];
     let newSongIndex;
 
     if (changeType === CHANGE_TYPES.NEXT) {
-      newSongIndex = currentSongIndex + 1;
+      newSongIndex = playingIndex + 1;
     } else if (changeType === CHANGE_TYPES.PREV) {
-      newSongIndex = currentSongIndex - 1;
+      newSongIndex = playingIndex - 1;
     } else if (changeType === CHANGE_TYPES.SHUFFLE) {
       newSongIndex = Math.floor((Math.random() * playlists[currentPlaylist].items.length - 1) + 0);
     }
@@ -56,10 +56,10 @@ export function playSong(playlist, songIndex) {
     dispatch(changeCurrentTime(0));
 
     const { player } = getState();
-    const { selectedPlaylists } = player;
-    const len = selectedPlaylists.length;
-    if (len === 0 || selectedPlaylists[len - 1] !== playlist) {
-      dispatch(changeSelectedPlaylists(selectedPlaylists, playlist));
+    const { playlistHistory } = player;
+    const len = playlistHistory.length;
+    if (len === 0 || playlistHistory[len - 1] !== playlist) {
+      dispatch(changeplaylistHistory(playlistHistory, playlist));
     }
 
     dispatch(changePlayingSong(songIndex));

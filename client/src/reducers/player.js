@@ -1,10 +1,10 @@
 import * as types from '../constants/ActionTypes';
 
 const initialState = {
-  currentSongIndex: null,
   currentTime: 0,
   isPlaying: false,
-  selectedPlaylists: [],
+  playingIndex: null,
+  playlistHistory: [],
 };
 
 export default function player(state = initialState, action) {
@@ -16,12 +16,12 @@ export default function player(state = initialState, action) {
 
     case types.CHANGE_PLAYING_SONG:
       return Object.assign({}, state, {
-        currentSongIndex: action.songIndex,
+        playingIndex: action.songIndex,
       });
 
     case types.CHANGE_SELECTED_PLAYLISTS:
       return Object.assign({}, state, {
-        selectedPlaylists: action.playlists,
+        playlistHistory: action.playlists,
       });
 
     case types.RESET_AUTHED:
