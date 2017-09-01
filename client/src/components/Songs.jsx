@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import { fetchSongsIfNeeded } from '../actions/PlaylistsActions';
-
 import SongCards from '../components/SongCards';
 import stickify from '../components/Stickify';
 import Toolbar from '../components/Toolbar';
@@ -22,18 +20,14 @@ const propTypes = {
 
 class Songs extends Component {
   componentWillMount() {
-    const { dispatch, playlist, playlists } = this.props;
-    if (!(playlist in playlists) || playlists[playlist].items.length === 0) {
-      dispatch(fetchSongsIfNeeded(playlist));
-    }
+    const { fetchSongsIfNeeded, playlist } = this.props;
+    fetchSongsIfNeeded(playlist);
   }
 
   componentWillReceiveProps(nextProps) {
-    const { dispatch, playlist, playlists } = this.props;
+    const { fetchSongsIfNeeded, playlist } = this.props;
     if (playlist !== nextProps.playlist) {
-      if (!(nextProps.playlist in playlists) || playlists[nextProps.playlist].items.length === 0) {
-        dispatch(fetchSongsIfNeeded(nextProps.playlist));
-      }
+      fetchSongsIfNeeded(playlist);
     }
   }
 
@@ -41,6 +35,7 @@ class Songs extends Component {
     const {
       authed,
       dispatch,
+      fetchSongsIfNeeded,
       height,
       playingSongId,
       playlist,
@@ -62,7 +57,7 @@ class Songs extends Component {
             playingSongId={playingSongId}
             playlist={playlist}
             playlists={playlists}
-            scrollFunc={fetchSongsIfNeeded.bind(null, playlist)}
+            scrollFunc={() => { fetchSongsIfNeeded(playlist); }}
             songs={songs}
             users={users}
           />

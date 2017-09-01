@@ -19,6 +19,21 @@ function playlist(state = initialPlaylistState, action) {
         items: [action.songId, ...state.items],
       });
 
+    case types.FETCH_SONGS_REQUEST:
+      return {
+        ...state,
+        isFetching: true,
+      };
+
+    case types.FETCH_SONGS_SUCCESS:
+      return {
+        ...state,
+        futureUrl: action.futureUrl,
+        isFetching: false,
+        items: [...state.items, ...action.items],
+        nextUrl: action.nextUrl,
+      };
+
     case types.RECEIVE_SONGS:
       return Object.assign({}, state, {
         isFetching: false,
@@ -64,6 +79,18 @@ export default function playlists(state = initialState, action) {
       return Object.assign({}, state, {
         [LIKES_PLAYLIST_KEY]: playlist(state[LIKES_PLAYLIST_KEY], action),
       });
+
+    case types.FETCH_SONGS_REQUEST:
+      return {
+        ...state,
+        [action.playlist]: playlist(state[action.playlist], action),
+      };
+
+    case types.FETCH_SONGS_SUCCESS:
+      return {
+        ...state,
+        [action.playlist]: playlist(state[action.playlist], action),
+      };
 
     case types.RECEIVE_SONGS:
       return Object.assign({}, state, {

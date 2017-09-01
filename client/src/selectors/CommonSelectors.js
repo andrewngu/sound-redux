@@ -1,3 +1,6 @@
+// authed selectors
+export const getAccessToken = state => state.authed.accessToken;
+
 // entities selectors
 export const getEntities = state => state.entities;
 

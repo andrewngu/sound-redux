@@ -14,9 +14,10 @@ class SongCard extends Component {
   }
 
   render() {
-    const { authed, dispatch, isActive, song, user } = this.props;
+    const { authed, dispatch, isActive, song } = this.props;
+    const { user } = song;
     const isLiked = Boolean(song.id in authed.likes && authed.likes[song.id] === 1);
-    const image = getImageUrl(song.artwork_url, IMAGE_SIZES.LARGE);
+    const image = getImageUrl(song.artworkUrl, IMAGE_SIZES.LARGE);
 
     return (
       <div className={`card song-card ${(isActive ? ' active' : '')}`}>
@@ -27,7 +28,7 @@ class SongCard extends Component {
           <img
             alt="user avatar"
             className="song-card-user-image"
-            src={getImageUrl(user.avatar_url)}
+            src={getImageUrl(user.avatarUrl)}
           />
           <div className="song-card-details">
             <Link
