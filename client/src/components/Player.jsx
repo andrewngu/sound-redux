@@ -1,14 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import audio from '../components/audio';
 import Slider from '../components/Slider';
 import { formatSeconds } from '../utils/NumberUtils';
 
 const propTypes = {
+  changeVolume: PropTypes.func.isRequired,
   player: PropTypes.shape({}).isRequired,
   song: PropTypes.shape({}).isRequired,
 };
 
-const Player = ({ player, song }) => {
+const Player = ({ changeVolume, player, song }) => {
   const { currentTime, duration, isPlaying, volume } = player;
   const { artworkUrl, title, user } = song;
   const { username } = user;
@@ -77,7 +79,7 @@ const Player = ({ player, song }) => {
         <div className="player__section player__section--volume">
           <Slider
             max={1}
-            onChange={() => {}}
+            onChange={changeVolume}
             value={volume}
           />
         </div>
@@ -88,4 +90,4 @@ const Player = ({ player, song }) => {
 
 Player.propTypes = propTypes;
 
-export default Player;
+export default audio(Player);

@@ -7,13 +7,13 @@
 }
 
 .slider__bar {
-  position: relative;
   width: 100%;
   height: 2px;
   background-color: $lightGray;
 }
 
 .slider__bar__fill {
+  position: relative;
   height: 100%;
   background-color: $green;
 }

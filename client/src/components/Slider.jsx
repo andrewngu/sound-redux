@@ -48,7 +48,7 @@ class Slider extends Component {
 
   render() {
     const { className, max, value } = this.props;
-    const width = `${(max / value) * 100}%`;
+    const width = `${(value / max) * 100}%`;
 
     return (
       <div
@@ -56,9 +56,18 @@ class Slider extends Component {
         ref={(node) => { this.domNode = node; }}
       >
         <div className="slider__bar">
-          <div className="slider__bar__fill" style={{ width }}>
-            <div className="slider__handle" role="button" tabIndex="0" />
-          </div>
+          {max > 0
+            ? (
+              <div className="slider__bar__fill" style={{ width }}>
+                <div
+                  className="slider__handle"
+                  onMouseDown={this.onMouseDown}
+                  role="button"
+                  tabIndex="0"
+                />
+              </div>
+            ) : null
+          }
         </div>
       </div>
     );

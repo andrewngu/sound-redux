@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { prepareStreamUrl } from '../utils/PlayerUtils';
+import prepareStreamUrl from '../utils/PlayerUtils';
 
 const audio = (InnerComponent) => {
   const propTypes = {
@@ -13,15 +13,17 @@ const audio = (InnerComponent) => {
     shuffleIndex: PropTypes.number.isRequired,
     playlist: PropTypes.string.isRequired,
     playSong: PropTypes.func.isRequired,
-    song: PropTypes.shapeOf({}).isRequired,
+    song: PropTypes.shape({}).isRequired,
     timeUpdate: PropTypes.func.isRequired,
-    volumechange: PropTypes.func.isRequired,
+    volumeChange: PropTypes.func.isRequired,
   };
 
   class AudioComponent extends Component {
     constructor() {
       super();
       this.audioElement = null;
+
+      this.changeVolume = this.changeVolume.bind(this);
 
       this.onEnded = this.onEnded.bind(this);
       this.onLoadedMetadata = this.onLoadedMetadata.bind(this);
@@ -66,7 +68,7 @@ const audio = (InnerComponent) => {
       loadedMetadata(Math.floor(audioElement.duration));
     }
 
-    onLoadstart() {
+    onLoadStart() {
       const { loadStart } = this.props;
       loadStart();
     }
@@ -89,8 +91,12 @@ const audio = (InnerComponent) => {
 
     onVolumeChange() {
       const { audioElement, props } = this;
-      const { volumechange } = props;
-      volumechange(audioElement.volume);
+      const { volumeChange } = props;
+      volumeChange(audioElement.volume);
+    }
+
+    changeVolume(volume) {
+      this.audioElement.volume = volume;
     }
 
     render() {
@@ -103,7 +109,11 @@ const audio = (InnerComponent) => {
             ref={(node) => { this.audioElement = node; }}
             src={prepareStreamUrl(streamUrl)}
           />
-          <InnerComponent {...this.props} {...this.state} />
+          <InnerComponent
+            {...this.props}
+            {...this.state}
+            changeVolume={this.changeVolume}
+          />
         </div>
       );
     }
