@@ -2,13 +2,13 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  loadedMetadata,
-  loadStart,
-  pause,
-  play,
+  onLoadedMetadata,
+  onLoadStart,
+  onPause,
+  onPlay,
+  onTimeUpdate,
+  onVolumeChange,
   playSong,
-  timeUpdate,
-  volumeChange,
 } from '../actions/PlayerActions';
 import Player from '../components/Player';
 import { getPlayingSongId, getPlaylists } from '../selectors/CommonSelectors';
@@ -45,11 +45,11 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  loadedMetadata,
-  loadStart,
-  pause,
-  play,
+  onLoadedMetadata,
+  onLoadStart,
+  onPause,
+  onPlay,
+  onTimeUpdate,
+  onVolumeChange,
   playSong,
-  timeUpdate,
-  volumeChange,
 })(PlayerContainer);
