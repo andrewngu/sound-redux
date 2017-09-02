@@ -57,7 +57,6 @@ class Popover extends Component {
       >
         {children[0]}
         {isOpen ? children[1] : null}
-        <span className="player-button-tooltip">Playlist</span>
       </div>
     );
   }

@@ -107,6 +107,7 @@ const audio = (InnerComponent) => {
         <div>
           <audio
             autoPlay
+            id="audio"
             ref={(node) => { this.audioElement = node; }}
             src={prepareStreamUrl(streamUrl)}
           />
