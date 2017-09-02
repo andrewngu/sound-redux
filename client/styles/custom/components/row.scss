@@ -1,0 +1,17 @@
+.row {
+  display: flex;
+  flex-direction: row;
+
+  & + .row {
+    margin-top:  20px;
+  }
+}
+
+.row__cell {
+  flex: 1;
+  overflow: hidden;
+
+  & + .row__cell {
+    margin-left: 20px;
+  }
+}

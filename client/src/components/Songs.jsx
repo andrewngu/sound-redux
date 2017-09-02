@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import SongCards from '../components/SongCards';
+import InfiniteScroll from '../components/InfiniteScroll';
+import SongsBody from '../components/SongsBody';
 import SongsHeader from '../components/SongsHeader';
 import stickify from '../components/Stickify';
 
@@ -59,7 +60,7 @@ class Songs extends Component {
     } = this.props;
 
     return (
-      <div className="songs">
+      <InfiniteScroll onScroll={() => fetchSongsIfNeeded(playlist)}>
         <SongsHeader
           genre={genre}
           genres={genres}
@@ -68,7 +69,7 @@ class Songs extends Component {
           times={times}
         />
         <div className="container">
-          <SongCards
+          <SongsBody
             authed={authed}
             dispatch={dispatch}
             isFetching={isFetching}
@@ -76,11 +77,10 @@ class Songs extends Component {
             playingSongId={playingSongId}
             playlist={playlist}
             playSong={playSong}
-            onScroll={() => { fetchSongsIfNeeded(playlist); }}
             songs={songs}
           />
         </div>
-      </div>
+      </InfiniteScroll>
     );
   }
 }
