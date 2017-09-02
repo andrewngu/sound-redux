@@ -86,7 +86,7 @@ const audio = (InnerComponent) => {
     onTimeUpdate() {
       const { audioElement, props } = this;
       const { timeUpdate } = props;
-      timeUpdate(audioElement.currentTime);
+      timeUpdate(Math.floor(audioElement.currentTime));
     }
 
     onVolumeChange() {
@@ -106,6 +106,7 @@ const audio = (InnerComponent) => {
       return (
         <div>
           <audio
+            autoPlay
             ref={(node) => { this.audioElement = node; }}
             src={prepareStreamUrl(streamUrl)}
           />
