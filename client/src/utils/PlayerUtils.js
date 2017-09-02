@@ -1,17 +1,5 @@
-export function getPlayingSongId(player, playlists) {
-  if (player.playingIndex !== null) {
-    const playingPlaylistKey = player.playlistHistory[player.playlistHistory.length - 1];
-    const playlist = playlists[playingPlaylistKey];
-    return playlist.items[player.playingIndex];
-  }
+import { CLIENT_ID } from '../constants/Config';
 
-  return null;
-}
+const prepareStreamUrl = s => `${s}?client_id=${CLIENT_ID}`;
 
-export function getPlayingPlaylist(player) {
-  if (player.playlistHistory.length === 0) {
-    return null;
-  }
-
-  return player.playlistHistory[player.playlistHistory.length - 1];
-}
+export default prepareStreamUrl;

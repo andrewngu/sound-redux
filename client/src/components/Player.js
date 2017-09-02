@@ -13,9 +13,9 @@ import LocalStorageUtils from '../utils/LocalStorageUtils';
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
   player: PropTypes.object.isRequired,
-  playingSongId: PropTypes.number,
+  playingSongId: PropTypes.number.isRequired,
   playlists: PropTypes.object.isRequired,
-  song: PropTypes.object,
+  song: PropTypes.shape({}).isRequired,
   songs: PropTypes.object.isRequired,
   users: PropTypes.object.isRequired,
 };
@@ -384,10 +384,9 @@ class Player extends Component {
   }
 
   render() {
-    const { dispatch, player, playingSongId, songs, users } = this.props;
+    const { dispatch, player, playingSongId, song, songs, users } = this.props;
+    const { user } = song;
     const { isPlaying } = player;
-    const song = songs[playingSongId];
-    const user = users[song.user_id];
     const { currentTime } = player;
     const { duration } = this.state;
     const prevFunc = this.changeSong.bind(this, CHANGE_TYPES.PREV);
@@ -401,7 +400,7 @@ class Player extends Component {
         <audio
           id="audio"
           ref={(node) => { this.audio = node; }}
-          src={formatStreamUrl(song.stream_url)}
+          src={formatStreamUrl(song.streamUrl)}
         />
         <div className="container">
           <div className="player-main">
@@ -409,7 +408,14 @@ class Player extends Component {
               <img
                 alt="song artwork"
                 className="player-image"
-                src={getImageUrl(song.artwork_url)}
+                src={getImageUrl(song.artworkUrl)}
+              />
+              <SongDetails
+                dispatch={dispatch}
+                songId={song.id}
+                title={song.title}
+                userId={user.id}
+                username={user.username}
               />
             </div>
             <div className="player-section">

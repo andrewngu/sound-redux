@@ -2,7 +2,12 @@ import * as types from '../constants/ActionTypes';
 
 const initialState = {
   currentTime: 0,
+  duration: 0,
   isPlaying: false,
+  muted: false,
+  repeat: false,
+  shuffle: false,
+  volume: 1,
   playingIndex: null,
   playlistHistory: [],
 };
@@ -24,6 +29,19 @@ const player = (state = initialState, action) => {
         playlistHistory: action.playlists,
       });
 
+    case types.LOAD_START:
+      return {
+        ...state,
+        currentTime: 0,
+        duration: 0,
+      };
+
+    case types.LOADED_METADATA:
+      return {
+        ...state,
+        duration: action.duration,
+      };
+
     case types.RESET_AUTHED:
       return Object.assign({}, state, initialState);
 
@@ -38,6 +56,30 @@ const player = (state = initialState, action) => {
             ? []
             : [action.playlist],
         ],
+      };
+
+    case types.PAUSE:
+      return {
+        ...state,
+        isPlaying: false,
+      };
+
+    case types.PLAY:
+      return {
+        ...state,
+        isPlaying: true,
+      };
+
+    case types.TIME_UPDATE:
+      return {
+        ...state,
+        currentTime: action.currentTime,
+      };
+
+    case types.VOLUME_CHANGE:
+      return {
+        ...state,
+        volume: action.volume,
       };
 
     case types.TOGGLE_IS_PLAYING:
