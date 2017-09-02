@@ -30,10 +30,10 @@ export const WINDOW_RESIZE = 'WINDOW_RESIZE';
 
 export const FETCH_SONGS_REQUEST = 'FETCH_SONGS_REQUEST';
 export const FETCH_SONGS_SUCCESS = 'FETCH_SONGS_SUCCESS';
-export const LOAD_START = 'LOAD_START';
-export const LOADED_METADATA = 'LOADED_METADATA';
-export const PLAY = 'PLAY';
+export const ON_LOAD_START = 'ON_LOAD_START';
+export const ON_LOADED_METADATA = 'ON_LOADED_METADATA';
+export const ON_PAUSE = 'ON_PAUSE';
+export const ON_PLAY = 'ON_PLAY';
+export const ON_TIME_UPDATE = 'ON_TIME_UPDATE';
+export const ON_VOLUME_CHANGE = 'ON_VOLUME_CHANGE';
 export const PLAY_SONG = 'PLAY_SONG';
-export const PAUSE = 'PAUSE';
-export const TIME_UPDATE = 'TIME_UPDATE';
-export const VOLUME_CHANGE = 'VOLUME_CHANGE';

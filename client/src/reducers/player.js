@@ -29,17 +29,41 @@ const player = (state = initialState, action) => {
         playlistHistory: action.playlists,
       });
 
-    case types.LOAD_START:
+    case types.ON_LOAD_START:
       return {
         ...state,
         currentTime: 0,
         duration: 0,
       };
 
-    case types.LOADED_METADATA:
+    case types.ON_LOADED_METADATA:
       return {
         ...state,
         duration: action.duration,
+      };
+
+    case types.ON_PAUSE:
+      return {
+        ...state,
+        isPlaying: false,
+      };
+
+    case types.ON_PLAY:
+      return {
+        ...state,
+        isPlaying: true,
+      };
+
+    case types.ON_TIME_UPDATE:
+      return {
+        ...state,
+        currentTime: action.currentTime,
+      };
+
+    case types.ON_VOLUME_CHANGE:
+      return {
+        ...state,
+        volume: action.volume,
       };
 
     case types.RESET_AUTHED:
@@ -56,30 +80,6 @@ const player = (state = initialState, action) => {
             ? []
             : [action.playlist],
         ],
-      };
-
-    case types.PAUSE:
-      return {
-        ...state,
-        isPlaying: false,
-      };
-
-    case types.PLAY:
-      return {
-        ...state,
-        isPlaying: true,
-      };
-
-    case types.TIME_UPDATE:
-      return {
-        ...state,
-        currentTime: action.currentTime,
-      };
-
-    case types.VOLUME_CHANGE:
-      return {
-        ...state,
-        volume: action.volume,
       };
 
     case types.TOGGLE_IS_PLAYING:

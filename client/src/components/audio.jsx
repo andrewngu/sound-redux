@@ -4,18 +4,18 @@ import prepareStreamUrl from '../utils/PlayerUtils';
 
 const audio = (InnerComponent) => {
   const propTypes = {
-    loadedMetadata: PropTypes.func.isRequired,
-    loadStart: PropTypes.func.isRequired,
-    pause: PropTypes.func.isRequired,
-    play: PropTypes.func.isRequired,
+    onLoadedMetadata: PropTypes.func.isRequired,
+    onLoadStart: PropTypes.func.isRequired,
+    onPause: PropTypes.func.isRequired,
+    onPlay: PropTypes.func.isRequired,
+    onTimeUpdate: PropTypes.func.isRequired,
+    onVolumeChange: PropTypes.func.isRequired,
     prevIndex: PropTypes.number.isRequired,
     nextIndex: PropTypes.number.isRequired,
     shuffleIndex: PropTypes.number.isRequired,
     playlist: PropTypes.string.isRequired,
     playSong: PropTypes.func.isRequired,
     song: PropTypes.shape({}).isRequired,
-    timeUpdate: PropTypes.func.isRequired,
-    volumeChange: PropTypes.func.isRequired,
   };
 
   class AudioComponent extends Component {
@@ -64,35 +64,35 @@ const audio = (InnerComponent) => {
 
     onLoadedMetadata() {
       const { audioElement, props } = this;
-      const { loadedMetadata } = props;
-      loadedMetadata(Math.floor(audioElement.duration));
+      const { onLoadedMetadata } = props;
+      onLoadedMetadata(Math.floor(audioElement.duration));
     }
 
     onLoadStart() {
-      const { loadStart } = this.props;
-      loadStart();
+      const { onLoadStart } = this.props;
+      onLoadStart();
     }
 
     onPlay() {
-      const { play } = this.props;
-      play();
+      const { onPlay } = this.props;
+      onPlay();
     }
 
     onPause() {
-      const { pause } = this.props;
-      pause();
+      const { onPause } = this.props;
+      onPause();
     }
 
     onTimeUpdate() {
       const { audioElement, props } = this;
-      const { timeUpdate } = props;
-      timeUpdate(Math.floor(audioElement.currentTime));
+      const { onTimeUpdate } = props;
+      onTimeUpdate(Math.floor(audioElement.currentTime));
     }
 
     onVolumeChange() {
       const { audioElement, props } = this;
-      const { volumeChange } = props;
-      volumeChange(audioElement.volume);
+      const { onVolumeChange } = props;
+      onVolumeChange(audioElement.volume);
     }
 
     changeVolume(volume) {

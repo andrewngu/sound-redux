@@ -5,13 +5,31 @@ export const changeCurrentTime = currentTime => ({
   currentTime,
 });
 
-export const loadedMetadata = duration => ({
-  type: types.LOADED_METADATA,
+export const onLoadedMetadata = duration => ({
+  type: types.ON_LOADED_METADATA,
   duration,
 });
 
-export const loadStart = () => ({
-  type: types.LOAD_START,
+export const onLoadStart = () => ({
+  type: types.ON_LOAD_START,
+});
+
+export const onPause = () => ({
+  type: types.ON_PAUSE,
+});
+
+export const onPlay = () => ({
+  type: types.ON_PLAY,
+});
+
+export const onTimeUpdate = currentTime => ({
+  type: types.ON_TIME_UPDATE,
+  currentTime,
+});
+
+export const onVolumeChange = volume => ({
+  type: types.ON_VOLUME_CHANGE,
+  volume,
 });
 
 export const playSong = (playlist, playingIndex) => ({
@@ -20,25 +38,7 @@ export const playSong = (playlist, playingIndex) => ({
   playingIndex,
 });
 
-export const pause = () => ({
-  type: types.PAUSE,
-});
-
-export const play = () => ({
-  type: types.PLAY,
-});
-
-export const timeUpdate = currentTime => ({
-  type: types.TIME_UPDATE,
-  currentTime,
-});
-
 export const toggleIsPlaying = isPlaying => ({
   type: types.TOGGLE_IS_PLAYING,
   isPlaying,
-});
-
-export const volumeChange = volume => ({
-  type: types.VOLUME_CHANGE,
-  volume,
 });
