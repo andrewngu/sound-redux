@@ -30,4 +30,10 @@ export const WINDOW_RESIZE = 'WINDOW_RESIZE';
 
 export const FETCH_SONGS_REQUEST = 'FETCH_SONGS_REQUEST';
 export const FETCH_SONGS_SUCCESS = 'FETCH_SONGS_SUCCESS';
+export const LOAD_START = 'LOAD_START';
+export const LOADED_METADATA = 'LOADED_METADATA';
+export const PLAY = 'PLAY';
 export const PLAY_SONG = 'PLAY_SONG';
+export const PAUSE = 'PAUSE';
+export const TIME_UPDATE = 'TIME_UPDATE';
+export const VOLUME_CHANGE = 'VOLUME_CHANGE';
