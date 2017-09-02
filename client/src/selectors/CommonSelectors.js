@@ -26,9 +26,9 @@ export const getPlayingSongId = createSelector(
 );
 
 // router selectors
-export const getGenre = state => state.router.route.options.g || 'house';
-export const getSearch = state => state.router.route.options.q || '';
-export const getTime = state => (state.router.route.options.t
-  ? Number(state.router.route.options.t)
-  : null
+export const getGenre = state => (state.router.route.options.q
+  ? ''
+  : (state.router.route.options.g || 'house')
 );
+export const getSearch = state => state.router.route.options.q || '';
+export const getTime = state => state.router.route.options.t || '';

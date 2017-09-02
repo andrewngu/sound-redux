@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import SongCards from '../components/SongCards';
+import SongsHeader from '../components/SongsHeader';
 import stickify from '../components/Stickify';
-import Toolbar from '../components/Toolbar';
 
 const defaultProps = {
   playingSongId: null,
@@ -14,6 +14,8 @@ const propTypes = {
   authed: PropTypes.shape({}).isRequired,
   dispatch: PropTypes.func.isRequired,
   fetchSongsIfNeeded: PropTypes.func.isRequired,
+  genre: PropTypes.string.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   height: PropTypes.number.isRequired,
   isFetching: PropTypes.bool.isRequired,
   playSong: PropTypes.func.isRequired,
@@ -21,7 +23,8 @@ const propTypes = {
   playlist: PropTypes.string.isRequired,
   sticky: PropTypes.bool.isRequired,
   songs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  time: PropTypes.number,
+  time: PropTypes.string.isRequired,
+  times: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 class Songs extends Component {
@@ -42,6 +45,8 @@ class Songs extends Component {
       authed,
       dispatch,
       fetchSongsIfNeeded,
+      genre,
+      genres,
       height,
       isFetching,
       playingSongId,
@@ -50,11 +55,18 @@ class Songs extends Component {
       sticky,
       songs,
       time,
+      times,
     } = this.props;
 
     return (
-      <div className={`songs ${(sticky ? 'sticky' : '')}`}>
-        <Toolbar dispatch={dispatch} playlist={playlist} sticky={sticky} time={time} />
+      <div className="songs">
+        <SongsHeader
+          genre={genre}
+          genres={genres}
+          sticky={sticky}
+          time={time}
+          times={times}
+        />
         <div className="container">
           <SongCards
             authed={authed}

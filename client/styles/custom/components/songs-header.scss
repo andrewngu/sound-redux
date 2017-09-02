@@ -1,0 +1,71 @@
+.songs-header {
+  height: 40px;
+}
+
+.songs-header--sticky {
+  .songs-header__inner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+  }
+}
+
+.songs-header__inner {
+  height: 40px;
+  background-color: $white;
+  border-bottom: 1px solid $lighterGray;
+}
+
+.songs-header__sections {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.songs-header__section {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+  border-right: 1px solid $lighterGray;
+}
+
+.songs-header__section--flex {
+  flex: 1;
+}
+
+.songs-header__genre {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: $darkGray;
+  font-size: 11px;
+  font-weight: 300;
+  text-transform: uppercase;
+  border-left: 1px solid $lighterGray;
+}
+
+.songs-header__icon {
+  color: $lightGray;
+  margin-left: 26px;
+}
+
+.songs-header__time {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  margin-left: 20px;
+  color: $darkGray;
+  font-size: 11px;
+  font-weight: 300;
+
+  &:last-child {
+    margin-right: 26px;
+  }
+}
