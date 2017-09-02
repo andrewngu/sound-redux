@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import Player from '../components/Player';
-import { getPlayingSongId } from '../selectors/CommonSelectors';
+import { getPlayingSongId, getPlaylists } from '../selectors/CommonSelectors';
 import getSong from '../selectors/PlayerSelectors';
 
 const defaultProps = {
@@ -22,13 +22,13 @@ PlayerContainer.defaultProps = defaultProps;
 PlayerContainer.propTypes = propTypes;
 
 const mapStateToProps = (state) => {
-  const { entities, player, playlists } = state;
+  const { entities, player } = state;
   const { songs, users } = entities;
 
   return {
     player,
     playingSongId: getPlayingSongId(state),
-    playlists,
+    playlists: getPlaylists(state),
     song: getSong(state),
     songs,
     users,

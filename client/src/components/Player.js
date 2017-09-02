@@ -12,12 +12,12 @@ import LocalStorageUtils from '../utils/LocalStorageUtils';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
-  player: PropTypes.object.isRequired,
+  player: PropTypes.shape({}).isRequired,
   playingSongId: PropTypes.number.isRequired,
-  playlists: PropTypes.object.isRequired,
+  playlists: PropTypes.shape({}).isRequired,
   song: PropTypes.shape({}).isRequired,
-  songs: PropTypes.object.isRequired,
-  users: PropTypes.object.isRequired,
+  songs: PropTypes.shape({}).isRequired,
+  users: PropTypes.shape({}).isRequired,
 };
 
 class Player extends Component {
