@@ -4,6 +4,7 @@ import Link from '../components/Link';
 import SongHeartCount from '../components/SongHeartCount';
 import Waveform from '../components/Waveform';
 
+import { SONG_PATH, USER_PATH } from '../constants/RouterConstants';
 import { IMAGE_SIZES } from '../constants/SongConstants';
 
 import TogglePlayButtonContainer from '../containers/TogglePlayButtonContainer';
@@ -54,6 +55,8 @@ class SongListItem extends Component {
             <Link
               className="song-list-item-title"
               dispatch={dispatch}
+              keys={{ id: String(song.id) }}
+              path={SONG_PATH}
               route={{ path: ['songs', song.id] }}
             >
               {song.title}
@@ -67,7 +70,8 @@ class SongListItem extends Component {
                 <Link
                   className="song-list-item-username"
                   dispatch={dispatch}
-                  route={{ path: ['users', song.user_id] }}
+                  key={{ id: String(song.user_id) }}
+                  path={USER_PATH}
                 >
                   {user.username}
                 </Link>

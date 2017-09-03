@@ -34,5 +34,6 @@ export const getGenre = state => (state.router.route.options.q
   ? ''
   : (state.router.route.options.g || 'house')
 );
+export const getId = state => state.router.route.keys.id;
 export const getSearch = state => state.router.route.options.q || '';
 export const getTime = state => state.router.route.options.t || '';
