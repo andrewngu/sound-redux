@@ -12,7 +12,7 @@ const propTypes = {
   times: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
-const SongsHeader = ({ genre, genres, navigateTo, sticky, time, times }) => (
+const SongsHeader = ({ genre, genres, navigateTo, search, sticky, time, times }) => (
   <div className={`songs-header ${sticky ? 'songs-header--sticky' : ''}`}>
     <div className="songs-header__inner">
       <div className="songs-header__sections container">
@@ -25,6 +25,7 @@ const SongsHeader = ({ genre, genres, navigateTo, sticky, time, times }) => (
         <SongsHeaderTimes
           genre={genre}
           navigateTo={navigateTo}
+          search={search}
           time={time}
           times={times}
         />

@@ -5,7 +5,7 @@ import { navigateTo } from '../actions/RouterActions';
 import { fetchSongsIfNeeded } from '../actions/PlaylistActions';
 import Songs from '../components/Songs';
 import { GENRES, TIMES } from '../constants/PlaylistConstants';
-import { getGenre, getIsPlaying, getLikes, getPlayingSongId, getTime } from '../selectors/CommonSelectors';
+import { getGenre, getIsPlaying, getLikes, getPlayingSongId, getSearch, getTime } from '../selectors/CommonSelectors';
 import { getIsFetching, getPlaylist, getSongs } from '../selectors/SongsSelectors';
 
 const SongsContainer = props => <Songs {...props} />;
@@ -25,6 +25,7 @@ const mapStateToProps = (state) => {
     songs: getSongs(state),
     genre: getGenre(state),
     genres: GENRES,
+    search: getSearch(state),
     time: getTime(state),
     times: TIMES,
   };
