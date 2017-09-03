@@ -22,12 +22,14 @@ const SongMain = ({ isActive, navigateTo, player, playSong, song }) => {
 
   return (
     <div className="song-main">
-      <div
-        className="song-main__artwork"
-        style={{
-          backgroundImage: `url(${getImageUrl(artworkUrl, IMAGE_SIZES.LARGE)})`,
-        }}
-      />
+      <div className="song-main__artwork">
+        <div
+          className="song-main__artwork__image"
+          style={{
+            backgroundImage: `url(${getImageUrl(artworkUrl, IMAGE_SIZES.LARGE)})`,
+          }}
+        />
+      </div>
       <div className="song-main__main">
         <div className="song-main__title">
           {song.title}
@@ -65,15 +67,14 @@ const SongMain = ({ isActive, navigateTo, player, playSong, song }) => {
           {song.description}
         </div>
       </div>
-      <div className="song-main__waveform">
-        <Waveform
-          currentTime={currentTime}
-          duration={duration}
-          isActive={isActive}
-          playSong={playSong}
-          waveformUrl={waveformUrl.replace('https', 'http')}
-        />
-      </div>
+      <Waveform
+        className="song-main__waveform"
+        currentTime={currentTime}
+        duration={duration}
+        isActive={isActive}
+        playSong={playSong}
+        waveformUrl={waveformUrl.replace('https', 'http')}
+      />
     </div>
   );
 };
