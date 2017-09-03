@@ -14,6 +14,8 @@ const propTypes = {
   authed: PropTypes.shape({}).isRequired,
   height: PropTypes.number.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  likes: PropTypes.shape({}).isRequired,
   playingSongId: PropTypes.number,
   playlist: PropTypes.string.isRequired,
   playSong: PropTypes.func.isRequired,
@@ -54,7 +56,16 @@ class SongBody extends Component {
   }
 
   render() {
-    const { authed, isFetching, playingSongId, playlist, playSong, songs } = this.props;
+    const {
+      authed,
+      isFetching,
+      isPlaying,
+      likes,
+      playingSongId,
+      playlist,
+      playSong,
+      songs,
+    } = this.props;
     const { end, paddingBottom, paddingTop, start } = this.state;
 
     return (
@@ -63,6 +74,8 @@ class SongBody extends Component {
         <SongsBodyRendered
           authed={authed}
           end={end}
+          isPlaying={isPlaying}
+          likes={likes}
           playingSongId={playingSongId}
           playlist={playlist}
           playSong={playSong}
