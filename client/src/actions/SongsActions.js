@@ -1,13 +1,15 @@
 import { normalize } from 'normalizr';
+import { fetchSongSuccess } from '../actions/PlaylistActions';
 import { receiveSongs } from '../actions/PlaylistsActions';
 import * as types from '../constants/ActionTypes';
+import { SONG_URL } from '../constants/ApiConstants';
 import { SONG_PLAYLIST_SUFFIX } from '../constants/PlaylistConstants';
 import { songSchema } from '../constants/Schemas';
 import {
-  constructSongUrl,
   constructSongCommentsUrl,
   constructUserSongsUrl,
 } from '../utils/SongUtils';
+import callApi from '../utils/ApiUtils';
 
 function fetchRelatedSongs(userId, songTitle) {
   return dispatch =>
@@ -26,38 +28,30 @@ function fetchRelatedSongs(userId, songTitle) {
       .catch(err => { throw err; });
 }
 
-export function fetchSongIfNeeded(songId) {
-  return (dispatch, getState) => {
-    const { entities, playlists } = getState();
-    const { songs } = entities;
-    if (!(songId in songs) || songs[songId].waveform_url.indexOf('json') > -1) {
-      dispatch(fetchSong(songId));
-    } else {
-      const song = songs[songId];
-      const songPlaylistKey = song.title + SONG_PLAYLIST_SUFFIX;
-      if (!(songPlaylistKey in playlists)) {
-        dispatch(receiveSongs({}, [songId], songPlaylistKey, null));
-      }
 
-      if (!('comments' in songs[songId])) {
-        dispatch(fetchSongData(songId, song.user_id, song.title));
-      }
-    }
-  };
-}
+const fetchSong = (id, playlist) => async (dispatch) => {
+  const { json } = await callApi(SONG_URL.replace(':id', id));
 
-function fetchSong(songId) {
-  return dispatch => {
-    dispatch(requestSong(songId));
-    return fetch(constructSongUrl(songId))
-      .then(response => response.json())
-      .then(json => {
-        const normalized = normalize(json, songSchema);
-        dispatch(receiveSongPre(songId, normalized.entities));
-      })
-      .catch(err => { throw err; });
-  };
-}
+  const { entities, result } = normalize(json, songSchema);
+  dispatch(fetchSongSuccess(playlist, [result], entities, null, null));
+};
+
+
+const shouldFetchSong = (id, state) => {
+  const { entities } = state;
+  const { songs } = entities;
+  const songExists = id in songs;
+  const songHasWaveform = songExists ? songs[id].waveformUrl.indexOf('json') > -1 : null;
+
+  return !songExists || !songHasWaveform;
+};
+
+
+export const fetchSongIfNeeded = (id, playlist) => (dispatch, getState) => {
+  if (shouldFetchSong(id, getState())) {
+    dispatch(fetchSong(id, playlist));
+  }
+};
 
 function fetchSongComments(songId) {
   return dispatch =>

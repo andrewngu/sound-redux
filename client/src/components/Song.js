@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { playSong } from '../actions/PlayerActions';
-import { fetchSongIfNeeded } from '../actions/SongsActions';
 
 import Comments from '../components/Comments';
 import SongListItem from '../components/SongListItem';
@@ -20,10 +19,12 @@ const defaultProps = {
 const propTypes = {
   authed: PropTypes.shape({}).isRequired,
   dispatch: PropTypes.func.isRequired,
+  fetchSongIfNeeded: PropTypes.func.isRequired,
   height: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   player: PropTypes.shape({}).isRequired,
   playingSongId: PropTypes.number,
+  playlist: PropTypes.string.isRequired,
   playlists: PropTypes.shape({}).isRequired,
   song: PropTypes.shape({}).isRequired,
   songs: PropTypes.shape({}).isRequired,
@@ -33,14 +34,14 @@ const propTypes = {
 
 class Song extends Component {
   componentWillMount() {
-    const { dispatch, id } = this.props;
-    dispatch(fetchSongIfNeeded(id));
+    const { fetchSongIfNeeded, id, playlist } = this.props;
+    fetchSongIfNeeded(id, playlist);
   }
 
   componentWillReceiveProps(nextProps) {
-    const { dispatch, id } = this.props;
+    const { fetchSongIfNeeded, id } = this.props;
     if (nextProps.id !== id) {
-      dispatch(fetchSongIfNeeded(nextProps.id));
+      fetchSongIfNeeded(nextProps.id, nextProps.playlist);
     }
   }
 
