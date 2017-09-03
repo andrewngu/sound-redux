@@ -40,7 +40,7 @@ class Songs extends Component {
   componentWillReceiveProps(nextProps) {
     const { fetchSongsIfNeeded, playlist } = this.props;
     if (playlist !== nextProps.playlist) {
-      fetchSongsIfNeeded(playlist);
+      fetchSongsIfNeeded(nextProps.playlist);
     }
   }
 
@@ -70,6 +70,7 @@ class Songs extends Component {
         <SongsHeader
           genre={genre}
           genres={genres}
+          navigateTo={navigateTo}
           sticky={sticky}
           time={time}
           times={times}

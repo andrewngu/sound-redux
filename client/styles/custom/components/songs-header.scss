@@ -47,7 +47,20 @@
   font-size: 11px;
   font-weight: 300;
   text-transform: uppercase;
+  border-bottom: 2px solid transparent;
+  border-top: 2px solid transparent;
   border-left: 1px solid $lighterGray;
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    color: $black;
+    text-decoration: none;
+  }
+}
+
+.songs-header__genre--active {
+  border-bottom-color: $green;
+  color: $black;
 }
 
 .songs-header__icon {
@@ -64,8 +77,21 @@
   color: $darkGray;
   font-size: 11px;
   font-weight: 300;
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    color: $blue;
+    text-decoration: none;
+  }
 
   &:last-child {
     margin-right: 18px;
   }
+}
+
+.songs-header__time--active {
+  color: $blue;
+  border-bottom-color: $blue;
 }
