@@ -6,11 +6,12 @@ import { SONGS_PATH } from '../constants/RouterConstants';
 const propTypes = {
   genre: PropTypes.string.isRequired,
   navigateTo: PropTypes.func.isRequired,
+  search: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
   times: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
-const SongsHeaderTimes = ({ genre, navigateTo, time, times }) => (
+const SongsHeaderTimes = ({ genre, navigateTo, search, time, times }) => (
   <div className="songs-header__section">
     <i className="songs-header__icon ion-funnel" />
     {times.map(t => (
@@ -19,8 +20,9 @@ const SongsHeaderTimes = ({ genre, navigateTo, time, times }) => (
         key={t.key}
         navigateTo={navigateTo}
         options={{
-          t: t.key,
+          ...time !== t.key ? { t: t.key } : {},
           ...genre ? { g: genre } : {},
+          ...search ? { q: search } : {},
         }}
         path={SONGS_PATH}
       >
