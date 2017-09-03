@@ -7,11 +7,25 @@ import { formatSeconds } from '../utils/NumberUtils';
 const propTypes = {
   changeVolume: PropTypes.func.isRequired,
   player: PropTypes.shape({}).isRequired,
+  playNextSong: PropTypes.func.isRequired,
+  playPrevSong: PropTypes.func.isRequired,
   song: PropTypes.shape({}).isRequired,
+  togglePlay: PropTypes.func.isRequired,
+  toggleRepeat: PropTypes.func.isRequired,
+  toggleShuffle: PropTypes.func.isRequired,
 };
 
-const Player = ({ changeVolume, player, song }) => {
-  const { currentTime, duration, isPlaying, volume } = player;
+const Player = ({
+  changeVolume,
+  player,
+  playNextSong,
+  playPrevSong,
+  song,
+  togglePlay,
+  toggleRepeat,
+  toggleShuffle,
+}) => {
+  const { currentTime, duration, isPlaying, repeat, shuffle, volume } = player;
   const { artworkUrl, title, user } = song;
   const { username } = user;
 
@@ -33,13 +47,28 @@ const Player = ({ changeVolume, player, song }) => {
         </div>
         <div className="player__section">
           <div className="player__buttons">
-            <div className="player__button">
+            <div
+              className="player__button"
+              onClick={playPrevSong}
+              role="button"
+              tabIndex="0"
+            >
               <i className="player__button__icon ion-ios-rewind" />
             </div>
-            <div className="player__button">
+            <div
+              className="player__button"
+              onClick={togglePlay}
+              role="button"
+              tabIndex="0"
+            >
               <i className={`player__button__icon ion-ios-${isPlaying ? 'pause' : 'play'}`} />
             </div>
-            <div className="player__button">
+            <div
+              className="player__button"
+              onClick={() => playNextSong(true)}
+              role="button"
+              tabIndex="0"
+            >
               <i className="player__button__icon ion-ios-fastforward" />
             </div>
           </div>
@@ -62,10 +91,20 @@ const Player = ({ changeVolume, player, song }) => {
         </div>
         <div className="player__section">
           <div className="player__buttons">
-            <div className="player__button">
+            <div
+              className={`player__button ${repeat ? 'player__button--active' : ''}`}
+              onClick={toggleRepeat}
+              role="button"
+              tabIndex="0"
+            >
               <i className="player__button__icon ion-loop" />
             </div>
-            <div className="player__button">
+            <div
+              className={`player__button ${shuffle ? 'player__button--active' : ''}`}
+              onClick={toggleShuffle}
+              role="button"
+              tabIndex="0"
+            >
               <i className="player__button__icon ion-shuffle" />
             </div>
             <div className="player__button">

@@ -1,4 +1,6 @@
 import * as types from '../constants/ActionTypes';
+import { getRepeat, getShuffle } from '../selectors/CommonSelectors';
+import { getNextIndex, getPlaylist, getPrevIndex, getShuffleIndex } from '../selectors/PlayerSelectors';
 
 export const changeCurrentTime = currentTime => ({
   type: types.CHANGE_CURRENT_TIME,
@@ -38,7 +40,36 @@ export const playSong = (playlist, playingIndex) => ({
   playingIndex,
 });
 
+export const playPrevSong = () => (dispatch, getState) => {
+  const state = getState();
+  const playlist = getPlaylist(state);
+  const prevIndex = getPrevIndex(state);
+
+  if (prevIndex !== null) {
+    dispatch(playSong(playlist, prevIndex));
+  }
+};
+
+export const playNextSong = (fromButtonPress = false) => (dispatch, getState) => {
+  const state = getState();
+  const nextIndex = getNextIndex(state);
+  const playlist = getPlaylist(state);
+  const repeat = getRepeat(state);
+  const shuffle = getShuffle(state);
+
+  if (shuffle) {
+    const shuffleIndex = getShuffleIndex(state);
+    dispatch(playSong(playlist, shuffleIndex));
+  } else if (nextIndex !== 0 || repeat || fromButtonPress) {
+    dispatch(playSong(playlist, nextIndex));
+  }
+};
+
 export const toggleIsPlaying = isPlaying => ({
   type: types.TOGGLE_IS_PLAYING,
   isPlaying,
 });
+
+export const toggleRepeat = () => ({ type: types.TOGGLE_REPEAT });
+
+export const toggleShuffle = () => ({ type: types.TOGGLE_SHUFFLE });

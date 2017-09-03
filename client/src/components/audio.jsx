@@ -2,28 +2,22 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import prepareStreamUrl from '../utils/PlayerUtils';
 
-const audio = (InnerComponent) => {
-  const propTypes = {
-    onLoadedMetadata: PropTypes.func.isRequired,
-    onLoadStart: PropTypes.func.isRequired,
-    onPause: PropTypes.func.isRequired,
-    onPlay: PropTypes.func.isRequired,
-    onTimeUpdate: PropTypes.func.isRequired,
-    onVolumeChange: PropTypes.func.isRequired,
-    prevIndex: PropTypes.number.isRequired,
-    nextIndex: PropTypes.number.isRequired,
-    shuffleIndex: PropTypes.number.isRequired,
-    playlist: PropTypes.string.isRequired,
-    playSong: PropTypes.func.isRequired,
-    song: PropTypes.shape({}).isRequired,
-  };
+const propTypes = {
+  onLoadedMetadata: PropTypes.func.isRequired,
+  onLoadStart: PropTypes.func.isRequired,
+  onPause: PropTypes.func.isRequired,
+  onPlay: PropTypes.func.isRequired,
+  onTimeUpdate: PropTypes.func.isRequired,
+  onVolumeChange: PropTypes.func.isRequired,
+  playNextSong: PropTypes.func.isRequired,
+  song: PropTypes.shape({}).isRequired,
+};
 
+const audio = (InnerComponent) => {
   class AudioComponent extends Component {
     constructor() {
       super();
       this.audioElement = null;
-
-      this.changeVolume = this.changeVolume.bind(this);
 
       this.onEnded = this.onEnded.bind(this);
       this.onLoadedMetadata = this.onLoadedMetadata.bind(this);
@@ -32,6 +26,9 @@ const audio = (InnerComponent) => {
       this.onPlay = this.onPlay.bind(this);
       this.onTimeUpdate = this.onTimeUpdate.bind(this);
       this.onVolumeChange = this.onVolumeChange.bind(this);
+
+      this.changeVolume = this.changeVolume.bind(this);
+      this.togglePlay = this.togglePlay.bind(this);
     }
 
     componentDidMount() {
@@ -57,9 +54,8 @@ const audio = (InnerComponent) => {
     }
 
     onEnded() {
-      const { shuffle } = this.state;
-      const { nextIndex, playlist, playSong, shuffleIndex } = this.props;
-      playSong(playlist, shuffle ? shuffleIndex : nextIndex);
+      const { playNextSong } = this.props;
+      playNextSong();
     }
 
     onLoadedMetadata() {
@@ -99,6 +95,15 @@ const audio = (InnerComponent) => {
       this.audioElement.volume = volume;
     }
 
+    togglePlay() {
+      const { audioElement } = this;
+      if (audioElement.paused) {
+        audioElement.play();
+      } else {
+        audioElement.pause();
+      }
+    }
+
     render() {
       const { song } = this.props;
       const { streamUrl } = song;
@@ -112,9 +117,10 @@ const audio = (InnerComponent) => {
             src={prepareStreamUrl(streamUrl)}
           />
           <InnerComponent
-            {...this.props}
             {...this.state}
+            {...this.props}
             changeVolume={this.changeVolume}
+            togglePlay={this.togglePlay}
           />
         </div>
       );

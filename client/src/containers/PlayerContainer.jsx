@@ -8,11 +8,15 @@ import {
   onPlay,
   onTimeUpdate,
   onVolumeChange,
+  playNextSong,
+  playPrevSong,
   playSong,
+  toggleRepeat,
+  toggleShuffle,
 } from '../actions/PlayerActions';
 import Player from '../components/Player';
 import { getPlayingSongId, getPlaylists } from '../selectors/CommonSelectors';
-import getSong from '../selectors/PlayerSelectors';
+import { getNextIndex, getSong } from '../selectors/PlayerSelectors';
 
 const defaultProps = {
   song: null,
@@ -35,6 +39,7 @@ const mapStateToProps = (state) => {
   const { songs, users } = entities;
 
   return {
+    nextIndex: getNextIndex(state),
     player,
     playingSongId: getPlayingSongId(state),
     playlists: getPlaylists(state),
@@ -51,5 +56,9 @@ export default connect(mapStateToProps, {
   onPlay,
   onTimeUpdate,
   onVolumeChange,
+  playNextSong,
+  playPrevSong,
   playSong,
+  toggleRepeat,
+  toggleShuffle,
 })(PlayerContainer);

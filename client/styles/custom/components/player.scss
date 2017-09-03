@@ -77,6 +77,21 @@
 
 .player__button {
   padding: 4px;
+  outline: 0;
+
+  &:hover {
+    cursor: pointer;
+
+    .player__button__icon {
+      color: $darkGray;
+    }
+  }
+
+  &:active {
+    .player__button__icon {
+      color: $darkGreen;
+    }
+  }
 
   & + .player__button {
     margin-left: 30px;
@@ -85,6 +100,18 @@
 
 .player__button__icon {
   color: $gray;
+}
+
+.player__button--active {
+  .player__button__icon {
+    color: $green;
+  }
+
+  &:hover {
+    .player__button__icon {
+      color: $darkerGreen;
+    }
+  }
 }
 
 .player__time {

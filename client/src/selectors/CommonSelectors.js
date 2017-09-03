@@ -26,6 +26,8 @@ export const getPlayingSongId = createSelector(
     return null;
   },
 );
+export const getRepeat = state => state.player.repeat;
+export const getShuffle = state => state.player.shuffle;
 
 // router selectors
 export const getGenre = state => (state.router.route.options.q
