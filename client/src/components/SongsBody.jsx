@@ -28,12 +28,7 @@ class SongBody extends Component {
     super(props);
     this.onScroll = this.onScroll.bind(this);
 
-    this.state = {
-      end: props.songs.length,
-      paddingBottom: 0,
-      paddingTop: 0,
-      start: 0,
-    };
+    this.state = scrollState(props.height, props.songs.length);
   }
 
   componentDidMount() {
