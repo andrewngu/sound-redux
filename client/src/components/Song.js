@@ -7,7 +7,7 @@ import Comments from '../components/Comments';
 import Link from '../components/Link';
 import SongListItem from '../components/SongListItem';
 import SongHeartCount from '../components/SongHeartCount';
-import Spinner from '../components/Spinner';
+import Loader from '../components/Loader';
 import stickify from '../components/Stickify';
 import Waveform from '../components/Waveform';
 
@@ -126,7 +126,7 @@ class Song extends Component {
     const { authed, dispatch, playingSongId, player, songId, songs, sticky, users } = this.props;
     const song = songs[songId];
     if (!song) {
-      return <Spinner />;
+      return <Loader />;
     }
 
     const isActive = Boolean(playingSongId && playingSongId === song.id);

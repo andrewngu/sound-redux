@@ -2,8 +2,8 @@
 
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import Loader from '../components/Loader';
 import SongsBodyRendered from '../components/SongsBodyRendered';
-import Spinner from '../components/Spinner';
 import scrollState from '../utils/ScrollUtils';
 
 const defaultProps = {
@@ -81,7 +81,7 @@ class SongBody extends Component {
           start={start}
         />
         <div className="songs-body__padder" style={{ height: `${paddingBottom}px` }} />
-        {isFetching ? <Spinner /> : null}
+        <Loader className="loader--full" isLoading={isFetching} />
       </div>
     );
   }

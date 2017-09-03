@@ -4,7 +4,7 @@ import { fetchSongsIfNeeded } from '../actions/PlaylistsActions';
 import { playSong } from '../actions/PlayerActions';
 import MobileSongListItem from '../components/MobileSongListItem';
 import MobileInfiniteScroll from '../components/MobileInfiniteScroll';
-import Spinner from '../components/Spinner';
+import Loader from '../components/Loader';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -47,7 +47,7 @@ class MobileSongList extends Component {
   renderSpinner() {
     const { playlist, playlists } = this.props;
     if (!(playlist in playlists) || playlists[playlist].isFetching) {
-      return <Spinner />;
+      return <Loader />;
     }
 
     return null;
