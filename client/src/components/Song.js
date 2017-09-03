@@ -4,44 +4,43 @@ import { playSong } from '../actions/PlayerActions';
 import { fetchSongIfNeeded } from '../actions/SongsActions';
 
 import Comments from '../components/Comments';
-import Link from '../components/Link';
 import SongListItem from '../components/SongListItem';
-import SongHeartCount from '../components/SongHeartCount';
 import Loader from '../components/Loader';
+import SongMain from '../components/SongMain';
 import stickify from '../components/Stickify';
-import Waveform from '../components/Waveform';
 
 import TogglePlayButtonContainer from '../containers/TogglePlayButtonContainer';
 
 import { SONG_PLAYLIST_SUFFIX } from '../constants/PlaylistConstants';
-import { IMAGE_SIZES } from '../constants/SongConstants';
 
-import { addCommas } from '../utils/FormatUtils';
-import { getImageUrl } from '../utils/SongUtils';
+const defaultProps = {
+  playingSongId: null,
+};
 
 const propTypes = {
-  authed: PropTypes.object.isRequired,
+  authed: PropTypes.shape({}).isRequired,
   dispatch: PropTypes.func.isRequired,
-  height: PropTypes.number,
-  player: PropTypes.object.isRequired,
+  height: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
+  player: PropTypes.shape({}).isRequired,
   playingSongId: PropTypes.number,
-  playlists: PropTypes.object.isRequired,
-  songId: PropTypes.number,
-  songs: PropTypes.object.isRequired,
+  playlists: PropTypes.shape({}).isRequired,
+  song: PropTypes.shape({}).isRequired,
+  songs: PropTypes.shape({}).isRequired,
   sticky: PropTypes.bool.isRequired,
-  users: PropTypes.object.isRequired,
+  users: PropTypes.shape({}).isRequired,
 };
 
 class Song extends Component {
   componentWillMount() {
-    const { dispatch, songId } = this.props;
-    dispatch(fetchSongIfNeeded(songId));
+    const { dispatch, id } = this.props;
+    dispatch(fetchSongIfNeeded(id));
   }
 
   componentWillReceiveProps(nextProps) {
-    const { dispatch, songId } = this.props;
-    if (nextProps.songId !== songId) {
-      dispatch(fetchSongIfNeeded(nextProps.songId));
+    const { dispatch, id } = this.props;
+    if (nextProps.id !== id) {
+      dispatch(fetchSongIfNeeded(nextProps.id));
     }
   }
 
@@ -114,87 +113,25 @@ class Song extends Component {
   }
 
   render() {
-    const { authed, dispatch, playingSongId, player, songId, songs, sticky, users } = this.props;
-    const song = songs[songId];
+    const { id, playingSongId, player, song, sticky } = this.props;
     if (!song) {
       return <Loader />;
     }
-
-    const isActive = Boolean(playingSongId && playingSongId === song.id);
-    const image = getImageUrl(song.artwork_url, IMAGE_SIZES.LARGE);
-    const playSongFunc = this.playSong.bind(this, 0);
-    const user = song.user_id in users ? users[song.user_id] : {};
 
     return (
       <div className="container">
         <div className="content">
           <div className="grid">
             <div className="col-7-10">
-              <div className={`song card ${(isActive ? ' active' : '')}`}>
-                <div className="song-main">
-                  <div
-                    className="song__image"
-                    style={{ backgroundImage: `url(${image})` }}
-                  >
-                    {this.renderTogglePlayButton()}
-                  </div>
-                  <div className="song__info__wrap">
-                    <div className="song__info">
-                      <div className="song-title">
-                        {song.title}
-                      </div>
-                      <div className="song-user">
-                        <div
-                          className="song-user-image"
-                          style={{ backgroundImage: `url(${getImageUrl(user.avatar_url)})` }}
-                        />
-                        <Link
-                          className="song-username"
-                          dispatch={dispatch}
-                          route={{ path: ['users', user.id] }}
-                        >
-                          {user.username}
-                        </Link>
-                      </div>
-                      <div className="song-stats">
-                        <SongHeartCount
-                          authed={authed}
-                          count={song.likes_count ? song.likes_count : song.favoritings_count}
-                          dispatch={dispatch}
-                          songId={song.id}
-                        />
-                        <div className="song-stat">
-                          <i className="icon ion-play" />
-                          <span>{addCommas(song.playback_count)}</span>
-                        </div>
-                        <div className="song-stat">
-                          <i className="icon ion-chatbubble" />
-                          <span>{addCommas(song.comment_count)}</span>
-                        </div>
-                      </div>
-                      <div className="song-description">
-                        {song.description}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="song-waveform">
-                    <Waveform
-                      currentTime={player.currentTime}
-                      dispatch={dispatch}
-                      duration={song.duration}
-                      isActive={isActive}
-                      playSong={playSongFunc}
-                      waveformUrl={song.waveform_url.replace('https', 'http')}
-                    />
-                  </div>
-                </div>
-              </div>
-              {this.renderSongs()}
+              <SongMain
+                isActive={Boolean(playingSongId === id)}
+                player={player}
+                playSong={playSong}
+                song={song}
+              />
             </div>
             <div className="col-3-10">
-              <div className={`sidebar ${(sticky ? ' sticky' : '')}`}>
-                {this.renderComments()}
-              </div>
+              <div className={`sidebar ${(sticky ? ' sticky' : '')}`} />
             </div>
           </div>
         </div>
@@ -203,6 +140,7 @@ class Song extends Component {
   }
 }
 
+Song.defaultProps = defaultProps;
 Song.propTypes = propTypes;
 
 export default stickify(Song, 50);
