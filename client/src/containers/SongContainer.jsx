@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchSongIfNeeded } from '../actions/SongsActions';
 import Song from '../components/Song';
 import { getId, getPlayingSongId } from '../selectors/CommonSelectors';
-import getSong from '../selectors/SongSelectors';
+import { getPlaylist, getSong } from '../selectors/SongSelectors';
 
 const SongContainer = props => <Song {...props} />;
 
@@ -18,6 +18,7 @@ const mapStateToProps = (state) => {
     id: getId(state),
     player,
     playingSongId: getPlayingSongId(state),
+    playlist: getPlaylist(state),
     playlists,
     song: getSong(state),
     songs,

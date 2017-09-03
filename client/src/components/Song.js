@@ -131,19 +131,15 @@ class Song extends Component {
     return (
       <div className="container">
         <div className="content">
-          <div className="grid">
-            <div className="col-7-10">
-              <SongMain
-                isActive={Boolean(playingSongId === id)}
-                player={player}
-                playSong={playSong}
-                song={song}
-              />
-            </div>
-            <div className="col-3-10">
-              <div className={`sidebar ${(sticky ? ' sticky' : '')}`} />
-            </div>
+          <div className="song__main">
+            <SongMain
+              isActive={Boolean(playingSongId === id)}
+              player={player}
+              playSong={playSong}
+              song={song}
+            />
           </div>
+          <div className="song__sidebar" />
         </div>
       </div>
     );

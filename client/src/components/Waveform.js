@@ -3,7 +3,12 @@ import React, { Component } from 'react';
 import { changeCurrentTime } from '../actions/PlayerActions';
 import { offsetLeft } from '../utils/MouseUtils';
 
+const defaultProps = {
+  className: '',
+};
+
 const propTypes = {
+  className: PropTypes.string,
   currentTime: PropTypes.number,
   dispatch: PropTypes.func.isRequired,
   duration: PropTypes.number,
@@ -116,8 +121,10 @@ class Waveform extends Component {
   }
 
   render() {
+    const { className } = this.props;
+
     return (
-      <div className="waveform">
+      <div className={`waveform ${className}`}>
         <canvas className="waveform-canvas"></canvas>
         {this.renderWaveform()}
       </div>

@@ -1,14 +1,10 @@
-.waveform {
-  width: 100%;
-}
-
 .waveform-canvas {
   display: none;
 }
 
 .waveform-image-container {
   width:  100%;
-  height: 50px;
+  height: 100%;
   position: relative;
 
   &:hover {
