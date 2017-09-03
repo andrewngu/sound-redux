@@ -6,6 +6,7 @@ const defaultProps = {
   className: '',
   keys: {},
   options: {},
+  title: '',
 };
 
 const propTypes = {
@@ -15,6 +16,7 @@ const propTypes = {
   keys: PropTypes.shape({}),
   options: PropTypes.shape({}),
   path: PropTypes.string.isRequired,
+  title: PropTypes.string,
 };
 
 class Link extends Component {
@@ -30,13 +32,14 @@ class Link extends Component {
   }
 
   render() {
-    const { children, className, keys, options, path } = this.props;
+    const { children, className, keys, options, path, title } = this.props;
 
     return (
       <a
         className={className}
         href={`/${compileHash({ path, keys, options })}`}
         onClick={this.onClick}
+        title={title}
       >
         {children}
       </a>

@@ -12,9 +12,14 @@ export const GENRES = [
   { key: 'house', query: 'house' },
   { key: 'progressive', query: 'progressive house' },
   { key: 'tech', query: 'tech house' },
-  { key: 'trance', query: 'trance house' },
+  { key: 'trance', query: 'trance' },
   { key: 'tropical', query: 'tropical house' },
 ];
+
+export const GENRE_QUERY_MAP = GENRES.reduce((obj, genre) => ({
+  ...obj,
+  [genre.key]: genre.query,
+}), {});
 
 export const TIMES = [
   { key: '7', label: '7 days' },
