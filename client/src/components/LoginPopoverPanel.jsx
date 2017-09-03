@@ -5,7 +5,7 @@ const propTypes = {
   login: PropTypes.func.isRequired,
 };
 
-const HeartPopoverPanel = ({ login }) => (
+const LoginPopoverPanel = ({ login }) => (
   <span
     className="button button--orange button--block button--margin"
     onClick={login}
@@ -16,6 +16,6 @@ const HeartPopoverPanel = ({ login }) => (
   </span>
 );
 
-HeartPopoverPanel.propTypes = propTypes;
+LoginPopoverPanel.propTypes = propTypes;
 
-export default HeartPopoverPanel;
+export default LoginPopoverPanel;

@@ -1,0 +1,23 @@
+.nav-user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-user__trigger {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav-user__icon {
+  color: $white;
+  font-size: 20px;
+}
+
+.nav-user__chevron {
+  margin-left: 6px;
+  color: $lightBlack;
+  font-size: 10px;
+}
