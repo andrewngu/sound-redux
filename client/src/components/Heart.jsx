@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import HeartPopover from '../components/HeartPopover';
+import LoginPopoverPanel from '../components/LoginPopoverPanel';
+import Popover from '../components/Popover';
 
 const defaultProps = {
   className: '',
@@ -17,7 +18,14 @@ const propTypes = {
 
 const Heart = ({ isAuthenticated, className, id, liked, login, toggleLike }) => {
   if (!isAuthenticated) {
-    return <HeartPopover className={className} login={login} />;
+    return (
+      <Popover
+        className={className}
+        renderPanel={() => <LoginPopoverPanel login={login} />}
+      >
+        <i className="heart ion-ios-heart" />
+      </Popover>
+    );
   }
 
   return (
