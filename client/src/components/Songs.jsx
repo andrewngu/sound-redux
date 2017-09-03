@@ -19,6 +19,8 @@ const propTypes = {
   genres: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   height: PropTypes.number.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  likes: PropTypes.shape({}).isRequired,
   playSong: PropTypes.func.isRequired,
   playingSongId: PropTypes.number,
   playlist: PropTypes.string.isRequired,
@@ -50,6 +52,8 @@ class Songs extends Component {
       genres,
       height,
       isFetching,
+      isPlaying,
+      likes,
       playingSongId,
       playlist,
       playSong,
@@ -72,8 +76,10 @@ class Songs extends Component {
           <SongsBody
             authed={authed}
             dispatch={dispatch}
-            isFetching={isFetching}
             height={height}
+            isFetching={isFetching}
+            isPlaying={isPlaying}
+            likes={likes}
             playingSongId={playingSongId}
             playlist={playlist}
             playSong={playSong}

@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import SongCard from '../components/SongCard';
+import SongsBodyCard from '../components/SongsBodyCard';
 
 const propTypes = {
   authed: PropTypes.shape({}).isRequired,
   end: PropTypes.number.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  likes: PropTypes.shape({}).isRequired,
   playingSongId: PropTypes.number.isRequired,
   playlist: PropTypes.string.isRequired,
   playSong: PropTypes.func.isRequired,
@@ -12,7 +14,17 @@ const propTypes = {
   start: PropTypes.number.isRequired,
 };
 
-const SongsBodyRendered = ({ authed, end, playingSongId, playlist, playSong, songs, start }) => {
+const SongsBodyRendered = ({
+  authed,
+  end,
+  likes,
+  isPlaying,
+  playingSongId,
+  playlist,
+  playSong,
+  songs,
+  start,
+}) => {
   const cellsPerRow = 5;
   const length = songs.length;
   const rows = [];
@@ -27,10 +39,12 @@ const SongsBodyRendered = ({ authed, end, playingSongId, playlist, playSong, son
       row.push(
         <div className="row__cell" key={index}>
           {song ? (
-            <SongCard
+            <SongsBodyCard
               authed={authed}
               index={index}
               isActive={playingSongId === song.id}
+              isPlaying={isPlaying}
+              liked={Boolean(song.id in likes && likes[song.id])}
               playlist={playlist}
               playSong={playSong}
               song={song}

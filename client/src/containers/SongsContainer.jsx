@@ -4,7 +4,7 @@ import { playSong } from '../actions/PlayerActions';
 import { fetchSongsIfNeeded } from '../actions/PlaylistActions';
 import Songs from '../components/Songs';
 import { GENRES, TIMES } from '../constants/PlaylistConstants';
-import { getPlayingSongId, getGenre, getTime } from '../selectors/CommonSelectors';
+import { getGenre, getIsPlaying, getLikes, getPlayingSongId, getTime } from '../selectors/CommonSelectors';
 import { getIsFetching, getPlaylist, getSongs } from '../selectors/SongsSelectors';
 
 const SongsContainer = props => <Songs {...props} />;
@@ -17,6 +17,8 @@ const mapStateToProps = (state) => {
     authed,
     height,
     isFetching: getIsFetching(state),
+    isPlaying: getIsPlaying(state),
+    likes: getLikes(state),
     playingSongId: getPlayingSongId(state),
     playlist: getPlaylist(state),
     songs: getSongs(state),

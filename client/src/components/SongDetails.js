@@ -15,9 +15,9 @@ class SongDetails extends Component {
   render() {
     const { dispatch, songId, title, userId, username } = this.props;
     return (
-      <div className="song-card-details">
+      <div className="songs-body-card__details">
         <Link
-          className="song-card-title"
+          className="songs-body-card__title"
           dispatch={dispatch}
           route={{ path: ['songs', songId] }}
           title={title}
@@ -25,7 +25,7 @@ class SongDetails extends Component {
           {formatSongTitle(title)}
         </Link>
         <Link
-          className="song-card-user-username"
+          className="songs-body-card__user-username"
           dispatch={dispatch}
           route={{ path: ['users', userId] }}
           title={username}

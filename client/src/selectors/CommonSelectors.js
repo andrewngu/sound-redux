@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 
 // authed selectors
 export const getAccessToken = state => state.authed.accessToken;
+export const getLikes = state => state.authed.likes;
 
 // entities selectors
 export const getEntities = state => state.entities;
@@ -10,6 +11,7 @@ export const getEntities = state => state.entities;
 export const getPlaylists = state => state.playlists;
 
 // player selectors
+export const getIsPlaying = state => state.player.isPlaying;
 export const getPlaylistHistory = state => state.player.playlistHistory;
 export const getPlayingIndex = state => state.player.playingIndex;
 export const getPlayingSongId = createSelector(
