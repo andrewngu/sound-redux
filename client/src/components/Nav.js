@@ -4,6 +4,7 @@ import { loginUser, logoutUser } from '../actions/AuthedActions';
 import Link from '../components/Link';
 import NavSearch from '../components/NavSearch';
 import Popover from '../components/Popover';
+import { SONGS_PATH } from '../constants/RouterConstants';
 import { getImageUrl } from '../utils/SongUtils';
 
 const propTypes = {
@@ -11,6 +12,7 @@ const propTypes = {
   authedPlaylists: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   navigator: PropTypes.object.isRequired,
+  navigateTo: PropTypes.func.isRequired,
   songs: PropTypes.object.isRequired,
 };
 
@@ -193,7 +195,7 @@ class Nav extends Component {
   }
 
   render() {
-    const { dispatch } = this.props;
+    const { dispatch, navigateTo } = this.props;
 
     return (
       <div className="nav">
@@ -205,15 +207,12 @@ class Nav extends Component {
             <div className="nav-nav-item">
               <Link
                 className="nav-nav-item-link active"
-                dispatch={dispatch}
-                route={{ path: ['songs'] }}
+                navigateTo={navigateTo}
+                path={SONGS_PATH}
               >
                 SoundRedux
               </Link>
             </div>
-            {this.renderStreamLink()}
-            {this.renderLikesLink()}
-            {this.renderPlaylistsPopover()}
           </div>
           <div className="nav-nav float-right">
             <div className="nav-nav-item">
