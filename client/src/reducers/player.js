@@ -87,6 +87,12 @@ const player = (state = initialState, action) => {
         isPlaying: action.isPlaying,
       });
 
+    case types.TOGGLE_REPEAT:
+      return { ...state, repeat: !state.repeat };
+
+    case types.TOGGLE_SHUFFLE:
+      return { ...state, shuffle: !state.shuffle };
+
     default:
       return state;
   }
