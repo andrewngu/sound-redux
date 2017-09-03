@@ -16,6 +16,7 @@ import SongsContainer from '../containers/SongsContainer';
 import UserContainer from '../containers/UserContainer';
 
 import {
+  INDEX_PATH,
   SONG_PATH,
   SONGS_PATH,
   USER_PATH,
@@ -66,9 +67,10 @@ function mapStateToProps(state) {
   const { router } = state;
 
   return {
-    paths: [SONG_PATH, SONGS_PATH, USER_PATH],
+    paths: [INDEX_PATH, SONG_PATH, SONGS_PATH, USER_PATH],
     router,
     routes: {
+      [INDEX_PATH]: SongsContainer,
       [SONG_PATH]: SongContainer,
       [SONGS_PATH]: SongsContainer,
       [USER_PATH]: UserContainer,

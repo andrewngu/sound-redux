@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { navigateTo } from '../actions/RouterActions';
 import MobileNav from '../components/MobileNav';
 import Nav from '../components/Nav';
 
@@ -35,4 +36,6 @@ function mapStateToProps(state) {
 
 NavContainer.propTypes = propTypes;
 
-export default connect(mapStateToProps)(NavContainer);
+export default connect(mapStateToProps, {
+  navigateTo,
+})(NavContainer);

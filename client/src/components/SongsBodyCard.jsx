@@ -3,25 +3,26 @@ import React from 'react';
 import Link from '../components/Link';
 import SongsBodyCardPlay from '../components/SongsBodyCardPlay';
 import SongHeart from '../components/SongHeart';
+import { SONG_PATH, USER_PATH } from '../constants/RouterConstants';
 import { IMAGE_SIZES } from '../constants/SongConstants';
 import { formatSongTitle } from '../utils/FormatUtils';
 import { getImageUrl } from '../utils/SongUtils';
 
 const propTypes = {
   authed: PropTypes.shape({}).isRequired,
-  dispatch: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   isActive: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   liked: PropTypes.bool.isRequired,
+  navigateTo: PropTypes.func.isRequired,
   playlist: PropTypes.string.isRequired,
   playSong: PropTypes.func.isRequired,
   song: PropTypes.shape({}).isRequired,
 };
 
 const SongsBodyCard = (props) => {
-  const { authed, dispatch, index, isActive, isPlaying, liked, playlist, playSong, song } = props;
-  const { artworkUrl, title, user } = song;
+  const { authed, index, isActive, isPlaying, liked, navigateTo, playlist, playSong, song } = props;
+  const { artworkUrl, id, title, user } = song;
   const { avatarUrl, username } = user;
 
   return (
@@ -51,16 +52,18 @@ const SongsBodyCard = (props) => {
           <div className="songs-body-card__details">
             <Link
               className="songs-body-card__title"
-              dispatch={dispatch}
-              route={{ path: ['songs', song.id] }}
+              keys={{ id }}
+              navigateTo={navigateTo}
+              path={SONG_PATH}
               title={title}
             >
               {formatSongTitle(title)}
             </Link>
             <Link
               className="songs-body-card__username"
-              dispatch={dispatch}
-              route={{ path: ['users', user.id] }}
+              keys={{ id: user.id }}
+              navigateTo={navigateTo}
+              path={USER_PATH}
               title={username}
             >
               {username}
@@ -69,7 +72,6 @@ const SongsBodyCard = (props) => {
           <SongHeart
             authed={authed}
             className="songs-body-card__heart"
-            dispatch={dispatch}
             liked={liked}
             songId={song.id}
           />
