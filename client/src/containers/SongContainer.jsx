@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { fetchSongIfNeeded } from '../actions/SongsActions';
 import Song from '../components/Song';
 import { getId, getPlayingSongId } from '../selectors/CommonSelectors';
 import getSong from '../selectors/SongSelectors';
 
 const SongContainer = props => <Song {...props} />;
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   const { authed, entities, environment, player, playlists } = state;
   const { songs, users } = entities;
   const { height } = environment;
@@ -22,6 +23,8 @@ function mapStateToProps(state) {
     songs,
     users,
   };
-}
+};
 
-export default connect(mapStateToProps)(SongContainer);
+export default connect(mapStateToProps, {
+  fetchSongIfNeeded,
+})(SongContainer);

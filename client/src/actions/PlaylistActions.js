@@ -11,7 +11,7 @@ const fetchSongsRequest = playlist => ({
   playlist,
 });
 
-const fetchSongSuccess = (playlist, items, entities, nextUrl, futureUrl) => ({
+export const fetchSongSuccess = (playlist, items, entities, nextUrl, futureUrl) => ({
   type: types.FETCH_SONGS_SUCCESS,
   entities,
   futureUrl,

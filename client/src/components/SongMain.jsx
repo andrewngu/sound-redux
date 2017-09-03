@@ -17,7 +17,7 @@ const propTypes = {
 
 const SongMain = ({ isActive, navigateTo, player, playSong, song }) => {
   const { currentTime } = player;
-  const { artworkUrl, duration, user, waveformUrl } = song;
+  const { artworkUrl, commentCount, duration, playbackCount, user, waveformUrl } = song;
   const { avatarUrl } = user;
 
   return (
@@ -51,13 +51,13 @@ const SongMain = ({ isActive, navigateTo, player, playSong, song }) => {
           <div className="song-main__stat">
             <i className="song-main__stat__icon ion-play" />
             <span className="song-main__stat__text">
-              {addCommas(song.playback_count)}
+              {addCommas(playbackCount)}
             </span>
           </div>
           <div className="song-main__stat">
             <i className="song-main__stat__icon ion-chatbubble" />
             <span className="song-main__stat__text">
-              {addCommas(song.comment_count)}
+              {addCommas(commentCount)}
             </span>
           </div>
         </div>
