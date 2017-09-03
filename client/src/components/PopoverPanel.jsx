@@ -10,19 +10,19 @@ const propTypes = {
 class PopoverPanel extends Component {
   constructor() {
     super();
-    this.onMouseDown = this.onMouseDown.bind(this);
+    this.onClick = this.onClick.bind(this);
     this.node = null;
   }
 
   componentDidMount() {
-    document.addEventListener('mousedown', this.onMouseDown);
+    document.addEventListener('click', this.onClick);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('mousedown', this.onMouseDown);
+    document.removeEventListener('click', this.onClick);
   }
 
-  onMouseDown(e) {
+  onClick(e) {
     if (!this.node.contains(e.target)) {
       const { toggleIsOpen } = this.props;
       toggleIsOpen();
