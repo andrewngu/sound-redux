@@ -42,10 +42,23 @@ export const fetchSongsIfNeeded = playlist => (dispatch, getState) => {
   const playlists = getPlaylists(state);
   const playlistExists = playlist in playlists;
   const playlistIsFetching = playlistExists ? playlists[playlist].isFetching : false;
+  const playlistHasItems = playlistExists ? Boolean(playlists[playlist].items.length) : false;
+
+  if (!playlistExists || (!playlistHasItems && !playlistIsFetching)) {
+    const url = playlistUrl(playlist);
+    dispatch(fetchSongs(playlist, url));
+  }
+};
+
+export const fetchSongsNext = playlist => (dispatch, getState) => {
+  const state = getState();
+  const playlists = getPlaylists(state);
+  const playlistExists = playlist in playlists;
+  const playlistIsFetching = playlistExists ? playlists[playlist].isFetching : false;
   const playlistHasNextUrl = playlistExists ? Boolean(playlists[playlist].nextUrl) : false;
 
-  if (!playlistExists || (!playlistIsFetching && playlistHasNextUrl)) {
-    const url = playlistHasNextUrl ? playlists[playlist].nextUrl : playlistUrl(playlist);
-    dispatch(fetchSongs(playlist, url));
+  if (playlistExists && !playlistIsFetching && playlistHasNextUrl) {
+    const { nextUrl } = playlists[playlist];
+    dispatch(fetchSongs(playlist, nextUrl));
   }
 };

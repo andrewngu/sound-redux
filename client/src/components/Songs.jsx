@@ -15,6 +15,7 @@ const propTypes = {
   authed: PropTypes.shape({}).isRequired,
   dispatch: PropTypes.func.isRequired,
   fetchSongsIfNeeded: PropTypes.func.isRequired,
+  fetchSongsNext: PropTypes.func.isRequired,
   genre: PropTypes.string.isRequired,
   genres: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   height: PropTypes.number.isRequired,
@@ -49,7 +50,7 @@ class Songs extends Component {
     const {
       authed,
       dispatch,
-      fetchSongsIfNeeded,
+      fetchSongsNext,
       genre,
       genres,
       height,
@@ -68,7 +69,7 @@ class Songs extends Component {
     } = this.props;
 
     return (
-      <InfiniteScroll onScroll={() => fetchSongsIfNeeded(playlist)}>
+      <InfiniteScroll onScroll={() => fetchSongsNext(playlist)}>
         <SongsHeader
           genre={genre}
           genres={genres}
