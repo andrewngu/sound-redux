@@ -13,18 +13,20 @@ const propTypes = {
 const SongsHeaderGenres = ({ genre, genres, navigateTo, time }) => (
   <div className="songs-header__section songs-header__section--flex">
     {genres.map(g => (
-      <Link
-        className={`songs-header__genre ${g.key === genre ? 'songs-header__genre--active' : ''}`}
-        key={g.key}
-        navigateTo={navigateTo}
-        options={{
-          g: g.key,
-          ...time ? { t: time } : {},
-        }}
-        path={SONGS_PATH}
-      >
-        {g.key}
-      </Link>
+      <div className="songs-header__genre__wrap">
+        <Link
+          className={`songs-header__genre ${g.key === genre ? 'songs-header__genre--active' : ''}`}
+          key={g.key}
+          navigateTo={navigateTo}
+          options={{
+            g: g.key,
+            ...time ? { t: time } : {},
+          }}
+          path={SONGS_PATH}
+        >
+          {g.key}
+        </Link>
+      </div>
     ))}
   </div>
 );
