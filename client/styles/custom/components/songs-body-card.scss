@@ -1,11 +1,16 @@
 .songs-body-card {
-  padding: 10px;
+  width: 218px;
   background-color: $white;
   border: 1px solid $lighterGray;
 }
 
 .songs-body-card--active {
   border-color: $green;
+}
+
+.songs-body-card__inner {
+  position: relative;
+  padding: 10px;
 }
 
 .songs-body-card__artwork {
@@ -20,7 +25,6 @@
 }
 
 .songs-body-card__main {
-  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -94,7 +98,7 @@
 
 .songs-body-card__heart {
   position: absolute;
-  bottom: -2px;
-  right: 0;
+  bottom: 8px;
+  right: 10px;
   font-size: 14px;
 }

@@ -1,67 +1,40 @@
 .button {
-    display: inline-block;
-    padding:  12px;
-    min-width: 100px;
-    background-color: #fff;
-    text-align: center;
-    color: #222;
-    font-size: 12px;
-    border: 1px solid #C7C7C7;
-    border-radius: 2px;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    -webkit-transition: background-color 0.2s ease-in-out;
-    -moz-transition: background-color 0.2s ease-in-out;
-    -ms-transition: background-color 0.2s ease-in-out;
-    transition: background-color 0.2s ease-in-out;
+  display: inline-block;
+  padding:  12px;
+  min-width: 100px;
+  background-color: #fff;
+  text-align: center;
+  color: #222;
+  font-size: 12px;
+  border: 1px solid #C7C7C7;
+  border-radius: 2px;
+  outline: 0;
+  transition: background-color 0.2s ease-in-out;
+  user-select: none;
 
-    &.small {
-        padding: 4px 6px;
-        font-size: 11px;
-    }
-
-    &:hover {
-        background-color: #fafafa;
-        text-decoration: none;
-    }
-
-    &:active {
-        background-color: #ececec;
-    }
-
-    i {
-        margin-right: 10px;
-    }
+  &:hover {
+    cursor: pointer;
+  }
 }
 
-.button.block {
-    display: block;
+.button--block {
+  display: block;
 }
 
-.button.disabled {
-    pointer-events: none;
+.button--margin {
+  margin: 10px;
 }
 
-.button.orange {
-    color: #fff;
-    background-color: #f85d0f;
-    border: 1px solid #F55A0D;
+.button--orange {
+  color: $white;
+  background-color: $orange;
+  border: 1px solid $darkerOrange;
 
-    &:hover {
-        background-color: #F77838;
-    }
+  &:hover {
+    background-color: $darkOrange;
+  }
 
-    &:active {
-        background-color: #F55A0D;
-    }
-}
-
-.button.red-white {
-
-    &.active {
-        border-color: #DE7168;
-        background-color: #e17d74;
-        color: #fff;
-    }
+  &:active {
+    background-color: $darkerOrange;
+  }
 }

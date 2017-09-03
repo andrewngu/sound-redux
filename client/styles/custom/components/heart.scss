@@ -1,0 +1,13 @@
+.heart {
+  color: $gray;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: $lightRed;
+    cursor: pointer;
+  }
+}
+
+.heart--active {
+  color: $red;
+}

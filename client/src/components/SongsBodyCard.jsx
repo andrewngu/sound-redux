@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Link from '../components/Link';
+import Heart from '../components/Heart';
 import SongsBodyCardPlay from '../components/SongsBodyCardPlay';
-import SongHeart from '../components/SongHeart';
 import { SONG_PATH, USER_PATH } from '../constants/RouterConstants';
 import { IMAGE_SIZES } from '../constants/SongConstants';
 import { formatSongTitle } from '../utils/FormatUtils';
@@ -69,13 +69,13 @@ const SongsBodyCard = (props) => {
               {username}
             </Link>
           </div>
-          <SongHeart
-            authed={authed}
-            className="songs-body-card__heart"
-            liked={liked}
-            songId={song.id}
-          />
         </div>
+        <Heart
+          authed={authed}
+          className="songs-body-card__heart popover--right"
+          liked={liked}
+          songId={song.id}
+        />
       </div>
     </div>
   );
