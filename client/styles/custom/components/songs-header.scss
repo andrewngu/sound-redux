@@ -36,9 +36,14 @@
   flex: 1;
 }
 
+.songs-header__genre__wrap {
+  flex: 1;
+  height: 100%;
+  border-left: 1px solid $lighterGray;
+}
+
 .songs-header__genre {
   display: flex;
-  flex: 1;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -49,7 +54,6 @@
   text-transform: uppercase;
   border-bottom: 2px solid transparent;
   border-top: 2px solid transparent;
-  border-left: 1px solid $lighterGray;
   transition: all 200ms ease-in-out;
 
   &:hover {
