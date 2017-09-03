@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Popover from '../components/Popover';
-import HeartPopoverPanel from '../components/HeartPopoverPanel';
+import LoginPopoverPanel from '../components/LoginPopoverPanel';
 
 const defaultProps = {
   className: '',
@@ -13,7 +13,10 @@ const propTypes = {
 };
 
 const HeartPopover = ({ className, login }) => (
-  <Popover className={className} renderPanel={() => <HeartPopoverPanel login={login} />}>
+  <Popover
+    className={className}
+    renderPanel={() => <LoginPopoverPanel login={login} />}
+  >
     <i className="heart ion-ios-heart" />
   </Popover>
 );
