@@ -6,7 +6,7 @@ import { fetchUserIfNeeded } from '../actions/UsersActions';
 
 import Followings from '../components/Followings';
 import SongListItem from '../components/SongListItem';
-import Spinner from '../components/Spinner';
+import Loader from '../components/Loader';
 import stickify from '../components/Stickify';
 
 import { USER_PLAYLIST_SUFFIX } from '../constants/PlaylistConstants';
@@ -145,7 +145,7 @@ class User extends Component {
     const { sticky, userId, users } = this.props;
     const user = users[userId];
     if (!user || !user.hasOwnProperty('description')) {
-      return <Spinner />;
+      return <Loader />;
     }
 
     const image = user.avatar_url ? getImageUrl(user.avatar_url, IMAGE_SIZES.LARGE) : null;

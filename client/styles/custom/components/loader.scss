@@ -1,0 +1,53 @@
+.loader--full {
+  position: relative;
+  width: 100%;
+
+  .loader__rects {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+  }
+}
+
+.loader__rects {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader__rect {
+  width: 7px;
+  height: 30px;
+  background-color: rgba(166, 210, 165, 0.9);
+  animation: stretch 1.2s infinite ease-in-out;
+
+  & + .loader__rect {
+    margin-left: 3px;
+  }
+}
+
+.loader__rect--2 {
+  animation-delay: -1.1s;
+}
+
+.loader__rect--3 {
+  animation-delay: -1.0s;
+}
+
+.loader__rect--4 {
+  animation-delay: -0.9s;
+}
+
+.loader__rect--5 {
+  animation-delay: -0.8s;
+}
+
+@keyframes stretch {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+  }  20% {
+    transform: scaleY(1.0);
+  }
+}
