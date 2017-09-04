@@ -7,13 +7,16 @@
   border-left: 1px solid $lighterGray;
   border-right: 1px solid $lighterGray;
   font-size: 11px;
-  animation-fill-mode: forwards;
-  animation-name: slideIn;
-  animation-duration: 360ms;
-  animation-timing-function: ease;
-  opacity: 0;
   overflow: hidden;
-  transform: translateX(200px);
+
+  &:nth-child(-n + 10) {
+    animation-fill-mode: forwards;
+    animation-name: slideIn;
+    animation-duration: 360ms;
+    animation-timing-function: ease;
+    opacity: 0;
+    transform: translateX(200px);
+  }
 }
 
 .song-comment--exit {

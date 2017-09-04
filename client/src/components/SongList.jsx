@@ -4,12 +4,13 @@ import SongListItem from '../components/SongListItem';
 
 const defaultProps = {
   className: '',
+  id: null,
   playingSongId: null,
 };
 
 const propTypes = {
   className: PropTypes.string,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.number,
   navigateTo: PropTypes.func.isRequired,
   player: PropTypes.shape({}).isRequired,
   playingSongId: PropTypes.number,
