@@ -16,7 +16,14 @@ const fetchSongCommentsSuccess = (id, comments) => ({
 
 const fetchSongComments = id => async (dispatch) => {
   const { json } = await callApi(SONG_COMMENTS_URL.replace(':id', id));
-  dispatch(fetchSongCommentsSuccess(id, json));
+  const comments = json
+    .map(comment => ({
+      ...comment,
+      unixTimestamp: Math.floor(comment.timestamp / 1000),
+    }))
+    .sort((a, b) => a.timestamp - b.timestamp);
+
+  dispatch(fetchSongCommentsSuccess(id, comments));
 };
 
 const fetchSong = (id, playlist) => async (dispatch) => {

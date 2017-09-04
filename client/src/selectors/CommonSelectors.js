@@ -11,13 +11,14 @@ export const getEntities = state => state.entities;
 export const getHeight = state => state.environment.height;
 export const getSidebarHeight = createSelector(
   getHeight,
-  height => height - 220,
+  height => height - 200,
 );
 
 // playlists selectors
 export const getPlaylists = state => state.playlists;
 
 // player selectors
+export const getCurrentTime = state => state.player.currentTime;
 export const getIsPlaying = state => state.player.isPlaying;
 export const getPlaylistHistory = state => state.player.playlistHistory;
 export const getPlayingIndex = state => state.player.playingIndex;

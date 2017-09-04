@@ -10,7 +10,7 @@ const propTypes = {
 };
 
 const SongComment = ({ comment, i }) => {
-  const { body, timestamp, user } = comment;
+  const { body, unixTimestamp, user } = comment;
   const { avatarUrl, username } = user;
 
   return (
@@ -28,7 +28,7 @@ const SongComment = ({ comment, i }) => {
         </div>
       </div>
       <div className="song-comment__time">
-        {formatSeconds(Math.floor(timestamp / 1000))}
+        {formatSeconds(unixTimestamp)}
       </div>
     </div>
   );
