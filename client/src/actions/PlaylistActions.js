@@ -11,7 +11,7 @@ const fetchSongsRequest = playlist => ({
   playlist,
 });
 
-export const fetchSongSuccess = (playlist, items, entities, nextUrl, futureUrl) => ({
+export const fetchSongsSuccess = (playlist, items, entities, nextUrl, futureUrl) => ({
   type: types.FETCH_SONGS_SUCCESS,
   entities,
   futureUrl,
@@ -28,13 +28,17 @@ export const fetchSongs = (playlist, url) => async (dispatch, getState) => {
   const accessTokenUriSegment = accessToken ? `&oauth_token=${accessToken}` : '';
 
   const { json } = await callApi(url);
-  const { collection, nextHref, futureHref } = json;
+
+  const collection = json.collection || json;
+  const nextHref = json.nextHref || null;
+  const futureHref = json.futureHref || null;
+
   const { result, entities } = normalize(collection, [songSchema]);
 
   const nextUrl = nextHref ? `${nextHref}${accessTokenUriSegment}` : null;
   const futureUrl = futureHref ? `${futureHref}${accessTokenUriSegment}` : null;
 
-  dispatch(fetchSongSuccess(playlist, result, entities, nextUrl, futureUrl));
+  dispatch(fetchSongsSuccess(playlist, result, entities, nextUrl, futureUrl));
 };
 
 export const fetchSongsIfNeeded = playlist => (dispatch, getState) => {
