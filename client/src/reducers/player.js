@@ -72,7 +72,6 @@ const player = (state = initialState, action) => {
     case types.PLAY_SONG:
       return {
         ...state,
-        currentTime: 0,
         playingIndex: action.playingIndex,
         playlistHistory: [
           ...state.playlistHistory,
