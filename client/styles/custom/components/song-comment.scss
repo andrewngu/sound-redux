@@ -7,6 +7,7 @@
   border-left: 1px solid $lighterGray;
   border-right: 1px solid $lighterGray;
   font-size: 11px;
+  overflow: hidden;
 }
 
 .song-comment__image {
@@ -21,15 +22,14 @@
 .song-comment__main {
   flex: 1;
   margin-right: 20px;
+  overflow: hidden;
 }
 
 .song-comment__username {
   color: $gray;
 }
 
-.song-comment__comment {
-  overflow: hidden;
-  text-overflow: ellipsis;
+.song-comment__body {
   word-break: break-word;
   word-wrap: break-word;
 }

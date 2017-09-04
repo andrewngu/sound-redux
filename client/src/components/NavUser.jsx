@@ -8,14 +8,12 @@ const propTypes = {
 };
 
 const NavUser = ({ login }) => (
-  <Popover
-    className="nav-user popover--right"
-    renderPanel={() => <LoginPopoverPanel login={login} />}
-  >
+  <Popover className="nav-user popover--right">
     <div className="nav-user__trigger">
       <i className="nav-user__icon ion-person" />
       <i className="nav-user__chevron ion-chevron-down" />
     </div>
+    <LoginPopoverPanel login={login} />
   </Popover>
 );
 

@@ -37,7 +37,7 @@ const SongComments = ({ comments, id, navigateTo, sidebarHeight, sticky, timed }
       </div>
     </div>
     <div className="sidebar__body">
-      {comments.map(comment => <SongComment comment={comment} />)}
+      {comments.map(comment => <SongComment comment={comment} key={comment.id} />)}
     </div>
   </div>
 );
