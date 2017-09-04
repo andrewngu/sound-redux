@@ -9,6 +9,7 @@ const defaultProps = {
 
 const propTypes = {
   className: PropTypes.string,
+  id: PropTypes.number.isRequired,
   navigateTo: PropTypes.func.isRequired,
   player: PropTypes.shape({}).isRequired,
   playingSongId: PropTypes.number,
@@ -17,19 +18,30 @@ const propTypes = {
   songs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
-const SongList = ({ className, navigateTo, player, playingSongId, playlist, playSong, songs }) => (
+const SongList = ({
+  className,
+  id,
+  navigateTo,
+  player,
+  playingSongId,
+  playlist,
+  playSong,
+  songs,
+}) => (
   <div className={`song-list ${className}`}>
-    {songs.map((song, i) => (
-      <SongListItem
-        index={i + 1}
-        isActive={playingSongId === song.id}
-        key={song.id}
-        navigateTo={navigateTo}
-        player={player}
-        playlist={playlist}
-        playSong={playSong}
-        song={song}
-      />
+    {songs.map((song, i) => (song.id !== id
+      ? (
+        <SongListItem
+          index={i + 1}
+          isActive={playingSongId === song.id}
+          key={song.id}
+          navigateTo={navigateTo}
+          player={player}
+          playlist={playlist}
+          playSong={playSong}
+          song={song}
+        />
+      ) : null
     ))}
   </div>
 );

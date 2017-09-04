@@ -20,7 +20,7 @@ const propTypes = {
 const SongMain = ({ isActive, navigateTo, player, playlist, playSong, song }) => {
   const { isPlaying } = player;
   const { artworkUrl, commentCount, playbackCount, user } = song;
-  const { avatarUrl } = user;
+  const { avatarUrl, username } = user;
 
   return (
     <div className={`song-main ${isActive ? 'song-main--active' : ''}`}>
@@ -52,11 +52,10 @@ const SongMain = ({ isActive, navigateTo, player, playlist, playSong, song }) =>
           <Link
             className="song-main__user__username"
             navigateTo={navigateTo}
-            keys={{ id: String(user.id) }}
+            keys={{ id: user.id }}
             path={USER_PATH}
-            route={{ path: ['users', user.id] }}
           >
-            {user.username}
+            {username}
           </Link>
         </div>
         <div className="song-main__stats">
