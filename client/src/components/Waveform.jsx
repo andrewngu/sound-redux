@@ -10,8 +10,9 @@ const defaultProps = {
 
 const propTypes = {
   className: PropTypes.string,
-  currentTime: PropTypes.number.isRequired,
   isActive: PropTypes.bool.isRequired,
+  player: PropTypes.shape({}).isRequired,
+  playlist: PropTypes.string.isRequired,
   playSong: PropTypes.func.isRequired,
   song: PropTypes.shape({}).isRequired,
 };
@@ -19,21 +20,13 @@ const propTypes = {
 class Waveform extends Component {
   constructor(props) {
     super(props);
-    this.onClick = this.onClick.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
+    this.playSong = this.playSong.bind(this);
+    this.seek = this.seek.bind(this);
     this.state = {
       seek: 0,
     };
-  }
-
-  onClick() {
-    const audioElement = document.getElementById('audio');
-    const { seek } = this.state;
-    const { song } = this.props;
-    const { duration } = song;
-    const currentTime = Math.floor((seek / 100) * (duration / 1000));
-    audioElement.currentTime = currentTime;
   }
 
   onMouseMove(e) {
@@ -45,9 +38,24 @@ class Waveform extends Component {
     this.setState({ seek: 0 });
   }
 
+  playSong() {
+    const { playlist, playSong } = this.props;
+    playSong(playlist, 0);
+  }
+
+  seek() {
+    const audioElement = document.getElementById('audio');
+    const { seek } = this.state;
+    const { song } = this.props;
+    const { duration } = song;
+    const currentTime = Math.floor((seek / 100) * (duration / 1000));
+    audioElement.currentTime = currentTime;
+  }
+
   render() {
     const { seek } = this.state;
-    const { className, currentTime, isActive, playSong, song } = this.props;
+    const { className, isActive, player, song } = this.props;
+    const { currentTime } = player;
     const { duration, waveformUrl } = song;
     const width = isActive ? (currentTime / (duration / 1000)) * 100 : 0;
 
@@ -57,7 +65,7 @@ class Waveform extends Component {
           className="waveform__image"
           onMouseLeave={this.onMouseLeave}
           onMouseMove={isActive ? this.onMouseMove : () => {}}
-          onClick={isActive ? this.onClick : playSong}
+          onClick={isActive ? this.seek : this.playSong}
           role="button"
           style={{ backgroundImage: `url(${waveformUrl})` }}
           tabIndex="0"
