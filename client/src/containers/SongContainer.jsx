@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { playSong } from '../actions/PlayerActions';
 import { navigateTo } from '../actions/RouterActions';
 import fetchSongIfNeeded from '../actions/SongActions';
 import Song from '../components/Song';
@@ -30,4 +31,5 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   fetchSongIfNeeded,
   navigateTo,
+  playSong,
 })(SongContainer);

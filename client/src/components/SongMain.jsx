@@ -17,11 +17,11 @@ const propTypes = {
 
 const SongMain = ({ isActive, navigateTo, player, playSong, song }) => {
   const { currentTime } = player;
-  const { artworkUrl, commentCount, duration, playbackCount, user, waveformUrl } = song;
+  const { artworkUrl, commentCount, duration, playbackCount, user } = song;
   const { avatarUrl } = user;
 
   return (
-    <div className="song-main">
+    <div className={`song-main ${isActive ? 'song-main--active' : ''}`}>
       <div className="song-main__artwork">
         <div
           className="song-main__artwork__image"
@@ -73,7 +73,7 @@ const SongMain = ({ isActive, navigateTo, player, playSong, song }) => {
         duration={duration}
         isActive={isActive}
         playSong={playSong}
-        waveformUrl={waveformUrl.replace('https', 'http')}
+        song={song}
       />
     </div>
   );
