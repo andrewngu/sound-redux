@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import SongComment from '../components/SongComment';
 import Switch from '../components/Switch';
 import { SONG_PATH } from '../constants/RouterConstants';
 
 const propTypes = {
+  comments: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   id: PropTypes.number.isRequired,
   navigateTo: PropTypes.func.isRequired,
   sidebarHeight: PropTypes.number.isRequired,
@@ -11,7 +13,7 @@ const propTypes = {
   timed: PropTypes.bool.isRequired,
 };
 
-const SongComments = ({ id, navigateTo, sidebarHeight, sticky, timed }) => (
+const SongComments = ({ comments, id, navigateTo, sidebarHeight, sticky, timed }) => (
   <div
     className={`sidebar ${sticky ? 'sidebar--sticky' : ''}`}
     style={{ height: `${sidebarHeight}px` }}
@@ -22,18 +24,20 @@ const SongComments = ({ id, navigateTo, sidebarHeight, sticky, timed }) => (
       </div>
       <div className="sidebar__header__right">
         <Switch
+          args={[{
+            path: SONG_PATH,
+            keys: { id },
+            options: {
+              ...timed ? {} : { timed: '1' },
+            },
+          }]}
           on={timed}
-          onClick={() => {
-            navigateTo({
-              path: SONG_PATH,
-              keys: { id },
-              options: {
-                ...timed ? {} : { timed: '1' },
-              },
-            });
-          }}
+          onClick={navigateTo}
         />
       </div>
+    </div>
+    <div className="sidebar__body">
+      {comments.map(comment => <SongComment comment={comment} />)}
     </div>
   </div>
 );

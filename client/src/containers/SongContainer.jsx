@@ -5,16 +5,16 @@ import { navigateTo } from '../actions/RouterActions';
 import fetchSongIfNeeded from '../actions/SongActions';
 import Song from '../components/Song';
 import { getId, getPlayingSongId, getSidebarHeight } from '../selectors/CommonSelectors';
-import { getPlaylist, getSong, getTimed } from '../selectors/SongSelectors';
+import { getComments, getPlaylist, getSong, getTimed } from '../selectors/SongSelectors';
 
 const SongContainer = props => <Song {...props} />;
 
 const mapStateToProps = (state) => {
-  const { authed, entities, player, playlists } = state;
-  const { songs, users } = entities;
+  const { authed, player, playlists } = state;
 
   return {
     authed,
+    comments: getComments(state),
     id: getId(state),
     player,
     playingSongId: getPlayingSongId(state),
@@ -22,9 +22,7 @@ const mapStateToProps = (state) => {
     playlists,
     sidebarHeight: getSidebarHeight(state),
     song: getSong(state),
-    songs,
     timed: getTimed(state),
-    users,
   };
 };
 

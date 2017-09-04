@@ -10,6 +10,11 @@ export const getSong = createSelector(
   (entities, id) => (id in entities.songs ? denormalize(id, songSchema, entities) : null),
 );
 
+export const getComments = createSelector(
+  getSong,
+  song => (song ? song.comments || [] : []),
+);
+
 export const getPlaylist = createSelector(
   getId,
   id => `${SONG_PLAYLIST_TYPE}|${id}`,
