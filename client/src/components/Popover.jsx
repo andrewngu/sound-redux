@@ -9,7 +9,6 @@ const defaultProps = {
 const propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
-  renderPanel: PropTypes.func.isRequired,
 };
 
 class Popover extends Component {
@@ -27,7 +26,7 @@ class Popover extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { className, children, renderPanel } = this.props;
+    const { className, children } = this.props;
 
     return (
       <div className={`popover ${className}`}>
@@ -37,11 +36,16 @@ class Popover extends Component {
           role="button"
           tabIndex="0"
         >
-          {children}
+          {children[0]}
         </span>
         {isOpen
-          ? <PopoverPanel renderPanel={renderPanel} toggleIsOpen={this.toggleIsOpen} />
-          : null
+          ? (
+            <PopoverPanel
+              toggleIsOpen={this.toggleIsOpen}
+            >
+              {children[1]}
+            </PopoverPanel>
+          ) : null
         }
       </div>
     );

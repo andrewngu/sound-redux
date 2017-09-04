@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 const propTypes = {
-  renderPanel: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
   toggleIsOpen: PropTypes.func.isRequired,
 };
 
@@ -30,10 +30,10 @@ class PopoverPanel extends Component {
   }
 
   render() {
-    const { renderPanel } = this.props;
+    const { children } = this.props;
     return (
       <div className="popover__panel" ref={(node) => { this.node = node; }}>
-        {renderPanel()}
+        {children}
       </div>
     );
   }

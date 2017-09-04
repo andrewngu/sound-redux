@@ -7,7 +7,7 @@ import { formatSeconds } from '../utils/NumberUtils';
 const propTypes = {
   changeVolume: PropTypes.func.isRequired,
   player: PropTypes.shape({}).isRequired,
-  playNextSong: PropTypes.func.isRequired,
+  playNextSongFromButton: PropTypes.func.isRequired,
   playPrevSong: PropTypes.func.isRequired,
   song: PropTypes.shape({}).isRequired,
   togglePlay: PropTypes.func.isRequired,
@@ -18,7 +18,7 @@ const propTypes = {
 const Player = ({
   changeVolume,
   player,
-  playNextSong,
+  playNextSongFromButton,
   playPrevSong,
   song,
   togglePlay,
@@ -65,7 +65,7 @@ const Player = ({
             </div>
             <div
               className="player__button"
-              onClick={() => playNextSong(true)}
+              onClick={playNextSongFromButton}
               role="button"
               tabIndex="0"
             >
