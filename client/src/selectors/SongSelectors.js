@@ -2,7 +2,7 @@ import { denormalize } from 'normalizr';
 import { createSelector } from 'reselect';
 import { SONG_PLAYLIST_TYPE } from '../constants/PlaylistConstants';
 import { songSchema } from '../constants/Schemas';
-import { getCurrentTime, getEntities, getId, getPlayingSongId } from '../selectors/CommonSelectors';
+import { getCurrentTime, getEntities, getId, getPlayingSongId, getPlaylists } from '../selectors/CommonSelectors';
 
 export const getSong = createSelector(
   getEntities,
@@ -27,6 +27,16 @@ export const getSongComments = createSelector(
 export const getPlaylist = createSelector(
   getId,
   id => `${SONG_PLAYLIST_TYPE}|${id}`,
+);
+
+export const getSongs = createSelector(
+  getPlaylist,
+  getPlaylists,
+  getEntities,
+  (playlist, playlists, entities) => (playlist in playlists
+    ? denormalize(playlists[playlist].items.slice(1), [songSchema], entities)
+    : []
+  ),
 );
 
 export const getTimed = state => Boolean(state.router.route.options.timed) || false;

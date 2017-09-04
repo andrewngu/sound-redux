@@ -9,6 +9,7 @@ import { addCommas } from '../utils/FormatUtils';
 import { getImageUrl } from '../utils/SongUtils';
 
 const propTypes = {
+  index: PropTypes.number.isRequired,
   isActive: PropTypes.bool.isRequired,
   navigateTo: PropTypes.func.isRequired,
   player: PropTypes.shape({}).isRequired,
@@ -17,7 +18,7 @@ const propTypes = {
   song: PropTypes.shape({}).isRequired,
 };
 
-const SongMain = ({ isActive, navigateTo, player, playlist, playSong, song }) => {
+const SongListItem = ({ index, isActive, navigateTo, player, playlist, playSong, song }) => {
   const { isPlaying } = player;
   const { artworkUrl, commentCount, playbackCount, user } = song;
   const { avatarUrl } = user;
@@ -32,7 +33,7 @@ const SongMain = ({ isActive, navigateTo, player, playlist, playSong, song }) =>
           }}
         >
           <ArtworkPlay
-            index={0}
+            index={index}
             isActive={isActive}
             isPlaying={isPlaying}
             playlist={playlist}
@@ -78,7 +79,7 @@ const SongMain = ({ isActive, navigateTo, player, playlist, playSong, song }) =>
       </div>
       <Waveform
         className="song-list__item__waveform"
-        index={0}
+        index={index}
         isActive={isActive}
         player={player}
         playlist={playlist}
@@ -89,6 +90,6 @@ const SongMain = ({ isActive, navigateTo, player, playlist, playSong, song }) =>
   );
 };
 
-SongMain.propTypes = propTypes;
+SongListItem.propTypes = propTypes;
 
-export default SongMain;
+export default SongListItem;
