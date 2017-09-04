@@ -1,31 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchSongIfNeeded } from '../actions/SongActions';
+import { navigateTo } from '../actions/RouterActions';
+import fetchSongIfNeeded from '../actions/SongActions';
 import Song from '../components/Song';
-import { getId, getPlayingSongId } from '../selectors/CommonSelectors';
-import { getPlaylist, getSong } from '../selectors/SongSelectors';
+import { getId, getPlayingSongId, getSidebarHeight } from '../selectors/CommonSelectors';
+import { getPlaylist, getSong, getTimed } from '../selectors/SongSelectors';
 
 const SongContainer = props => <Song {...props} />;
 
 const mapStateToProps = (state) => {
-  const { authed, entities, environment, player, playlists } = state;
+  const { authed, entities, player, playlists } = state;
   const { songs, users } = entities;
-  const { height } = environment;
 
   return {
     authed,
-    height,
     id: getId(state),
     player,
     playingSongId: getPlayingSongId(state),
     playlist: getPlaylist(state),
     playlists,
+    sidebarHeight: getSidebarHeight(state),
     song: getSong(state),
     songs,
+    timed: getTimed(state),
     users,
   };
 };
 
 export default connect(mapStateToProps, {
   fetchSongIfNeeded,
+  navigateTo,
 })(SongContainer);
