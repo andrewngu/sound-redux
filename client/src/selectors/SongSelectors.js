@@ -2,7 +2,7 @@ import { denormalize } from 'normalizr';
 import { createSelector } from 'reselect';
 import { SONG_PLAYLIST_TYPE } from '../constants/PlaylistConstants';
 import { songSchema } from '../constants/Schemas';
-import { getCurrentTime, getEntities, getId } from '../selectors/CommonSelectors';
+import { getCurrentTime, getEntities, getId, getPlayingSongId } from '../selectors/CommonSelectors';
 
 const COMMENTS_TIMED_WINDOW = 10;
 
@@ -10,6 +10,12 @@ export const getSong = createSelector(
   getEntities,
   getId,
   (entities, id) => (id in entities.songs ? denormalize(id, songSchema, entities) : null),
+);
+
+export const getIsActive = createSelector(
+  getPlayingSongId,
+  getId,
+  (playingSongId, id) => playingSongId === id,
 );
 
 export const getSongComments = createSelector(

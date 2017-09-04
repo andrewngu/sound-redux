@@ -6,15 +6,15 @@ import { getImageUrl } from '../utils/SongUtils';
 
 const propTypes = {
   comment: PropTypes.shape({}).isRequired,
-  i: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
-const SongComment = ({ comment, i }) => {
+const SongComment = ({ comment, index }) => {
   const { body, unixTimestamp, user } = comment;
   const { avatarUrl, username } = user;
 
   return (
-    <div className="song-comment" style={{ animationDelay: `${(i * 50)}ms` }}>
+    <div className="song-comment" style={{ animationDelay: `${index * 50}ms` }}>
       <div
         className="song-comment__image"
         style={{ backgroundImage: `url(${getImageUrl(avatarUrl, IMAGE_SIZES.LARGE)})` }}

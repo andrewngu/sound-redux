@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import SongComment from '../components/SongComment';
 import Switch from '../components/Switch';
 import { SONG_PATH } from '../constants/RouterConstants';
@@ -37,7 +38,20 @@ const SongComments = ({ comments, id, navigateTo, sidebarHeight, sticky, timed }
       </div>
     </div>
     <div className="sidebar__body">
-      {comments.map(comment => <SongComment comment={comment} key={comment.id} />)}
+      <TransitionGroup>
+        {comments.map((comment, i) => (
+          <CSSTransition
+            classNames="song-comment-"
+            timeout={{ enter: 0, exit: 0 }}
+          >
+            <SongComment
+              comment={comment}
+              key={comment.id}
+              index={i}
+            />
+          </CSSTransition>
+        ))}
+      </TransitionGroup>
     </div>
   </div>
 );
