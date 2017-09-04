@@ -63,7 +63,8 @@ class Song extends Component {
               isActive={Boolean(playingSongId === id)}
               navigateTo={navigateTo}
               player={player}
-              playSong={() => playSong(playlist, 0)}
+              playlist={playlist}
+              playSong={playSong}
               song={song}
             />
           </div>

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import ArtworkPlay from '../components/ArtworkPlay';
 import Link from '../components/Link';
 import Waveform from '../components/Waveform';
 import { USER_PATH } from '../constants/RouterConstants';
@@ -11,13 +12,14 @@ const propTypes = {
   isActive: PropTypes.bool.isRequired,
   navigateTo: PropTypes.func.isRequired,
   player: PropTypes.shape({}).isRequired,
+  playlist: PropTypes.string.isRequired,
   playSong: PropTypes.func.isRequired,
   song: PropTypes.shape({}).isRequired,
 };
 
-const SongMain = ({ isActive, navigateTo, player, playSong, song }) => {
-  const { currentTime } = player;
-  const { artworkUrl, commentCount, duration, playbackCount, user } = song;
+const SongMain = ({ isActive, navigateTo, player, playlist, playSong, song }) => {
+  const { isPlaying } = player;
+  const { artworkUrl, commentCount, playbackCount, user } = song;
   const { avatarUrl } = user;
 
   return (
@@ -28,7 +30,15 @@ const SongMain = ({ isActive, navigateTo, player, playSong, song }) => {
           style={{
             backgroundImage: `url(${getImageUrl(artworkUrl, IMAGE_SIZES.LARGE)})`,
           }}
-        />
+        >
+          <ArtworkPlay
+            index={0}
+            isActive={isActive}
+            isPlaying={isPlaying}
+            playlist={playlist}
+            playSong={playSong}
+          />
+        </div>
       </div>
       <div className="song-main__main">
         <div className="song-main__title">
@@ -69,9 +79,10 @@ const SongMain = ({ isActive, navigateTo, player, playSong, song }) => {
       </div>
       <Waveform
         className="song-main__waveform"
-        currentTime={currentTime}
-        duration={duration}
+        index={0}
         isActive={isActive}
+        player={player}
+        playlist={playlist}
         playSong={playSong}
         song={song}
       />

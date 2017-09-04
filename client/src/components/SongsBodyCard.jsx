@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Link from '../components/Link';
 import Heart from '../components/Heart';
-import SongsBodyCardPlay from '../components/SongsBodyCardPlay';
+import ArtworkPlay from '../components/ArtworkPlay';
 import { SONG_PATH, USER_PATH } from '../constants/RouterConstants';
 import { IMAGE_SIZES } from '../constants/SongConstants';
 import { formatSongTitle } from '../utils/FormatUtils';
@@ -34,7 +34,7 @@ const SongsBodyCard = (props) => {
             backgroundImage: `url(${getImageUrl(artworkUrl, IMAGE_SIZES.LARGE)})`,
           }}
         >
-          <SongsBodyCardPlay
+          <ArtworkPlay
             index={index}
             isActive={isActive}
             isPlaying={isPlaying}
@@ -74,7 +74,7 @@ const SongsBodyCard = (props) => {
           authed={authed}
           className="songs-body-card__heart popover--right"
           liked={liked}
-          songId={song.id}
+          songId={id}
         />
       </div>
     </div>
