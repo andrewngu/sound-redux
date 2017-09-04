@@ -4,8 +4,6 @@ import { SONG_PLAYLIST_TYPE } from '../constants/PlaylistConstants';
 import { songSchema } from '../constants/Schemas';
 import { getCurrentTime, getEntities, getId, getPlayingSongId } from '../selectors/CommonSelectors';
 
-const COMMENTS_TIMED_WINDOW = 10;
-
 export const getSong = createSelector(
   getEntities,
   getId,
@@ -32,27 +30,19 @@ export const getPlaylist = createSelector(
 );
 
 export const getTimed = state => Boolean(state.router.route.options.timed) || false;
-export const getTimedRange = createSelector(
-  getCurrentTime,
-  (currentTime) => {
-    const start = currentTime - (currentTime % COMMENTS_TIMED_WINDOW);
-    const end = currentTime + COMMENTS_TIMED_WINDOW;
-
-    return {
-      start,
-      end,
-    };
-  },
-);
 
 export const getComments = createSelector(
-  getSongComments,
+  getIsActive,
   getTimed,
-  getTimedRange,
-  (comments, timed, timedRange) => (timed
-    ? comments.filter(comment =>
-      comment.unixTimestamp >= timedRange.start
-      && comment.unixTimestamp < timedRange.end)
-    : comments
-  ),
+  getSongComments,
+  getCurrentTime,
+  (isActive, timed, comments, currentTime) => {
+    if (isActive && timed) {
+      const start = currentTime - (currentTime % 10);
+      const end = start + 10;
+      return comments.filter(({ unixTimestamp }) => unixTimestamp >= start && unixTimestamp < end);
+    }
+
+    return comments;
+  },
 );
