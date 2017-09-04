@@ -12,6 +12,7 @@ const defaultProps = {
 };
 
 const propTypes = {
+  comments: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   fetchSongIfNeeded: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   navigateTo: PropTypes.func.isRequired,
@@ -40,6 +41,7 @@ class Song extends Component {
 
   render() {
     const {
+      comments,
       id,
       navigateTo,
       playingSongId,
@@ -70,6 +72,7 @@ class Song extends Component {
           </div>
           <div className="song__sidebar">
             <SongComments
+              comments={comments}
               id={id}
               navigateTo={navigateTo}
               sidebarHeight={sidebarHeight}

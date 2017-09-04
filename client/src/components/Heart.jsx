@@ -28,7 +28,7 @@ class Heart extends Component {
   }
 
   render() {
-    const { isAuthenticated, className, liked, login, toggleLike } = this.props;
+    const { isAuthenticated, className, liked, login } = this.props;
     if (!isAuthenticated) {
       return (
         <Popover
@@ -43,7 +43,7 @@ class Heart extends Component {
     return (
       <i
         className={`heart ${liked ? 'heart--liked' : ''} ${className}`}
-        onClick={toggleLike}
+        onClick={this.onClick}
         role="button"
         tabIndex="0"
       />
