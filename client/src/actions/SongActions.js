@@ -40,9 +40,9 @@ const shouldFetchSong = (id, state) => {
   const { entities } = state;
   const { songs } = entities;
   const songExists = id in songs;
-  const songHasWaveform = songExists ? songs[id].waveformUrl.indexOf('json') > -1 : null;
+  const songHasComments = songExists ? 'comments' in songs[id] : false;
 
-  return !songExists || !songHasWaveform;
+  return !songExists || !songHasComments;
 };
 
 const fetchSongIfNeeded = (id, playlist) => (dispatch, getState) => {
