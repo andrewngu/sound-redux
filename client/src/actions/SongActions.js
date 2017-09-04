@@ -38,15 +38,10 @@ const shouldFetchSong = (id, state) => {
   return !songExists || !songHasWaveform;
 };
 
-export const fetchSongIfNeeded = (id, playlist) => (dispatch, getState) => {
+const fetchSongIfNeeded = (id, playlist) => (dispatch, getState) => {
   if (shouldFetchSong(id, getState())) {
     dispatch(fetchSong(id, playlist));
   }
 };
 
-export function receiveSong(entities) {
-  return {
-    type: types.RECEIVE_SONG,
-    entities,
-  };
-}
+export default fetchSongIfNeeded;

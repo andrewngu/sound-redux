@@ -7,6 +7,13 @@ export const getLikes = state => state.authed.likes;
 // entities selectors
 export const getEntities = state => state.entities;
 
+// environment selectors
+export const getHeight = state => state.environment.height;
+export const getSidebarHeight = createSelector(
+  getHeight,
+  height => height - 220,
+);
+
 // playlists selectors
 export const getPlaylists = state => state.playlists;
 

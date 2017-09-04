@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { playSong } from '../actions/PlayerActions';
 
 import Comments from '../components/Comments';
+import SongComments from '../components/SongComments';
 import SongListItem from '../components/SongListItem';
 import Loader from '../components/Loader';
 import SongMain from '../components/SongMain';
@@ -22,13 +23,16 @@ const propTypes = {
   fetchSongIfNeeded: PropTypes.func.isRequired,
   height: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
+  navigateTo: PropTypes.func.isRequired,
   player: PropTypes.shape({}).isRequired,
   playingSongId: PropTypes.number,
   playlist: PropTypes.string.isRequired,
   playlists: PropTypes.shape({}).isRequired,
+  sidebarHeight: PropTypes.number.isRequired,
   song: PropTypes.shape({}).isRequired,
   songs: PropTypes.shape({}).isRequired,
   sticky: PropTypes.bool.isRequired,
+  timed: PropTypes.bool.isRequired,
   users: PropTypes.shape({}).isRequired,
 };
 
@@ -123,14 +127,23 @@ class Song extends Component {
   }
 
   render() {
-    const { id, playingSongId, player, song, sticky } = this.props;
+    const {
+      id,
+      navigateTo,
+      playingSongId,
+      player,
+      sidebarHeight,
+      song,
+      sticky,
+      timed,
+    } = this.props;
     if (!song) {
       return <Loader />;
     }
 
     return (
       <div className="container">
-        <div className="content">
+        <div className="song content">
           <div className="song__main">
             <SongMain
               isActive={Boolean(playingSongId === id)}
@@ -139,7 +152,15 @@ class Song extends Component {
               song={song}
             />
           </div>
-          <div className="song__sidebar" />
+          <div className="song__sidebar">
+            <SongComments
+              id={id}
+              navigateTo={navigateTo}
+              sidebarHeight={sidebarHeight}
+              sticky={sticky}
+              timed={timed}
+            />
+          </div>
         </div>
       </div>
     );
