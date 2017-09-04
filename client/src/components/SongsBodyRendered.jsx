@@ -2,13 +2,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import SongsBodyCard from '../components/SongsBodyCard';
 
+const defaultProps = {
+  playingSongId: null,
+};
+
 const propTypes = {
   authed: PropTypes.shape({}).isRequired,
   end: PropTypes.number.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   likes: PropTypes.shape({}).isRequired,
   navigateTo: PropTypes.func.isRequired,
-  playingSongId: PropTypes.number.isRequired,
+  playingSongId: PropTypes.number,
   playlist: PropTypes.string.isRequired,
   playSong: PropTypes.func.isRequired,
   songs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
@@ -67,6 +71,7 @@ const SongsBodyRendered = ({
   return <div>{rows}</div>;
 };
 
+SongsBodyRendered.defaultProps = defaultProps;
 SongsBodyRendered.propTypes = propTypes;
 
 export default SongsBodyRendered;

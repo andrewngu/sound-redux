@@ -15,4 +15,4 @@ export const getPlaylist = createSelector(
   id => `${SONG_PLAYLIST_TYPE}|${id}`,
 );
 
-export const getTimed = state => state.router.route.options.timed || false;
+export const getTimed = state => Boolean(state.router.route.options.timed) || false;

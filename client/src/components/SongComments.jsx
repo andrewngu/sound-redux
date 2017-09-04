@@ -4,7 +4,7 @@ import Switch from '../components/Switch';
 import { SONG_PATH } from '../constants/RouterConstants';
 
 const propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   navigateTo: PropTypes.func.isRequired,
   sidebarHeight: PropTypes.number.isRequired,
   sticky: PropTypes.bool.isRequired,

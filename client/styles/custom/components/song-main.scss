@@ -7,6 +7,10 @@
   border: 1px solid $lighterGray;
 }
 
+.song-main--active {
+  border-color: $green;
+}
+
 .song-main__artwork {
   display: flex;
   align-items: center;;
