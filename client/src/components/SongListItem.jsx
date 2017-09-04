@@ -3,7 +3,7 @@ import React from 'react';
 import ArtworkPlay from '../components/ArtworkPlay';
 import Link from '../components/Link';
 import Waveform from '../components/Waveform';
-import { USER_PATH } from '../constants/RouterConstants';
+import { SONG_PATH, USER_PATH } from '../constants/RouterConstants';
 import { IMAGE_SIZES } from '../constants/SongConstants';
 import { addCommas } from '../utils/FormatUtils';
 import { getImageUrl } from '../utils/SongUtils';
@@ -20,8 +20,8 @@ const propTypes = {
 
 const SongListItem = ({ index, isActive, navigateTo, player, playlist, playSong, song }) => {
   const { isPlaying } = player;
-  const { artworkUrl, commentCount, playbackCount, user } = song;
-  const { avatarUrl } = user;
+  const { artworkUrl, commentCount, id, playbackCount, user } = song;
+  const { avatarUrl, username } = user;
 
   return (
     <div className={`song-list__item ${isActive ? 'song-list__item--active' : ''}`}>
@@ -42,9 +42,14 @@ const SongListItem = ({ index, isActive, navigateTo, player, playlist, playSong,
         </div>
       </div>
       <div className="song-list__item__main">
-        <div className="song-list__item__title">
+        <Link
+          className="song-list__item__title"
+          navigateTo={navigateTo}
+          keys={{ id }}
+          path={SONG_PATH}
+        >
           {song.title}
-        </div>
+        </Link>
         <div className="song-list__item__meta">
           <div className="song-list__item__user">
             <div
@@ -54,11 +59,10 @@ const SongListItem = ({ index, isActive, navigateTo, player, playlist, playSong,
             <Link
               className="song-list__item__user__username"
               navigateTo={navigateTo}
-              keys={{ id: String(user.id) }}
+              keys={{ id: user.id }}
               path={USER_PATH}
-              route={{ path: ['users', user.id] }}
             >
-              {user.username}
+              {username}
             </Link>
           </div>
           <div className="song-list__item__stats">

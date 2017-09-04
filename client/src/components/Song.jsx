@@ -76,6 +76,7 @@ class Song extends Component {
             />
             <SongList
               className="song__song-list"
+              id={id}
               navigateTo={navigateTo}
               player={player}
               playingSongId={playingSongId}

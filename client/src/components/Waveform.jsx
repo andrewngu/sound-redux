@@ -10,6 +10,7 @@ const defaultProps = {
 
 const propTypes = {
   className: PropTypes.string,
+  index: PropTypes.number.isRequired,
   isActive: PropTypes.bool.isRequired,
   player: PropTypes.shape({}).isRequired,
   playlist: PropTypes.string.isRequired,
@@ -39,8 +40,8 @@ class Waveform extends Component {
   }
 
   playSong() {
-    const { playlist, playSong } = this.props;
-    playSong(playlist, 0);
+    const { index, playlist, playSong } = this.props;
+    playSong(playlist, index);
   }
 
   seek() {
