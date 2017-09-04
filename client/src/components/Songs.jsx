@@ -69,7 +69,7 @@ class Songs extends Component {
     } = this.props;
 
     return (
-      <InfiniteScroll onScroll={() => fetchSongsNext(playlist)}>
+      <InfiniteScroll args={[playlist]} onScroll={fetchSongsNext}>
         <SongsHeader
           genre={genre}
           genres={genres}
