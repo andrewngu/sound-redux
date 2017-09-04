@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import SongComments from '../components/SongComments';
+import SongList from '../components/SongList';
 import Loader from '../components/Loader';
 import SongMain from '../components/SongMain';
 import stickify from '../components/Stickify';
@@ -18,10 +19,12 @@ const propTypes = {
   isActive: PropTypes.bool.isRequired,
   navigateTo: PropTypes.func.isRequired,
   player: PropTypes.shape({}).isRequired,
+  playingSongId: PropTypes.number,
   playlist: PropTypes.string.isRequired,
   playSong: PropTypes.func.isRequired,
   sidebarHeight: PropTypes.number.isRequired,
   song: PropTypes.shape({}),
+  songs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   sticky: PropTypes.bool.isRequired,
   timed: PropTypes.bool.isRequired,
 };
@@ -47,9 +50,11 @@ class Song extends Component {
       navigateTo,
       playlist,
       player,
+      playingSongId,
       playSong,
       sidebarHeight,
       song,
+      songs,
       sticky,
       timed,
     } = this.props;
@@ -68,6 +73,15 @@ class Song extends Component {
               playlist={playlist}
               playSong={playSong}
               song={song}
+            />
+            <SongList
+              className="song__song-list"
+              navigateTo={navigateTo}
+              player={player}
+              playingSongId={playingSongId}
+              playlist={playlist}
+              playSong={playSong}
+              songs={songs}
             />
           </div>
           <div className="song__sidebar">
