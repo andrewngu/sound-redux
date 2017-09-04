@@ -13,7 +13,6 @@ const defaultProps = {
 
 const propTypes = {
   authed: PropTypes.shape({}).isRequired,
-  dispatch: PropTypes.func.isRequired,
   fetchSongsIfNeeded: PropTypes.func.isRequired,
   fetchSongsNext: PropTypes.func.isRequired,
   genre: PropTypes.string.isRequired,
@@ -49,7 +48,6 @@ class Songs extends Component {
   render() {
     const {
       authed,
-      dispatch,
       fetchSongsNext,
       genre,
       genres,
@@ -82,7 +80,6 @@ class Songs extends Component {
         <div className="container">
           <SongsBody
             authed={authed}
-            dispatch={dispatch}
             height={height}
             isFetching={isFetching}
             isPlaying={isPlaying}

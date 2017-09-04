@@ -7,7 +7,17 @@
   border-left: 1px solid $lighterGray;
   border-right: 1px solid $lighterGray;
   font-size: 11px;
+  animation-fill-mode: forwards;
+  animation-name: slideIn;
+  animation-duration: 360ms;
+  animation-timing-function: ease;
+  opacity: 0;
   overflow: hidden;
+  transform: translateX(200px);
+}
+
+.song-comment--exit {
+  display: none;
 }
 
 .song-comment__image {
@@ -34,29 +44,7 @@
   word-wrap: break-word;
 }
 
-.song-comment__time {
-  align-items: center;
-}
-
-.animate-out .comment {
-  opacity: 0 !important;
-  transition: opacity 0.2s ease-in-out;
-}
-
-.timed .comment {
-  animation-name: animateIn;
-  animation-duration: 360ms;
-  animation-timing-function: ease;
-  opacity: 0;
-  animation-fill-mode: forwards;
-}
-
-@keyframes animateIn {
-  from {
-    transform: translateX(200px);
-    opacity: 0;
-  }
-
+@keyframes slideIn {
   to {
     transform: translateX(0px);
     opacity: 1;

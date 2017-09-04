@@ -15,9 +15,9 @@ const propTypes = {
   comments: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   fetchSongIfNeeded: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
+  isActive: PropTypes.bool.isRequired,
   navigateTo: PropTypes.func.isRequired,
   player: PropTypes.shape({}).isRequired,
-  playingSongId: PropTypes.number,
   playlist: PropTypes.string.isRequired,
   playSong: PropTypes.func.isRequired,
   sidebarHeight: PropTypes.number.isRequired,
@@ -43,8 +43,8 @@ class Song extends Component {
     const {
       comments,
       id,
+      isActive,
       navigateTo,
-      playingSongId,
       playlist,
       player,
       playSong,
@@ -62,7 +62,7 @@ class Song extends Component {
         <div className="song content">
           <div className="song__main">
             <SongMain
-              isActive={Boolean(playingSongId === id)}
+              isActive={isActive}
               navigateTo={navigateTo}
               player={player}
               playlist={playlist}
