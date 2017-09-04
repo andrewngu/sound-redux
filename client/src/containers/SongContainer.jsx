@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchSongIfNeeded } from '../actions/SongsActions';
+import { fetchSongIfNeeded } from '../actions/SongActions';
 import Song from '../components/Song';
 import { getId, getPlayingSongId } from '../selectors/CommonSelectors';
 import { getPlaylist, getSong } from '../selectors/SongSelectors';
