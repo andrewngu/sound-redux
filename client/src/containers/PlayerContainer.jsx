@@ -15,6 +15,7 @@ import {
   toggleRepeat,
   toggleShuffle,
 } from '../actions/PlayerActions';
+import { navigateTo } from '../actions/RouterActions';
 import Player from '../components/Player';
 import { getPlayingSongId, getPlaylists } from '../selectors/CommonSelectors';
 import { getNextIndex, getSong } from '../selectors/PlayerSelectors';
@@ -51,6 +52,7 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
+  navigateTo,
   onLoadedMetadata,
   onLoadStart,
   onPause,

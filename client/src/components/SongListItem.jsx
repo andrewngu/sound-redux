@@ -20,7 +20,7 @@ const propTypes = {
 
 const SongListItem = ({ index, isActive, navigateTo, player, playlist, playSong, song }) => {
   const { isPlaying } = player;
-  const { artworkUrl, commentCount, id, playbackCount, user } = song;
+  const { artworkUrl, commentCount, id, playbackCount, title, user } = song;
   const { avatarUrl, username } = user;
 
   return (
@@ -48,7 +48,7 @@ const SongListItem = ({ index, isActive, navigateTo, player, playlist, playSong,
           keys={{ id }}
           path={SONG_PATH}
         >
-          {song.title}
+          {title}
         </Link>
         <div className="song-list__item__meta">
           <div className="song-list__item__user">

@@ -57,8 +57,13 @@
   overflow: hidden;
 }
 
+.player__song__title {
+  color: $black;
+}
+
 .player__song__title,
 .player__song__username {
+  display: block;
   font-size: 11px;
   overflow: hidden;
   text-overflow: ellipsis;
