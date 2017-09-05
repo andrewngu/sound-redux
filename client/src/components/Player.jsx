@@ -5,6 +5,7 @@ import Slider from '../components/Slider';
 import { formatSeconds } from '../utils/NumberUtils';
 
 const propTypes = {
+  changeCurrentTime: PropTypes.func.isRequired,
   changeVolume: PropTypes.func.isRequired,
   player: PropTypes.shape({}).isRequired,
   playNextSongFromButton: PropTypes.func.isRequired,
@@ -16,6 +17,7 @@ const propTypes = {
 };
 
 const Player = ({
+  changeCurrentTime,
   changeVolume,
   player,
   playNextSongFromButton,
@@ -76,7 +78,7 @@ const Player = ({
         <div className="player__section player__section--flex">
           <Slider
             max={duration}
-            onChange={() => {}}
+            onChange={changeCurrentTime}
             value={currentTime}
           />
         </div>

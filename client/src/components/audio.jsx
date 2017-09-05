@@ -27,6 +27,7 @@ const audio = (InnerComponent) => {
       this.onTimeUpdate = this.onTimeUpdate.bind(this);
       this.onVolumeChange = this.onVolumeChange.bind(this);
 
+      this.changeCurrentTime = this.changeCurrentTime.bind(this);
       this.changeVolume = this.changeVolume.bind(this);
       this.togglePlay = this.togglePlay.bind(this);
     }
@@ -91,6 +92,10 @@ const audio = (InnerComponent) => {
       onVolumeChange(audioElement.volume);
     }
 
+    changeCurrentTime(currentTime) {
+      this.audioElement.currentTime = currentTime;
+    }
+
     changeVolume(volume) {
       this.audioElement.volume = volume;
     }
@@ -119,6 +124,7 @@ const audio = (InnerComponent) => {
           <InnerComponent
             {...this.state}
             {...this.props}
+            changeCurrentTime={this.changeCurrentTime}
             changeVolume={this.changeVolume}
             togglePlay={this.togglePlay}
           />
