@@ -78,6 +78,7 @@ class Song extends Component {
               className="song__song-list"
               id={id}
               navigateTo={navigateTo}
+              offsetIndex={1}
               player={player}
               playingSongId={playingSongId}
               playlist={playlist}

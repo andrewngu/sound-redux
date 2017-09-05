@@ -4,6 +4,7 @@ import SongListItem from '../components/SongListItem';
 
 const defaultProps = {
   className: '',
+  offsetIndex: 0,
   id: null,
   playingSongId: null,
 };
@@ -11,6 +12,7 @@ const defaultProps = {
 const propTypes = {
   className: PropTypes.string,
   id: PropTypes.number,
+  offsetIndex: PropTypes.number,
   navigateTo: PropTypes.func.isRequired,
   player: PropTypes.shape({}).isRequired,
   playingSongId: PropTypes.number,
@@ -23,6 +25,7 @@ const SongList = ({
   className,
   id,
   navigateTo,
+  offsetIndex,
   player,
   playingSongId,
   playlist,
@@ -33,7 +36,7 @@ const SongList = ({
     {songs.map((song, i) => (song.id !== id
       ? (
         <SongListItem
-          index={i + 1}
+          index={i + offsetIndex}
           isActive={playingSongId === song.id}
           key={song.id}
           navigateTo={navigateTo}
