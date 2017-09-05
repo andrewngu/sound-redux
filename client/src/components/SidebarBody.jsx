@@ -6,9 +6,12 @@ const propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+const onMouseEnter = () => { document.body.style.overflow = 'hidden'; };
+const onMouseLeave = () => { document.body.style.overflow = 'auto'; };
+
 class SidebarBody extends Component {
   componentWillUnmount() {
-    document.body.style = 'auto';
+    onMouseLeave();
   }
 
   render() {
@@ -17,8 +20,8 @@ class SidebarBody extends Component {
     return (
       <div
         className="sidebar__body"
-        onMouseEnter={() => { document.body.style = 'hidden'; }}
-        onMouseLeave={() => { document.body.style = 'auto'; }}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
       >
         {children}
       </div>

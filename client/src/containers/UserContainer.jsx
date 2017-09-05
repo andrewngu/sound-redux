@@ -5,7 +5,7 @@ import { playSong } from '../actions/PlayerActions';
 import { navigateTo } from '../actions/RouterActions';
 import fetchUserIfNeeded from '../actions/UserActions';
 import { getId, getPlayingSongId, getSidebarHeight } from '../selectors/CommonSelectors';
-import { getPlaylist, getSongs, getUser } from '../selectors/UserSelectors';
+import { getFollowings, getPlaylist, getProfiles, getShouldFetchUser, getSongs, getUser } from '../selectors/UserSelectors';
 
 const UserContainer = props => <User {...props} />;
 
@@ -14,11 +14,14 @@ const mapStateToProps = (state) => {
 
   return {
     authed,
+    followings: getFollowings(state),
     id: getId(state),
     player,
     playingSongId: getPlayingSongId(state),
     playlist: getPlaylist(state),
+    profiles: getProfiles(state),
     sidebarHeight: getSidebarHeight(state),
+    shouldFetchUser: getShouldFetchUser(state),
     songs: getSongs(state),
     user: getUser(state),
   };

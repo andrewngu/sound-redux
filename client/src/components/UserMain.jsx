@@ -6,11 +6,12 @@ import { getImageUrl } from '../utils/SongUtils';
 import { getSocialIcon, getUserLocation } from '../utils/UserUtils';
 
 const propTypes = {
+  profiles: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   user: PropTypes.shape({}).isRequired,
 };
 
-const UserMain = ({ user }) => {
-  const { avatarUrl, description, followersCount, profiles, username } = user;
+const UserMain = ({ profiles, user }) => {
+  const { avatarUrl, description, followersCount, username } = user;
 
   return (
     <div className="user-main">

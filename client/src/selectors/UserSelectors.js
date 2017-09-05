@@ -27,3 +27,29 @@ export const getUser = createSelector(
     : null
   ),
 );
+
+export const getFollowings = createSelector(
+  getUser,
+  getEntities,
+  (user, entities) => (user && user.followings
+    ? denormalize(user.followings, [userSchema], entities)
+    : []
+  ),
+);
+
+export const getShouldFetchUser = createSelector(
+  getId,
+  getEntities,
+  (id, entities) => {
+    const { users } = entities;
+    const userExists = id in users;
+    const userHasDescription = userExists ? 'description' in users[id] : false;
+
+    return !userExists || !userHasDescription;
+  },
+);
+
+export const getProfiles = createSelector(
+  getUser,
+  user => (user && user.profiles ? user.profiles : []),
+);

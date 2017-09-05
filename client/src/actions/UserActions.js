@@ -12,7 +12,8 @@ const fetchUserFollowingsSuccess = entities => ({
 
 const fetchUserFollowings = id => async (dispatch) => {
   const { json } = await callApi(USER_FOLLOWINGS_URL.replace(':id', id));
-  const { entities, result } = normalize(json, [userSchema]);
+  const { collection } = json;
+  const { entities, result } = normalize(collection, [userSchema]);
 
   dispatch(fetchUserFollowingsSuccess({
     users: {
@@ -51,17 +52,8 @@ const fetchUser = (id, playlist) => async (dispatch) => {
   dispatch(fetchUserProfiles(id));
 };
 
-const shouldFetchUser = (id, state) => {
-  const { entities } = state;
-  const { users } = entities;
-  const userExists = id in users;
-  const userHasDescription = userExists ? 'description' in users[id] : false;
-
-  return !userExists || !userHasDescription;
-};
-
-const fetchUserIfNeeded = (id, playlist) => (dispatch, getState) => {
-  if (shouldFetchUser(id, getState())) {
+const fetchUserIfNeeded = (shouldFetchUser, id, playlist) => (dispatch) => {
+  if (shouldFetchUser) {
     dispatch(fetchUser(id, playlist));
   }
 };
