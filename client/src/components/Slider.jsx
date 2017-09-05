@@ -10,12 +10,19 @@ const defaultProps = {
 const propTypes = {
   className: PropTypes.string,
   max: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
   value: PropTypes.number.isRequired,
+};
+
+const prevent = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
 };
 
 class Slider extends Component {
   constructor() {
     super();
+    this.onClick = this.onClick.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
@@ -25,6 +32,12 @@ class Slider extends Component {
   componentWillUnmount() {
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
+  }
+
+  onClick(e) {
+    const { max, onChange } = this.props;
+    const percent = (e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth;
+    onChange(percent * max);
   }
 
   onMouseDown() {
@@ -53,7 +66,10 @@ class Slider extends Component {
     return (
       <div
         className={`slider ${className}`}
+        onClick={this.onClick}
         ref={(node) => { this.domNode = node; }}
+        role="button"
+        tabIndex="0"
       >
         <div className="slider__bar">
           {max > 0
@@ -61,6 +77,7 @@ class Slider extends Component {
               <div className="slider__bar__fill" style={{ width }}>
                 <div
                   className="slider__handle"
+                  onClick={prevent}
                   onMouseDown={this.onMouseDown}
                   role="button"
                   tabIndex="0"
