@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import SidebarBody from '../components/SidebarBody';
 import SongComment from '../components/SongComment';
 import Switch from '../components/Switch';
 import { SONG_PATH } from '../constants/RouterConstants';
@@ -36,7 +37,7 @@ const SongComments = ({ comments, id, navigateTo, sidebarHeight, sticky, timed }
         />
       </div>
     </div>
-    <div className="sidebar__body">
+    <SidebarBody>
       {comments.map((comment, i) => (
         <SongComment
           comment={comment}
@@ -44,7 +45,7 @@ const SongComments = ({ comments, id, navigateTo, sidebarHeight, sticky, timed }
           index={i}
         />
       ))}
-    </div>
+    </SidebarBody>
   </div>
 );
 
