@@ -1,5 +1,6 @@
 const webpack = require('webpack');
-const ignore = new webpack.IgnorePlugin(/\.svg$/)
+const ignore = new webpack.IgnorePlugin(/\.svg$/);
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: 'source-map',
@@ -20,7 +21,13 @@ module.exports = {
       { test: /\.scss$/, loaders: ['style', 'css', 'postcss', 'sass'] },
     ],
   },
-  plugins: [ignore],
+  plugins: [
+    ignore,
+    new HtmlWebpackPlugin({
+      filename: '../index.html',
+      template: './server/html/index.html',
+    }),
+  ],
   devServer: {
     host: '0.0.0.0',
     proxy: {

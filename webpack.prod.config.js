@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const ignore = new webpack.IgnorePlugin(/\.svg$/);
 const nodeModulesDir = path.resolve(__dirname, 'node_modules');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -17,8 +18,8 @@ module.exports = {
     ],
   },
   output: {
-    publicPath: 'http://localhost:8080/',
-    filename: './server/public/js/[name].js',
+    filename: '[name].js',
+    path: path.join(__dirname, 'server/public/js'),
   },
   module: {
     loaders: [
@@ -28,7 +29,11 @@ module.exports = {
   },
   plugins: [
     ignore,
-    new ExtractTextPlugin('./server/public/css/main.css'),
-    new webpack.optimize.CommonsChunkPlugin('vendor', './server/public/js/vendor.js'),
+    new ExtractTextPlugin('../css/main.css'),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+    new HtmlWebpackPlugin({
+      filename: '../index.html',
+      template: './server/html/index.html',
+    }),
   ],
 };
