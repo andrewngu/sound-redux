@@ -9,6 +9,7 @@ import { formatSeconds, formatStreamUrl } from '../utils/FormatUtils';
 import { offsetLeft } from '../utils/MouseUtils';
 import { getImageUrl } from '../utils/SongUtils';
 import LocalStorageUtils from '../utils/LocalStorageUtils';
+import { fetchSongsIfNeeded } from '../actions/PlaylistsActions';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -18,6 +19,7 @@ const propTypes = {
   song: PropTypes.object,
   songs: PropTypes.object.isRequired,
   users: PropTypes.object.isRequired,
+  playlist: PropTypes.string,
 };
 
 class Player extends Component {
@@ -72,6 +74,16 @@ class Player extends Component {
     audioElement.addEventListener('volumechange', this.handleVolumeChange, false);
     audioElement.volume = this.state.volume;
     audioElement.play();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { dispatch, playingSongId, playlist, playlists, player } = nextProps;
+    const switchedFromOtherSong = this.props.playingSongId !== playingSongId;
+    const startedWithLastSong = this.props.player.isPlaying === false && player.isPlaying === true;
+    if (playingSongId && !this.state.shuffle && (switchedFromOtherSong || startedWithLastSong)
+      && playlists[playlist].items.length === player.currentSongIndex + 1) {
+      dispatch(fetchSongsIfNeeded(playlist));
+    }
   }
 
   componentDidUpdate(prevProps) {
