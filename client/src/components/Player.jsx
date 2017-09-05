@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import audio from '../components/audio';
+import Link from '../components/Link';
 import Slider from '../components/Slider';
+import { SONG_PATH, USER_PATH } from '../constants/RouterConstants';
 import { formatSeconds } from '../utils/NumberUtils';
 
 const propTypes = {
   changeCurrentTime: PropTypes.func.isRequired,
   changeVolume: PropTypes.func.isRequired,
+  navigateTo: PropTypes.func.isRequired,
   player: PropTypes.shape({}).isRequired,
   playNextSongFromButton: PropTypes.func.isRequired,
   playPrevSong: PropTypes.func.isRequired,
@@ -19,6 +22,7 @@ const propTypes = {
 const Player = ({
   changeCurrentTime,
   changeVolume,
+  navigateTo,
   player,
   playNextSongFromButton,
   playPrevSong,
@@ -28,7 +32,7 @@ const Player = ({
   toggleShuffle,
 }) => {
   const { currentTime, duration, isPlaying, repeat, shuffle, volume } = player;
-  const { artworkUrl, title, user } = song;
+  const { artworkUrl, id, title, user } = song;
   const { username } = user;
 
   return (
@@ -38,12 +42,22 @@ const Player = ({
           <div className="player__song">
             <div className="player__song__artwork" style={{ backgroundImage: `url(${artworkUrl})` }} />
             <div className="player__song__main">
-              <div className="player__song__title">
+              <Link
+                className="player__song__title"
+                navigateTo={navigateTo}
+                keys={{ id }}
+                path={SONG_PATH}
+              >
                 {title}
-              </div>
-              <div className="player__song__username">
+              </Link>
+              <Link
+                className="player__song__username"
+                navigateTo={navigateTo}
+                keys={{ id: user.id }}
+                path={USER_PATH}
+              >
                 {username}
-              </div>
+              </Link>
             </div>
           </div>
         </div>
