@@ -29,6 +29,7 @@ const audio = (InnerComponent) => {
 
       this.changeCurrentTime = this.changeCurrentTime.bind(this);
       this.changeVolume = this.changeVolume.bind(this);
+      this.toggleMuted = this.toggleMuted.bind(this);
       this.togglePlay = this.togglePlay.bind(this);
     }
 
@@ -88,8 +89,9 @@ const audio = (InnerComponent) => {
 
     onVolumeChange() {
       const { audioElement, props } = this;
+      const { muted, volume } = audioElement;
       const { onVolumeChange } = props;
-      onVolumeChange(audioElement.volume);
+      onVolumeChange(muted, volume);
     }
 
     changeCurrentTime(currentTime) {
@@ -97,7 +99,15 @@ const audio = (InnerComponent) => {
     }
 
     changeVolume(volume) {
-      this.audioElement.volume = volume;
+      const { audioElement } = this;
+      audioElement.muted = false;
+      audioElement.volume = volume;
+    }
+
+    toggleMuted() {
+      const { audioElement } = this;
+      const { muted } = audioElement;
+      audioElement.muted = !muted;
     }
 
     togglePlay() {
@@ -126,6 +136,7 @@ const audio = (InnerComponent) => {
             {...this.props}
             changeCurrentTime={this.changeCurrentTime}
             changeVolume={this.changeVolume}
+            toggleMuted={this.toggleMuted}
             togglePlay={this.togglePlay}
           />
         </div>

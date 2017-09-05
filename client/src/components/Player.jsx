@@ -5,6 +5,7 @@ import Link from '../components/Link';
 import Slider from '../components/Slider';
 import { SONG_PATH, USER_PATH } from '../constants/RouterConstants';
 import { formatSeconds } from '../utils/NumberUtils';
+import { volumeClassName } from '../utils/PlayerUtils';
 
 const propTypes = {
   changeCurrentTime: PropTypes.func.isRequired,
@@ -14,6 +15,7 @@ const propTypes = {
   playNextSongFromButton: PropTypes.func.isRequired,
   playPrevSong: PropTypes.func.isRequired,
   song: PropTypes.shape({}).isRequired,
+  toggleMuted: PropTypes.func.isRequired,
   togglePlay: PropTypes.func.isRequired,
   toggleRepeat: PropTypes.func.isRequired,
   toggleShuffle: PropTypes.func.isRequired,
@@ -27,13 +29,15 @@ const Player = ({
   playNextSongFromButton,
   playPrevSong,
   song,
+  toggleMuted,
   togglePlay,
   toggleRepeat,
   toggleShuffle,
 }) => {
-  const { currentTime, duration, isPlaying, repeat, shuffle, volume } = player;
+  const { currentTime, duration, isPlaying, muted, repeat, shuffle } = player;
   const { artworkUrl, id, title, user } = song;
   const { username } = user;
+  const volume = muted ? 0 : player.volume;
 
   return (
     <div className="player">
@@ -126,8 +130,14 @@ const Player = ({
             <div className="player__button">
               <i className="player__button__icon ion-android-list" />
             </div>
-            <div className="player__button">
-              <i className="player__button__icon ion-android-volume-mute" />
+            <div
+              className="player__button player__button--volume"
+              onClick={toggleMuted}
+              role="button"
+              tabIndex="0"
+            >
+              <i className={`player__button__icon ion-android-volume-${muted ? 'off' : 'mute'}`} />
+              <i className={`player__button__icon player__button__icon--absolute ${volumeClassName(volume)}`} />
             </div>
           </div>
         </div>

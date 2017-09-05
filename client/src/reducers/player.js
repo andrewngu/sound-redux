@@ -63,6 +63,7 @@ const player = (state = initialState, action) => {
     case types.ON_VOLUME_CHANGE:
       return {
         ...state,
+        muted: action.muted,
         volume: action.volume,
       };
 

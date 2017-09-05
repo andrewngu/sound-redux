@@ -29,8 +29,9 @@ export const onTimeUpdate = currentTime => ({
   currentTime,
 });
 
-export const onVolumeChange = volume => ({
+export const onVolumeChange = (muted, volume) => ({
   type: types.ON_VOLUME_CHANGE,
+  muted,
   volume,
 });
 
