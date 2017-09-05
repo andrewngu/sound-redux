@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { toggleFollow } from '../actions/AuthedActions';
 import { playSong } from '../actions/PlayerActions';
-import { fetchUserIfNeeded } from '../actions/UsersActions';
 
 import Followings from '../components/Followings';
 import SongListItem from '../components/SongListItem';
 import Loader from '../components/Loader';
 import stickify from '../components/Stickify';
+import UserMain from '../components/UserMain';
 
 import { USER_PLAYLIST_SUFFIX } from '../constants/PlaylistConstants';
 import { IMAGE_SIZES } from '../constants/SongConstants';
@@ -19,31 +19,29 @@ import { getUserLocation } from '../utils/UserUtils';
 const propTypes = {
   authed: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
+  fetchUserIfNeeded: PropTypes.func.isRequired,
   height: PropTypes.number,
+  id: PropTypes.number.isRequired,
   player: PropTypes.object.isRequired,
   playingSongId: PropTypes.number,
   playlists: PropTypes.object.isRequired,
   songs: PropTypes.object.isRequired,
   sticky: PropTypes.bool.isRequired,
+  user: PropTypes.shape({}).isRequired,
   userId: PropTypes.number,
   users: PropTypes.object.isRequired,
 };
 
 class User extends Component {
-  constructor() {
-    super();
-    this.toggleFollow = this.toggleFollow.bind(this);
-  }
-
   componentWillMount() {
-    const { dispatch, userId } = this.props;
-    dispatch(fetchUserIfNeeded(userId));
+    const { fetchUserIfNeeded, id } = this.props;
+    fetchUserIfNeeded(id);
   }
 
   componentWillReceiveProps(nextProps) {
-    const { dispatch, userId } = this.props;
-    if (nextProps.userId !== userId) {
-      dispatch(fetchUserIfNeeded(nextProps.userId));
+    const { fetchUserIfNeeded, id } = this.props;
+    if (nextProps.id !== id) {
+      fetchUserIfNeeded(nextProps.id);
     }
   }
 
@@ -142,57 +140,23 @@ class User extends Component {
   }
 
   render() {
-    const { sticky, userId, users } = this.props;
-    const user = users[userId];
-    if (!user || !user.hasOwnProperty('description')) {
-      return <Loader />;
-    }
+    const { user } = this.props;
 
-    const image = user.avatar_url ? getImageUrl(user.avatar_url, IMAGE_SIZES.LARGE) : null;
     return (
-      <div className="container">
-        <div className="content">
-          <div className="grid">
-            <div className="col-7-10">
-              <div className="user card">
-                <div className="user-detail">
-                  <img
-                    alt="user avatar"
-                    className="user-image"
-                    src={image}
-                  />
-                </div>
-                <div className="user-info">
-                  {this.renderFollowButton()}
-                  <div className="user-username">
-                    {user.username}
-                  </div>
-                  <div className="user-location">
-                    <i className="icon ion-location" />
-                    {getUserLocation(user)}
-                  </div>
-                  <div className="user-profiles">
-                    <div className="user-profile">
-                      {`${addCommas(user.followers_count)} followers`}
-                    </div>
-                    {this.renderUserProfiles()}
-                  </div>
-                  <div
-                    className="user-description"
-                    dangerouslySetInnerHTML={{ __html: user.description }}
-                  />
-                </div>
-              </div>
-              {this.renderSongs()}
-            </div>
-            <div className="col-3-10">
-              <div className={`sidebar ${(sticky ? 'sticky' : '')}`}>
-                {this.renderFollowings()}
-              </div>
+      <Loader
+        className="loader--full"
+        isLoading={!user || !('followings' in user) || !('profiles' in user)}
+      >
+        <div className="container">
+          <div className="user content">
+            <div className="user__main">
+              <UserMain
+                user={user}
+              />
             </div>
           </div>
         </div>
-      </div>
+      </Loader>
     );
   }
 }

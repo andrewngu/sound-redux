@@ -33,8 +33,7 @@ const fetchUserProfilesSuccess = (id, profiles) => ({
 
 const fetchUserProfiles = id => async (dispatch) => {
   const { json } = await callApi(USER_PROFILES_URL.replace(':id', id));
-
-  dispatch(fetchUserProfilesSuccess(json));
+  dispatch(fetchUserProfilesSuccess(id, json));
 };
 
 const fetchUserSuccess = entities => ({
@@ -56,9 +55,9 @@ const shouldFetchUser = (id, state) => {
   const { entities } = state;
   const { users } = entities;
   const userExists = id in users;
-  const userHasFollowings = userExists ? 'followings' in users[id] : false;
+  const userHasDescription = userExists ? 'description' in users[id] : false;
 
-  return !userExists || !userHasFollowings;
+  return !userExists || !userHasDescription;
 };
 
 const fetchUserIfNeeded = (id, playlist) => (dispatch, getState) => {
