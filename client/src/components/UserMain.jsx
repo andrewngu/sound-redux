@@ -50,9 +50,7 @@ const UserMain = ({ user }) => {
             </div>
           ))}
         </div>
-        <div className="user-main__description">
-          {description}
-        </div>
+        <div className="user-main__description" dangerouslySetInnerHTML={{ __html: description }} />
       </div>
     </div>
   );

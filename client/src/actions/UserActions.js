@@ -33,7 +33,7 @@ const fetchUserProfilesSuccess = (id, profiles) => ({
 
 const fetchUserProfiles = id => async (dispatch) => {
   const { json } = await callApi(USER_PROFILES_URL.replace(':id', id));
-  dispatch(fetchUserProfilesSuccess(id, json));
+  dispatch(fetchUserProfilesSuccess(id, json.slice(0, 6)));
 };
 
 const fetchUserSuccess = entities => ({
