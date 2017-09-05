@@ -2,6 +2,7 @@
 
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import WaveformEvents from '../components/WaveformEvents';
 import { offsetLeft } from '../utils/MouseUtils';
 
 const defaultProps = {
@@ -21,7 +22,6 @@ const propTypes = {
 class Waveform extends Component {
   constructor(props) {
     super(props);
-    this.onMouseLeave = this.onMouseLeave.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
     this.playSong = this.playSong.bind(this);
     this.seek = this.seek.bind(this);
@@ -33,10 +33,6 @@ class Waveform extends Component {
   onMouseMove(e) {
     const seek = ((e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth) * 100;
     this.setState({ seek });
-  }
-
-  onMouseLeave() {
-    this.setState({ seek: 0 });
   }
 
   playSong() {
@@ -61,24 +57,24 @@ class Waveform extends Component {
     const width = isActive ? (currentTime / (duration / 1000)) * 100 : 0;
 
     return (
-      <div className={`waveform ${className}`}>
+      <div className={`waveform ${isActive ? 'waveform--active' : ''} ${className}`}>
         <div
           className="waveform__image"
-          onMouseLeave={this.onMouseLeave}
-          onMouseMove={isActive ? this.onMouseMove : () => {}}
-          onClick={isActive ? this.seek : this.playSong}
-          role="button"
           style={{ backgroundImage: `url(${waveformUrl})` }}
-          tabIndex="0"
         />
         <div className="waveform__bg" style={{ width: `${width}%` }} />
         <div className="waveform__seek-bg" style={{ width: `${seek}%` }} />
-        {!isActive ? <div className="waveform__hover-bg" /> : null}
-        {!isActive
-          ? <div className="waveform__hover-icon"><i className="ion-ios-play" /></div>
-          : null
-        }
-        {seek ? <div className="waveform__seek-line" style={{ width: `${seek}%` }} /> : null}
+        <div className="waveform__hover-icon">
+          <i className="ion-ios-play" />
+        </div>
+        <div className="waveform__hover-bg" />
+        <div className="waveform__seek-line" style={{ width: `${seek}%` }} />
+        <WaveformEvents
+          isActive={isActive}
+          onMouseMove={this.onMouseMove}
+          playSong={this.playSong}
+          seek={this.seek}
+        />
       </div>
     );
   }
