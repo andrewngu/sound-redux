@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import User from '../components/User';
 import { playSong } from '../actions/PlayerActions';
 import { navigateTo } from '../actions/RouterActions';
-import { fetchUserIfNeeded } from '../actions/UserActions';
+import fetchUserIfNeeded from '../actions/UserActions';
 import { getId, getPlayingSongId, getSidebarHeight } from '../selectors/CommonSelectors';
 import { getPlaylist, getSongs, getUser } from '../selectors/UserSelectors';
 
