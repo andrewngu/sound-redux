@@ -43,9 +43,9 @@ export const getShouldFetchUser = createSelector(
   (id, entities) => {
     const { users } = entities;
     const userExists = id in users;
-    const userHasDescription = userExists ? 'description' in users[id] : false;
+    const userHasProfiles = userExists ? 'profiles' in users[id] : false;
 
-    return !userExists || !userHasDescription;
+    return !userExists || !userHasProfiles;
   },
 );
 
