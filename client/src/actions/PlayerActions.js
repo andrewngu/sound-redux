@@ -65,7 +65,7 @@ export const playNextSong = (fromButtonPress = false) => (dispatch, getState) =>
   }
 };
 
-export const playNextSongFromButton = dispatch => dispatch(playNextSong(true));
+export const playNextSongFromButton = () => dispatch => dispatch(playNextSong(true));
 
 export const toggleIsPlaying = isPlaying => ({
   type: types.TOGGLE_IS_PLAYING,
