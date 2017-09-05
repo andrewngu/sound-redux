@@ -82,6 +82,7 @@
 }
 
 .player__button {
+  position: relative;
   padding: 4px;
   outline: 0;
 
@@ -105,7 +106,9 @@
 }
 
 .player__button__icon {
+  position: relative;
   color: $gray;
+  z-index: 1;
 }
 
 .player__button--active {
@@ -129,4 +132,21 @@
 
 .player__time__separator {
   margin: 0 10px;
+}
+
+.player__button--volume {
+  position: relative;
+  width: 6px;
+  height: 22px;
+
+  .player__button__icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.player__button__icon--absolute {
+  color: $green;
+  z-index: 0;
 }
