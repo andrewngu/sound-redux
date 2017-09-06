@@ -3,34 +3,28 @@ import React, { Component } from 'react';
 
 const propTypes = {
   isPlaying: PropTypes.bool.isRequired,
+  togglePlay: PropTypes.func.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  playSong: PropTypes.func.isRequired,
 };
 
 class TogglePlayButton extends Component {
-  constructor() {
-    super();
-    this.togglePlay = this.togglePlay.bind(this);
-  }
-
-  togglePlay() {
-    const { isPlaying } = this.props;
-    const audioElement = document.getElementById('audio');
-    if (!audioElement) {
-      return;
-    }
-
-    if (isPlaying) {
-      audioElement.pause();
-    } else {
-      audioElement.play();
-    }
-  }
-
   render() {
-    const { isPlaying } = this.props;
+    const { isPlaying, togglePlay, isActive, playSong } = this.props;
+    const onClickHandler = togglePlay.bind(null, !isPlaying);
+
+    if (!isActive) {
+      return (
+        <div className="toggle-play-button" onClick={playSong}>
+          <i className="toggle-play-button-icon ion-ios-play" />
+        </div>
+      );
+    }
+
     return (
       <div
         className={`toggle-play-button active ${(isPlaying ? 'is-playing' : '')}`}
-        onClick={this.togglePlay}
+        onClick={onClickHandler}
       >
         <i className="toggle-play-button-icon ion-radio-waves" />
         <i className="toggle-play-button-icon ion-ios-play" />

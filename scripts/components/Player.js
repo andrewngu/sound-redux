@@ -61,17 +61,20 @@ class Player extends Component {
 
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyDown);
-
     const audioElement = this.audio;
-    audioElement.addEventListener('ended', this.handleEnded, false);
-    audioElement.addEventListener('loadedmetadata', this.handleLoadedMetadata, false);
-    audioElement.addEventListener('loadstart', this.handleLoadStart, false);
-    audioElement.addEventListener('pause', this.handlePause, false);
-    audioElement.addEventListener('play', this.handlePlay, false);
-    audioElement.addEventListener('timeupdate', this.handleTimeUpdate, false);
-    audioElement.addEventListener('volumechange', this.handleVolumeChange, false);
     audioElement.volume = this.state.volume;
     audioElement.play();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const audioElement = this.audio;
+    if (nextProps.player.isPlaying !== this.props.player.isPlaying) {
+      if (nextProps.player.isPlaying) {
+        audioElement.play();
+      } else {
+        audioElement.pause();
+      }
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -84,15 +87,6 @@ class Player extends Component {
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleKeyDown, false);
-
-    const audioElement = this.audio;
-    audioElement.removeEventListener('ended', this.handleEnded, false);
-    audioElement.removeEventListener('loadedmetadata', this.handleLoadedMetadata, false);
-    audioElement.removeEventListener('loadstart', this.handleLoadStart, false);
-    audioElement.removeEventListener('pause', this.handlePause, false);
-    audioElement.removeEventListener('play', this.handlePlay, false);
-    audioElement.removeEventListener('timeupdate', this.handleTimeUpdate, false);
-    audioElement.removeEventListener('volumechange', this.handleVolumeChange, false);
   }
 
   bindSeekMouseEvents() {
@@ -402,6 +396,13 @@ class Player extends Component {
           id="audio"
           ref={(node) => { this.audio = node; }}
           src={formatStreamUrl(song.stream_url)}
+          onVolumeChange={this.handleVolumeChange}
+          onTimeUpdate={this.handleTimeUpdate}
+          onPlay={this.handlePlay}
+          onPause={this.handlePause}
+          onEnded={this.handleEnded}
+          onLoadStart={this.handleLoadStart}
+          onLoadedMetadata={this.handleLoadedMetadata}
         />
         <div className="container">
           <div className="player-main">

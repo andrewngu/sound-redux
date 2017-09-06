@@ -110,16 +110,7 @@ class Song extends Component {
     const { playingSongId, songId } = this.props;
     const isActive = playingSongId && playingSongId === songId;
     const playSongFunc = this.playSong.bind(this, 0);
-
-    if (isActive) {
-      return <TogglePlayButtonContainer />;
-    }
-
-    return (
-      <div className="toggle-play-button" onClick={playSongFunc}>
-        <i className="toggle-play-button-icon ion-ios-play" />
-      </div>
-    );
+    return <TogglePlayButtonContainer isActive={!!isActive} playSong={playSongFunc} />;
   }
 
   render() {
