@@ -12,7 +12,9 @@
   padding: 0 25px;
   color: $mediumGray;
   font-size: 12px;
+  letter-spacing: 2px;
   text-decoration: none;
+  text-transform: uppercase;
   transition: background-color 200ms ease-in-out;
 
   &:hover {
