@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { normalize } from 'normalizr';
 import { fetchSongsSuccess } from '../actions/PlaylistActions';
 import * as types from '../constants/ActionTypes';
@@ -6,13 +7,15 @@ import { SESSION_LIKES_PLAYLIST } from '../constants/PlaylistConstants';
 import { songSchema, userSchema } from '../constants/Schemas';
 import { callApi, loginToSoundCloud } from '../utils/ApiUtils';
 
-const fetchFollowingsSuccess = (followings, entities) => ({
+const COOKIE_PATH = 'oauthToken';
+
+const fetchSessionFollowingsSuccess = (followings, entities) => ({
   type: types.FETCH_SESSION_FOLLOWINGS_SUCCESS,
   entities,
   followings,
 });
 
-const fetchFollowings = oauthToken => async (dispatch) => {
+const fetchSessionFollowings = oauthToken => async (dispatch) => {
   const { json } = await callApi(`${SESSION_FOLLOWINGS_URL}?oauth_token=${oauthToken}`);
   const { collection } = json;
   const { result, entities } = normalize(collection, [userSchema]);
@@ -21,7 +24,7 @@ const fetchFollowings = oauthToken => async (dispatch) => {
     [id]: 1,
   }), {});
 
-  dispatch(fetchFollowingsSuccess(followings, entities));
+  dispatch(fetchSessionFollowingsSuccess(followings, entities));
 };
 
 const fetchSessionLikesSuccess = likes => ({
@@ -53,6 +56,12 @@ const fetchSessionUser = oauthToken => async (dispatch) => {
   dispatch(fetchSessionUserSuccess(result, entities));
 };
 
+const fetchSessionData = oauthToken => (dispatch) => {
+  dispatch(fetchSessionUser(oauthToken));
+  dispatch(fetchSessionFollowings(oauthToken));
+  dispatch(fetchSessionLikes(oauthToken));
+};
+
 const loginSuccess = oauthToken => ({
   type: types.LOGIN_SUCCESS,
   oauthToken,
@@ -61,11 +70,18 @@ const loginSuccess = oauthToken => ({
 const login = () => async (dispatch) => {
   const { json } = await loginToSoundCloud(CLIENT_ID);
   const { oauthToken } = json;
+  Cookies.set(COOKIE_PATH, oauthToken);
 
   dispatch(loginSuccess(oauthToken));
-  dispatch(fetchSessionUser(oauthToken));
-  dispatch(fetchFollowings(oauthToken));
-  dispatch(fetchSessionLikes(oauthToken));
+  dispatch(fetchSessionData(oauthToken));
+};
+
+export const initAuth = () => (dispatch) => {
+  const oauthToken = Cookies.get(COOKIE_PATH);
+  if (oauthToken) {
+    dispatch(loginSuccess(oauthToken));
+    dispatch(fetchSessionData(oauthToken));
+  }
 };
 
 export default login;
