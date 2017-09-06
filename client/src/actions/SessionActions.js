@@ -67,13 +67,18 @@ const loginSuccess = oauthToken => ({
   oauthToken,
 });
 
-const login = () => async (dispatch) => {
+export const login = () => async (dispatch) => {
   const { json } = await loginToSoundCloud(CLIENT_ID);
   const { oauthToken } = json;
   Cookies.set(COOKIE_PATH, oauthToken);
 
   dispatch(loginSuccess(oauthToken));
   dispatch(fetchSessionData(oauthToken));
+};
+
+export const logout = () => (dispatch) => {
+  Cookies.remove(COOKIE_PATH);
+  dispatch({ type: types.LOGOUT });
 };
 
 export const initAuth = () => (dispatch) => {
@@ -83,5 +88,3 @@ export const initAuth = () => (dispatch) => {
     dispatch(fetchSessionData(oauthToken));
   }
 };
-
-export default login;

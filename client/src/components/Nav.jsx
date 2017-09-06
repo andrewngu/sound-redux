@@ -5,14 +5,19 @@ import NavSearch from '../components/NavSearch';
 import NavUser from '../components/NavUser';
 import { SONGS_PATH } from '../constants/RouterConstants';
 
+const defaultProps = {
+  user: null,
+};
+
 const propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
-  user: PropTypes.shape({}).isRequired,
+  user: PropTypes.shape({}),
 };
 
-const Nav = ({ isAuthenticated, login, navigateTo, user }) => (
+const Nav = ({ isAuthenticated, login, logout, navigateTo, user }) => (
   <div className="nav">
     <div className="nav__inner container">
       <div className="nav__section">
@@ -33,6 +38,7 @@ const Nav = ({ isAuthenticated, login, navigateTo, user }) => (
         <NavUser
           isAuthenticated={isAuthenticated}
           login={login}
+          logout={logout}
           user={user}
         />
       </div>
@@ -40,6 +46,7 @@ const Nav = ({ isAuthenticated, login, navigateTo, user }) => (
   </div>
 );
 
+Nav.defaultProps = defaultProps;
 Nav.propTypes = propTypes;
 
 export default Nav;

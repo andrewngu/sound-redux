@@ -33,6 +33,9 @@ const session = (state = initialState, action) => {
         oauthToken: action.oauthToken,
       };
 
+    case types.LOGOUT:
+      return { ...initialState };
+
     default:
       return state;
   }
