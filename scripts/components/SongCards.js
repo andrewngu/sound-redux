@@ -167,7 +167,7 @@ class SongCards extends Component {
     const isFetching = playlist in playlists ? playlists[playlist].isFetching : false;
 
     return (
-      <div className="content">
+      <div className="content viewport-height">
         <div className="padder" style={{ height: paddingTop }} />
         {this.renderSongs(start, end)}
         <div className="padder" style={{ height: paddingBottom }} />
