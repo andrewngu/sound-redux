@@ -3,7 +3,7 @@ import * as types from '../constants/ActionTypes';
 import { songSchema } from '../constants/Schemas';
 
 import { getAccessToken, getPlaylists } from '../selectors/CommonSelectors';
-import callApi from '../utils/ApiUtils';
+import { callApi } from '../utils/ApiUtils';
 import playlistUrl from '../utils/PlaylistUtils';
 
 const fetchSongsRequest = playlist => ({

@@ -3,7 +3,7 @@ import { fetchSongs, fetchSongsSuccess } from '../actions/PlaylistActions';
 import * as types from '../constants/ActionTypes';
 import { SONG_URL, SONG_COMMENTS_URL, USER_SONGS_URL } from '../constants/ApiConstants';
 import { songSchema } from '../constants/Schemas';
-import callApi from '../utils/ApiUtils';
+import { callApi } from '../utils/ApiUtils';
 
 const fetchSongCommentsSuccess = (id, comments) => ({
   type: types.FETCH_SONG_COMMENTS_SUCCESS,

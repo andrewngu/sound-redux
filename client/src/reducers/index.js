@@ -7,6 +7,7 @@ import navigator from '../reducers/navigator';
 import router from '../reducers/router';
 import player from '../reducers/player';
 import playlists from '../reducers/playlists';
+import session from '../reducers/session';
 
 const rootReducer = combineReducers({
   authed,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   player,
   playlists,
   router,
+  session,
 });
 
 export default rootReducer;
