@@ -5,11 +5,15 @@ import SessionPopoverPanel from '../components/SessionPopoverPanel';
 import Popover from '../components/Popover';
 import { getImageUrl } from '../utils/SongUtils';
 
+const defaultProps = {
+  user: null,
+};
+
 const propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
-  user: PropTypes.shape({}).isRequired,
+  user: PropTypes.shape({}),
 };
 
 const NavUser = ({ isAuthenticated, login, logout, user }) => {
@@ -40,6 +44,7 @@ const NavUser = ({ isAuthenticated, login, logout, user }) => {
   );
 };
 
+NavUser.defaultProps = defaultProps;
 NavUser.propTypes = propTypes;
 
 export default NavUser;

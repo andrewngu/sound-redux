@@ -60,5 +60,5 @@ export const getSessionUser = createSelector(
 export const getIsAuthenticated = createSelector(
   getOauthToken,
   getSessionUser,
-  (oauthToken, user) => oauthToken && user,
+  (oauthToken, user) => Boolean(oauthToken && user),
 );

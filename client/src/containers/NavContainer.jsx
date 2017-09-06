@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { navigateTo } from '../actions/RouterActions';
-import login from '../actions/SessionActions';
+import { login, logout } from '../actions/SessionActions';
 import Nav from '../components/Nav';
 import { getIsAuthenticated, getSessionUser } from '../selectors/CommonSelectors';
 
@@ -14,5 +14,6 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   login,
+  logout,
   navigateTo,
 })(NavContainer);
