@@ -3,7 +3,7 @@ import { fetchSongs } from '../actions/PlaylistActions';
 import * as types from '../constants/ActionTypes';
 import { USER_FOLLOWINGS_URL, USER_PROFILES_URL, USER_SONGS_URL, USER_URL } from '../constants/ApiConstants';
 import { userSchema } from '../constants/Schemas';
-import callApi from '../utils/ApiUtils';
+import { callApi } from '../utils/ApiUtils';
 
 const fetchUserFollowingsSuccess = entities => ({
   type: types.FETCH_USER_FOLLOWINGS_SUCCESS,
