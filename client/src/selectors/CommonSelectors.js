@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { SONGS_PATH } from '../constants/RouterConstants';
 
 // authed selectors
 export const getAccessToken = state => state.authed.accessToken;
@@ -43,7 +44,27 @@ export const getGenre = state => (state.router.route.options.q
   : (state.router.route.options.g || 'house')
 );
 export const getId = state => (state.router.route.keys.id ? Number(state.router.route.keys.id) : 0);
+export const getPath = state => state.router.route.path;
 export const getSearch = state => state.router.route.options.q || '';
+export const getSession = (state) => {
+  const { s } = state.router.route.options;
+  if (s === 'likes' || s === 'stream') {
+    return s;
+  }
+
+  return '';
+};
+export const getShowLikes = createSelector(
+  getPath,
+  getSession,
+  (path, session) => path === SONGS_PATH && session === 'likes',
+);
+
+export const getShowStream = createSelector(
+  getPath,
+  getSession,
+  (path, session) => path === SONGS_PATH && session === 'stream',
+);
 export const getTime = state => state.router.route.options.t || '';
 
 // session selectors

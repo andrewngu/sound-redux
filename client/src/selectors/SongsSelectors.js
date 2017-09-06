@@ -1,14 +1,20 @@
 import { denormalize } from 'normalizr';
 import { createSelector } from 'reselect';
-import { GENRE_PLAYLIST_TYPE, SEARCH_PLAYLIST_TYPE } from '../constants/PlaylistConstants';
+import { GENRE_PLAYLIST_TYPE, SEARCH_PLAYLIST_TYPE, SESSION_LIKES_PLAYLIST } from '../constants/PlaylistConstants';
 import { songSchema } from '../constants/Schemas';
-import { getEntities, getGenre, getPlaylists, getSearch, getTime } from '../selectors/CommonSelectors';
+import { getEntities, getGenre, getPlaylists, getSearch, getShowLikes, getShowStream, getTime } from '../selectors/CommonSelectors';
 
 export const getPlaylist = createSelector(
   getGenre,
   getSearch,
+  getShowLikes,
+  getShowStream,
   getTime,
-  (genre, search, time) => {
+  (genre, search, showLikes, showStream, time) => {
+    if (showLikes) {
+      return SESSION_LIKES_PLAYLIST;
+    }
+
     if (search) {
       return [SEARCH_PLAYLIST_TYPE, search, time].join('|');
     }

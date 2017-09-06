@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import { normalize } from 'normalizr';
-import { fetchSongsSuccess } from '../actions/PlaylistActions';
+import { fetchSongsRequest, fetchSongsSuccess } from '../actions/PlaylistActions';
 import * as types from '../constants/ActionTypes';
 import { CLIENT_ID, SESSION_FOLLOWINGS_URL, SESSION_LIKES_URL, SESSION_USER_URL } from '../constants/ApiConstants';
 import { SESSION_LIKES_PLAYLIST } from '../constants/PlaylistConstants';
@@ -33,6 +33,8 @@ const fetchSessionLikesSuccess = likes => ({
 });
 
 const fetchSessionLikes = oauthToken => async (dispatch) => {
+  dispatch(fetchSongsRequest(SESSION_LIKES_PLAYLIST));
+
   const { json } = await callApi(`${SESSION_LIKES_URL}?oauth_token=${oauthToken}`);
   const songs = json.filter(song => song.streamable);
   const { result, entities } = normalize(songs, [songSchema]);
