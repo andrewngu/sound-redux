@@ -6,11 +6,13 @@ import NavUser from '../components/NavUser';
 import { SONGS_PATH } from '../constants/RouterConstants';
 
 const propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
+  user: PropTypes.shape({}).isRequired,
 };
 
-const Nav = ({ login, navigateTo }) => (
+const Nav = ({ isAuthenticated, login, navigateTo, user }) => (
   <div className="nav">
     <div className="nav__inner container">
       <div className="nav__section">
@@ -28,7 +30,11 @@ const Nav = ({ login, navigateTo }) => (
         <NavSearch navigateTo={navigateTo} />
       </div>
       <div className="nav__section">
-        <NavUser login={login} />
+        <NavUser
+          isAuthenticated={isAuthenticated}
+          login={login}
+          user={user}
+        />
       </div>
     </div>
   </div>

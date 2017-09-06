@@ -23,7 +23,12 @@ class PopoverPanel extends Component {
   }
 
   onClick(e) {
-    if (!this.node.contains(e.target)) {
+    const { target } = e;
+    const outsideClick = !this.node.contains(target);
+    const role = target.getAttribute('role');
+    const targetIsButton = role === 'button';
+
+    if (outsideClick || targetIsButton) {
       const { toggleIsOpen } = this.props;
       toggleIsOpen();
     }

@@ -22,6 +22,20 @@
   z-index: 501;
 }
 
+.popover__panel__item {
+  display: block;
+  padding: 12px 16px;
+  color: $blue;
+  font-size: 12px;
+
+  &[role="button"] {
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}
+
 .popover--right {
   .popover__panel {
     left: auto;

@@ -21,3 +21,11 @@
   color: $lightBlack;
   font-size: 10px;
 }
+
+.nav-user__avatar {
+  width: 29px;
+  height: 29px;
+  background: no-repeat center center;
+  background-size: cover;
+  border-radius: 50%;
+}
