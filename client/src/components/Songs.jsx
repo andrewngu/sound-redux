@@ -26,6 +26,8 @@ const propTypes = {
   playingSongId: PropTypes.number,
   playlist: PropTypes.string.isRequired,
   search: PropTypes.string.isRequired,
+  showLikes: PropTypes.bool.isRequired,
+  showStream: PropTypes.bool.isRequired,
   sticky: PropTypes.bool.isRequired,
   songs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   time: PropTypes.string.isRequired,
@@ -60,6 +62,8 @@ class Songs extends Component {
       playlist,
       playSong,
       search,
+      showLikes,
+      showStream,
       sticky,
       songs,
       time,
@@ -73,6 +77,8 @@ class Songs extends Component {
           genres={genres}
           navigateTo={navigateTo}
           search={search}
+          showLikes={showLikes}
+          showStream={showStream}
           sticky={sticky}
           time={time}
           times={times}

@@ -6,7 +6,7 @@ import { getAccessToken, getPlaylists } from '../selectors/CommonSelectors';
 import { callApi } from '../utils/ApiUtils';
 import playlistUrl from '../utils/PlaylistUtils';
 
-const fetchSongsRequest = playlist => ({
+export const fetchSongsRequest = playlist => ({
   type: types.FETCH_SONGS_REQUEST,
   playlist,
 });
@@ -50,7 +50,9 @@ export const fetchSongsIfNeeded = playlist => (dispatch, getState) => {
 
   if (!playlistExists || (!playlistHasItems && !playlistIsFetching)) {
     const url = playlistUrl(playlist);
-    dispatch(fetchSongs(playlist, url));
+    if (url) {
+      dispatch(fetchSongs(playlist, url));
+    }
   }
 };
 

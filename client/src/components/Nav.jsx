@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Link from '../components/Link';
 import NavSearch from '../components/NavSearch';
+import NavSession from '../components/NavSession';
 import NavUser from '../components/NavUser';
 import { SONGS_PATH } from '../constants/RouterConstants';
 
@@ -14,10 +15,12 @@ const propTypes = {
   login: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
+  showLikes: PropTypes.bool.isRequired,
+  showStream: PropTypes.bool.isRequired,
   user: PropTypes.shape({}),
 };
 
-const Nav = ({ isAuthenticated, login, logout, navigateTo, user }) => (
+const Nav = ({ isAuthenticated, login, logout, navigateTo, showLikes, showStream, user }) => (
   <div className="nav">
     <div className="nav__inner container">
       <div className="nav__section">
@@ -30,7 +33,14 @@ const Nav = ({ isAuthenticated, login, logout, navigateTo, user }) => (
           SoundRedux
         </Link>
       </div>
-      <div className="nav__section nav__section--flex" />
+      <div className="nav__section nav__section--flex">
+        <NavSession
+          isAuthenticated={isAuthenticated}
+          navigateTo={navigateTo}
+          showLikes={showLikes}
+          showStream={showStream}
+        />
+      </div>
       <div className="nav__section">
         <NavSearch navigateTo={navigateTo} />
       </div>

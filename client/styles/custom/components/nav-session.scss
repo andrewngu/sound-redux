@@ -1,0 +1,28 @@
+.nav-session {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.nav-session__item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  padding: 0 25px;
+  color: $mediumGray;
+  font-size: 12px;
+  text-decoration: none;
+  transition: background-color 200ms ease-in-out;
+
+  &:hover {
+    background-color: $darkestGray;
+    text-decoration: none;
+  }
+}
+
+.nav-session__item--active {
+  background-color: $darkestGray;
+  color: $white;
+  font-weight: 600;
+}
