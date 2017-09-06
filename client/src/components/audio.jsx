@@ -33,28 +33,6 @@ const audio = (InnerComponent) => {
       this.togglePlay = this.togglePlay.bind(this);
     }
 
-    componentDidMount() {
-      const { audioElement } = this;
-      audioElement.addEventListener('ended', this.onEnded, false);
-      audioElement.addEventListener('loadedmetadata', this.onLoadedMetadata, false);
-      audioElement.addEventListener('loadstart', this.onLoadStart, false);
-      audioElement.addEventListener('pause', this.onPause, false);
-      audioElement.addEventListener('play', this.onPlay, false);
-      audioElement.addEventListener('timeupdate', this.onTimeUpdate, false);
-      audioElement.addEventListener('volumechange', this.onVolumeChange, false);
-    }
-
-    componentWillUnmount() {
-      const audioElement = this.audio;
-      audioElement.removeEventListener('ended', this.onEnded, false);
-      audioElement.removeEventListener('loadedmetadata', this.onLoadedMetadata, false);
-      audioElement.removeEventListener('loadstart', this.onLoadStart, false);
-      audioElement.removeEventListener('pause', this.onPause, false);
-      audioElement.removeEventListener('play', this.onPlay, false);
-      audioElement.removeEventListener('timeupdate', this.onTimeUpdate, false);
-      audioElement.removeEventListener('volumechange', this.onVolumeChange, false);
-    }
-
     onEnded() {
       const { playNextSong } = this.props;
       playNextSong();
@@ -128,6 +106,13 @@ const audio = (InnerComponent) => {
           <audio
             autoPlay
             id="audio"
+            onEnded={this.onEnded}
+            onLoadedMetadata={this.onLoadedMetadata}
+            onLoadStart={this.onLoadStart}
+            onPause={this.onPause}
+            onPlay={this.onPlay}
+            onTimeUpdate={this.onTimeUpdate}
+            onVolumeChange={this.onVolumeChange}
             ref={(node) => { this.audioElement = node; }}
             src={prepareStreamUrl(streamUrl)}
           />
