@@ -45,3 +45,20 @@ export const getGenre = state => (state.router.route.options.q
 export const getId = state => (state.router.route.keys.id ? Number(state.router.route.keys.id) : 0);
 export const getSearch = state => state.router.route.options.q || '';
 export const getTime = state => state.router.route.options.t || '';
+
+// session selectors
+export const getOauthToken = state => state.session.oauthToken;
+export const getSessionId = state => state.session.id;
+export const getSessionUser = createSelector(
+  getSessionId,
+  getEntities,
+  (id, entities) => (id in entities.users
+    ? entities.users[id]
+    : null
+  ),
+);
+export const getIsAuthenticated = createSelector(
+  getOauthToken,
+  getSessionUser,
+  (oauthToken, user) => oauthToken && user,
+);
