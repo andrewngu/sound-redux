@@ -23,30 +23,30 @@ class Heart extends Component {
   }
 
   onClick() {
-    const { id, toggleLike } = this.props;
-    toggleLike(id);
+    const { id, liked, toggleLike } = this.props;
+    toggleLike(id, !liked);
   }
 
   render() {
-    const { isAuthenticated, className, liked, login } = this.props;
+    const { className, isAuthenticated, liked, login } = this.props;
     if (!isAuthenticated) {
       return (
-        <Popover
-          className={className}
-        >
-          <i className="heart ion-ios-heart" />
+        <Popover className={`heart ${className}`} >
+          <i className="heart__icon ion-ios-heart" />
           <LoginPopoverPanel login={login} />
         </Popover>
       );
     }
 
     return (
-      <i
-        className={`heart ${liked ? 'heart--liked' : ''} ${className}`}
-        onClick={this.onClick}
-        role="button"
-        tabIndex="0"
-      />
+      <div className={`heart ${liked ? 'heart--liked' : ''} ${className} `}>
+        <i
+          className="heart__icon ion-ios-heart"
+          onClick={this.onClick}
+          role="button"
+          tabIndex="0"
+        />
+      </div>
     );
   }
 }

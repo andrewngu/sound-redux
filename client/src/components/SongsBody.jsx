@@ -13,6 +13,7 @@ const defaultProps = {
 const propTypes = {
   authed: PropTypes.shape({}).isRequired,
   height: PropTypes.number.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   isFetching: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   likes: PropTypes.shape({}).isRequired,
@@ -21,6 +22,7 @@ const propTypes = {
   playlist: PropTypes.string.isRequired,
   playSong: PropTypes.func.isRequired,
   songs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  toggleLike: PropTypes.func.isRequired,
 };
 
 class SongBody extends Component {
@@ -54,6 +56,7 @@ class SongBody extends Component {
   render() {
     const {
       authed,
+      isAuthenticated,
       isFetching,
       isPlaying,
       likes,
@@ -62,6 +65,7 @@ class SongBody extends Component {
       playlist,
       playSong,
       songs,
+      toggleLike,
     } = this.props;
     const { end, paddingBottom, paddingTop, start } = this.state;
 
@@ -71,6 +75,7 @@ class SongBody extends Component {
         <SongsBodyRendered
           authed={authed}
           end={end}
+          isAuthenticated={isAuthenticated}
           isPlaying={isPlaying}
           likes={likes}
           navigateTo={navigateTo}
@@ -79,6 +84,7 @@ class SongBody extends Component {
           playSong={playSong}
           songs={songs}
           start={start}
+          toggleLike={toggleLike}
         />
         <div className="songs-body__padder" style={{ height: `${paddingBottom}px` }} />
         <Loader className="loader--full" isLoading={isFetching} />

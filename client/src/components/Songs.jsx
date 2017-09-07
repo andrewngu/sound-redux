@@ -20,6 +20,7 @@ const propTypes = {
   genre: PropTypes.string.isRequired,
   genres: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   height: PropTypes.number.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   isFetching: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   likes: PropTypes.shape({}).isRequired,
@@ -36,6 +37,7 @@ const propTypes = {
   songs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   time: PropTypes.string.isRequired,
   times: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  toggleLike: PropTypes.func.isRequired,
 };
 
 class Songs extends Component {
@@ -58,6 +60,7 @@ class Songs extends Component {
       genre,
       genres,
       height,
+      isAuthenticated,
       isFetching,
       isPlaying,
       navigateTo,
@@ -73,6 +76,7 @@ class Songs extends Component {
       songs,
       time,
       times,
+      toggleLike,
     } = this.props;
 
     return (
@@ -92,6 +96,7 @@ class Songs extends Component {
           <SongsBody
             authed={authed}
             height={height}
+            isAuthenticated={isAuthenticated}
             isFetching={isFetching}
             isPlaying={isPlaying}
             likes={likes}
@@ -100,6 +105,7 @@ class Songs extends Component {
             playlist={playlist}
             playSong={playSong}
             songs={songs}
+            toggleLike={toggleLike}
           />
         </div>
       </InfiniteScroll>

@@ -2,9 +2,10 @@ import Cookies from 'js-cookie';
 import { normalize } from 'normalizr';
 import { fetchSongsRequest, fetchSongsIfNeeded, fetchSongsSuccess } from '../actions/PlaylistActions';
 import * as types from '../constants/ActionTypes';
-import { CLIENT_ID, SESSION_FOLLOWINGS_URL, SESSION_LIKES_URL, SESSION_STREAM_URL, SESSION_USER_URL } from '../constants/ApiConstants';
+import { CLIENT_ID, SESSION_FOLLOWINGS_URL, SESSION_LIKES_URL, SESSION_STREAM_URL, SESSION_USER_URL, TOGGLE_LIKE_URL } from '../constants/ApiConstants';
 import { SESSION_LIKES_PLAYLIST, SESSION_STREAM_PLAYLIST } from '../constants/PlaylistConstants';
 import { songSchema, userSchema } from '../constants/Schemas';
+import { getOauthToken } from '../selectors/CommonSelectors';
 import { callApi, loginToSoundCloud } from '../utils/ApiUtils';
 
 const COOKIE_PATH = 'oauthToken';
@@ -39,9 +40,9 @@ const fetchSessionLikes = oauthToken => async (dispatch) => {
   const songs = json.filter(song => song.streamable);
   const { result, entities } = normalize(songs, [songSchema]);
 
-  const likes = json.reduce((obj, song) => ({ ...obj, [song.id]: 1 }), {});
+  const likes = result.reduce((obj, id) => ({ ...obj, [id]: 1 }), {});
 
-  dispatch(fetchSessionLikesSuccess(likes, result, entities));
+  dispatch(fetchSessionLikesSuccess(likes));
   dispatch(fetchSongsSuccess(SESSION_LIKES_PLAYLIST, result, entities, null, null));
 };
 
@@ -90,4 +91,38 @@ export const initAuth = () => (dispatch) => {
     dispatch(loginSuccess(oauthToken));
     dispatch(fetchSessionData(oauthToken));
   }
+};
+
+export const toggleLikeError = (id, liked) => ({
+  type: types.TOGGLE_LIKE,
+  id,
+  liked,
+});
+
+export const toggleLikeRequest = (id, liked) => ({
+  type: types.TOGGLE_LIKE,
+  id,
+  liked,
+});
+
+export const toggleLikeSuccess = (id, liked) => ({
+  type: types.TOGGLE_LIKE_SUCCESS,
+  id,
+  liked,
+});
+
+export const toggleLike = (id, liked) => async (dispatch, getState) => {
+  dispatch(toggleLikeRequest(id, liked));
+
+  const oauthToken = getOauthToken(getState());
+  const { error } = await callApi(
+    `${TOGGLE_LIKE_URL.replace(':id', id)}?oauth_token=${oauthToken}`,
+    { method: liked ? 'PUT' : 'DELETE' },
+  );
+
+  if (error) {
+    return dispatch(toggleLikeError(id, !liked));
+  }
+
+  return dispatch(toggleLikeSuccess(id, liked));
 };

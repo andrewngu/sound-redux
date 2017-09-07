@@ -3,7 +3,6 @@ import { SONGS_PATH } from '../constants/RouterConstants';
 
 // authed selectors
 export const getAccessToken = state => state.authed.accessToken;
-export const getLikes = state => state.authed.likes;
 
 // entities selectors
 export const getEntities = state => state.entities;
@@ -68,6 +67,7 @@ export const getShowStream = createSelector(
 export const getTime = state => state.router.route.options.t || '';
 
 // session selectors
+export const getLikes = state => state.session.likes;
 export const getOauthToken = state => state.session.oauthToken;
 export const getSessionId = state => state.session.id;
 export const getSessionUser = createSelector(

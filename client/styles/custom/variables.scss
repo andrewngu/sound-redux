@@ -23,7 +23,10 @@ $green: #7ec57c;
 $darkGreen: darken($green, 5);
 $darkerGreen: darken($green, 10);
 
-$lightRed: #F9C5C5;
+$lighterRed: #F9C5C5;
+$lightRed: darken($lighterRed, 5);
 $red: #e17d74;
+$darkRed: darken($red, 5);
+$darkerRed: darken($red, 10);
 
 $white: #fff;
