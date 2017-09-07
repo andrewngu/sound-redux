@@ -5,6 +5,7 @@ const constructUrl = url => `${API_HOSTNAME}${url}${url.indexOf('?') === -1 ? '?
 
 export const SESSION_FOLLOWINGS_URL = `${API_HOSTNAME}/me/followings`;
 export const SESSION_LIKES_URL = `${API_HOSTNAME}/me/favorites`;
+export const SESSION_STREAM_URL = `${API_HOSTNAME}/me/activities/tracks/affiliated?limit=50`;
 export const SESSION_USER_URL = `${API_HOSTNAME}/me`;
 export const SONG_URL = constructUrl('/tracks/:id');
 export const SONG_COMMENTS_URL = constructUrl('/tracks/:id/comments');

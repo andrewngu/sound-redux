@@ -8,6 +8,8 @@ import stickify from '../components/Stickify';
 
 const defaultProps = {
   playingSongId: null,
+  playlistUrl: null,
+  playlistNextUrl: null,
   time: null,
 };
 
@@ -25,6 +27,8 @@ const propTypes = {
   playSong: PropTypes.func.isRequired,
   playingSongId: PropTypes.number,
   playlist: PropTypes.string.isRequired,
+  playlistNextUrl: PropTypes.string,
+  playlistUrl: PropTypes.string,
   search: PropTypes.string.isRequired,
   showLikes: PropTypes.bool.isRequired,
   showStream: PropTypes.bool.isRequired,
@@ -36,14 +40,14 @@ const propTypes = {
 
 class Songs extends Component {
   componentWillMount() {
-    const { fetchSongsIfNeeded, playlist } = this.props;
-    fetchSongsIfNeeded(playlist);
+    const { fetchSongsIfNeeded, playlist, playlistUrl } = this.props;
+    fetchSongsIfNeeded(playlist, playlistUrl);
   }
 
   componentWillReceiveProps(nextProps) {
     const { fetchSongsIfNeeded, playlist } = this.props;
     if (playlist !== nextProps.playlist) {
-      fetchSongsIfNeeded(nextProps.playlist);
+      fetchSongsIfNeeded(nextProps.playlist, nextProps.playlistUrl);
     }
   }
 
@@ -60,6 +64,7 @@ class Songs extends Component {
       likes,
       playingSongId,
       playlist,
+      playlistNextUrl,
       playSong,
       search,
       showLikes,
@@ -71,7 +76,7 @@ class Songs extends Component {
     } = this.props;
 
     return (
-      <InfiniteScroll args={[playlist]} onScroll={fetchSongsNext}>
+      <InfiniteScroll args={[playlist, playlistNextUrl]} onScroll={fetchSongsNext}>
         <SongsHeader
           genre={genre}
           genres={genres}
