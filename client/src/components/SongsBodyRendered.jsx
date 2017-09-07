@@ -12,6 +12,7 @@ const propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   likes: PropTypes.shape({}).isRequired,
+  login: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
   playingSongId: PropTypes.number,
   playlist: PropTypes.string.isRequired,
@@ -27,6 +28,7 @@ const SongsBodyRendered = ({
   isAuthenticated,
   isPlaying,
   likes,
+  login,
   navigateTo,
   playingSongId,
   playlist,
@@ -56,6 +58,7 @@ const SongsBodyRendered = ({
               isAuthenticated={isAuthenticated}
               isPlaying={isPlaying}
               liked={Boolean(song.id in likes && likes[song.id])}
+              login={login}
               navigateTo={navigateTo}
               playlist={playlist}
               playSong={playSong}

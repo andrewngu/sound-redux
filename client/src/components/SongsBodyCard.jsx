@@ -14,6 +14,7 @@ const propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   liked: PropTypes.bool.isRequired,
+  login: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
   playlist: PropTypes.string.isRequired,
   playSong: PropTypes.func.isRequired,
@@ -27,6 +28,7 @@ const SongsBodyCard = ({
   isAuthenticated,
   isPlaying,
   liked,
+  login,
   navigateTo,
   playlist,
   playSong,
@@ -86,6 +88,7 @@ const SongsBodyCard = ({
           id={id}
           isAuthenticated={isAuthenticated}
           liked={liked}
+          login={login}
           toggleLike={toggleLike}
         />
       </div>
