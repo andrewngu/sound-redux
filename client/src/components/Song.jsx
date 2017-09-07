@@ -16,7 +16,9 @@ const propTypes = {
   comments: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   fetchSongIfNeeded: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
-  isActive: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  likes: PropTypes.shape({}).isRequired,
+  login: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
   player: PropTypes.shape({}).isRequired,
   playingSongId: PropTypes.number,
@@ -27,6 +29,7 @@ const propTypes = {
   songs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   sticky: PropTypes.bool.isRequired,
   timed: PropTypes.bool.isRequired,
+  toggleLike: PropTypes.func.isRequired,
 };
 
 class Song extends Component {
@@ -46,7 +49,9 @@ class Song extends Component {
     const {
       comments,
       id,
-      isActive,
+      isAuthenticated,
+      likes,
+      login,
       navigateTo,
       playlist,
       player,
@@ -57,6 +62,7 @@ class Song extends Component {
       songs,
       sticky,
       timed,
+      toggleLike,
     } = this.props;
     if (!song) {
       return <Loader className="loader--full" isLoading />;
@@ -67,16 +73,23 @@ class Song extends Component {
         <div className="song content">
           <div className="song__main">
             <SongMain
-              isActive={isActive}
+              isActive={playingSongId === id}
+              isAuthenticated={isAuthenticated}
+              liked={Boolean(id in likes && likes[id])}
+              login={login}
               navigateTo={navigateTo}
               player={player}
               playlist={playlist}
               playSong={playSong}
               song={song}
+              toggleLike={toggleLike}
             />
             <SongList
               className="song__song-list"
               id={id}
+              isAuthenticated={isAuthenticated}
+              likes={likes}
+              login={login}
               navigateTo={navigateTo}
               offsetIndex={1}
               player={player}
@@ -84,6 +97,7 @@ class Song extends Component {
               playlist={playlist}
               playSong={playSong}
               songs={songs}
+              toggleLike={toggleLike}
             />
           </div>
           <div className="song__sidebar">
