@@ -10,6 +10,7 @@ export const SESSION_USER_URL = `${API_HOSTNAME}/me`;
 export const SONG_URL = constructUrl('/tracks/:id');
 export const SONG_COMMENTS_URL = constructUrl('/tracks/:id/comments');
 export const SONGS_URL = constructUrl('/tracks?linked_partitioning=1&limit=50&offset=0');
+export const TOGGLE_LIKE_URL = `${API_HOSTNAME}/me/favorites/:id`;
 export const USER_FOLLOWINGS_URL = constructUrl('/users/:id/followings');
 export const USER_PROFILES_URL = constructUrl('/users/:id/web-profiles');
 export const USER_URL = constructUrl('/users/:id');

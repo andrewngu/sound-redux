@@ -46,5 +46,7 @@ export const ON_PLAY = 'ON_PLAY';
 export const ON_TIME_UPDATE = 'ON_TIME_UPDATE';
 export const ON_VOLUME_CHANGE = 'ON_VOLUME_CHANGE';
 export const PLAY_SONG = 'PLAY_SONG';
+export const TOGGLE_LIKE = 'TOGGLE_LIKE';
+export const TOGGLE_LIKE_SUCCESS = 'TOGGLE_LIKE_SUCCESS';
 export const TOGGLE_REPEAT = 'TOGGLE_REPEAT';
 export const TOGGLE_SHUFFLE = 'TOGGLE_SHUFFLE';

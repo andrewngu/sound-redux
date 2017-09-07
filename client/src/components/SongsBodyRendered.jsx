@@ -9,6 +9,7 @@ const defaultProps = {
 const propTypes = {
   authed: PropTypes.shape({}).isRequired,
   end: PropTypes.number.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   likes: PropTypes.shape({}).isRequired,
   navigateTo: PropTypes.func.isRequired,
@@ -17,19 +18,22 @@ const propTypes = {
   playSong: PropTypes.func.isRequired,
   songs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   start: PropTypes.number.isRequired,
+  toggleLike: PropTypes.func.isRequired,
 };
 
 const SongsBodyRendered = ({
   authed,
   end,
-  likes,
+  isAuthenticated,
   isPlaying,
+  likes,
   navigateTo,
   playingSongId,
   playlist,
   playSong,
   songs,
   start,
+  toggleLike,
 }) => {
   const cellsPerRow = 5;
   const length = songs.length;
@@ -49,12 +53,14 @@ const SongsBodyRendered = ({
               authed={authed}
               index={index}
               isActive={playingSongId === song.id}
+              isAuthenticated={isAuthenticated}
               isPlaying={isPlaying}
               liked={Boolean(song.id in likes && likes[song.id])}
               navigateTo={navigateTo}
               playlist={playlist}
               playSong={playSong}
               song={song}
+              toggleLike={toggleLike}
             />
           ) : null}
         </div>,

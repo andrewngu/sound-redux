@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { playSong } from '../actions/PlayerActions';
 import { navigateTo } from '../actions/RouterActions';
 import { fetchSongsIfNeeded, fetchSongsNext } from '../actions/PlaylistActions';
+import { toggleLike } from '../actions/SessionActions';
 import Songs from '../components/Songs';
 import { GENRES, TIMES } from '../constants/PlaylistConstants';
-import { getGenre, getIsPlaying, getLikes, getPlayingSongId, getSearch, getShowLikes, getShowStream, getTime } from '../selectors/CommonSelectors';
+import { getGenre, getIsAuthenticated, getIsPlaying, getLikes, getPlayingSongId, getSearch, getShowLikes, getShowStream, getTime } from '../selectors/CommonSelectors';
 import getPlaylistData from '../selectors/SongsSelectors';
 
 const SongsContainer = props => <Songs {...props} />;
@@ -18,6 +19,7 @@ const mapStateToProps = (state) => {
     ...getPlaylistData(state),
     authed,
     height,
+    isAuthenticated: getIsAuthenticated(state),
     isPlaying: getIsPlaying(state),
     likes: getLikes(state),
     playingSongId: getPlayingSongId(state),
@@ -36,4 +38,5 @@ export default connect(mapStateToProps, {
   fetchSongsNext,
   navigateTo,
   playSong,
+  toggleLike,
 })(SongsContainer);

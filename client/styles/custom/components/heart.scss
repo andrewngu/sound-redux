@@ -1,13 +1,28 @@
-.heart {
+.heart__icon {
   color: $gray;
+  outline: 0;
   transition: color 0.2s ease-in-out;
 
   &:hover {
-    color: $lightRed;
+    color: $lighterRed;
     cursor: pointer;
+  }
+
+  &:active {
+    color: $lightRed;
   }
 }
 
-.heart--active {
-  color: $red;
+.heart--liked {
+  .heart__icon {
+    color: $red;
+
+    &:hover {
+      color: $darkRed;
+    }
+
+    &:active {
+      color: $darkerRed;
+    }
+  }
 }

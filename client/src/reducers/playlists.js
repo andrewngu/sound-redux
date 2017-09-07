@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes';
-import { AUTHED_PLAYLIST_SUFFIX } from '../constants/PlaylistConstants';
+import { AUTHED_PLAYLIST_SUFFIX, SESSION_STREAM_PLAYLIST } from '../constants/PlaylistConstants';
 import merge from 'lodash/merge';
 
 const initialPlaylistState = {
@@ -57,6 +57,14 @@ function playlist(state = initialPlaylistState, action) {
         isFetching: true,
         nextUrl: null,
       });
+
+    case types.TOGGLE_LIKE_SUCCESS:
+      return {
+        ...state,
+        items: action.liked
+          ? [action.id, ...state.items]
+          : state.items.filter(id => id !== action.id),
+      };
 
     case types.UNSHIFT_NEW_STREAM_SONGS:
       return Object.assign({}, state, {
@@ -118,6 +126,12 @@ export default function playlists(state = initialState, action) {
         .reduce((obj, p) => merge({}, obj, { [p]: initialPlaylistState }), {});
       return Object.assign({}, state, newState);
     }
+
+    case types.TOGGLE_LIKE_SUCCESS:
+      return {
+        ...state,
+        [SESSION_STREAM_PLAYLIST]: playlist(state[SESSION_STREAM_PLAYLIST], action),
+      };
 
     case types.UNSHIFT_NEW_STREAM_SONGS:
       return Object.assign({}, state, {

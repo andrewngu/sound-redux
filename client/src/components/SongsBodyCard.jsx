@@ -9,19 +9,30 @@ import { formatSongTitle } from '../utils/FormatUtils';
 import { getImageUrl } from '../utils/SongUtils';
 
 const propTypes = {
-  authed: PropTypes.shape({}).isRequired,
   index: PropTypes.number.isRequired,
   isActive: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   liked: PropTypes.bool.isRequired,
   navigateTo: PropTypes.func.isRequired,
   playlist: PropTypes.string.isRequired,
   playSong: PropTypes.func.isRequired,
   song: PropTypes.shape({}).isRequired,
+  toggleLike: PropTypes.func.isRequired,
 };
 
-const SongsBodyCard = (props) => {
-  const { authed, index, isActive, isPlaying, liked, navigateTo, playlist, playSong, song } = props;
+const SongsBodyCard = ({
+  index,
+  isActive,
+  isAuthenticated,
+  isPlaying,
+  liked,
+  navigateTo,
+  playlist,
+  playSong,
+  song,
+  toggleLike,
+}) => {
   const { artworkUrl, id, title, user } = song;
   const { avatarUrl, username } = user;
 
@@ -71,10 +82,11 @@ const SongsBodyCard = (props) => {
           </div>
         </div>
         <Heart
-          authed={authed}
           className="songs-body-card__heart popover--right"
+          id={id}
+          isAuthenticated={isAuthenticated}
           liked={liked}
-          songId={id}
+          toggleLike={toggleLike}
         />
       </div>
     </div>
