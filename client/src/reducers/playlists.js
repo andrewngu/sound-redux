@@ -5,8 +5,8 @@ import merge from 'lodash/merge';
 const initialPlaylistState = {
   isFetching: false,
   items: [],
-  futureUrl: false,
-  nextUrl: false,
+  futureUrl: null,
+  nextUrl: null,
 };
 
 const LIKES_PLAYLIST_KEY = `likes${AUTHED_PLAYLIST_SUFFIX}`;

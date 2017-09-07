@@ -9,6 +9,7 @@ export const SESSION_PLAYLIST_TYPE = 'SESSION_PLAYLIST_TYPE';
 export const USER_PLAYLIST_TYPE = 'USER_PLAYLIST_TYPE';
 
 export const SESSION_LIKES_PLAYLIST = `${SESSION_PLAYLIST_TYPE}|LIKES`;
+export const SESSION_STREAM_PLAYLIST = `${SESSION_PLAYLIST_TYPE}|STREAM`;
 
 export const GENRES = [
   { key: 'chill', query: 'chill house' },

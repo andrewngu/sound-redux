@@ -1,9 +1,9 @@
 import Cookies from 'js-cookie';
 import { normalize } from 'normalizr';
-import { fetchSongsRequest, fetchSongsSuccess } from '../actions/PlaylistActions';
+import { fetchSongsRequest, fetchSongsIfNeeded, fetchSongsSuccess } from '../actions/PlaylistActions';
 import * as types from '../constants/ActionTypes';
-import { CLIENT_ID, SESSION_FOLLOWINGS_URL, SESSION_LIKES_URL, SESSION_USER_URL } from '../constants/ApiConstants';
-import { SESSION_LIKES_PLAYLIST } from '../constants/PlaylistConstants';
+import { CLIENT_ID, SESSION_FOLLOWINGS_URL, SESSION_LIKES_URL, SESSION_STREAM_URL, SESSION_USER_URL } from '../constants/ApiConstants';
+import { SESSION_LIKES_PLAYLIST, SESSION_STREAM_PLAYLIST } from '../constants/PlaylistConstants';
 import { songSchema, userSchema } from '../constants/Schemas';
 import { callApi, loginToSoundCloud } from '../utils/ApiUtils';
 
@@ -62,6 +62,7 @@ const fetchSessionData = oauthToken => (dispatch) => {
   dispatch(fetchSessionUser(oauthToken));
   dispatch(fetchSessionFollowings(oauthToken));
   dispatch(fetchSessionLikes(oauthToken));
+  dispatch(fetchSongsIfNeeded(SESSION_STREAM_PLAYLIST, `${SESSION_STREAM_URL}&oauth_token=${oauthToken}`));
 };
 
 const loginSuccess = oauthToken => ({

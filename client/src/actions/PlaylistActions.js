@@ -2,9 +2,8 @@ import { normalize } from 'normalizr';
 import * as types from '../constants/ActionTypes';
 import { songSchema } from '../constants/Schemas';
 
-import { getAccessToken, getPlaylists } from '../selectors/CommonSelectors';
+import { getPlaylists } from '../selectors/CommonSelectors';
 import { callApi } from '../utils/ApiUtils';
-import playlistUrl from '../utils/PlaylistUtils';
 
 export const fetchSongsRequest = playlist => ({
   type: types.FETCH_SONGS_REQUEST,
@@ -20,51 +19,45 @@ export const fetchSongsSuccess = (playlist, items, entities, nextUrl, futureUrl)
   nextUrl,
 });
 
-export const fetchSongs = (playlist, url) => async (dispatch, getState) => {
+export const fetchSongs = (playlist, url) => async (dispatch) => {
   dispatch(fetchSongsRequest(playlist));
-
-  const state = getState();
-  const accessToken = getAccessToken(state);
-  const accessTokenUriSegment = accessToken ? `&oauth_token=${accessToken}` : '';
 
   const { json } = await callApi(url);
 
   const collection = json.collection || json;
-  const nextHref = json.nextHref || null;
-  const futureHref = json.futureHref || null;
+  const songs = collection
+    .map(song => song.origin || song)
+    .filter(song => song.kind === 'track' && song.streamable);
+  const nextUrl = json.nextHref || null;
+  const futureUrl = json.futureHref || null;
 
-  const { result, entities } = normalize(collection, [songSchema]);
-
-  const nextUrl = nextHref ? `${nextHref}${accessTokenUriSegment}` : null;
-  const futureUrl = futureHref ? `${futureHref}${accessTokenUriSegment}` : null;
+  const { result, entities } = normalize(songs, [songSchema]);
 
   dispatch(fetchSongsSuccess(playlist, result, entities, nextUrl, futureUrl));
 };
 
-export const fetchSongsIfNeeded = playlist => (dispatch, getState) => {
+export const fetchSongsIfNeeded = (playlist, playlistUrl) => (dispatch, getState) => {
   const state = getState();
   const playlists = getPlaylists(state);
   const playlistExists = playlist in playlists;
   const playlistIsFetching = playlistExists ? playlists[playlist].isFetching : false;
   const playlistHasItems = playlistExists ? Boolean(playlists[playlist].items.length) : false;
+  const shouldFetchSongs = playlistUrl
+     && (!playlistExists || (!playlistHasItems && !playlistIsFetching));
 
-  if (!playlistExists || (!playlistHasItems && !playlistIsFetching)) {
-    const url = playlistUrl(playlist);
-    if (url) {
-      dispatch(fetchSongs(playlist, url));
-    }
+  if (shouldFetchSongs) {
+    dispatch(fetchSongs(playlist, playlistUrl));
   }
 };
 
-export const fetchSongsNext = playlist => (dispatch, getState) => {
+export const fetchSongsNext = (playlist, playlistNextUrl) => (dispatch, getState) => {
   const state = getState();
   const playlists = getPlaylists(state);
   const playlistExists = playlist in playlists;
   const playlistIsFetching = playlistExists ? playlists[playlist].isFetching : false;
-  const playlistHasNextUrl = playlistExists ? Boolean(playlists[playlist].nextUrl) : false;
+  const shouldFetchSongsNext = (playlistExists && !playlistIsFetching && playlistNextUrl);
 
-  if (playlistExists && !playlistIsFetching && playlistHasNextUrl) {
-    const { nextUrl } = playlists[playlist];
-    dispatch(fetchSongs(playlist, nextUrl));
+  if (shouldFetchSongsNext) {
+    dispatch(fetchSongs(playlist, playlistNextUrl));
   }
 };
