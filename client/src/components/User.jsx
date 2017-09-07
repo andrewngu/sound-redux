@@ -16,6 +16,9 @@ const propTypes = {
   fetchUserIfNeeded: PropTypes.func.isRequired,
   followings: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   id: PropTypes.number.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  likes: PropTypes.shape({}).isRequired,
+  login: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
   player: PropTypes.shape({}).isRequired,
   playingSongId: PropTypes.number,
@@ -26,6 +29,7 @@ const propTypes = {
   sidebarHeight: PropTypes.number.isRequired,
   sticky: PropTypes.bool.isRequired,
   songs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  toggleLike: PropTypes.func.isRequired,
   user: PropTypes.shape({}),
 };
 
@@ -45,6 +49,9 @@ class User extends Component {
   render() {
     const {
       followings,
+      isAuthenticated,
+      likes,
+      login,
       navigateTo,
       player,
       playlist,
@@ -55,6 +62,7 @@ class User extends Component {
       sidebarHeight,
       sticky,
       songs,
+      toggleLike,
       user,
     } = this.props;
     if (shouldFetchUser) {
@@ -68,12 +76,16 @@ class User extends Component {
             <UserMain profiles={profiles} user={user} />
             <SongList
               className="user__song-list"
+              isAuthenticated={isAuthenticated}
+              likes={likes}
+              login={login}
               navigateTo={navigateTo}
               player={player}
               playingSongId={playingSongId}
               playlist={playlist}
               playSong={playSong}
               songs={songs}
+              toggleLike={toggleLike}
             />
           </div>
           <div className="user__sidebar">
