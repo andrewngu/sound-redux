@@ -1,14 +1,17 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import HeartCount from '../components/HeartCount';
 import LoginPopoverPanel from '../components/LoginPopoverPanel';
 import Popover from '../components/Popover';
 
 const defaultProps = {
   className: '',
+  favoritingsCount: null,
 };
 
 const propTypes = {
   className: PropTypes.string,
+  favoritingsCount: PropTypes.number,
   id: PropTypes.number.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   liked: PropTypes.bool.isRequired,
@@ -28,11 +31,14 @@ class Heart extends Component {
   }
 
   render() {
-    const { className, isAuthenticated, liked, login } = this.props;
+    const { className, favoritingsCount, isAuthenticated, liked, login } = this.props;
     if (!isAuthenticated) {
       return (
         <Popover className={`heart ${className}`} >
-          <i className="heart__icon ion-ios-heart" />
+          <div className="heart__inner">
+            <i className="heart__icon ion-ios-heart" />
+            <HeartCount favoritingsCount={favoritingsCount} />
+          </div>
           <LoginPopoverPanel login={login} />
         </Popover>
       );
@@ -40,12 +46,15 @@ class Heart extends Component {
 
     return (
       <div className={`heart ${liked ? 'heart--liked' : ''} ${className} `}>
-        <i
-          className="heart__icon ion-ios-heart"
+        <div
+          className="heart__inner"
           onClick={this.onClick}
           role="button"
           tabIndex="0"
-        />
+        >
+          <i className="heart__icon ion-ios-heart" />
+          <HeartCount favoritingsCount={favoritingsCount} />
+        </div>
       </div>
     );
   }

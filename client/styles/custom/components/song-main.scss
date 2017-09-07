@@ -72,22 +72,7 @@
 }
 
 .song-main__stats {
-  display: flex;
-  flex-direction: row;
   margin-top: 10px;
-}
-
-.song-main__stat {
-  color: $gray;
-  font-size: 11px;
-
-  & + .song-main__stat {
-    margin-left: 20px;
-  }
-}
-
-.song-main__stat__text {
-  margin-left: 10px;
 }
 
 .song-main__description {

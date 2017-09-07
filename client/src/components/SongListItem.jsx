@@ -2,25 +2,41 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ArtworkPlay from '../components/ArtworkPlay';
 import Link from '../components/Link';
+import Stats from '../components/Stats';
 import Waveform from '../components/Waveform';
 import { SONG_PATH, USER_PATH } from '../constants/RouterConstants';
 import { IMAGE_SIZES } from '../constants/SongConstants';
-import { addCommas } from '../utils/FormatUtils';
 import { getImageUrl } from '../utils/SongUtils';
 
 const propTypes = {
   index: PropTypes.number.isRequired,
   isActive: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  liked: PropTypes.bool.isRequired,
+  login: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
   player: PropTypes.shape({}).isRequired,
   playlist: PropTypes.string.isRequired,
   playSong: PropTypes.func.isRequired,
   song: PropTypes.shape({}).isRequired,
+  toggleLike: PropTypes.func.isRequired,
 };
 
-const SongListItem = ({ index, isActive, navigateTo, player, playlist, playSong, song }) => {
+const SongListItem = ({
+  index,
+  isActive,
+  isAuthenticated,
+  liked,
+  login,
+  navigateTo,
+  player,
+  playlist,
+  playSong,
+  song,
+  toggleLike,
+}) => {
   const { isPlaying } = player;
-  const { artworkUrl, commentCount, id, playbackCount, title, user } = song;
+  const { artworkUrl, commentCount, favoritingsCount, id, playbackCount, title, user } = song;
   const { avatarUrl, username } = user;
 
   return (
@@ -65,20 +81,17 @@ const SongListItem = ({ index, isActive, navigateTo, player, playlist, playSong,
               {username}
             </Link>
           </div>
-          <div className="song-list__item__stats">
-            <div className="song-list__item__stat">
-              <i className="song-list__item__stat__icon ion-play" />
-              <span className="song-list__item__stat__text">
-                {addCommas(playbackCount)}
-              </span>
-            </div>
-            <div className="song-list__item__stat">
-              <i className="song-list__item__stat__icon ion-chatbubble" />
-              <span className="song-list__item__stat__text">
-                {addCommas(commentCount)}
-              </span>
-            </div>
-          </div>
+          <Stats
+            className="song-list__item__stats"
+            commentCount={commentCount}
+            favoritingsCount={favoritingsCount}
+            id={id}
+            isAuthenticated={isAuthenticated}
+            liked={liked}
+            login={login}
+            playbackCount={playbackCount}
+            toggleLike={toggleLike}
+          />
         </div>
       </div>
       <Waveform

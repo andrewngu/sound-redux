@@ -1,0 +1,37 @@
+.stats {
+  display: flex;
+  flex-direction: row;
+}
+
+.stats__stat {
+  color: $gray;
+  font-size: 11px;
+
+  & + .stats__stat {
+    margin-left: 20px;
+  }
+}
+
+.stats__stat__text {
+  margin-left: 10px;
+}
+
+.stats__stat--heart {
+  .heart__inner {
+    display: flex;
+    flex-direction: row;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+
+  .heart__icon {
+    font-size: 11px;
+  }
+
+  .heart__count {
+    margin-left: 10px;
+  }
+}

@@ -1,28 +1,43 @@
-.heart__icon {
-  color: $gray;
+.heart__inner {
   outline: 0;
-  transition: color 0.2s ease-in-out;
 
   &:hover {
-    color: $lighterRed;
     cursor: pointer;
+
+    .heart__icon {
+      color: $lighterRed;
+    }
   }
 
   &:active {
-    color: $lightRed;
+    .heart__icon {
+      color: $lightRed;
+    }
   }
+}
+
+.heart__icon {
+  color: $gray;
+
+  transition: color 0.2s ease-in-out;
 }
 
 .heart--liked {
   .heart__icon {
     color: $red;
+  }
 
+  .heart__inner {
     &:hover {
-      color: $darkRed;
+      .heart__icon {
+        color: $darkRed;
+      }
     }
 
     &:active {
-      color: $darkerRed;
+      .heart__icon {
+        color: $darkerRed;
+      }
     }
   }
 }
