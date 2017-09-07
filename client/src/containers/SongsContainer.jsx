@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { playSong } from '../actions/PlayerActions';
 import { navigateTo } from '../actions/RouterActions';
 import { fetchSongsIfNeeded, fetchSongsNext } from '../actions/PlaylistActions';
-import { toggleLike } from '../actions/SessionActions';
+import { login, toggleLike } from '../actions/SessionActions';
 import Songs from '../components/Songs';
 import { GENRES, TIMES } from '../constants/PlaylistConstants';
 import { getGenre, getIsAuthenticated, getIsPlaying, getLikes, getPlayingSongId, getSearch, getShowLikes, getShowStream, getTime } from '../selectors/CommonSelectors';
@@ -36,6 +36,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   fetchSongsIfNeeded,
   fetchSongsNext,
+  login,
   navigateTo,
   playSong,
   toggleLike,

@@ -24,6 +24,7 @@ const propTypes = {
   isFetching: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   likes: PropTypes.shape({}).isRequired,
+  login: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
   playSong: PropTypes.func.isRequired,
   playingSongId: PropTypes.number,
@@ -65,6 +66,7 @@ class Songs extends Component {
       isPlaying,
       navigateTo,
       likes,
+      login,
       playingSongId,
       playlist,
       playlistNextUrl,
@@ -100,6 +102,7 @@ class Songs extends Component {
             isFetching={isFetching}
             isPlaying={isPlaying}
             likes={likes}
+            login={login}
             navigateTo={navigateTo}
             playingSongId={playingSongId}
             playlist={playlist}
