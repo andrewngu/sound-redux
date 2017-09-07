@@ -25,13 +25,17 @@
 .popover__panel__item {
   display: block;
   padding: 12px 16px;
-  color: $blue;
   font-size: 12px;
+  transition: background-color 200ms ease-in-out;
 
   &[role="button"] {
     &:hover {
+      background-color: $lightestGray;
       cursor: pointer;
-      text-decoration: underline;
+    }
+
+    &:active {
+      background-color: $lighterGray;
     }
   }
 }
