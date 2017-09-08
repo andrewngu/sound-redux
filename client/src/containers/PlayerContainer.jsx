@@ -16,6 +16,7 @@ import {
   toggleShuffle,
 } from '../actions/PlayerActions';
 import { navigateTo } from '../actions/RouterActions';
+import toggleShowHistory from '../actions/HistoryActions';
 import Player from '../components/Player';
 import { getPlayingSongId, getPlaylists } from '../selectors/CommonSelectors';
 import { getNextIndex, getSong } from '../selectors/PlayerSelectors';
@@ -64,5 +65,6 @@ export default connect(mapStateToProps, {
   playPrevSong,
   playSong,
   toggleRepeat,
+  toggleShowHistory,
   toggleShuffle,
 })(PlayerContainer);

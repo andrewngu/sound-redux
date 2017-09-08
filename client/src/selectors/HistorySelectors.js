@@ -1,14 +1,16 @@
 import { denormalize } from 'normalizr';
 import { createSelector } from 'reselect';
+import { HISTORY_PLAYLIST } from '../constants/PlaylistConstants';
 import { songSchema } from '../constants/Schemas';
-import { getEntities } from '../selectors/CommonSelectors';
-
-const getHistorySongs = state => state.history.songs;
+import { getEntities, getPlaylists } from '../selectors/CommonSelectors';
 
 export const getSongs = createSelector(
-  getHistorySongs,
+  getPlaylists,
   getEntities,
-  (songs, entities) => denormalize(songs, [songSchema], entities),
+  (playlists, entities) => (HISTORY_PLAYLIST in playlists
+    ? denormalize(playlists[HISTORY_PLAYLIST].items, [songSchema], entities)
+    : []
+  ),
 );
 
 export const getShowHistory = state => state.history.showHistory;

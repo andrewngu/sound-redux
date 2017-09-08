@@ -1,6 +1,6 @@
 import * as types from '../constants/ActionTypes';
-import { getRepeat, getShuffle } from '../selectors/CommonSelectors';
-import { getNextIndex, getPlaylist, getPrevIndex, getShuffleIndex } from '../selectors/PlayerSelectors';
+import { getPlaylist, getRepeat, getShuffle } from '../selectors/CommonSelectors';
+import { getNextIndex, getPrevIndex, getShuffleIndex } from '../selectors/PlayerSelectors';
 
 export const changeCurrentTime = currentTime => ({
   type: types.CHANGE_CURRENT_TIME,
@@ -35,16 +35,11 @@ export const onVolumeChange = (muted, volume) => ({
   volume,
 });
 
-export const playSong = (playlist, playingIndex) => (dispatch, getState) => {
-  const { playlists } = getState();
-
-  dispatch({
-    type: types.PLAY_SONG,
-    id: playlists[playlist].items[playingIndex],
-    playlist,
-    playingIndex,
-  });
-};
+export const playSong = (playlist, playingIndex) => ({
+  type: types.PLAY_SONG,
+  playlist,
+  playingIndex,
+});
 
 export const playPrevSong = () => (dispatch, getState) => {
   const state = getState();

@@ -18,6 +18,7 @@ const propTypes = {
   toggleMuted: PropTypes.func.isRequired,
   togglePlay: PropTypes.func.isRequired,
   toggleRepeat: PropTypes.func.isRequired,
+  toggleShowHistory: PropTypes.func.isRequired,
   toggleShuffle: PropTypes.func.isRequired,
 };
 
@@ -32,6 +33,7 @@ const Player = ({
   toggleMuted,
   togglePlay,
   toggleRepeat,
+  toggleShowHistory,
   toggleShuffle,
 }) => {
   const { currentTime, duration, isPlaying, muted, repeat, shuffle } = player;
@@ -127,7 +129,12 @@ const Player = ({
             >
               <i className="player__button__icon ion-shuffle" />
             </div>
-            <div className="player__button">
+            <div
+              className="player__button"
+              onClick={toggleShowHistory}
+              role="button"
+              tabIndex="0"
+            >
               <i className="player__button__icon ion-android-list" />
             </div>
             <div

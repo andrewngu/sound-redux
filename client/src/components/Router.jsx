@@ -13,7 +13,8 @@ const propTypes = {
 const Router = ({ router, routes }) => {
   const { path } = router.route;
   if (path in routes) {
-    return React.createElement(routes[path]);
+    const Component = routes[path];
+    return <Component />;
   }
 
   return null;
