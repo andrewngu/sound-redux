@@ -35,11 +35,16 @@ export const onVolumeChange = (muted, volume) => ({
   volume,
 });
 
-export const playSong = (playlist, playingIndex) => ({
-  type: types.PLAY_SONG,
-  playlist,
-  playingIndex,
-});
+export const playSong = (playlist, playingIndex) => (dispatch, getState) => {
+  const { playlists } = getState();
+
+  dispatch({
+    type: types.PLAY_SONG,
+    id: playlists[playlist].items[playingIndex],
+    playlist,
+    playingIndex,
+  });
+};
 
 export const playPrevSong = () => (dispatch, getState) => {
   const state = getState();

@@ -40,8 +40,12 @@ const playlistUrl = (playlist) => {
   }
 };
 
-const playlistNextUrl = (playlist, playlists) => (playlist in playlists
-  ? playlists[playlist].nextUrl
+const playlistNextUrl = (
+  playlist,
+  playlists,
+  oauthToken,
+) => (playlist in playlists && playlists[playlist].nextUrl
+  ? `${playlists[playlist].nextUrl}${oauthToken ? `&oauth_token=${oauthToken}` : ''}`
   : null
 );
 
@@ -77,7 +81,7 @@ export const playlistData = (
       isFetching: isFetching(playlist, playlists),
       playlist,
       playlistUrl: `${SESSION_STREAM_URL}?oauth_token=${oauthToken}`,
-      playlistNextUrl: playlistNextUrl(playlist, playlists),
+      playlistNextUrl: playlistNextUrl(playlist, playlists, oauthToken),
       songs: playlistSongs(playlist, playlists, entities),
     };
   }

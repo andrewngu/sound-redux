@@ -20,15 +20,15 @@ export const getPlaylists = state => state.playlists;
 // player selectors
 export const getCurrentTime = state => state.player.currentTime;
 export const getIsPlaying = state => state.player.isPlaying;
-export const getPlaylistHistory = state => state.player.playlistHistory;
 export const getPlayingIndex = state => state.player.playingIndex;
+export const getPlaylist = state => state.player.playlist;
 export const getPlayingSongId = createSelector(
-  getPlaylistHistory,
   getPlayingIndex,
+  getPlaylist,
   getPlaylists,
-  (playlistHistory, playingIndex, playlists) => {
-    if (playingIndex !== null && playlistHistory.length) {
-      return playlists[playlistHistory[playlistHistory.length - 1]].items[playingIndex];
+  (playingIndex, playlist, playlists) => {
+    if (playlist && playingIndex !== null) {
+      return playlists[playlist].items[playingIndex];
     }
 
     return null;
