@@ -14,6 +14,7 @@ export const GENRES = [
   'tech',
   'trance',
   'tropical',
+  'rap'
 ];
 
 export const GENRES_MAP = GENRES.reduce((obj, genre) =>
