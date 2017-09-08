@@ -33,10 +33,7 @@ class Root extends Component {
     return (
       <div>
         <NavContainer />
-        <Router
-          router={router}
-          routes={routes}
-        />
+        <Router router={router} routes={routes} />
         <PlayerContainer />
         <ModalContainer />
         <HistoryContainer />

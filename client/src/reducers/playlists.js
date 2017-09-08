@@ -1,24 +1,15 @@
 import * as types from '../constants/ActionTypes';
-import { AUTHED_PLAYLIST_SUFFIX, SESSION_STREAM_PLAYLIST } from '../constants/PlaylistConstants';
-import merge from 'lodash/merge';
+import { HISTORY_PLAYLIST, SESSION_LIKES_PLAYLIST } from '../constants/PlaylistConstants';
 
-const initialPlaylistState = {
+const initialState = {
   isFetching: false,
   items: [],
   futureUrl: null,
   nextUrl: null,
 };
 
-const LIKES_PLAYLIST_KEY = `likes${AUTHED_PLAYLIST_SUFFIX}`;
-const STREAM_PLAYLIST_KEY = `stream${AUTHED_PLAYLIST_SUFFIX}`;
-
-function playlist(state = initialPlaylistState, action) {
+function playlist(state = initialState, action) {
   switch (action.type) {
-    case types.APPEND_LIKE:
-      return Object.assign({}, state, {
-        items: [action.songId, ...state.items],
-      });
-
     case types.FETCH_SONGS_REQUEST:
       return {
         ...state,
@@ -34,29 +25,14 @@ function playlist(state = initialPlaylistState, action) {
         nextUrl: action.nextUrl,
       };
 
-    case types.RECEIVE_SONGS:
-      return Object.assign({}, state, {
-        isFetching: false,
-        items: [...state.items, ...action.songs],
-        futureUrl: action.futureUrl,
-        nextUrl: action.nextUrl,
-      });
-
-    case types.RECEIVE_NEW_STREAM_SONGS:
-      return Object.assign({}, state, {
-        futureUrl: action.futureUrl,
-      });
-
-    case types.REMOVE_UNLIKED_SONGS:
-      return Object.assign({}, state, {
-        items: [...action.songs],
-      });
-
-    case types.REQUEST_SONGS:
-      return Object.assign({}, state, {
-        isFetching: true,
-        nextUrl: null,
-      });
+    case types.PLAY_SONG:
+      return {
+        ...state,
+        items: [
+          ...state.items.filter(id => id !== action.id),
+          action.id,
+        ],
+      };
 
     case types.TOGGLE_LIKE_SUCCESS:
       return {
@@ -66,77 +42,37 @@ function playlist(state = initialPlaylistState, action) {
           : state.items.filter(id => id !== action.id),
       };
 
-    case types.UNSHIFT_NEW_STREAM_SONGS:
-      return Object.assign({}, state, {
-        items: [...action.songs, ...state.items],
-      });
-
     default:
       return state;
   }
 }
 
-const initialState = {
-  [LIKES_PLAYLIST_KEY]: { isFetching: false, items: [], nextUrl: null },
-  [STREAM_PLAYLIST_KEY]: { isFetching: false, items: [], nextUrl: null },
-};
-
-export default function playlists(state = initialState, action) {
+export default function playlists(state = {}, action) {
   switch (action.type) {
-    case types.APPEND_LIKE:
-      return Object.assign({}, state, {
-        [LIKES_PLAYLIST_KEY]: playlist(state[LIKES_PLAYLIST_KEY], action),
-      });
-
     case types.FETCH_SONGS_REQUEST:
-      return {
-        ...state,
-        [action.playlist]: playlist(state[action.playlist], action),
-      };
-
     case types.FETCH_SONGS_SUCCESS:
       return {
         ...state,
         [action.playlist]: playlist(state[action.playlist], action),
       };
 
-    case types.RECEIVE_SONGS:
-      return Object.assign({}, state, {
-        [action.playlist]: playlist(state[action.playlist], action),
-      });
-
-    case types.RECEIVE_NEW_STREAM_SONGS:
-      return Object.assign({}, state, {
-        [STREAM_PLAYLIST_KEY]: playlist(state[STREAM_PLAYLIST_KEY], action),
-      });
-
-    case types.REMOVE_UNLIKED_SONGS:
-      return Object.assign({}, state, {
-        [LIKES_PLAYLIST_KEY]: playlist(state[LIKES_PLAYLIST_KEY], action),
-      });
-
-    case types.REQUEST_SONGS:
-      return Object.assign({}, state, {
-        [action.playlist]: playlist(state[action.playlist], action),
-      });
-
-    case types.RESET_AUTHED: {
-      const resetedPlaylists = [...action.playlists, STREAM_PLAYLIST_KEY, LIKES_PLAYLIST_KEY];
-      const newState = resetedPlaylists
-        .reduce((obj, p) => merge({}, obj, { [p]: initialPlaylistState }), {});
-      return Object.assign({}, state, newState);
-    }
+    case types.PLAY_SONG:
+      return {
+        ...state,
+        [HISTORY_PLAYLIST]: playlist(
+          state[HISTORY_PLAYLIST],
+          {
+            ...action,
+            id: state[action.playlist].items[action.playingIndex],
+          },
+        ),
+      };
 
     case types.TOGGLE_LIKE_SUCCESS:
       return {
         ...state,
-        [SESSION_STREAM_PLAYLIST]: playlist(state[SESSION_STREAM_PLAYLIST], action),
+        [SESSION_LIKES_PLAYLIST]: playlist(state[SESSION_LIKES_PLAYLIST], action),
       };
-
-    case types.UNSHIFT_NEW_STREAM_SONGS:
-      return Object.assign({}, state, {
-        [STREAM_PLAYLIST_KEY]: playlist(state[STREAM_PLAYLIST_KEY], action),
-      });
 
     default:
       return state;
