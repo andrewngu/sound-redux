@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import Router from '../components/Router';
-import NavContainer from '../containers/NavContainer';
+import HistoryContainer from '../containers/HistoryContainer';
 import ModalContainer from '../containers/ModalContainer';
+import NavContainer from '../containers/NavContainer';
 import PlayerContainer from '../containers/PlayerContainer';
 
 const propTypes = {
@@ -38,6 +39,7 @@ class Root extends Component {
         />
         <PlayerContainer />
         <ModalContainer />
+        <HistoryContainer />
       </div>
     );
   }

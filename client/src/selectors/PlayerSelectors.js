@@ -1,7 +1,7 @@
 import { denormalize } from 'normalizr';
 import { createSelector } from 'reselect';
 import { songSchema } from '../constants/Schemas';
-import { getEntities, getPlayingIndex, getPlayingSongId, getPlaylistHistory, getPlaylists } from '../selectors/CommonSelectors';
+import { getEntities, getPlayingIndex, getPlayingSongId, getPlaylist, getPlaylists } from '../selectors/CommonSelectors';
 
 export const getSong = createSelector(
   getEntities,
@@ -10,11 +10,6 @@ export const getSong = createSelector(
     ? denormalize(playingSongId, songSchema, entities)
     : null
   ),
-);
-
-export const getPlaylist = createSelector(
-  getPlaylistHistory,
-  playlistHistory => (playlistHistory.length ? playlistHistory[playlistHistory.length - 1] : null),
 );
 
 const getPlaylistItemsLength = createSelector(

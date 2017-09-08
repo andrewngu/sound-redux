@@ -9,7 +9,7 @@ const initialState = {
   shuffle: false,
   volume: 1,
   playingIndex: null,
-  playlistHistory: [],
+  playlist: null,
 };
 
 const player = (state = initialState, action) => {
@@ -74,12 +74,7 @@ const player = (state = initialState, action) => {
       return {
         ...state,
         playingIndex: action.playingIndex,
-        playlistHistory: [
-          ...state.playlistHistory,
-          ...state.playlistHistory[state.playlistHistory.length - 1] === action.playlist
-            ? []
-            : [action.playlist],
-        ],
+        playlist: action.playlist,
       };
 
     case types.TOGGLE_IS_PLAYING:
