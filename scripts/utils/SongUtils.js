@@ -11,6 +11,7 @@ export function constructUrl(cat) {
   if (category in GENRES_MAP) {
     if (category !== 'house'
     && category !== 'trance'
+    && category !== 'rap'
     && category !== 'dubstep') {
       category = `${category} house`;
     }
