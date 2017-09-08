@@ -57,6 +57,20 @@
     }
 }
 
+.button.lastfm {
+    color: #fff;
+    background-color: #b90000;
+    border: 1px solid #9d0000;
+
+    &:hover {
+        background-color: #d50000;
+    }
+
+    &:active {
+        background-color: #9d0000;
+    }
+}
+
 .button.red-white {
 
     &.active {

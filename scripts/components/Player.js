@@ -7,10 +7,12 @@ import SongDetails from '../components/SongDetails';
 import { CHANGE_TYPES } from '../constants/SongConstants';
 import { formatSeconds, formatStreamUrl } from '../utils/FormatUtils';
 import { offsetLeft } from '../utils/MouseUtils';
-import { getImageUrl } from '../utils/SongUtils';
+import { getImageUrl, getArtistAndSongname } from '../utils/SongUtils';
 import LocalStorageUtils from '../utils/LocalStorageUtils';
+import { scrobble, updateNowPlaying } from '../utils/LastfmUtils';
 
 const propTypes = {
+  lastfm: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   player: PropTypes.object.isRequired,
   playingSongId: PropTypes.number,
@@ -110,6 +112,16 @@ class Player extends Component {
   }
 
   handleEnded() {
+    const { playingSongId, songs, lastfm } = this.props;
+    const song = songs[playingSongId];
+    const [artist, track] = getArtistAndSongname(song.title);
+    if (lastfm.username) {
+      scrobble({
+        artist,
+        track,
+      });
+    }
+
     if (this.state.repeat) {
       this.audio.play();
     } else if (this.state.shuffle) {
@@ -145,6 +157,17 @@ class Player extends Component {
   }
 
   handlePlay() {
+    const { playingSongId, songs, lastfm } = this.props;
+    const song = songs[playingSongId];
+    const [artist, track] = getArtistAndSongname(song.title);
+    if (lastfm.username) {
+      updateNowPlaying({
+        artist,
+        track,
+        duration: this.audio.duration,
+      });
+    }
+
     const { dispatch } = this.props;
     dispatch(toggleIsPlaying(true));
   }
