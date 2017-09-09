@@ -1,13 +1,17 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Link from '../components/Link';
-import NavSessionPlaylists from '../components/NavSessionPlaylists';
+import NavPlaylists from '../components/NavPlaylists';
 import { SONGS_PATH } from '../constants/RouterConstants';
+
+const defaultProps = {
+  playlist: null,
+};
 
 const propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   navigateTo: PropTypes.func.isRequired,
-  playlist: PropTypes.shape({}).isRequired,
+  playlist: PropTypes.shape({}),
   playlists: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   showLikes: PropTypes.bool.isRequired,
   showStream: PropTypes.bool.isRequired,
@@ -43,8 +47,8 @@ const NavSession = ({
       >
         Likes
       </Link>
-      <NavSessionPlaylists
-        className="nav-session__item"
+      <NavPlaylists
+        navigateTo={navigateTo}
         playlist={playlist}
         playlists={playlists}
       />
@@ -52,6 +56,7 @@ const NavSession = ({
   );
 };
 
+NavSession.defaultProps = defaultProps;
 NavSession.propTypes = propTypes;
 
 export default NavSession;

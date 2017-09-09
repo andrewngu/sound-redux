@@ -7,6 +7,7 @@ import NavUser from '../components/NavUser';
 import { SONGS_PATH } from '../constants/RouterConstants';
 
 const defaultProps = {
+  playlist: null,
   user: null,
 };
 
@@ -15,12 +16,24 @@ const propTypes = {
   login: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
+  playlist: PropTypes.shape({}),
+  playlists: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   showLikes: PropTypes.bool.isRequired,
   showStream: PropTypes.bool.isRequired,
   user: PropTypes.shape({}),
 };
 
-const Nav = ({ isAuthenticated, login, logout, navigateTo, showLikes, showStream, user }) => (
+const Nav = ({
+  isAuthenticated,
+  login,
+  logout,
+  navigateTo,
+  playlist,
+  playlists,
+  showLikes,
+  showStream,
+  user,
+}) => (
   <div className="nav">
     <div className="nav__inner container">
       <div className="nav__section">
@@ -37,6 +50,8 @@ const Nav = ({ isAuthenticated, login, logout, navigateTo, showLikes, showStream
         <NavSession
           isAuthenticated={isAuthenticated}
           navigateTo={navigateTo}
+          playlist={playlist}
+          playlists={playlists}
           showLikes={showLikes}
           showStream={showStream}
         />
