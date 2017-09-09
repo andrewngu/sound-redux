@@ -219,7 +219,7 @@ class MobileNav extends Component {
     return (
       <div className="mobile-nav">
         {this.renderGenreMenu(isGenreMenuOpen, playlist)}
-        {this.renderUserMenu(isUserMenuOpen, playlist, getPlaylistDetails)}
+        {this.renderUserMenu(isUserMenuOpen, getPlaylistDetails)}
         {this.renderGenresOptions(isGenreMenuOpen, playlist)}
         {this.renderUserOptions()}
       </div>
