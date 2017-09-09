@@ -33,9 +33,6 @@ const session = (state = initialState, action) => {
         oauthToken: action.oauthToken,
       };
 
-    case types.LOGOUT:
-      return { ...initialState };
-
     case types.TOGGLE_FOLLOW:
       return {
         ...state,
@@ -53,6 +50,9 @@ const session = (state = initialState, action) => {
           [action.id]: action.liked ? 1 : 0,
         },
       };
+
+    case types.LOGOUT:
+      return { ...initialState };
 
     default:
       return state;

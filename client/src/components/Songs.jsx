@@ -33,6 +33,7 @@ const propTypes = {
   playlistUrl: PropTypes.string,
   search: PropTypes.string.isRequired,
   showLikes: PropTypes.bool.isRequired,
+  showPlaylist: PropTypes.bool.isRequired,
   showStream: PropTypes.bool.isRequired,
   sticky: PropTypes.bool.isRequired,
   songs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,

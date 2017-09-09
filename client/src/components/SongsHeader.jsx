@@ -9,6 +9,7 @@ const propTypes = {
   navigateTo: PropTypes.func.isRequired,
   search: PropTypes.string.isRequired,
   showLikes: PropTypes.bool.isRequired,
+  showPlaylist: PropTypes.bool.isRequired,
   showStream: PropTypes.bool.isRequired,
   sticky: PropTypes.bool.isRequired,
   time: PropTypes.string.isRequired,
@@ -21,12 +22,13 @@ const SongsHeader = ({
   navigateTo,
   search,
   showLikes,
+  showPlaylist,
   showStream,
   sticky,
   time,
   times,
 }) => {
-  if (showLikes || showStream) {
+  if (showLikes || showStream || showPlaylist) {
     return null;
   }
 

@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes';
-import { HISTORY_PLAYLIST, SESSION_LIKES_PLAYLIST } from '../constants/PlaylistConstants';
+import { HISTORY_PLAYLIST, PLAYLIST_PLAYLIST_TYPE, SESSION_LIKES_PLAYLIST, SESSION_PLAYLIST_TYPE } from '../constants/PlaylistConstants';
 
 const initialState = {
   isFetching: false,
@@ -78,6 +78,17 @@ export default function playlists(state = {}, action) {
         ...state,
         [SESSION_LIKES_PLAYLIST]: playlist(state[SESSION_LIKES_PLAYLIST], action),
       };
+
+    case types.LOGOUT:
+      return Object.keys(state)
+        .filter((key) => {
+          const type = key.split('|')[0];
+          return type !== SESSION_PLAYLIST_TYPE && type !== PLAYLIST_PLAYLIST_TYPE;
+        })
+        .reduce((obj, key) => ({
+          ...obj,
+          [key]: state[key],
+        }), {});
 
     default:
       return state;

@@ -1,9 +1,11 @@
 import Cookies from 'js-cookie';
 import { normalize } from 'normalizr';
 import { fetchSongsRequest, fetchSongsIfNeeded, fetchSongsSuccess } from '../actions/PlaylistActions';
+import { navigateTo } from '../actions/RouterActions';
 import * as types from '../constants/ActionTypes';
 import { CLIENT_ID, SESSION_FOLLOWINGS_URL, SESSION_LIKES_URL, SESSION_PLAYLISTS_URL, SESSION_STREAM_URL, SESSION_USER_URL, TOGGLE_FOLLOW_URL, TOGGLE_LIKE_URL } from '../constants/ApiConstants';
 import { PLAYLIST_PLAYLIST_TYPE, SESSION_LIKES_PLAYLIST, SESSION_STREAM_PLAYLIST } from '../constants/PlaylistConstants';
+import { INITIAL_ROUTE } from '../constants/RouterConstants';
 import { playlistSchema, songSchema, userSchema } from '../constants/Schemas';
 import { getOauthToken } from '../selectors/CommonSelectors';
 import { callApi, loginToSoundCloud } from '../utils/ApiUtils';
@@ -103,6 +105,7 @@ export const login = () => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   Cookies.remove(COOKIE_PATH);
+  dispatch(navigateTo(INITIAL_ROUTE));
   dispatch({ type: types.LOGOUT });
 };
 
