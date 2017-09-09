@@ -6,7 +6,7 @@ const propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const onMouseEnter = () => { document.body.style.overflow = 'hidden'; };
+const onScroll = () => { document.body.style.overflow = 'hidden'; };
 const onMouseLeave = () => { document.body.style.overflow = 'auto'; };
 
 class SidebarBody extends Component {
@@ -18,12 +18,10 @@ class SidebarBody extends Component {
     const { children } = this.props;
 
     return (
-      <div
-        className="sidebar__body"
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-      >
-        {children}
+      <div className="sidebar__body" onScroll={onScroll}>
+        <div onMouseLeave={onMouseLeave}>
+          {children}
+        </div>
       </div>
     );
   }
