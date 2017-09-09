@@ -17,6 +17,7 @@ const propTypes = {
   followings: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   id: PropTypes.number.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
+  isFollowing: PropTypes.bool.isRequired,
   likes: PropTypes.shape({}).isRequired,
   login: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
@@ -29,6 +30,7 @@ const propTypes = {
   sidebarHeight: PropTypes.number.isRequired,
   sticky: PropTypes.bool.isRequired,
   songs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  toggleFollow: PropTypes.func.isRequired,
   toggleLike: PropTypes.func.isRequired,
   user: PropTypes.shape({}),
 };
@@ -50,6 +52,7 @@ class User extends Component {
     const {
       followings,
       isAuthenticated,
+      isFollowing,
       likes,
       login,
       navigateTo,
@@ -62,6 +65,7 @@ class User extends Component {
       sidebarHeight,
       sticky,
       songs,
+      toggleFollow,
       toggleLike,
       user,
     } = this.props;
@@ -73,7 +77,12 @@ class User extends Component {
       <div className="container">
         <div className="user content">
           <div className="user__main">
-            <UserMain profiles={profiles} user={user} />
+            <UserMain
+              isFollowing={isFollowing}
+              profiles={profiles}
+              toggleFollow={toggleFollow}
+              user={user}
+            />
             <SongList
               className="user__song-list"
               isAuthenticated={isAuthenticated}
