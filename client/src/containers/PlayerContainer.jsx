@@ -20,6 +20,7 @@ import toggleShowHistory from '../actions/HistoryActions';
 import Player from '../components/Player';
 import { getPlayingSongId, getPlaylists } from '../selectors/CommonSelectors';
 import { getNextIndex, getSong } from '../selectors/PlayerSelectors';
+import { getShowHistory } from '../selectors/HistorySelectors';
 
 const defaultProps = {
   song: null,
@@ -46,6 +47,7 @@ const mapStateToProps = (state) => {
     player,
     playingSongId: getPlayingSongId(state),
     playlists: getPlaylists(state),
+    showHistory: getShowHistory(state),
     song: getSong(state),
     songs,
     users,

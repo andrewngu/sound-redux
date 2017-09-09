@@ -1,0 +1,108 @@
+.history {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.history__bg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  outline: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.history__main {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  right: 0;
+  width: 350px;
+  height: 100%;
+  background-color: $white;
+  border-left: 1px solid $black;
+}
+
+.history__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: $darkerGray;
+  height: 50px;
+}
+
+.history__header__title {
+  flex: 1;
+  padding: 0 20px;
+  color: $white;
+  font-size: 11px;
+
+  & + .history__header__button {
+    border-left: 1px solid $lightBlack;
+  }
+}
+
+.history__header__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 100%;
+  color: $gray;
+  outline: 0;
+
+  &:hover {
+    color: $white;
+    cursor: pointer;
+  }
+}
+
+.history__body {
+  flex: 1;
+  overflow: scroll;
+}
+
+.history__song {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 350px;
+  padding: 8px;
+  outline: 0;
+  border-bottom: 1px solid $lighterGray;
+}
+
+.history__song__artwork {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  background: no-repeat center center;
+  background-size: cover;
+}
+
+.history__song__main {
+  flex: 1;
+  margin: 0 8px;
+  overflow: hidden;
+}
+
+.history__song__title {
+  display: block;
+  color: $black;
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.history__song__username {
+  font-size: 11px;
+  color: $blue;
+}

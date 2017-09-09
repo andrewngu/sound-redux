@@ -25,14 +25,19 @@ function playlist(state = initialState, action) {
         nextUrl: action.nextUrl,
       };
 
-    case types.PLAY_SONG:
-      return {
-        ...state,
-        items: [
-          ...state.items.filter(id => id !== action.id),
-          action.id,
-        ],
-      };
+    case types.PLAY_SONG: {
+      if (action.playlist !== HISTORY_PLAYLIST) {
+        return {
+          ...state,
+          items: [
+            action.id,
+            ...state.items.filter(id => id !== action.id),
+          ],
+        };
+      }
+
+      return state;
+    }
 
     case types.TOGGLE_LIKE_SUCCESS:
       return {
