@@ -23,7 +23,7 @@ class UserFollowButton extends Component {
 
     return (
       <div
-        className={`user-follow-button button button--short ${isFollowing ? 'button-red' : ''}`}
+        className={`user-follow-button button button--short ${isFollowing ? 'button--red' : ''}`}
         onClick={this.onClick}
         role="button"
         tabIndex="0"

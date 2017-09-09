@@ -83,3 +83,4 @@ export const getIsAuthenticated = createSelector(
   getSessionUser,
   (oauthToken, user) => Boolean(oauthToken && user),
 );
+export const getSessionFollowings = state => state.session.followings;
