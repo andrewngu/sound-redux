@@ -1,16 +1,19 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import UserFollowButton from '../components/UserFollowButton';
 import { IMAGE_SIZES } from '../constants/SongConstants';
 import { addCommas } from '../utils/FormatUtils';
 import { getImageUrl } from '../utils/SongUtils';
 import { getSocialIcon, getUserLocation } from '../utils/UserUtils';
 
 const propTypes = {
+  isFollowing: PropTypes.bool.isRequired,
   profiles: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  toggleFollow: PropTypes.func.isRequired,
   user: PropTypes.shape({}).isRequired,
 };
 
-const UserMain = ({ profiles, user }) => {
+const UserMain = ({ isFollowing, profiles, toggleFollow, user }) => {
   const { avatarUrl, description, followersCount, username } = user;
 
   return (
@@ -25,6 +28,13 @@ const UserMain = ({ profiles, user }) => {
         <div className="user-main__title">
           <div className="user-main__username">
             {username}
+          </div>
+          <div className="user-main__button">
+            <UserFollowButton
+              id={user.id}
+              isFollowing={isFollowing}
+              toggleFollow={toggleFollow}
+            />
           </div>
         </div>
         <div className="user-main__location">
@@ -51,7 +61,10 @@ const UserMain = ({ profiles, user }) => {
             </div>
           ))}
         </div>
-        <div className="user-main__description" dangerouslySetInnerHTML={{ __html: description }} />
+        <div
+          className="user-main__description"
+          dangerouslySetInnerHTML={{ __html: description }}
+        />
       </div>
     </div>
   );

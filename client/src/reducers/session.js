@@ -36,6 +36,15 @@ const session = (state = initialState, action) => {
     case types.LOGOUT:
       return { ...initialState };
 
+    case types.TOGGLE_FOLLOW:
+      return {
+        ...state,
+        followings: {
+          ...state.followings,
+          [action.id]: action.follow ? 1 : 0,
+        },
+      };
+
     case types.TOGGLE_LIKE:
       return {
         ...state,

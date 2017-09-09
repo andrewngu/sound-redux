@@ -37,6 +37,12 @@ export const getFollowings = createSelector(
   ),
 );
 
+export const getIsFollowing = createSelector(
+  getId,
+  getFollowings,
+  (id, followings) => Boolean(id in followings && followings[id]),
+);
+
 export const getShouldFetchUser = createSelector(
   getId,
   getEntities,

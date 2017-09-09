@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 import { normalize } from 'normalizr';
 import { fetchSongsRequest, fetchSongsIfNeeded, fetchSongsSuccess } from '../actions/PlaylistActions';
 import * as types from '../constants/ActionTypes';
-import { CLIENT_ID, SESSION_FOLLOWINGS_URL, SESSION_LIKES_URL, SESSION_STREAM_URL, SESSION_USER_URL, TOGGLE_LIKE_URL } from '../constants/ApiConstants';
+import { CLIENT_ID, SESSION_FOLLOWINGS_URL, SESSION_LIKES_URL, SESSION_STREAM_URL, SESSION_USER_URL, TOGGLE_FOLLOW_URL, TOGGLE_LIKE_URL } from '../constants/ApiConstants';
 import { SESSION_LIKES_PLAYLIST, SESSION_STREAM_PLAYLIST } from '../constants/PlaylistConstants';
 import { songSchema, userSchema } from '../constants/Schemas';
 import { getOauthToken } from '../selectors/CommonSelectors';
@@ -90,6 +90,32 @@ export const initAuth = () => (dispatch) => {
   if (oauthToken) {
     dispatch(loginSuccess(oauthToken));
     dispatch(fetchSessionData(oauthToken));
+  }
+};
+
+export const toggleFollowError = (id, following) => ({
+  type: types.TOGGLE_FOLLOW,
+  id,
+  following,
+});
+
+export const toggleFollowRequest = (id, following) => ({
+  type: types.TOGGLE_FOLLOW,
+  id,
+  following,
+});
+
+export const toggleFollow = (id, following) => async (dispatch, getState) => {
+  dispatch(toggleFollowRequest(id, following));
+
+  const oauthToken = getOauthToken(getState());
+  const { error } = await callApi(
+    `${TOGGLE_FOLLOW_URL.replace(':id', id)}?oauth_token=${oauthToken}`,
+    { method: following ? 'PUT' : 'DELETE' },
+  );
+
+  if (error) {
+    dispatch(toggleFollowError(id, !following));
   }
 };
 

@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import User from '../components/User';
 import { playSong } from '../actions/PlayerActions';
 import { navigateTo } from '../actions/RouterActions';
-import { login, toggleLike } from '../actions/SessionActions';
+import { login, toggleFollow, toggleLike } from '../actions/SessionActions';
 import fetchUserIfNeeded from '../actions/UserActions';
 import { getId, getIsAuthenticated, getLikes, getPlayingSongId, getSidebarHeight } from '../selectors/CommonSelectors';
-import { getFollowings, getPlaylist, getProfiles, getShouldFetchUser, getSongs, getUser } from '../selectors/UserSelectors';
+import { getFollowings, getIsFollowing, getPlaylist, getProfiles, getShouldFetchUser, getSongs, getUser } from '../selectors/UserSelectors';
 
 const UserContainer = props => <User {...props} />;
 
@@ -18,6 +18,7 @@ const mapStateToProps = (state) => {
     followings: getFollowings(state),
     id: getId(state),
     isAuthenticated: getIsAuthenticated(state),
+    isFollowing: getIsFollowing(state),
     likes: getLikes(state),
     player,
     playingSongId: getPlayingSongId(state),
@@ -33,6 +34,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   fetchUserIfNeeded,
   login,
+  toggleFollow,
   toggleLike,
   navigateTo,
   playSong,
