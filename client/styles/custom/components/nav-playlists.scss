@@ -1,42 +1,8 @@
 .nav-playlists {
   height: 100%;
-
-  .popover__trigger {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    padding: 0 25px;
-    color: $mediumGray;
-    transition: background-color 200ms ease-in-out;
-
-    &:hover {
-      background-color: $darkestGray;
-    }
-  }
 }
 
-.nav-playlists__title {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  max-width: 300px;
-  font-size: 12px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.nav-playlists__title__text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.nav-playlists__title__icon {
-  margin-left: 4px;
-}
-
-.nav-playlists__playlist {
+.nav-playlists__item {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -44,7 +10,7 @@
   padding: 0 12px;
   overflow: hidden;
 
-  & + .nav-playlists__playlist {
+  & + .nav-playlists__item {
     border-top: 1px solid $lighterGray
   }
 
@@ -58,14 +24,14 @@
   }
 }
 
-.nav-playlists__playlist__main {
+.nav-playlists__item__main {
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100%;
 }
 
-.nav-playlists__playlist__title {
+.nav-playlists__item__title {
   width: 180px;
   color: $black;
   font-size: 11px;
@@ -74,12 +40,12 @@
   white-space: nowrap;
 }
 
-.nav-playlists__playlist__meta {
+.nav-playlists__item__meta {
   color: $gray;
   font-size: 11px;
 }
 
-.nav-playlists__playlist__songs {
+.nav-playlists__item__songs {
   display: flex;
   flex-direction: row;
   flex: 1;
@@ -87,13 +53,13 @@
   margin-left: 4px;
 }
 
-.nav-playlists__playlist__song {
+.nav-playlists__item__song {
   width: 32px;
   height: 32px;
   background: no-repeat center center;
   background-size: cover;
 
-  & + .nav-playlists__playlist__song {
+  & + .nav-playlists__item__song {
     margin-left: 4px;
   }
 }

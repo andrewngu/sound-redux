@@ -19,6 +19,7 @@ const propTypes = {
   playlist: PropTypes.shape({}),
   playlists: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   showLikes: PropTypes.bool.isRequired,
+  showPlaylist: PropTypes.bool.isRequired,
   showStream: PropTypes.bool.isRequired,
   user: PropTypes.shape({}),
 };
@@ -31,6 +32,7 @@ const Nav = ({
   playlist,
   playlists,
   showLikes,
+  showPlaylist,
   showStream,
   user,
 }) => (
@@ -53,6 +55,7 @@ const Nav = ({
           playlist={playlist}
           playlists={playlists}
           showLikes={showLikes}
+          showPlaylist={showPlaylist}
           showStream={showStream}
         />
       </div>
@@ -64,6 +67,7 @@ const Nav = ({
           isAuthenticated={isAuthenticated}
           login={login}
           logout={logout}
+          showPlaylist={showPlaylist}
           user={user}
         />
       </div>

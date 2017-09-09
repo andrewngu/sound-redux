@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { SONGS_PATH } from '../constants/RouterConstants';
+import { PLAYLIST_PATH, SONGS_PATH } from '../constants/RouterConstants';
 
 // authed selectors
 export const getAccessToken = state => state.authed.accessToken;
@@ -58,7 +58,10 @@ export const getShowLikes = createSelector(
   getSession,
   (path, session) => path === SONGS_PATH && session === 'likes',
 );
-
+export const getShowPlaylist = createSelector(
+  getPath,
+  path => path === PLAYLIST_PATH,
+);
 export const getShowStream = createSelector(
   getPath,
   getSession,

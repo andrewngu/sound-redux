@@ -6,7 +6,18 @@ import { fetchSongsIfNeeded, fetchSongsNext } from '../actions/PlaylistActions';
 import { login, toggleLike } from '../actions/SessionActions';
 import Songs from '../components/Songs';
 import { GENRES, TIMES } from '../constants/PlaylistConstants';
-import { getGenre, getIsAuthenticated, getIsPlaying, getLikes, getPlayingSongId, getSearch, getShowLikes, getShowStream, getTime } from '../selectors/CommonSelectors';
+import {
+  getGenre,
+  getIsAuthenticated,
+  getIsPlaying,
+  getLikes,
+  getPlayingSongId,
+  getSearch,
+  getShowLikes,
+  getShowPlaylist,
+  getShowStream,
+  getTime,
+} from '../selectors/CommonSelectors';
 import getPlaylistData from '../selectors/SongsSelectors';
 
 const SongsContainer = props => <Songs {...props} />;
@@ -24,6 +35,7 @@ const mapStateToProps = (state) => {
     likes: getLikes(state),
     playingSongId: getPlayingSongId(state),
     showLikes: getShowLikes(state),
+    showPlaylist: getShowPlaylist(state),
     showStream: getShowStream(state),
     genre: getGenre(state),
     genres: GENRES,

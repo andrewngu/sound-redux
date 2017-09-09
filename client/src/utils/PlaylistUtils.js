@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { denormalize } from 'normalizr';
 import { SESSION_LIKES_URL, SESSION_STREAM_URL, SONGS_URL } from '../constants/ApiConstants';
-import { GENRE_PLAYLIST_TYPE, GENRE_QUERY_MAP, SEARCH_PLAYLIST_TYPE, SESSION_LIKES_PLAYLIST, SESSION_STREAM_PLAYLIST } from '../constants/PlaylistConstants';
+import { GENRE_PLAYLIST_TYPE, GENRE_QUERY_MAP, PLAYLIST_PLAYLIST_TYPE, SEARCH_PLAYLIST_TYPE, SESSION_LIKES_PLAYLIST, SESSION_STREAM_PLAYLIST } from '../constants/PlaylistConstants';
 import { songSchema } from '../constants/Schemas';
 
 const isFetching = (playlist, playlists) => (playlist in playlists
@@ -58,9 +58,11 @@ export const playlistData = (
   genre,
   search,
   showLike,
+  showPlaylist,
   showStream,
   time,
   entities,
+  id,
   oauthToken,
   playlists,
 ) => {
@@ -70,6 +72,17 @@ export const playlistData = (
       isFetching: isFetching(playlist, playlists),
       playlist,
       playlistUrl: `${SESSION_LIKES_URL}?oauth_token=${oauthToken}`,
+      playlistNextUrl: null,
+      songs: playlistSongs(playlist, playlists, entities),
+    };
+  }
+
+  if (showPlaylist) {
+    const playlist = `${PLAYLIST_PLAYLIST_TYPE}|${id}`;
+    return {
+      isFetching: isFetching(playlist, playlists),
+      playlist,
+      playlistUrl: null,
       playlistNextUrl: null,
       songs: playlistSongs(playlist, playlists, entities),
     };

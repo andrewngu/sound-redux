@@ -11,7 +11,7 @@
   height: 100%;
   padding: 0 25px;
   color: $mediumGray;
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 2px;
   text-decoration: none;
   text-transform: uppercase;
@@ -21,6 +21,17 @@
     background-color: $darkestGray;
     text-decoration: none;
   }
+}
+
+.nav-session__item__text {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav-session__item__icon {
+  margin-left: 4px;
 }
 
 .nav-session__item--active {

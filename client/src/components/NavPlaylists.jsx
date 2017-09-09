@@ -11,19 +11,21 @@ const propTypes = {
   navigateTo: PropTypes.func.isRequired,
   playlist: PropTypes.shape({}),
   playlists: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  showPlaylist: PropTypes.bool.isRequired,
 };
 
-const NavPlaylists = ({ navigateTo, playlist, playlists }) => (
+const NavPlaylists = ({ navigateTo, playlist, playlists, showPlaylist }) => (
   <Popover className="nav-playlists">
-    <div className="nav-playlists__title">
-      <div className="nav-playlists__title__text">
+    <div className={`nav-session__item ${showPlaylist ? 'nav-session__item--active' : ''}`}>
+      <div className="nav-session__item__text">
         {playlist ? playlist.title : 'Playlists'}
       </div>
-      <i className="nav-playlists__title__icon ion-ios-arrow-down" />
+      <i className="nav-session__item__icon ion-ios-arrow-down" />
     </div>
     <NavPlaylistsPanel
       navigateTo={navigateTo}
       playlists={playlists}
+      showPlaylist={showPlaylist}
     />
   </Popover>
 );
