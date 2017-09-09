@@ -22,6 +22,12 @@ const playlists = (state = [], action) => {
 
 const history = (state = initialState, action) => {
   switch (action.type) {
+    case types.CHANGE_ROUTE:
+      return {
+        ...state,
+        showHistory: false,
+      };
+
     case types.PLAY_SONG:
       return {
         ...state,

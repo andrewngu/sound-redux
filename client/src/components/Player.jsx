@@ -14,6 +14,7 @@ const propTypes = {
   player: PropTypes.shape({}).isRequired,
   playNextSongFromButton: PropTypes.func.isRequired,
   playPrevSong: PropTypes.func.isRequired,
+  showHistory: PropTypes.bool.isRequired,
   song: PropTypes.shape({}).isRequired,
   toggleMuted: PropTypes.func.isRequired,
   togglePlay: PropTypes.func.isRequired,
@@ -29,6 +30,7 @@ const Player = ({
   player,
   playNextSongFromButton,
   playPrevSong,
+  showHistory,
   song,
   toggleMuted,
   togglePlay,
@@ -130,7 +132,7 @@ const Player = ({
               <i className="player__button__icon ion-shuffle" />
             </div>
             <div
-              className="player__button"
+              className={`player__button ${showHistory ? 'player__button--active' : ''}`}
               onClick={toggleShowHistory}
               role="button"
               tabIndex="0"

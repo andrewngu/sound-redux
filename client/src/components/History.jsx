@@ -8,6 +8,7 @@ const defaultProps = {
 
 const propTypes = {
   isPlaying: PropTypes.bool.isRequired,
+  navigateTo: PropTypes.func.isRequired,
   playlist: PropTypes.string.isRequired,
   playingSongId: PropTypes.number,
   playSong: PropTypes.func.isRequired,
@@ -18,6 +19,7 @@ const propTypes = {
 
 const History = ({
   isPlaying,
+  navigateTo,
   playingSongId,
   playlist,
   playSong,
@@ -40,7 +42,7 @@ const History = ({
       <div className="history__main">
         <div className="history__header">
           <div className="history__header__title">
-            History
+            Recently Played
           </div>
           <div
             className="history__header__button"
@@ -48,7 +50,7 @@ const History = ({
             role="button"
             tabIndex="0"
           >
-            <i className="history__header__button__icon ion-close" />
+            <i className="history__header__button__icon ion-android-close" />
           </div>
         </div>
         <div className="history__body">
@@ -58,6 +60,7 @@ const History = ({
               isActive={playingSongId === song.id}
               isPlaying={isPlaying}
               key={song.id}
+              navigateTo={navigateTo}
               playlist={playlist}
               playSong={playSong}
               song={song}
