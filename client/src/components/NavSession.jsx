@@ -1,16 +1,26 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Link from '../components/Link';
+import NavSessionPlaylists from '../components/NavSessionPlaylists';
 import { SONGS_PATH } from '../constants/RouterConstants';
 
 const propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   navigateTo: PropTypes.func.isRequired,
+  playlist: PropTypes.shape({}).isRequired,
+  playlists: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   showLikes: PropTypes.bool.isRequired,
   showStream: PropTypes.bool.isRequired,
 };
 
-const NavSession = ({ isAuthenticated, navigateTo, showLikes, showStream }) => {
+const NavSession = ({
+  isAuthenticated,
+  navigateTo,
+  playlist,
+  playlists,
+  showLikes,
+  showStream,
+}) => {
   if (!isAuthenticated) {
     return null;
   }
@@ -33,6 +43,11 @@ const NavSession = ({ isAuthenticated, navigateTo, showLikes, showStream }) => {
       >
         Likes
       </Link>
+      <NavSessionPlaylists
+        className="nav-session__item"
+        playlist={playlist}
+        playlists={playlists}
+      />
     </div>
   );
 };
