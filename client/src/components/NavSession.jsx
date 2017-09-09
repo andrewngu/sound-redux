@@ -14,6 +14,7 @@ const propTypes = {
   playlist: PropTypes.shape({}),
   playlists: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   showLikes: PropTypes.bool.isRequired,
+  showPlaylist: PropTypes.bool.isRequired,
   showStream: PropTypes.bool.isRequired,
 };
 
@@ -23,6 +24,7 @@ const NavSession = ({
   playlist,
   playlists,
   showLikes,
+  showPlaylist,
   showStream,
 }) => {
   if (!isAuthenticated) {
@@ -51,6 +53,7 @@ const NavSession = ({
         navigateTo={navigateTo}
         playlist={playlist}
         playlists={playlists}
+        showPlaylist={showPlaylist}
       />
     </div>
   );

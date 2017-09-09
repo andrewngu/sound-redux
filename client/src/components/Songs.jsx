@@ -73,6 +73,7 @@ class Songs extends Component {
       playSong,
       search,
       showLikes,
+      showPlaylist,
       showStream,
       sticky,
       songs,
@@ -89,6 +90,7 @@ class Songs extends Component {
           navigateTo={navigateTo}
           search={search}
           showLikes={showLikes}
+          showPlaylist={showPlaylist}
           showStream={showStream}
           sticky={sticky}
           time={time}
