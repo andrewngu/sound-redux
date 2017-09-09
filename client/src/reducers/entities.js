@@ -1,4 +1,5 @@
 import merge from 'lodash.merge';
+import * as types from '../constants/ActionTypes';
 
 const initialState = {
   playlists: {},
@@ -11,5 +12,14 @@ export default function entities(state = initialState, action) {
     return merge({}, state, action.entities);
   }
 
-  return state;
+  switch (action.type) {
+    case types.LOGOUT:
+      return {
+        ...state,
+        playlists: {},
+      };
+
+    default:
+      return state;
+  }
 }

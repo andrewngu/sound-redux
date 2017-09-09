@@ -88,6 +88,9 @@ const player = (state = initialState, action) => {
     case types.TOGGLE_SHUFFLE:
       return { ...state, shuffle: !state.shuffle };
 
+    case types.LOGOUT:
+      return { ...initialState };
+
     default:
       return state;
   }

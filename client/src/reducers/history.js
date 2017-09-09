@@ -40,6 +40,9 @@ const history = (state = initialState, action) => {
         showHistory: !state.showHistory,
       };
 
+    case types.LOGOUT:
+      return { ...initialState };
+
     default:
       return state;
   }
