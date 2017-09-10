@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import SongList from '../components/SongList';
 import Loader from '../components/Loader';
-import stickify from '../components/Stickify';
+import stickyOnScroll from '../components/stickyOnScroll';
 import UserFollowings from '../components/UserFollowings';
 import UserMain from '../components/UserMain';
 
@@ -114,4 +114,4 @@ class User extends Component {
 User.defaultProps = defaultProps;
 User.propTypes = propTypes;
 
-export default stickify(User, 50);
+export default stickyOnScroll(User, 50);
