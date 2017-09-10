@@ -15,6 +15,7 @@ const propTypes = {
   navigateTo: PropTypes.func.isRequired,
   navPlaylist: PropTypes.shape({}),
   navPlaylists: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  newStreamSongsCount: PropTypes.number.isRequired,
   showLikes: PropTypes.bool.isRequired,
   showPlaylist: PropTypes.bool.isRequired,
   showStream: PropTypes.bool.isRequired,
@@ -27,6 +28,7 @@ const NavSession = ({
   navigateTo,
   navPlaylist,
   navPlaylists,
+  newStreamSongsCount,
   showLikes,
   showPlaylist,
   showStream,
@@ -41,6 +43,7 @@ const NavSession = ({
       <NavStream
         fetchNewStreamSongs={fetchNewStreamSongs}
         navigateTo={navigateTo}
+        newStreamSongsCount={newStreamSongsCount}
         showStream={showStream}
         streamFutureUrl={streamFutureUrl}
       />

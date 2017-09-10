@@ -5,6 +5,7 @@
 }
 
 .nav-session__item {
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -32,6 +33,27 @@
 
 .nav-session__item__icon {
   margin-left: 4px;
+}
+
+.nav-session__item__badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  min-width: 18px;
+  padding: 0 1px 1px 0;
+  align-items: center;
+  justify-content: center;
+  background-color: $blue;
+  border-radius: 7px;
+}
+
+.nav-session__item__badge__text {
+  color: $white;
+  font-size: 8px;
+  letter-spacing: normal;
+  text-transform: none;
+  text-shadow: 0 0 2px #666;
 }
 
 .nav-session__item--active {

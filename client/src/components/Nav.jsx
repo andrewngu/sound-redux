@@ -19,6 +19,7 @@ const propTypes = {
   navigateTo: PropTypes.func.isRequired,
   navPlaylist: PropTypes.shape({}),
   navPlaylists: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  newStreamSongsCount: PropTypes.number.isRequired,
   showLikes: PropTypes.bool.isRequired,
   showPlaylist: PropTypes.bool.isRequired,
   showStream: PropTypes.bool.isRequired,
@@ -34,6 +35,7 @@ const Nav = ({
   navigateTo,
   navPlaylist,
   navPlaylists,
+  newStreamSongsCount,
   showLikes,
   showPlaylist,
   showStream,
@@ -59,6 +61,7 @@ const Nav = ({
           navigateTo={navigateTo}
           navPlaylist={navPlaylist}
           navPlaylists={navPlaylists}
+          newStreamSongsCount={newStreamSongsCount}
           showLikes={showLikes}
           showPlaylist={showPlaylist}
           showStream={showStream}

@@ -71,6 +71,7 @@ export const getTime = state => state.router.route.options.t || '';
 
 // session selectors
 export const getLikes = state => state.session.likes;
+export const getNewStreamSongs = state => state.session.newStreamSongs;
 export const getOauthToken = state => state.session.oauthToken;
 export const getSessionId = state => state.session.id;
 export const getSessionUser = createSelector(
