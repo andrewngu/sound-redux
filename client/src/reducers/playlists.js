@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes';
-import { HISTORY_PLAYLIST, PLAYLIST_PLAYLIST_TYPE, SESSION_LIKES_PLAYLIST, SESSION_PLAYLIST_TYPE } from '../constants/PlaylistConstants';
+import { HISTORY_PLAYLIST, PLAYLIST_PLAYLIST_TYPE, SESSION_LIKES_PLAYLIST, SESSION_PLAYLIST_TYPE, SESSION_STREAM_PLAYLIST } from '../constants/PlaylistConstants';
 
 const initialState = {
   isFetching: false,
@@ -10,6 +10,12 @@ const initialState = {
 
 function playlist(state = initialState, action) {
   switch (action.type) {
+    case types.FETCH_NEW_STREAM_SONGS_SUCCESS:
+      return {
+        ...state,
+        futureUrl: action.futureUrl,
+      };
+
     case types.FETCH_SONGS_REQUEST:
       return {
         ...state,
@@ -54,6 +60,12 @@ function playlist(state = initialState, action) {
 
 export default function playlists(state = {}, action) {
   switch (action.type) {
+    case types.FETCH_NEW_STREAM_SONGS_SUCCESS:
+      return {
+        ...state,
+        [SESSION_STREAM_PLAYLIST]: playlist(state[SESSION_STREAM_PLAYLIST], action),
+      };
+
     case types.FETCH_SONGS_REQUEST:
     case types.FETCH_SONGS_SUCCESS:
       return {

@@ -7,33 +7,37 @@ import NavUser from '../components/NavUser';
 import { SONGS_PATH } from '../constants/RouterConstants';
 
 const defaultProps = {
-  playlist: null,
+  navPlaylist: null,
   user: null,
 };
 
 const propTypes = {
+  fetchNewStreamSongs: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
-  playlist: PropTypes.shape({}),
-  playlists: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  navPlaylist: PropTypes.shape({}),
+  navPlaylists: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   showLikes: PropTypes.bool.isRequired,
   showPlaylist: PropTypes.bool.isRequired,
   showStream: PropTypes.bool.isRequired,
+  streamFutureUrl: PropTypes.string.isRequired,
   user: PropTypes.shape({}),
 };
 
 const Nav = ({
+  fetchNewStreamSongs,
   isAuthenticated,
   login,
   logout,
   navigateTo,
-  playlist,
-  playlists,
+  navPlaylist,
+  navPlaylists,
   showLikes,
   showPlaylist,
   showStream,
+  streamFutureUrl,
   user,
 }) => (
   <div className="nav">
@@ -50,13 +54,15 @@ const Nav = ({
       </div>
       <div className="nav__section nav__section--flex">
         <NavSession
+          fetchNewStreamSongs={fetchNewStreamSongs}
           isAuthenticated={isAuthenticated}
           navigateTo={navigateTo}
-          playlist={playlist}
-          playlists={playlists}
+          navPlaylist={navPlaylist}
+          navPlaylists={navPlaylists}
           showLikes={showLikes}
           showPlaylist={showPlaylist}
           showStream={showStream}
+          streamFutureUrl={streamFutureUrl}
         />
       </div>
       <div className="nav__section">

@@ -12,6 +12,35 @@ import { callApi, loginToSoundCloud } from '../utils/ApiUtils';
 
 const COOKIE_PATH = 'oauthToken';
 
+const fetchNewStreamSongsSuccess = (songs, entities, futureUrl) => ({
+  type: types.FETCH_NEW_STREAM_SONGS_SUCCESS,
+  entities,
+  futureUrl,
+  songs,
+});
+
+export const fetchNewStreamSongs = url => async (dispatch, getState) => {
+  const { json } = await callApi(url);
+  const { playlists } = getState();
+  const items = SESSION_STREAM_PLAYLIST in playlists
+    ? playlists[SESSION_STREAM_PLAYLIST].items
+    : [];
+  const itemsMap = items.reduce((obj, id) => ({ ...obj, [id]: 1 }), {});
+
+  const { collection, futureHref } = json;
+
+  const futureUrl = futureHref || null;
+  const songs = collection
+    .filter(song =>
+      song.kind === 'track'
+      && song.streamable
+      && !(song.id in itemsMap));
+
+  const { result, entities } = normalize(songs, [songSchema]);
+
+  dispatch(fetchNewStreamSongsSuccess(result, entities, futureUrl));
+};
+
 const fetchSessionFollowingsSuccess = (followings, entities) => ({
   type: types.FETCH_SESSION_FOLLOWINGS_SUCCESS,
   entities,

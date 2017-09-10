@@ -5,10 +5,17 @@ const initialState = {
   id: null,
   likes: {},
   oauthToken: null,
+  newStreamSongs: [],
 };
 
 const session = (state = initialState, action) => {
   switch (action.type) {
+    case types.FETCH_NEW_STREAM_SONGS_SUCCESS:
+      return {
+        ...state,
+        newStreamSongs: [...state.newStreamSongs, ...action.songs],
+      };
+
     case types.FETCH_SESSION_FOLLOWINGS_SUCCESS:
       return {
         ...state,

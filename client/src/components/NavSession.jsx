@@ -2,30 +2,35 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Link from '../components/Link';
 import NavPlaylists from '../components/NavPlaylists';
+import NavStream from '../components/NavStream';
 import { SONGS_PATH } from '../constants/RouterConstants';
 
 const defaultProps = {
-  playlist: null,
+  navPlaylist: null,
 };
 
 const propTypes = {
+  fetchNewStreamSongs: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   navigateTo: PropTypes.func.isRequired,
-  playlist: PropTypes.shape({}),
-  playlists: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  navPlaylist: PropTypes.shape({}),
+  navPlaylists: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   showLikes: PropTypes.bool.isRequired,
   showPlaylist: PropTypes.bool.isRequired,
   showStream: PropTypes.bool.isRequired,
+  streamFutureUrl: PropTypes.string.isRequired,
 };
 
 const NavSession = ({
+  fetchNewStreamSongs,
   isAuthenticated,
   navigateTo,
-  playlist,
-  playlists,
+  navPlaylist,
+  navPlaylists,
   showLikes,
   showPlaylist,
   showStream,
+  streamFutureUrl,
 }) => {
   if (!isAuthenticated) {
     return null;
@@ -33,14 +38,12 @@ const NavSession = ({
 
   return (
     <div className="nav-session">
-      <Link
-        className={`nav-session__item ${showStream ? 'nav-session__item--active' : ''}`}
+      <NavStream
+        fetchNewStreamSongs={fetchNewStreamSongs}
         navigateTo={navigateTo}
-        path={SONGS_PATH}
-        options={{ s: 'stream' }}
-      >
-        Stream
-      </Link>
+        showStream={showStream}
+        streamFutureUrl={streamFutureUrl}
+      />
       <Link
         className={`nav-session__item ${showLikes ? 'nav-session__item--active' : ''}`}
         navigateTo={navigateTo}
@@ -51,8 +54,8 @@ const NavSession = ({
       </Link>
       <NavPlaylists
         navigateTo={navigateTo}
-        playlist={playlist}
-        playlists={playlists}
+        navPlaylist={navPlaylist}
+        navPlaylists={navPlaylists}
         showPlaylist={showPlaylist}
       />
     </div>
