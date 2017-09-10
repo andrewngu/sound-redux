@@ -11,10 +11,9 @@ import { getFollowings, getIsFollowing, getPlaylist, getProfiles, getShouldFetch
 const UserContainer = props => <User {...props} />;
 
 const mapStateToProps = (state) => {
-  const { authed, player } = state;
+  const { player } = state;
 
   return {
-    authed,
     followings: getFollowings(state),
     id: getId(state),
     isAuthenticated: getIsAuthenticated(state),

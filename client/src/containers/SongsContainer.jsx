@@ -23,12 +23,11 @@ import getPlaylistData from '../selectors/SongsSelectors';
 const SongsContainer = props => <Songs {...props} />;
 
 const mapStateToProps = (state) => {
-  const { authed, environment } = state;
+  const { environment } = state;
   const { height } = environment;
 
   return {
     ...getPlaylistData(state),
-    authed,
     height,
     isAuthenticated: getIsAuthenticated(state),
     isPlaying: getIsPlaying(state),

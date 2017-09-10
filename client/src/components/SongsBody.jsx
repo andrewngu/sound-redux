@@ -11,7 +11,6 @@ const defaultProps = {
 };
 
 const propTypes = {
-  authed: PropTypes.shape({}).isRequired,
   height: PropTypes.number.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   isFetching: PropTypes.bool.isRequired,
@@ -56,7 +55,6 @@ class SongBody extends Component {
 
   render() {
     const {
-      authed,
       isAuthenticated,
       isFetching,
       isPlaying,
@@ -75,7 +73,6 @@ class SongBody extends Component {
       <div className="songs-body">
         <div className="songs-body__padder" style={{ height: `${paddingTop}px` }} />
         <SongsBodyRendered
-          authed={authed}
           end={end}
           isAuthenticated={isAuthenticated}
           isPlaying={isPlaying}

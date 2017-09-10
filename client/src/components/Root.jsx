@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 
 import Router from '../components/Router';
 import HistoryContainer from '../containers/HistoryContainer';
-import ModalContainer from '../containers/ModalContainer';
 import NavContainer from '../containers/NavContainer';
 import PlayerContainer from '../containers/PlayerContainer';
 
@@ -35,7 +34,6 @@ class Root extends Component {
         <NavContainer />
         <Router router={router} routes={routes} />
         <PlayerContainer />
-        <ModalContainer />
         <HistoryContainer />
       </div>
     );

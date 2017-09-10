@@ -11,10 +11,9 @@ import { getComments, getPlaylist, getSong, getSongs, getTimed } from '../select
 const SongContainer = props => <Song {...props} />;
 
 const mapStateToProps = (state) => {
-  const { authed, player, playlists } = state;
+  const { player, playlists } = state;
 
   return {
-    authed,
     comments: getComments(state),
     id: getId(state),
     isAuthenticated: getIsAuthenticated(state),
