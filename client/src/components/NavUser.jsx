@@ -3,7 +3,7 @@ import React from 'react';
 import LoginPopoverPanel from '../components/LoginPopoverPanel';
 import SessionPopoverPanel from '../components/SessionPopoverPanel';
 import Popover from '../components/Popover';
-import { getImageUrl } from '../utils/SongUtils';
+import getImageUrl from '../utils/ImageUtils';
 
 const defaultProps = {
   user: null,

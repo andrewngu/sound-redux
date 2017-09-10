@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import ArtworkPlay from '../components/ArtworkPlay';
 import Link from '../components/Link';
 import { SONG_PATH, USER_PATH } from '../constants/RouterConstants';
-import { getImageUrl } from '../utils/SongUtils';
+import getImageUrl from '../utils/ImageUtils';
 
 const propTypes = {
   index: PropTypes.number.isRequired,

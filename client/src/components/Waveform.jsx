@@ -3,7 +3,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import WaveformEvents from '../components/WaveformEvents';
-import { offsetLeft } from '../utils/MouseUtils';
+import offsetLeft from '../utils/DomUtils';
 
 const defaultProps = {
   className: '',

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Heart from '../components/Heart';
-import { addCommas } from '../utils/FormatUtils';
+import { addCommas } from '../utils/NumberUtils';
 
 const defaultProps = {
   className: '',

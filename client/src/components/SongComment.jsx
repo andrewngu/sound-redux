@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { IMAGE_SIZES } from '../constants/SongConstants';
-import { formatSeconds } from '../utils/FormatUtils';
-import { getImageUrl } from '../utils/SongUtils';
+import IMAGE_SIZES from '../constants/ImageConstants';
+import { formatSeconds } from '../utils/NumberUtils';
+import getImageUrl from '../utils/ImageUtils';
 
 const propTypes = {
   comment: PropTypes.shape({}).isRequired,

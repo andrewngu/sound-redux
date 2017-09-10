@@ -4,9 +4,9 @@ import Link from '../components/Link';
 import Heart from '../components/Heart';
 import ArtworkPlay from '../components/ArtworkPlay';
 import { SONG_PATH, USER_PATH } from '../constants/RouterConstants';
-import { IMAGE_SIZES } from '../constants/SongConstants';
-import { formatSongTitle } from '../utils/FormatUtils';
-import { getImageUrl } from '../utils/SongUtils';
+import IMAGE_SIZES from '../constants/ImageConstants';
+import getImageUrl from '../utils/ImageUtils';
+import formatSongTitle from '../utils/SongUtils';
 
 const propTypes = {
   index: PropTypes.number.isRequired,

@@ -1,22 +1,22 @@
-import { CLIENT_ID } from '../constants/Config';
+export const getLocation = (user) => {
+  const { city, country } = user;
 
-export function constructUserFollowingsUrl(userId) {
-  return `//api.soundcloud.com/users/${userId}/followings?client_id=${CLIENT_ID}`;
-}
+  if (city && country) {
+    return `${city}, ${country}`;
+  }
 
-export function constructUserProfilesUrl(userId) {
-  return `//api.soundcloud.com/users/${userId}/web-profiles?client_id=${CLIENT_ID}`;
-}
+  if (city) {
+    return city;
+  }
 
-export function constructUserTracksUrl(userId) {
-  return `//api.soundcloud.com/users/${userId}/tracks?client_id=${CLIENT_ID}`;
-}
+  if (country) {
+    return country;
+  }
 
-export function constructUserUrl(userId) {
-  return `//api.soundcloud.com/users/${userId}?client_id=${CLIENT_ID}`;
-}
+  return 'Earth';
+};
 
-export function getSocialIcon(service) {
+export const getSocialIcon = (service) => {
   switch (service) {
     case 'facebook':
       return 'ion-social-facebook';
@@ -39,16 +39,4 @@ export function getSocialIcon(service) {
     default:
       return 'ion-ios-world-outline';
   }
-}
-
-export function getUserLocation(user) {
-  if (user.city && user.country) {
-    return `${user.city}, ${user.country}`;
-  } else if (user.city) {
-    return user.city;
-  } else if (user.country) {
-    return user.country;
-  }
-
-  return 'Earth';
-}
+};

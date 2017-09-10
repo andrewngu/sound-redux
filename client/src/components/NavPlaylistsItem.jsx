@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Link from '../components/Link';
 import { PLAYLIST_PATH } from '../constants/RouterConstants';
-import { getImageUrl } from '../utils/SongUtils';
+import getImageUrl from '../utils/ImageUtils';
 
 const propTypes = {
   navigateTo: PropTypes.func.isRequired,

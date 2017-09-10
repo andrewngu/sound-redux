@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import UserFollowButton from '../components/UserFollowButton';
-import { IMAGE_SIZES } from '../constants/SongConstants';
-import { addCommas } from '../utils/FormatUtils';
-import { getImageUrl } from '../utils/SongUtils';
-import { getSocialIcon, getUserLocation } from '../utils/UserUtils';
+import IMAGE_SIZES from '../constants/ImageConstants';
+import { addCommas } from '../utils/NumberUtils';
+import getImageUrl from '../utils/ImageUtils';
+import { getSocialIcon, getLocation } from '../utils/UserUtils';
 
 const propTypes = {
   isFollowing: PropTypes.bool.isRequired,
@@ -40,7 +40,7 @@ const UserMain = ({ isFollowing, profiles, toggleFollow, user }) => {
         <div className="user-main__location">
           <i className="user-main__location__icon ion-location" />
           <div className="user-main__location__text">
-            {getUserLocation(user)}
+            {getLocation(user)}
           </div>
         </div>
         <div className="user-main__meta">

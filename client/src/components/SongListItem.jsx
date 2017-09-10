@@ -5,8 +5,8 @@ import Link from '../components/Link';
 import Stats from '../components/Stats';
 import Waveform from '../components/Waveform';
 import { SONG_PATH, USER_PATH } from '../constants/RouterConstants';
-import { IMAGE_SIZES } from '../constants/SongConstants';
-import { getImageUrl } from '../utils/SongUtils';
+import IMAGE_SIZES from '../constants/ImageConstants';
+import getImageUrl from '../utils/ImageUtils';
 
 const propTypes = {
   index: PropTypes.number.isRequired,
