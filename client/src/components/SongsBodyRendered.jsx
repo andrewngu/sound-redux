@@ -7,7 +7,6 @@ const defaultProps = {
 };
 
 const propTypes = {
-  authed: PropTypes.shape({}).isRequired,
   end: PropTypes.number.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
@@ -23,7 +22,6 @@ const propTypes = {
 };
 
 const SongsBodyRendered = ({
-  authed,
   end,
   isAuthenticated,
   isPlaying,
@@ -52,7 +50,6 @@ const SongsBodyRendered = ({
         <div className="row__cell" key={index}>
           {song ? (
             <SongsBodyCard
-              authed={authed}
               index={index}
               isActive={playingSongId === song.id}
               isAuthenticated={isAuthenticated}

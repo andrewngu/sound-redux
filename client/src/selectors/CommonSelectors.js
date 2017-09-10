@@ -1,9 +1,6 @@
 import { createSelector } from 'reselect';
 import { PLAYLIST_PATH, SONGS_PATH } from '../constants/RouterConstants';
 
-// authed selectors
-export const getAccessToken = state => state.authed.accessToken;
-
 // entities selectors
 export const getEntities = state => state.entities;
 

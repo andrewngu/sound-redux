@@ -28,9 +28,7 @@ const SongComments = ({ comments, id, navigateTo, sidebarHeight, sticky, timed }
           args={[{
             path: SONG_PATH,
             keys: { id },
-            options: {
-              ...timed ? {} : { timed: '1' },
-            },
+            options: timed ? {} : { timed: '1' },
           }]}
           on={timed}
           onClick={navigateTo}
