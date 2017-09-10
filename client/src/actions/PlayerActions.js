@@ -2,11 +2,6 @@ import * as types from '../constants/ActionTypes';
 import { getPlaylist, getRepeat, getShuffle } from '../selectors/CommonSelectors';
 import { getNextIndex, getPrevIndex, getShuffleIndex } from '../selectors/PlayerSelectors';
 
-export const changeCurrentTime = currentTime => ({
-  type: types.CHANGE_CURRENT_TIME,
-  currentTime,
-});
-
 export const onLoadedMetadata = duration => ({
   type: types.ON_LOADED_METADATA,
   duration,
@@ -67,11 +62,6 @@ export const playNextSong = (fromButtonPress = false) => (dispatch, getState) =>
 };
 
 export const playNextSongFromButton = () => dispatch => dispatch(playNextSong(true));
-
-export const toggleIsPlaying = isPlaying => ({
-  type: types.TOGGLE_IS_PLAYING,
-  isPlaying,
-});
 
 export const toggleRepeat = () => ({ type: types.TOGGLE_REPEAT });
 
