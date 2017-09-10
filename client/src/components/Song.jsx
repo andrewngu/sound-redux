@@ -5,7 +5,7 @@ import SongComments from '../components/SongComments';
 import SongList from '../components/SongList';
 import Loader from '../components/Loader';
 import SongMain from '../components/SongMain';
-import stickify from '../components/Stickify';
+import stickyOnScroll from '../components/stickyOnScroll';
 
 const defaultProps = {
   playingSongId: null,
@@ -119,4 +119,4 @@ class Song extends Component {
 Song.defaultProps = defaultProps;
 Song.propTypes = propTypes;
 
-export default stickify(Song, 50);
+export default stickyOnScroll(Song, 50);

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import InfiniteScroll from '../components/InfiniteScroll';
 import SongsBody from '../components/SongsBody';
 import SongsHeader from '../components/SongsHeader';
-import stickify from '../components/Stickify';
+import stickyOnScroll from '../components/stickyOnScroll';
 
 const defaultProps = {
   playingSongId: null,
@@ -122,4 +122,4 @@ class Songs extends Component {
 Songs.defaultProps = defaultProps;
 Songs.propTypes = propTypes;
 
-export default stickify(Songs, 50);
+export default stickyOnScroll(Songs, 50);
