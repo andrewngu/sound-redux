@@ -6,6 +6,7 @@ import { SONGS_PATH } from '../constants/RouterConstants';
 const propTypes = {
   fetchNewStreamSongs: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
+  newStreamSongsCount: PropTypes.number.isRequired,
   showStream: PropTypes.bool.isRequired,
   streamFutureUrl: PropTypes.string.isRequired,
 };
@@ -31,7 +32,7 @@ class NavStream extends Component {
   }
 
   render() {
-    const { navigateTo, showStream } = this.props;
+    const { navigateTo, newStreamSongsCount, showStream } = this.props;
 
     return (
       <Link
@@ -41,6 +42,14 @@ class NavStream extends Component {
         options={{ s: 'stream' }}
       >
         Stream
+        {newStreamSongsCount
+          ? (
+            <div className="nav-session__item__badge">
+              <div className="nav-session__item__badge__text">
+                {newStreamSongsCount}
+              </div>
+            </div>
+          ) : null}
       </Link>
     );
   }

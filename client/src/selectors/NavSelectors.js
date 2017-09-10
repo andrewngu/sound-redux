@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 import { SESSION_STREAM_PLAYLIST } from '../constants/PlaylistConstants';
 import { PLAYLIST_PATH } from '../constants/RouterConstants';
 import { playlistSchema } from '../constants/Schemas';
-import { getEntities, getPlaylists, getId, getOauthToken, getPath } from '../selectors/CommonSelectors';
+import { getEntities, getNewStreamSongs, getId, getPlaylists, getOauthToken, getPath } from '../selectors/CommonSelectors';
 
 export const getNavPlaylists = createSelector(
   getEntities,
@@ -18,6 +18,11 @@ export const getNavPlaylist = createSelector(
     ? denormalize(id, playlistSchema, entities)
     : null
   ),
+);
+
+export const getNewStreamSongsCount = createSelector(
+  getNewStreamSongs,
+  newStreamSongs => newStreamSongs.length,
 );
 
 export const getStreamFutureUrl = createSelector(
