@@ -25,7 +25,6 @@ const NavPlaylists = ({ navigateTo, playlist, playlists, showPlaylist }) => (
     <NavPlaylistsPanel
       navigateTo={navigateTo}
       playlists={playlists}
-      showPlaylist={showPlaylist}
     />
   </Popover>
 );
