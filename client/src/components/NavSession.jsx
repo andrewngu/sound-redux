@@ -12,10 +12,11 @@ const defaultProps = {
 const propTypes = {
   fetchNewStreamSongs: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
+  loadNewStreamSongs: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
   navPlaylist: PropTypes.shape({}),
   navPlaylists: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  newStreamSongsCount: PropTypes.number.isRequired,
+  newStreamSongs: PropTypes.arrayOf(PropTypes.number).isRequired,
   showLikes: PropTypes.bool.isRequired,
   showPlaylist: PropTypes.bool.isRequired,
   showStream: PropTypes.bool.isRequired,
@@ -25,10 +26,11 @@ const propTypes = {
 const NavSession = ({
   fetchNewStreamSongs,
   isAuthenticated,
+  loadNewStreamSongs,
   navigateTo,
   navPlaylist,
   navPlaylists,
-  newStreamSongsCount,
+  newStreamSongs,
   showLikes,
   showPlaylist,
   showStream,
@@ -42,8 +44,9 @@ const NavSession = ({
     <div className="nav-session">
       <NavStream
         fetchNewStreamSongs={fetchNewStreamSongs}
+        loadNewStreamSongs={loadNewStreamSongs}
         navigateTo={navigateTo}
-        newStreamSongsCount={newStreamSongsCount}
+        newStreamSongs={newStreamSongs}
         showStream={showStream}
         streamFutureUrl={streamFutureUrl}
       />

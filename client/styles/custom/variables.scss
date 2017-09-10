@@ -5,6 +5,7 @@ $lightBlack: #6d6d6d;
 $lighterBlack: #999;
 
 $blue: #3381b7;
+$lightBlue: lighten($blue, 5);
 $darkBlue: darken($blue, 5);
 
 $lightestGray: #fafafa;

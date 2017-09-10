@@ -21,6 +21,10 @@
   &:hover {
     background-color: $darkestGray;
     text-decoration: none;
+
+    .nav-session__item__badge {
+      background-color: $lightBlue;
+    }
   }
 }
 
@@ -40,12 +44,13 @@
   top: 12px;
   right: 12px;
   display: flex;
-  min-width: 18px;
+  min-width: 16px;
   padding: 0 1px 1px 0;
   align-items: center;
   justify-content: center;
   background-color: $blue;
   border-radius: 7px;
+  transition: background-color 200ms ease-in-out;
 }
 
 .nav-session__item__badge__text {

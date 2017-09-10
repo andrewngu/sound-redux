@@ -5,6 +5,7 @@ import { compileHash } from '../utils/RouterUtils';
 const defaultProps = {
   className: '',
   keys: {},
+  onClick: () => {},
   options: {},
   title: '',
 };
@@ -12,6 +13,7 @@ const defaultProps = {
 const propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
+  onClick: PropTypes.func,
   navigateTo: PropTypes.func.isRequired,
   keys: PropTypes.shape({}),
   options: PropTypes.shape({}),
@@ -27,8 +29,9 @@ class Link extends Component {
 
   onClick(e) {
     e.preventDefault();
-    const { keys, navigateTo, options, path } = this.props;
+    const { keys, navigateTo, onClick, options, path } = this.props;
     navigateTo({ path, keys, options });
+    onClick();
   }
 
   render() {
