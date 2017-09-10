@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Link from '../components/Link';
 import { USER_PATH } from '../constants/RouterConstants';
-import { addCommas } from '../utils/FormatUtils';
-import { getImageUrl } from '../utils/SongUtils';
-import { getUserLocation } from '../utils/UserUtils';
+import { addCommas } from '../utils/NumberUtils';
+import getImageUrl from '../utils/ImageUtils';
+import { getLocation } from '../utils/UserUtils';
 
 const propTypes = {
   navigateTo: PropTypes.func.isRequired,
@@ -32,7 +32,7 @@ const UserFollowing = ({ following, navigateTo }) => {
         <div className="user-following__location">
           <i className="user-following__location__icon ion-location" />
           <div className="user-following__location__text">
-            {getUserLocation(following)}
+            {getLocation(following)}
           </div>
         </div>
       </div>
