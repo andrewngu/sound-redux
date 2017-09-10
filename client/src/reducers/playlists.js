@@ -43,7 +43,7 @@ function playlist(state = initialState, action) {
       return {
         ...state,
         items: action.liked
-          ? [action.id, ...state.items]
+          ? [action.id, ...state.items.filter(id => id !== action.id)]
           : state.items.filter(id => id !== action.id),
       };
 
