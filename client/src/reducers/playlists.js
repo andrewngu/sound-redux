@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes';
-import { HISTORY_PLAYLIST, PLAYLIST_PLAYLIST_TYPE, SESSION_LIKES_PLAYLIST, SESSION_PLAYLIST_TYPE, SESSION_STREAM_PLAYLIST } from '../constants/PlaylistConstants';
+import { HISTORY_PLAYLIST, PLAYLIST_PLAYLIST_TYPE, SESSION_PLAYLIST_TYPE, SESSION_STREAM_PLAYLIST } from '../constants/PlaylistConstants';
 
 const initialState = {
   isFetching: false,
@@ -51,14 +51,6 @@ function playlist(state = initialState, action) {
       return state;
     }
 
-    case types.TOGGLE_LIKE_SUCCESS:
-      return {
-        ...state,
-        items: action.liked
-          ? [action.id, ...state.items.filter(id => id !== action.id)]
-          : state.items.filter(id => id !== action.id),
-      };
-
     default:
       return state;
   }
@@ -90,12 +82,6 @@ export default function playlists(state = {}, action) {
             id: state[action.playlist].items[action.playingIndex],
           },
         ),
-      };
-
-    case types.TOGGLE_LIKE_SUCCESS:
-      return {
-        ...state,
-        [SESSION_LIKES_PLAYLIST]: playlist(state[SESSION_LIKES_PLAYLIST], action),
       };
 
     case types.LOGOUT:
