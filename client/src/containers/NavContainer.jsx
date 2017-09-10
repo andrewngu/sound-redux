@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { navigateTo } from '../actions/RouterActions';
-import { fetchNewStreamSongs, login, logout } from '../actions/SessionActions';
+import { fetchNewStreamSongs, loadNewStreamSongs, login, logout } from '../actions/SessionActions';
 import Nav from '../components/Nav';
-import { getIsAuthenticated, getSessionUser, getShowLikes, getShowPlaylist, getShowStream } from '../selectors/CommonSelectors';
-import { getNavPlaylist, getNavPlaylists, getNewStreamSongsCount, getStreamFutureUrl } from '../selectors/NavSelectors';
+import { getIsAuthenticated, getNewStreamSongs, getSessionUser, getShowLikes, getShowPlaylist, getShowStream } from '../selectors/CommonSelectors';
+import { getNavPlaylist, getNavPlaylists, getStreamFutureUrl } from '../selectors/NavSelectors';
 
 const NavContainer = props => <Nav {...props} />;
 
@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
   isAuthenticated: getIsAuthenticated(state),
   navPlaylist: getNavPlaylist(state),
   navPlaylists: getNavPlaylists(state),
-  newStreamSongsCount: getNewStreamSongsCount(state),
+  newStreamSongs: getNewStreamSongs(state),
   showLikes: getShowLikes(state),
   showPlaylist: getShowPlaylist(state),
   showStream: getShowStream(state),
@@ -22,6 +22,7 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   fetchNewStreamSongs,
+  loadNewStreamSongs,
   login,
   logout,
   navigateTo,

@@ -1,4 +1,5 @@
 import * as types from '../constants/ActionTypes';
+import { SESSION_STREAM_PLAYLIST } from '../constants/PlaylistConstants';
 
 const initialState = {
   currentTime: 0,
@@ -28,6 +29,16 @@ const player = (state = initialState, action) => {
       return Object.assign({}, state, {
         playlistHistory: action.playlists,
       });
+
+    case types.LOAD_NEW_STREAM_SONGS:
+      return {
+        ...state,
+        playingIndex:
+          state.playlist === SESSION_STREAM_PLAYLIST
+          && state.playingIndex !== null
+            ? state.playingIndex + action.newStreamSongs.length
+            : state.playingIndex,
+      };
 
     case types.ON_LOAD_START:
       return {

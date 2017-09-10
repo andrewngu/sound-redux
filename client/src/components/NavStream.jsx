@@ -5,8 +5,9 @@ import { SONGS_PATH } from '../constants/RouterConstants';
 
 const propTypes = {
   fetchNewStreamSongs: PropTypes.func.isRequired,
+  loadNewStreamSongs: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
-  newStreamSongsCount: PropTypes.number.isRequired,
+  newStreamSongs: PropTypes.arrayOf(PropTypes.number).isRequired,
   showStream: PropTypes.bool.isRequired,
   streamFutureUrl: PropTypes.string.isRequired,
 };
@@ -15,6 +16,7 @@ class NavStream extends Component {
   constructor() {
     super();
     this.interval = null;
+    this.onClick = this.onClick.bind(this);
   }
 
   componentWillMount() {
@@ -31,15 +33,22 @@ class NavStream extends Component {
     this.interval = null;
   }
 
+  onClick() {
+    const { loadNewStreamSongs, newStreamSongs } = this.props;
+    loadNewStreamSongs(newStreamSongs);
+  }
+
   render() {
-    const { navigateTo, newStreamSongsCount, showStream } = this.props;
+    const { navigateTo, newStreamSongs, showStream } = this.props;
+    const newStreamSongsCount = newStreamSongs.length;
 
     return (
       <Link
         className={`nav-session__item ${showStream ? 'nav-session__item--active' : ''}`}
         navigateTo={navigateTo}
-        path={SONGS_PATH}
+        onClick={this.onClick}
         options={{ s: 'stream' }}
+        path={SONGS_PATH}
       >
         Stream
         {newStreamSongsCount

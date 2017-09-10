@@ -3,7 +3,16 @@ import { normalize } from 'normalizr';
 import { fetchSongsRequest, fetchSongsIfNeeded, fetchSongsSuccess } from '../actions/PlaylistActions';
 import { navigateTo } from '../actions/RouterActions';
 import * as types from '../constants/ActionTypes';
-import { CLIENT_ID, SESSION_FOLLOWINGS_URL, SESSION_LIKES_URL, SESSION_PLAYLISTS_URL, SESSION_STREAM_URL, SESSION_USER_URL, TOGGLE_FOLLOW_URL, TOGGLE_LIKE_URL } from '../constants/ApiConstants';
+import {
+  CLIENT_ID,
+  SESSION_FOLLOWINGS_URL,
+  SESSION_LIKES_URL,
+  SESSION_PLAYLISTS_URL,
+  SESSION_STREAM_URL,
+  SESSION_USER_URL,
+  TOGGLE_FOLLOW_URL,
+  TOGGLE_LIKE_URL,
+} from '../constants/ApiConstants';
 import { PLAYLIST_PLAYLIST_TYPE, SESSION_LIKES_PLAYLIST, SESSION_STREAM_PLAYLIST } from '../constants/PlaylistConstants';
 import { INITIAL_ROUTE } from '../constants/RouterConstants';
 import { playlistSchema, songSchema, userSchema } from '../constants/Schemas';
@@ -117,6 +126,11 @@ const fetchSessionData = oauthToken => (dispatch) => {
   dispatch(fetchSessionPlaylists(oauthToken));
   dispatch(fetchSongsIfNeeded(SESSION_STREAM_PLAYLIST, `${SESSION_STREAM_URL}&oauth_token=${oauthToken}`));
 };
+
+export const loadNewStreamSongs = newStreamSongs => ({
+  type: types.LOAD_NEW_STREAM_SONGS,
+  newStreamSongs,
+});
 
 const loginSuccess = oauthToken => ({
   type: types.LOGIN_SUCCESS,

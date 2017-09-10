@@ -34,6 +34,12 @@ const session = (state = initialState, action) => {
         id: action.id,
       };
 
+    case types.LOAD_NEW_STREAM_SONGS:
+      return {
+        ...state,
+        newStreamSongs: [],
+      };
+
     case types.LOGIN_SUCCESS:
       return {
         ...state,

@@ -31,6 +31,12 @@ function playlist(state = initialState, action) {
         nextUrl: action.nextUrl,
       };
 
+    case types.LOAD_NEW_STREAM_SONGS:
+      return {
+        ...state,
+        items: [...action.newStreamSongs, ...state.items],
+      };
+
     case types.PLAY_SONG: {
       if (action.playlist !== HISTORY_PLAYLIST) {
         return {
@@ -61,6 +67,7 @@ function playlist(state = initialState, action) {
 export default function playlists(state = {}, action) {
   switch (action.type) {
     case types.FETCH_NEW_STREAM_SONGS_SUCCESS:
+    case types.LOAD_NEW_STREAM_SONGS:
       return {
         ...state,
         [SESSION_STREAM_PLAYLIST]: playlist(state[SESSION_STREAM_PLAYLIST], action),
