@@ -27,7 +27,7 @@ function playlist(state = initialState, action) {
         ...state,
         futureUrl: action.futureUrl,
         isFetching: false,
-        items: [...state.items, ...action.items],
+        items: [...new Set([...state.items, ...action.items])],
         nextUrl: action.nextUrl,
       };
 
