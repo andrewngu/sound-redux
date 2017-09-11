@@ -56,7 +56,7 @@ const Nav = ({
           SoundRedux
         </Link>
       </div>
-      <div className="nav__section nav__section--flex">
+      <div className="nav__section nav__section--session">
         <NavSession
           fetchNewStreamSongs={fetchNewStreamSongs}
           isAuthenticated={isAuthenticated}
@@ -71,10 +71,10 @@ const Nav = ({
           streamFutureUrl={streamFutureUrl}
         />
       </div>
-      <div className="nav__section">
+      <div className="nav__section nav__section--search">
         <NavSearch navigateTo={navigateTo} />
       </div>
-      <div className="nav__section">
+      <div className="nav__section nav__section--user">
         <NavUser
           isAuthenticated={isAuthenticated}
           login={login}

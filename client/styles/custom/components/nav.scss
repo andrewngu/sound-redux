@@ -1,6 +1,10 @@
 .nav {
   height: 50px;
   background-color: $darkerGray;
+
+  @include mobile {
+    padding: 0 10px;
+  };
 };
 
 .nav__inner {
@@ -20,8 +24,16 @@
   }
 }
 
-.nav__section--flex {
+.nav__section--session {
   flex: 1;
+}
+
+.nav__section--search,
+.nav__section--session,
+.nav__section--user {
+  @include mobile {
+    display: none;
+  };
 }
 
 .nav__logo__icon {

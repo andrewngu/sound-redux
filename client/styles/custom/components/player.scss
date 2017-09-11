@@ -41,7 +41,9 @@
   width: 100px;
 }
 
-.player__section--meta {
+.player__section--song {
+  width: 200px;
+
   @include mobile {
     flex: 1;
   };
@@ -61,7 +63,7 @@
   flex-direction: row;
   align-items: center;
   height: 100%;
-  width: 200px;
+  width: 100%;
 }
 
 .player__song__artwork {

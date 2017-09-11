@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { TABLET_WIDTH } from '../constants/EnvironmentConstants';
 import { PLAYLIST_PATH, SONGS_PATH } from '../constants/RouterConstants';
 
 // entities selectors
@@ -6,9 +7,14 @@ export const getEntities = state => state.entities;
 
 // environment selectors
 export const getHeight = state => state.environment.height;
+export const getWidth = state => state.environment.width;
 export const getSidebarHeight = createSelector(
   getHeight,
   height => height - 200,
+);
+export const getIsMobile = createSelector(
+  getWidth,
+  width => width < TABLET_WIDTH,
 );
 
 // playlists selectors
