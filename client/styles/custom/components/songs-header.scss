@@ -1,5 +1,12 @@
 .songs-header {
   height: 40px;
+
+  @include mobile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+  }
 }
 
 .songs-header--sticky {
