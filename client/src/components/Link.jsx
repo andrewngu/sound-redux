@@ -5,7 +5,7 @@ import { compileHash } from '../utils/RouterUtils';
 const defaultProps = {
   className: '',
   keys: {},
-  onClick: () => {},
+  onClick: null,
   options: {},
   title: '',
 };
@@ -31,7 +31,9 @@ class Link extends Component {
     e.preventDefault();
     const { keys, navigateTo, onClick, options, path } = this.props;
     navigateTo({ path, keys, options });
-    onClick();
+    if (typeof onClick === 'function') {
+      onClick();
+    }
   }
 
   render() {
