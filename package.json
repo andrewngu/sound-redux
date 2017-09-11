@@ -4,7 +4,11 @@
   "description": "",
   "main": "client/src/index.js",
   "scripts": {
+    "prebuild": "npm run clean && npm run copy",
     "build": "NODE_ENV=production webpack -p --config ./client/webpack.prod.config.js",
+    "clean": "rm -rf ./dist",
+    "precopy": "mkdir -p ./dist/public",
+    "copy": "cp -r ./client/public/* ./dist/public/",
     "lint": "eslint client/src",
     "start": "webpack-dev-server --progress --colors --hot --content-base ./client/public --config ./client/webpack.dev.config.js"
   },

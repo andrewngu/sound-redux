@@ -4,14 +4,6 @@ const OfflinePlugin = require('offline-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
-const html = new HtmlWebpackPlugin({ template: '../public/index.html' });
-const ignore = new webpack.IgnorePlugin(/\.svg$/);
-const offline = new OfflinePlugin({
-  caches: {
-    main: [],
-  },
-});
-
 module.exports = {
   context: path.resolve('client/src/'),
   devtool: 'source-map',
@@ -28,7 +20,11 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.(js|jsx)$/, loaders: ['react-hot-loader', 'babel-loader'], exclude: /node_modules/ },
+      {
+        test: /\.(js|jsx)$/,
+        loaders: ['react-hot-loader', 'babel-loader'],
+        exclude: /node_modules/,
+      },
       {
         test: /\.scss$/,
         use: [
@@ -46,7 +42,11 @@ module.exports = {
       },
     ],
   },
-  plugins: [html, ignore, offline],
+  plugins: [
+    new HtmlWebpackPlugin({ template: '../public/index.html' }),
+    new webpack.IgnorePlugin(/\.svg$/),
+    new OfflinePlugin({ caches: { main: [] } }),
+  ],
   devServer: {
     host: '0.0.0.0',
     port: '8080',
