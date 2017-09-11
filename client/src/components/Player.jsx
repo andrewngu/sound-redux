@@ -46,7 +46,7 @@ const Player = ({
   return (
     <div className="player">
       <div className="player__inner container">
-        <div className="player__section">
+        <div className="player__section player__section--meta">
           <div className="player__song">
             <div className="player__song__artwork" style={{ backgroundImage: `url(${artworkUrl})` }} />
             <div className="player__song__main">
@@ -97,14 +97,14 @@ const Player = ({
             </div>
           </div>
         </div>
-        <div className="player__section player__section--flex">
+        <div className="player__section player__section--seek">
           <Slider
             max={duration}
             onChange={changeCurrentTime}
             value={currentTime}
           />
         </div>
-        <div className="player__section">
+        <div className="player__section player__section--time">
           <div className="player__time">
             {formatSeconds(currentTime)}
             <div className="player__time__separator">
@@ -113,8 +113,8 @@ const Player = ({
             {formatSeconds(duration)}
           </div>
         </div>
-        <div className="player__section">
-          <div className="player__buttons">
+        <div className="player__section player__section--options">
+          <div className="player__buttons player__buttons--options">
             <div
               className={`player__button ${repeat ? 'player__button--active' : ''}`}
               onClick={toggleRepeat}
