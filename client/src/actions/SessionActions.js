@@ -47,7 +47,7 @@ export const fetchNewStreamSongs = url => async (dispatch, getState) => {
 
   const { result, entities } = normalize(songs, [songSchema]);
 
-  dispatch(fetchNewStreamSongsSuccess(result, entities, futureUrl));
+  dispatch(fetchNewStreamSongsSuccess([...new Set(result)], entities, futureUrl));
 };
 
 const fetchSessionFollowingsSuccess = (followings, entities) => ({
