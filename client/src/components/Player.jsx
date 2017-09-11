@@ -5,7 +5,7 @@ import Link from '../components/Link';
 import Slider from '../components/Slider';
 import { SONG_PATH, USER_PATH } from '../constants/RouterConstants';
 import { formatSeconds } from '../utils/NumberUtils';
-import { volumeClassName } from '../utils/PlayerUtils';
+import volumeClassName from '../utils/PlayerUtils';
 
 const propTypes = {
   changeCurrentTime: PropTypes.func.isRequired,

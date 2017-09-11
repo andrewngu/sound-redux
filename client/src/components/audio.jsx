@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import prepareStreamUrl from '../utils/PlayerUtils';
 
 const propTypes = {
+  audioUrl: PropTypes.string.isRequired,
   onLoadedMetadata: PropTypes.func.isRequired,
   onLoadStart: PropTypes.func.isRequired,
   onPause: PropTypes.func.isRequired,
@@ -10,7 +10,6 @@ const propTypes = {
   onTimeUpdate: PropTypes.func.isRequired,
   onVolumeChange: PropTypes.func.isRequired,
   playNextSong: PropTypes.func.isRequired,
-  song: PropTypes.shape({}).isRequired,
 };
 
 const audio = (InnerComponent) => {
@@ -98,8 +97,7 @@ const audio = (InnerComponent) => {
     }
 
     render() {
-      const { song } = this.props;
-      const { streamUrl } = song;
+      const { audioUrl } = this.props;
 
       return (
         <div>
@@ -114,7 +112,7 @@ const audio = (InnerComponent) => {
             onTimeUpdate={this.onTimeUpdate}
             onVolumeChange={this.onVolumeChange}
             ref={(node) => { this.audioElement = node; }}
-            src={prepareStreamUrl(streamUrl)}
+            src={audioUrl}
           />
           <InnerComponent
             {...this.state}
