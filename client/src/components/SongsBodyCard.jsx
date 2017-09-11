@@ -3,6 +3,7 @@ import React from 'react';
 import Link from '../components/Link';
 import Heart from '../components/Heart';
 import ArtworkPlay from '../components/ArtworkPlay';
+import SongsBodyCardMobileEvents from '../components/SongsBodyCardMobileEvents';
 import { SONG_PATH, USER_PATH } from '../constants/RouterConstants';
 import IMAGE_SIZES from '../constants/ImageConstants';
 import getImageUrl from '../utils/ImageUtils';
@@ -92,6 +93,11 @@ const SongsBodyCard = ({
           toggleLike={toggleLike}
         />
       </div>
+      <SongsBodyCardMobileEvents
+        index={index}
+        playlist={playlist}
+        playSong={playSong}
+      />
     </div>
   );
 };
