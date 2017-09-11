@@ -5,7 +5,7 @@ const initialState = {
   id: null,
   likes: {},
   oauthToken: null,
-  newStreamSongs: [47454240],
+  newStreamSongs: [],
 };
 
 const session = (state = initialState, action) => {
