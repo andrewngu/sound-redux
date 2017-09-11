@@ -19,7 +19,7 @@ import { navigateTo } from '../actions/RouterActions';
 import toggleShowHistory from '../actions/HistoryActions';
 import Player from '../components/Player';
 import { getPlayingSongId, getPlaylists } from '../selectors/CommonSelectors';
-import { getNextIndex, getSong } from '../selectors/PlayerSelectors';
+import { getAudioUrl, getNextIndex, getSong } from '../selectors/PlayerSelectors';
 import { getShowHistory } from '../selectors/HistorySelectors';
 
 const defaultProps = {
@@ -43,6 +43,7 @@ const mapStateToProps = (state) => {
   const { songs, users } = entities;
 
   return {
+    audioUrl: getAudioUrl(state),
     nextIndex: getNextIndex(state),
     player,
     playingSongId: getPlayingSongId(state),

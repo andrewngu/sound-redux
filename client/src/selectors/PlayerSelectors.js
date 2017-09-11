@@ -1,5 +1,6 @@
 import { denormalize } from 'normalizr';
 import { createSelector } from 'reselect';
+import { CLIENT_ID } from '../constants/ApiConstants';
 import { songSchema } from '../constants/Schemas';
 import { getEntities, getPlayingIndex, getPlayingSongId, getPlaylist, getPlaylists } from '../selectors/CommonSelectors';
 
@@ -10,6 +11,11 @@ export const getSong = createSelector(
     ? denormalize(playingSongId, songSchema, entities)
     : null
   ),
+);
+
+export const getAudioUrl = createSelector(
+  getSong,
+  song => (song ? `${song.streamUrl}?client_id=${CLIENT_ID}` : ''),
 );
 
 const getPlaylistItemsLength = createSelector(
