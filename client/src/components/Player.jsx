@@ -46,7 +46,7 @@ const Player = ({
   return (
     <div className="player">
       <div className="player__inner container">
-        <div className="player__section player__section--meta">
+        <div className="player__section player__section--song">
           <div className="player__song">
             <div className="player__song__artwork" style={{ backgroundImage: `url(${artworkUrl})` }} />
             <div className="player__song__main">
