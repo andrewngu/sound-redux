@@ -1,34 +1,80 @@
+const autoprefixer = require('autoprefixer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
 const path = require('path');
 const webpack = require('webpack');
-const ignore = new webpack.IgnorePlugin(/\.svg$/);
-const nodeModulesDir = path.resolve(__dirname, 'node_modules');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
+  context: path.resolve('client/src/'),
   entry: {
-    main: './scripts/main.js',
+    main: './index.jsx',
     vendor: [
-      'lodash',
+      'babel-polyfill',
+      'camelize',
+      'isomorphic-fetch',
+      'js-cookie',
+      'lodash.merge',
       'moment',
       'normalizr',
+      'offline-plugin/runtime',
+      'path-to-regexp',
+      'prop-types',
       'react',
+      'react-dom',
+      'react-redux',
       'redux',
+      'redux-thunk',
+      'reselect',
       'soundcloud',
     ],
   },
   output: {
-    publicPath: 'http://localhost:8080/',
-    filename: './server/public/js/[name].js',
+    filename: 'js/[name].js',
+    path: path.resolve('dist/public/'),
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   module: {
     loaders: [
-      { test: /\.js$/, loader: 'babel?' + JSON.stringify({presets: ['react', 'es2015', 'stage-0']}), exclude: [nodeModulesDir] },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css!postcss!sass') },
+      {
+        test: /\.(js|jsx)$/,
+        loaders: ['babel-loader'],
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            { loader: 'css-loader' },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: () => [autoprefixer({ browsers: ['> 1%', 'IE >= 10'] })],
+              },
+            },
+            { loader: 'sass-loader' },
+          ],
+        }),
+      },
     ],
   },
   plugins: [
-    ignore,
-    new ExtractTextPlugin('./server/public/css/main.css'),
-    new webpack.optimize.CommonsChunkPlugin('vendor', './server/public/js/vendor.js'),
+    new HtmlWebpackPlugin({ template: '../public/index.html' }),
+    new ExtractTextPlugin('css/main.css'),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+    }),
+    new webpack.IgnorePlugin(/\.svg$/),
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'js/vendor.js' }),
+    new webpack.optimize.UglifyJsPlugin({
+      parallel: {
+        cache: true,
+        workers: 2,
+      },
+    }),
+    new OfflinePlugin({}),
   ],
 };
