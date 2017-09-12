@@ -36,19 +36,23 @@ const SongsHeader = ({
     <div className={`songs-header ${sticky ? 'songs-header--sticky' : ''}`}>
       <div className="songs-header__inner">
         <div className="songs-header__sections container">
-          <SongsHeaderGenres
-            genre={genre}
-            genres={genres}
-            navigateTo={navigateTo}
-            time={time}
-          />
-          <SongsHeaderTimes
-            genre={genre}
-            navigateTo={navigateTo}
-            search={search}
-            time={time}
-            times={times}
-          />
+          <div className="songs-header__section songs-header__section--genres">
+            <SongsHeaderGenres
+              genre={genre}
+              genres={genres}
+              navigateTo={navigateTo}
+              time={time}
+            />
+          </div>
+          <div className="songs-header__section songs-header__section--time">
+            <SongsHeaderTimes
+              genre={genre}
+              navigateTo={navigateTo}
+              search={search}
+              time={time}
+              times={times}
+            />
+          </div>
         </div>
       </div>
     </div>
