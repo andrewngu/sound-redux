@@ -1,7 +1,9 @@
+/* global document */
 import React, { Component, PropTypes } from 'react';
 
 const propTypes = {
   index: PropTypes.number.isRequired,
+  isActive: PropTypes.bool.isRequired,
   playlist: PropTypes.string.isRequired,
   playSong: PropTypes.func.isRequired,
 };
@@ -9,19 +11,28 @@ const propTypes = {
 class SongsBodyCardMobileEvents extends Component {
   constructor() {
     super();
-    this.onMouseDown = this.onMouseDown.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
-  onMouseDown() {
-    const { index, playlist, playSong } = this.props;
-    playSong(playlist, index);
+  onClick() {
+    const { index, isActive, playlist, playSong } = this.props;
+    if (isActive) {
+      const audioElement = document.getElementById('audio');
+      if (audioElement.paused) {
+        audioElement.play();
+      } else {
+        audioElement.pause();
+      }
+    } else {
+      playSong(playlist, index);
+    }
   }
 
   render() {
     return (
       <div
         className="songs-body-card__mobile-events"
-        onMouseDown={this.onMouseDown}
+        onClick={this.onClick}
         role="button"
         tabIndex="0"
       />

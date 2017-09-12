@@ -32,6 +32,19 @@ const audio = (InnerComponent) => {
       this.togglePlay = this.togglePlay.bind(this);
     }
 
+    componentDidMount() {
+      const { audioElement } = this;
+      audioElement.play();
+    }
+
+    componentDidUpdate(prevProps) {
+      const { audioElement, props } = this;
+      const { audioUrl } = props;
+      if (prevProps.audioUrl !== audioUrl) {
+        audioElement.play();
+      }
+    }
+
     onEnded() {
       const { playNextSong } = this.props;
       playNextSong();
@@ -102,7 +115,6 @@ const audio = (InnerComponent) => {
       return (
         <div>
           <audio
-            autoPlay
             id="audio"
             onEnded={this.onEnded}
             onLoadedMetadata={this.onLoadedMetadata}
