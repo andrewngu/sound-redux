@@ -45,6 +45,7 @@
   width: 200px;
 
   @include mobile {
+    pointer-events: none;
     flex: 1;
   };
 }

@@ -3,7 +3,9 @@
   background-color: $darkerGray;
 
   @include mobile {
+    position: relative;
     padding: 0 10px;
+    z-index: 5;
   };
 };
 
