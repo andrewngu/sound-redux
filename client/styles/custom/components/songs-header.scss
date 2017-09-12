@@ -1,5 +1,7 @@
 .songs-header {
+  position: relative;
   height: 40px;
+  z-index: 2;
 }
 
 .songs-header--sticky {

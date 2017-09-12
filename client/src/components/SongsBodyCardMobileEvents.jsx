@@ -1,5 +1,6 @@
 /* global document */
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
 const propTypes = {
   index: PropTypes.number.isRequired,

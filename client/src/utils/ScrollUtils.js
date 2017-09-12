@@ -11,7 +11,16 @@ const ROW_HEIGHT = 132;
 const THREE_ROWS_HEIGHT = totalHeightofRows(3, ROW_HEIGHT, MARGIN_BETWEEN_ROWS);
 const TWO_ROWS_HEIGHT = totalHeightofRows(2, ROW_HEIGHT, MARGIN_BETWEEN_ROWS);
 
-const scrollState = (height, count) => {
+const scrollState = (height, count, isMobile) => {
+  if (isMobile) {
+    return {
+      paddingTop: 0,
+      paddingBottom: 0,
+      start: 0,
+      end: count,
+    };
+  }
+
   const scrollY = window.scrollY;
 
   let paddingTop = 0;
