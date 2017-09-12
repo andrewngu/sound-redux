@@ -39,10 +39,14 @@
 }
 
 .songs-header__genres {
-  display: flex;
-  flex-direction: row;
   height: 100%;
   border-right: 1px solid $lighterGray;
+}
+
+.songs-header__genres__main {
+  display: flex;
+  flex-direction: row;
+  height: 100%
 }
 
 .songs-header__genre__wrap {
