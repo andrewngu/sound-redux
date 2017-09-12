@@ -9,6 +9,7 @@ import { GENRES, TIMES } from '../constants/PlaylistConstants';
 import {
   getGenre,
   getIsAuthenticated,
+  getIsMobile,
   getIsPlaying,
   getLikes,
   getPlayingSongId,
@@ -30,6 +31,7 @@ const mapStateToProps = (state) => {
     ...getPlaylistData(state),
     height,
     isAuthenticated: getIsAuthenticated(state),
+    isMobile: getIsMobile(state),
     isPlaying: getIsPlaying(state),
     likes: getLikes(state),
     playingSongId: getPlayingSongId(state),

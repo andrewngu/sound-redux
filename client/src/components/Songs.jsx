@@ -21,6 +21,7 @@ const propTypes = {
   height: PropTypes.number.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  isMobile: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   likes: PropTypes.shape({}).isRequired,
   login: PropTypes.func.isRequired,
@@ -62,6 +63,7 @@ class Songs extends Component {
       height,
       isAuthenticated,
       isFetching,
+      isMobile,
       isPlaying,
       navigateTo,
       likes,
@@ -100,6 +102,7 @@ class Songs extends Component {
             height={height}
             isAuthenticated={isAuthenticated}
             isFetching={isFetching}
+            isMobile={isMobile}
             isPlaying={isPlaying}
             likes={likes}
             login={login}

@@ -14,6 +14,7 @@ const propTypes = {
   height: PropTypes.number.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  isMobile: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   likes: PropTypes.shape({}).isRequired,
   login: PropTypes.func.isRequired,
@@ -30,7 +31,7 @@ class SongBody extends Component {
     super(props);
     this.onScroll = this.onScroll.bind(this);
 
-    this.state = scrollState(props.height, props.songs.length);
+    this.state = scrollState(props.height, props.songs.length, props.isMobile);
   }
 
   componentDidMount() {
@@ -40,7 +41,7 @@ class SongBody extends Component {
   componentWillReceiveProps(nextProps) {
     const { height, songs } = this.props;
     if (height !== nextProps.height || songs.length !== nextProps.songs.length) {
-      this.setState(scrollState(nextProps.height, nextProps.songs.length));
+      this.setState(scrollState(nextProps.height, nextProps.songs.length, nextProps.isMobile));
     }
   }
 
@@ -49,14 +50,15 @@ class SongBody extends Component {
   }
 
   onScroll() {
-    const { height, songs } = this.props;
-    this.setState(scrollState(height, songs.length));
+    const { height, isMobile, songs } = this.props;
+    this.setState(scrollState(height, songs.length, isMobile));
   }
 
   render() {
     const {
       isAuthenticated,
       isFetching,
+      isMobile,
       isPlaying,
       likes,
       login,
@@ -75,6 +77,7 @@ class SongBody extends Component {
         <SongsBodyRendered
           end={end}
           isAuthenticated={isAuthenticated}
+          isMobile={isMobile}
           isPlaying={isPlaying}
           likes={likes}
           login={login}
