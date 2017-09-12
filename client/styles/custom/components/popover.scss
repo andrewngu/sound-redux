@@ -1,0 +1,49 @@
+.popover {
+  position: relative;
+}
+
+.popover__trigger {
+  outline: 0;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: none;
+  }
+}
+
+.popover__panel {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  min-width: 200px;
+  margin-top: 4px;
+  background-color: $white;
+  border: solid 1px $lighterBlack;
+  box-shadow: 0 0 2px 1px rgba(0,0,0,.2);
+  z-index: 501;
+}
+
+.popover__panel__item {
+  display: block;
+  padding: 12px 16px;
+  font-size: 12px;
+  transition: background-color 200ms ease-in-out;
+
+  &[role="button"] {
+    &:hover {
+      background-color: $lightestGray;
+      cursor: pointer;
+    }
+
+    &:active {
+      background-color: $lighterGray;
+    }
+  }
+}
+
+.popover--right {
+  .popover__panel {
+    left: auto;
+    right: 0;
+  }
+}

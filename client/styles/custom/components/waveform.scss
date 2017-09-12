@@ -1,0 +1,105 @@
+.waveform {
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+
+    .waveform__hover-bg,
+    .waveform__hover-icon {
+      opacity: 1;
+    }
+  }
+}
+
+.waveform--active {
+  &:hover {
+    .waveform__seek-bg,
+    .waveform__seek-line {
+      display: block;
+    }
+  }
+
+  .waveform__hover-bg,
+  .waveform__hover-icon {
+    display: none;
+  }
+}
+
+.waveform__image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: no-repeat center center;
+  background-size: 100% 100%;
+  outline: 0;
+  z-index: 2;
+}
+
+.waveform__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: $lightGreen;
+  z-index: 0;
+}
+
+.waveform__seek-bg {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.waveform__seek-line {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-right: 1px solid $black;
+  z-index: 3;
+}
+
+.waveform__hover-bg,
+.waveform__hover-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+.waveform__hover-bg {
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+}
+
+.waveform__hover-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: $green;
+  z-index: 4;
+}
+
+.waveform__hover__icon {
+  font-size: 18px;
+  color: $green;
+}
+
+.waveform__events {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  outline: 0;
+  z-index: 5;
+}

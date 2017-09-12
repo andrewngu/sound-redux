@@ -1,0 +1,68 @@
+.nav-session {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.nav-session__item {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  padding: 0 25px;
+  color: $mediumGray;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 200ms ease-in-out;
+
+  &:hover {
+    background-color: $darkestGray;
+    text-decoration: none;
+
+    .nav-session__item__badge {
+      background-color: $lightBlue;
+    }
+  }
+}
+
+.nav-session__item__text {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav-session__item__icon {
+  margin-left: 4px;
+}
+
+.nav-session__item__badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  min-width: 16px;
+  padding: 0 1px 1px 0;
+  align-items: center;
+  justify-content: center;
+  background-color: $blue;
+  border-radius: 7px;
+  transition: background-color 200ms ease-in-out;
+}
+
+.nav-session__item__badge__text {
+  color: $white;
+  font-size: 8px;
+  letter-spacing: normal;
+  text-transform: none;
+  text-shadow: 0 0 2px #666;
+}
+
+.nav-session__item--active {
+  background-color: $darkestGray;
+  color: $white;
+  font-weight: 600;
+}

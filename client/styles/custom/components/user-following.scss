@@ -1,0 +1,43 @@
+.user-following {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  font-size: 11px;
+  background-color: #fff;
+  border-bottom: 1px solid $lighterGray;
+  border-left: 1px solid $lighterGray;
+  border-right: 1px solid $lighterGray;
+}
+
+.user-following__avatar {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  background: no-repeat center center;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.user-following__main {
+  flex: 1;
+  overflow: hidden;
+}
+
+.user-following__location {
+  display: flex;
+  flex-direction: row;
+  color: $gray;
+}
+
+.user-following__location__icon {
+  margin-right: 4px;
+}
+
+.user-following__followers {
+  text-align: right;
+}
+
+.user-following__followers__text {
+  color: $gray;
+}

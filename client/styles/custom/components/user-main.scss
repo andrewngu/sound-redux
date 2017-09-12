@@ -1,0 +1,97 @@
+.user-main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 144px;
+  background-color: #fff;
+  border: 1px solid $lighterGray;
+}
+
+.user-main__avatar {
+  display: flex;
+  align-items: center;;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 140px;
+  height: 100%;
+  margin-right: 10px;
+}
+
+.user-main__avatar__image {
+  width: 120px;
+  height: 120px;
+  background: no-repeat center center;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.user-main__main {
+  flex: 1;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.user-main__title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.user-main__username {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 300;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-main__location {
+  display: flex;
+  flex-direction: row;
+  color: $gray;
+  font-size: 18px;
+}
+
+.user-main__location__icon {
+  margin-right: 10px;
+}
+
+.user-main__meta {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-main__followings {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-main__followings__count {
+  margin-right: 10px;
+}
+
+.user-main__profile {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+}
+
+.user-main__profile__icon {
+  margin-right: 10px;
+  color: $gray;
+}
+
+.user-main__description {
+  margin-top: 10px;
+  max-height: 30px;
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

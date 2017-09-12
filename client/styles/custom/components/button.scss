@@ -1,0 +1,64 @@
+.button {
+  display: inline-block;
+  padding:  12px;
+  min-width: 100px;
+  background-color: $white;
+  text-align: center;
+  color: $black;
+  font-size: 12px;
+  border: 1px solid #C7C7C7;
+  border-radius: 2px;
+  outline: 0;
+  transition: background-color 0.2s ease-in-out;
+  user-select: none;
+
+  &:hover {
+    background-color: $lightestGray;
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: $lighterGray;
+  }
+}
+
+.button--block {
+  display: block;
+}
+
+.button--margin {
+  margin: 10px;
+}
+
+.button--short {
+  padding: 4px 6px;
+  font-size: 11px;
+}
+
+.button--orange {
+  color: $white;
+  background-color: $orange;
+  border: 1px solid $darkerOrange;
+
+  &:hover {
+    background-color: $darkOrange;
+  }
+
+  &:active {
+    background-color: $darkerOrange;
+  }
+}
+
+.button--red {
+  color: $white;
+  background-color: $red;
+  border: 1px solid $darkerRed;
+
+  &:hover {
+    background-color: $darkRed;
+  }
+
+  &:active {
+    background-color: $darkerRed;
+  }
+}

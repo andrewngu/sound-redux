@@ -1,0 +1,11 @@
+.songs-body {
+  margin: 40px 0 80px 0;
+
+  @include mobile {
+    margin: 0;
+  }
+}
+
+.songs-body__padder {
+  visibility: hidden;
+}

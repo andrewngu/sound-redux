@@ -1,0 +1,35 @@
+$fontFamily: 'Open Sans','Helvetica Neue', Helvetica, Arial, sans-serif;
+
+$black: #222;
+$lightBlack: #6d6d6d;
+$lighterBlack: #999;
+
+$blue: #3381b7;
+$lightBlue: lighten($blue, 5);
+$darkBlue: darken($blue, 5);
+
+$lightestGray: #fafafa;
+$lighterGray: #e3e3e3;
+$lightGray: #ddd;
+$gray: #ccc;
+$mediumGray: #c8c9cb;
+$darkGray: #adadad;
+$darkerGray: #3a3f41;
+$darkestGray: #2B2B2B;
+
+$orange: #f85d0f;
+$darkOrange: darken($orange, 5);
+$darkerOrange: darken($orange, 10);
+
+$lightGreen: #a6d2a5;
+$green: #7ec57c;
+$darkGreen: darken($green, 5);
+$darkerGreen: darken($green, 10);
+
+$lighterRed: #F9C5C5;
+$lightRed: darken($lighterRed, 5);
+$red: #e17d74;
+$darkRed: darken($red, 5);
+$darkerRed: darken($red, 10);
+
+$white: #fff;

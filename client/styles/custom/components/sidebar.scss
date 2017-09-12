@@ -1,0 +1,31 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.sidebar--sticky {
+  position: fixed;
+  top: 40px;
+  width: 350px;
+}
+
+.sidebar__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 60px;
+  padding: 0 20px;
+  background-color: $white;
+  border: 1px solid $lighterGray;
+}
+
+.sidebar__header__left {
+  flex: 1;
+}
+
+.sidebar__body {
+  flex: 1;
+  width: 100%;
+  overflow: scroll;
+}

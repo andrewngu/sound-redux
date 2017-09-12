@@ -1,0 +1,51 @@
+.song-comment {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  background-color: #fff;
+  border-bottom: 1px solid $lighterGray;
+  border-left: 1px solid $lighterGray;
+  border-right: 1px solid $lighterGray;
+  font-size: 11px;
+  overflow: hidden;
+
+  &:nth-child(-n + 10) {
+    animation-fill-mode: forwards;
+    animation-name: slideIn;
+    animation-duration: 360ms;
+    animation-timing-function: ease;
+    opacity: 0;
+    transform: translateX(200px);
+  }
+}
+
+.song-comment__image {
+  width: 24px;
+  height: 24px;
+  margin-right: 20px;
+  border-radius: 50%;
+  background: no-repeat center center;
+  background-size: cover;
+};
+
+.song-comment__main {
+  flex: 1;
+  margin-right: 20px;
+  overflow: hidden;
+}
+
+.song-comment__username {
+  color: $gray;
+}
+
+.song-comment__body {
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}

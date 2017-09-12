@@ -1,0 +1,184 @@
+.player {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 48px;
+  background-color: $white;
+  border-top: 1px solid $lighterGray;
+  user-select: none;
+  z-index: 999;
+
+  @include mobile {
+    background-color: $darkestGray;
+    border-top-color: $black;
+    padding: 0 10px;
+  };
+}
+
+.player__inner {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.player__section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+
+  & + .player__section {
+    margin-left: 40px;
+  }
+}
+
+.player__section--seek {
+  flex: 1;
+}
+
+.player__section--volume {
+  width: 100px;
+}
+
+.player__section--song {
+  width: 200px;
+
+  @include mobile {
+    pointer-events: none;
+    flex: 1;
+  };
+}
+
+.player__section--seek,
+.player__section--time,
+.player__section--options,
+.player__section--volume {
+  @include mobile {
+    display: none;
+  };
+}
+
+.player__song {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.player__song__artwork {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  background: no-repeat center center;
+  background-size: cover;
+}
+
+.player__song__main {
+  flex: 1;
+  margin-left: 8px;
+  overflow: hidden;
+}
+
+.player__song__title {
+  color: $black;
+
+  @include mobile {
+    color: $white;
+  };
+}
+
+.player__song__username {
+  color: $blue;
+}
+
+.player__song__title,
+.player__song__username {
+  display: block;
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @include mobile {
+    color: $white;
+  };
+}
+
+.player__buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+}
+
+.player__button {
+  position: relative;
+  padding: 4px;
+  outline: 0;
+
+  &:hover {
+    cursor: pointer;
+
+    .player__button__icon {
+      color: $darkGray;
+    }
+  }
+
+  &:active {
+    .player__button__icon {
+      color: $darkGreen;
+    }
+  }
+
+  & + .player__button {
+    margin-left: 30px;
+  }
+}
+
+.player__button__icon {
+  position: relative;
+  color: $gray;
+  z-index: 1;
+}
+
+.player__button--active {
+  .player__button__icon {
+    color: $green;
+  }
+
+  &:hover {
+    .player__button__icon {
+      color: $darkerGreen;
+    }
+  }
+}
+
+.player__time {
+  display: flex;
+  flex-direction: row;
+  color: $gray;
+  font-size: 11px;
+}
+
+.player__time__separator {
+  margin: 0 10px;
+}
+
+.player__button--volume {
+  position: relative;
+  width: 6px;
+  height: 22px;
+
+  .player__button__icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.player__button__icon--absolute {
+  color: $green;
+  z-index: 0;
+}

@@ -1,0 +1,56 @@
+.nav {
+  height: 50px;
+  background-color: $darkerGray;
+
+  @include mobile {
+    position: relative;
+    padding: 0 10px;
+    z-index: 5;
+  };
+};
+
+.nav__inner {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.nav__section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+
+  & + .nav__section {
+    margin-left: 30px;
+  }
+}
+
+.nav__section--session {
+  flex: 1;
+}
+
+.nav__section--search,
+.nav__section--session,
+.nav__section--user {
+  @include mobile {
+    display: none;
+  };
+}
+
+.nav__logo__icon {
+  color: $white;
+  font-size: 20px;
+}
+
+.nav__logo__text {
+  margin-left: 30px;
+  color: $white;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

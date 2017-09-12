@@ -1,0 +1,28 @@
+.nav-search {
+  position: relative;
+  background-color: $darkestGray;
+  border-radius: 3px;
+}
+
+.nav-search__icon {
+  position: absolute;
+  top: 2px;
+  left: 10px;
+  color: #808080;
+  pointer-events: none;
+}
+
+.nav-search__input {
+  width: 290px;
+  padding: 6px 10px 6px 30px;
+  color: $lighterGray;
+  font-size: 12px;
+  font-weight: 300;
+  background-color: transparent;
+  border: none;
+  outline: 0;
+}
+
+.nav-search__input::placeholder {
+  font-family: $fontFamily;
+}

@@ -1,0 +1,26 @@
+.row {
+  display: flex;
+  flex-direction: row;
+
+  @include mobile {
+    display: block;
+  };
+
+  & + .row {
+    margin-top:  20px;
+
+    @include mobile {
+      margin-top: 0;
+    }
+  }
+}
+
+.row__cell {
+  & + .row__cell {
+    margin-left: 20px;
+
+    @include mobile {
+      margin: 0;
+    }
+  }
+}

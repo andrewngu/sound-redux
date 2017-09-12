@@ -1,0 +1,34 @@
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 6px;
+  border-radius: 3px;
+  border: 1px solid $lighterGray;
+  outline: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.switch__button {
+  position: absolute;
+  top: -4px;
+  left: -2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: $white;
+  border: 1px solid $lighterGray;
+  transition: transform 110ms ease-in-out;
+}
+
+.switch--on {
+  border-color: $blue;
+  background-color: $blue;
+
+  .switch__button {
+    transform: translateX(10px);
+  }
+}

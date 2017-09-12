@@ -1,0 +1,18 @@
+.user {
+  display: flex;
+  flex-direction: row;
+  margin: 40px 0 80px 0;
+}
+
+.user__main {
+  width: 800px;
+}
+
+.user__song-list {
+  margin-top: 20px;
+}
+
+.user__sidebar {
+  width: 350px;
+  margin-left: 20px;
+}

@@ -1,0 +1,7 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "jsx-a11y/media-has-caption": 0,
+    "react/no-danger": 0
+  }
+}
