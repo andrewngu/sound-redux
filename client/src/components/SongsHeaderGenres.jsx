@@ -11,7 +11,7 @@ const propTypes = {
 };
 
 const SongsHeaderGenres = ({ genre, genres, navigateTo, time }) => (
-  <div className="songs-header__section songs-header__section--flex">
+  <div className="songs-header__genres">
     {genres.map(g => (
       <div className="songs-header__genre__wrap" key={g.key}>
         <Link

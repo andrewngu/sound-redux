@@ -25,15 +25,24 @@
 }
 
 .songs-header__section {
+  height: 100%;
+}
+
+.songs-header__section--genres {
+  flex: 1;
+}
+
+.songs-header__section--time {
+  @include mobile {
+    display: none;
+  };
+}
+
+.songs-header__genres {
   display: flex;
   flex-direction: row;
   height: 100%;
-  align-items: center;
   border-right: 1px solid $lighterGray;
-}
-
-.songs-header__section--flex {
-  flex: 1;
 }
 
 .songs-header__genre__wrap {
@@ -67,9 +76,25 @@
   color: $black;
 }
 
-.songs-header__icon {
+.songs-header__times {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 217px;
+  border-right: 1px solid $lighterGray;
+}
+
+.songs-header__times__inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+}
+
+.songs-header__times__icon {
   color: $lightGray;
-  margin-left: 18px;
 }
 
 .songs-header__time {
@@ -88,10 +113,6 @@
   &:hover {
     color: $blue;
     text-decoration: none;
-  }
-
-  &:last-child {
-    margin-right: 18px;
   }
 }
 
