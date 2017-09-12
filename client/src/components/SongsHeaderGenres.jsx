@@ -39,7 +39,7 @@ class SongsHeaderGenres extends Component {
         </div>
         <div className="songs-header__genres__main">
           {genres.map(g => (
-            <div className={`songs-header__genre ${g.key === genre ? 'songs-header__genre--active' : ''}`}>
+            <div className={`songs-header__genre ${g.key === genre ? 'songs-header__genre--active' : ''}`} key={g.key}>
               <Link
                 className="songs-header__genre__text"
                 navigateTo={navigateTo}
