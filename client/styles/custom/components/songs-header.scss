@@ -43,10 +43,28 @@
   border-right: 1px solid $lighterGray;
 }
 
+.songs-header__genres__active {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 11px;
+  font-weight: 300;
+  text-transform: uppercase;
+
+  @include mobile {
+    display: flex;
+  }
+}
+
 .songs-header__genres__main {
   display: flex;
   flex-direction: row;
-  height: 100%
+  height: 100%;
+
+  @include mobile {
+    display: none;
+  };
 }
 
 .songs-header__genre__wrap {

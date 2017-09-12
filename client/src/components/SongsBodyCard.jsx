@@ -95,6 +95,7 @@ const SongsBodyCard = ({
       </div>
       <SongsBodyCardMobileEvents
         index={index}
+        isActive={isActive}
         playlist={playlist}
         playSong={playSong}
       />
