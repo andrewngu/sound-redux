@@ -4,6 +4,10 @@
   background-color: $white;
   border: 1px solid $lighterGray;
 
+  @include tablet {
+    width: 139px;
+  }
+
   @include mobile {
     width: 100%;
     border-left: 0;

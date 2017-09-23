@@ -21,6 +21,10 @@
   background-color: transparent;
   border: none;
   outline: 0;
+
+  @include tablet {
+    width: 200px;
+  }
 }
 
 .nav-search__input::placeholder {

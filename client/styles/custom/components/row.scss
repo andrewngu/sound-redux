@@ -19,6 +19,10 @@
   & + .row__cell {
     margin-left: 20px;
 
+    @include tablet {
+      margin-left: 10px;
+    }
+
     @include mobile {
       margin: 0;
     }
