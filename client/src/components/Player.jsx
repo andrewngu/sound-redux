@@ -6,6 +6,8 @@ import Slider from '../components/Slider';
 import { SONG_PATH, USER_PATH } from '../constants/RouterConstants';
 import { formatSeconds } from '../utils/NumberUtils';
 import volumeClassName from '../utils/PlayerUtils';
+import { PLAYER_PLAY_PREVIOUS_SONG_HINT, PLAYER_PLAY_CURRENT_SONG_HINT, PLAYER_PLAY_NEXT_SONG_HINT,
+  PLAYER_REPEAT_PLAY_HINT, PLAYER_SHUFFLE_HINT, PLAYER_RECENTLY_PLAYED_HINT, PLAYER_MUTE_HINT } from '../constants/PlayerConstants';
 
 const propTypes = {
   changeCurrentTime: PropTypes.func.isRequired,
@@ -77,7 +79,10 @@ const Player = ({
               role="button"
               tabIndex="0"
             >
-              <i className="player__button__icon ion-ios-rewind" />
+              <i
+                className="player__button__icon ion-ios-rewind"
+                title={PLAYER_PLAY_PREVIOUS_SONG_HINT}
+              />
             </div>
             <div
               className="player__button"
@@ -85,7 +90,10 @@ const Player = ({
               role="button"
               tabIndex="0"
             >
-              <i className={`player__button__icon ion-ios-${isPlaying ? 'pause' : 'play'}`} />
+              <i
+                className={`player__button__icon ion-ios-${isPlaying ? 'pause' : 'play'}`}
+                title={PLAYER_PLAY_CURRENT_SONG_HINT}
+              />
             </div>
             <div
               className="player__button"
@@ -93,7 +101,10 @@ const Player = ({
               role="button"
               tabIndex="0"
             >
-              <i className="player__button__icon ion-ios-fastforward" />
+              <i
+                className="player__button__icon ion-ios-fastforward"
+                title={PLAYER_PLAY_NEXT_SONG_HINT}
+              />
             </div>
           </div>
         </div>
@@ -121,7 +132,10 @@ const Player = ({
               role="button"
               tabIndex="0"
             >
-              <i className="player__button__icon ion-loop" />
+              <i
+                className="player__button__icon ion-loop"
+                title={PLAYER_REPEAT_PLAY_HINT}
+              />
             </div>
             <div
               className={`player__button ${shuffle ? 'player__button--active' : ''}`}
@@ -129,7 +143,10 @@ const Player = ({
               role="button"
               tabIndex="0"
             >
-              <i className="player__button__icon ion-shuffle" />
+              <i
+                className="player__button__icon ion-shuffle"
+                title={PLAYER_SHUFFLE_HINT}
+              />
             </div>
             <div
               className={`player__button ${showHistory ? 'player__button--active' : ''}`}
@@ -137,7 +154,10 @@ const Player = ({
               role="button"
               tabIndex="0"
             >
-              <i className="player__button__icon ion-android-list" />
+              <i
+                className="player__button__icon ion-android-list"
+                title={PLAYER_RECENTLY_PLAYED_HINT}
+              />
             </div>
             <div
               className="player__button player__button--volume"
