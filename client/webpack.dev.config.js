@@ -7,11 +7,9 @@ const webpack = require('webpack');
 module.exports = {
   context: path.resolve('client/src/'),
   devtool: 'source-map',
-  entry: {
-    main: [
-      './index.jsx',
-    ],
-  },
+  entry: [
+    './index.jsx',
+  ],
   output: {
     filename: 'js/[name].js',
   },
@@ -22,7 +20,7 @@ module.exports = {
     loaders: [
       {
         test: /\.(js|jsx)$/,
-        loaders: ['react-hot-loader', 'babel-loader'],
+        loaders: ['babel-loader'],
         exclude: /node_modules/,
       },
       {
@@ -43,12 +41,16 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({ template: '../public/index.html' }),
     new webpack.IgnorePlugin(/\.svg$/),
     new OfflinePlugin({ caches: { main: [] } }),
   ],
   devServer: {
     host: '0.0.0.0',
+    hot: true,
     port: '8080',
   },
 };
