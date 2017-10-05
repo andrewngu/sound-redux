@@ -6,8 +6,9 @@ const webpack = require('webpack');
 
 module.exports = {
   context: path.resolve('client/src/'),
-  devtool: 'source-map',
+  devtool: 'eval',
   entry: [
+    'react-hot-loader/patch',
     './index.jsx',
   ],
   output: {
