@@ -23,6 +23,10 @@
 
   & + .nav__section {
     margin-left: 30px;
+
+    @include tablet {
+      margin-left: 15px;
+    }
   }
 }
 

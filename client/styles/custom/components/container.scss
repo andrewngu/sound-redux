@@ -1,6 +1,10 @@
 .container {
-  width: 1170px;
+  width: $desktopWidth;
   margin: 0 auto;
+
+  @include tablet {
+    width: $tabletWidth;
+  }
 
   @include mobile {
     width: 100%;

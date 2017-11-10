@@ -18,6 +18,10 @@
   text-transform: uppercase;
   transition: background-color 200ms ease-in-out;
 
+  @include tablet {
+    padding: 0 15px;
+  }
+
   &:hover {
     background-color: $darkestGray;
     text-decoration: none;

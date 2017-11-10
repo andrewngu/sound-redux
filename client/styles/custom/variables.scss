@@ -33,3 +33,8 @@ $darkRed: darken($red, 5);
 $darkerRed: darken($red, 10);
 
 $white: #fff;
+
+// Grid breakpoints
+$mobileWidth: 320px;
+$tabletWidth: 736px;
+$desktopWidth: 1170px;
