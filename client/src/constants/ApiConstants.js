@@ -1,5 +1,5 @@
 const API_HOSTNAME = '//api.soundcloud.com';
-export const CLIENT_ID = 'f4323c6f7c0cd73d2d786a2b1cdae80c';
+export const CLIENT_ID = '342b8a7af638944906dcdb46f9d56d98';
 
 const constructUrl = url => `${API_HOSTNAME}${url}${url.indexOf('?') === -1 ? '?' : '&'}client_id=${CLIENT_ID}`;
 
