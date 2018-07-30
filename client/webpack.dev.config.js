@@ -51,6 +51,9 @@ module.exports = {
   ],
   devServer: {
     host: '0.0.0.0',
+    allowedHosts: [
+      '.amazonaws.com'
+    ],
     hot: true,
     port: '8080',
   },
