@@ -6,6 +6,7 @@ import Loader from '../components/Loader';
 import stickyOnScroll from '../components/stickyOnScroll';
 import UserFollowings from '../components/UserFollowings';
 import UserMain from '../components/UserMain';
+import Flags from  '../constants/Flags.js'
 
 const defaultProps = {
   playingSongId: null,
@@ -98,12 +99,14 @@ class User extends Component {
             />
           </div>
           <div className="user__sidebar">
+          { Flags.followingView.isEnabled() ? 
             <UserFollowings
               followings={followings}
               navigateTo={navigateTo}
               sidebarHeight={sidebarHeight}
               sticky={sticky}
             />
+            : null }
           </div>
         </div>
       </div>
