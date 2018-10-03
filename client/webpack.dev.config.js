@@ -56,6 +56,6 @@ module.exports = {
       '.rollout.io'
     ],
     hot: true,
-    port: '8080',
+    port: '80',
   },
 };

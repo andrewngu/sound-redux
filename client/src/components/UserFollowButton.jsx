@@ -16,6 +16,11 @@ class UserFollowButton extends Component {
 
   onClick() {
     const { id, isFollowing, toggleFollow } = this.props;
+    if (isFollowing) {
+      analytics.track('Stop Follow', {id});
+    } else {
+      analytics.track('Start Follow', {id});
+    }
     toggleFollow(id, !isFollowing);
   }
 

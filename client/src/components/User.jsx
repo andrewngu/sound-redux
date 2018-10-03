@@ -39,6 +39,7 @@ const propTypes = {
 class User extends Component {
   componentWillMount() {
     const { fetchUserIfNeeded, id, playlist, shouldFetchUser } = this.props;
+    analytics.track('User page reached', {id, playlist});
     fetchUserIfNeeded(shouldFetchUser, id, playlist);
   }
 
