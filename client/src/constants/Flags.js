@@ -17,7 +17,7 @@ const fakeUserID =  "" + Math.random();
 Rox.setCustomStringProperty('rox.distinct_id', fakeUserID);
 analytics.identify(fakeUserID, {});
 // setup the SDK with the production environment key of app soundredux - see https://app.rollout.io/app/5b5ea80aec73e3454653ecc4
-Rox.setup('5bb481ca21161732af3f5ecc', {
+Rox.setup('5bb493fcbae7137e6c9dea86', {
   impressionHandler: (reporting, experiment) => {
     if (experiment && experiment.labels.includes('segment')){
 	let props = {};
