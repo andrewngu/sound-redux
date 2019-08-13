@@ -75,6 +75,7 @@ class User extends Component {
       return <Loader className="loader--full" isLoading />;
     }
 
+
     return (
       <div className="container">
         <div className="user content">
