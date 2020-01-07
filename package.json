@@ -31,7 +31,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "css-hot-loader": "^1.3.0",
     "css-loader": "^0.28.7",
-    "eslint": "^4.5.0",
+    "eslint": "^4.18.2",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
