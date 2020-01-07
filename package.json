@@ -42,7 +42,7 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.7.1"
+    "webpack-dev-server": "^3.1.11"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
