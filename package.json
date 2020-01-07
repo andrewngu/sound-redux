@@ -50,7 +50,7 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "isomorphic-fetch": "^2.2.1",
     "js-cookie": "^2.1.4",
-    "lodash.merge": "^4.6.0",
+    "lodash.merge": "^4.6.2",
     "moment": "^2.19.3",
     "normalizr": "^3.2.3",
     "offline-plugin": "^4.8.3",
