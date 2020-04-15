@@ -6,6 +6,7 @@ import Loader from '../components/Loader';
 import stickyOnScroll from '../components/stickyOnScroll';
 import UserFollowings from '../components/UserFollowings';
 import UserMain from '../components/UserMain';
+import Flags from  '../constants/Flags.js'
 
 const defaultProps = {
   playingSongId: null,
@@ -38,6 +39,7 @@ const propTypes = {
 class User extends Component {
   componentWillMount() {
     const { fetchUserIfNeeded, id, playlist, shouldFetchUser } = this.props;
+    analytics.track('User page reached', {id, playlist});
     fetchUserIfNeeded(shouldFetchUser, id, playlist);
   }
 
@@ -73,6 +75,7 @@ class User extends Component {
       return <Loader className="loader--full" isLoading />;
     }
 
+
     return (
       <div className="container">
         <div className="user content">
@@ -98,12 +101,14 @@ class User extends Component {
             />
           </div>
           <div className="user__sidebar">
+          { Flags.followingView.isEnabled() ? 
             <UserFollowings
               followings={followings}
               navigateTo={navigateTo}
               sidebarHeight={sidebarHeight}
               sticky={sticky}
             />
+            : null }
           </div>
         </div>
       </div>

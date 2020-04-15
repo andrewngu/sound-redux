@@ -6,6 +6,7 @@ import Slider from '../components/Slider';
 import { SONG_PATH, USER_PATH } from '../constants/RouterConstants';
 import { formatSeconds } from '../utils/NumberUtils';
 import volumeClassName from '../utils/PlayerUtils';
+import Flags from '../constants/Flags'
 
 const propTypes = {
   changeCurrentTime: PropTypes.func.isRequired,
@@ -115,6 +116,7 @@ const Player = ({
         </div>
         <div className="player__section player__section--options">
           <div className="player__buttons player__buttons--options">
+            { Flags.repeat.isEnabled() ? 
             <div
               className={`player__button ${repeat ? 'player__button--active' : ''}`}
               onClick={toggleRepeat}
@@ -123,6 +125,8 @@ const Player = ({
             >
               <i className="player__button__icon ion-loop" />
             </div>
+            : null }
+            { Flags.shuffle.isEnabled() ? 
             <div
               className={`player__button ${shuffle ? 'player__button--active' : ''}`}
               onClick={toggleShuffle}
@@ -131,6 +135,8 @@ const Player = ({
             >
               <i className="player__button__icon ion-shuffle" />
             </div>
+            : null }
+            { Flags.history.isEnabled() ?
             <div
               className={`player__button ${showHistory ? 'player__button--active' : ''}`}
               onClick={toggleShowHistory}
@@ -139,6 +145,7 @@ const Player = ({
             >
               <i className="player__button__icon ion-android-list" />
             </div>
+            : null }
             <div
               className="player__button player__button--volume"
               onClick={toggleMuted}

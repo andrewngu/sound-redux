@@ -5,6 +5,7 @@ import NavSearch from '../components/NavSearch';
 import NavSession from '../components/NavSession';
 import NavUser from '../components/NavUser';
 import { SONGS_PATH } from '../constants/RouterConstants';
+import Rox from 'rox-browser'
 
 const defaultProps = {
   navPlaylist: null,
@@ -47,7 +48,7 @@ const Nav = ({
   <div className="nav">
     <div className="nav__inner container">
       <div className="nav__section">
-        <i className="nav__logo__icon ion-radio-waves" />
+        <a onClick={Rox.showOverrides}> <i className="nav__logo__icon ion-radio-waves" /> </a>
         <Link
           className="nav__logo__text"
           navigateTo={navigateTo}

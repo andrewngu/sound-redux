@@ -51,7 +51,12 @@ module.exports = {
   ],
   devServer: {
     host: '0.0.0.0',
+    allowedHosts: [
+      '.amazonaws.com',
+      '127.0.0.1',
+      '.rollout.io'
+    ],
     hot: true,
-    port: '8080',
+    port: '8083',
   },
 };
