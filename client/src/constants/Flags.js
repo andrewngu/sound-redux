@@ -17,9 +17,21 @@ const Flags = {
 Rox.register('default', Flags);
 
 
-Rox.setup('5990c4a1eae09726fa0d6040', { 
-    devModeSecret: "pFymEevjDCbXWoEZPDqrGT8v" 
-});
+ const options = {
+    
+    selfManaged: {
+      serverURL: 'http://localhost:8557',
+      analyticsURL: 'http://localhost:8558'
+    }
+  }
+
+
+  // Setup the Rollout key
+  Rox.setup('5e977711c37225cea474c367', options);
+
+//Rox.setup('5990c4a1eae09726fa0d6040', { 
+//    devModeSecret: "pFymEevjDCbXWoEZPDqrGT8v" 
+//});
 
 Rox.setCustomStringProperty('plan', () => UserRepo.getUser().plan);
 Rox.setCustomStringProperty('email', () => UserRepo.getUser().email);
