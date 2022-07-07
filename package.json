@@ -51,7 +51,7 @@
     "isomorphic-fetch": "^2.2.1",
     "js-cookie": "^2.1.4",
     "lodash.merge": "^4.6.2",
-    "moment": "^2.19.3",
+    "moment": "^2.29.4",
     "normalizr": "^3.2.3",
     "offline-plugin": "^4.8.3",
     "path-to-regexp": "^2.0.0",
